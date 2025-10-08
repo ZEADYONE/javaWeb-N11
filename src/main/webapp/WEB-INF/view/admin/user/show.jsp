@@ -51,14 +51,14 @@
                     <table class="table align-items-center justify-content-center mb-0">
                       <thead>
                         <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                            style="text-align: center; vertical-align: middle;">
                             ID</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Name</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Email</th>
-                          <th
-                            class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Phone number</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Action</th>
@@ -67,29 +67,35 @@
                       <tbody>
                         <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
                         <tr>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle;">
                             <div class="my-auto">
                               <h6 class="mb-0 text-sm">1</h6>
                             </div>
                           </td>
-                          <td>
+                          <td style="width: 400px;">
                             <p class="text-sm font-weight-bold mb-0">Nguyễn Trường Giang</p>
                           </td>
-                          <td>
+                          <td style="width: 400px;">
                             <span class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
                           </td>
-                          <td class="align-middle text-center">
+                          <td>
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                           <td>
-                            <a type=" button" class="bi bi-info-square""></a>
-                            <a type=" button" class="btn bg-gradient-success">Success</a>
-                            <a type="button" class="btn bg-gradient-danger">Danger</a>
-                            <a type="button" class="btn bg-gradient-warning">Warning</a>
+                            <div class="dropdown">
+                              <i class="bi bi-info-square" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                , style="padding-left: 12px" ,>
+                              </i>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              </ul>
+                            </div>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle;">
                             <div class="my-auto">
                               <h6 class="mb-0 text-sm">2</h6>
                             </div>
@@ -100,12 +106,12 @@
                           <td>
                             <span class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
                           </td>
-                          <td class="align-middle text-center">
+                          <td>
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle;">
                             <div class="my-auto">
                               <h6 class="mb-0 text-sm">3</h6>
                             </div>
@@ -116,12 +122,12 @@
                           <td>
                             <span class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
                           </td>
-                          <td class="align-middle text-center">
+                          <td>
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle;">
                             <div class="my-auto">
                               <h6 class="mb-0 text-sm">4</h6>
                             </div>
@@ -132,12 +138,12 @@
                           <td>
                             <span class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
                           </td>
-                          <td class="align-middle text-center">
+                          <td>
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                         </tr>
                         <tr>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle;">
                             <div class="my-auto">
                               <h6 class="mb-0 text-sm">5</h6>
                             </div>
@@ -148,7 +154,7 @@
                           <td>
                             <span class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
                           </td>
-                          <td class="align-middle text-center">
+                          <td>
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                         </tr>
