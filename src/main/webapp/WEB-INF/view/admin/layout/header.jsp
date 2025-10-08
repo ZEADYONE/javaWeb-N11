@@ -23,6 +23,10 @@
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
             <!-- CSS Files -->
             <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
+            <!-- CSS Bootstrap -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+                rel="stylesheet" />
         </head>
 
         <body>
@@ -305,4 +309,6 @@
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
             <script src="/admin/js/material-dashboard.min.js?v=3.0.0"></script>
+            <!-- JS Bootstrap + Popper -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         </body>

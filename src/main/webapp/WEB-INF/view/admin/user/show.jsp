@@ -11,6 +11,7 @@
       <title>
         Material Dashboard 2 by Creative Tim
       </title>
+
       <!--     Fonts and icons     -->
       <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -23,6 +24,8 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
       <!-- CSS Files -->
       <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
+
+
     </head>
 
     <body class="g-sidenav-show  bg-gray-200">
@@ -79,8 +82,8 @@
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                           <td>
-                            <a type="button" class="btn bg-gradient-info">Info</a>
-                            <a type="button" class="btn bg-gradient-success">Success</a>
+                            <a type=" button" class="bi bi-info-square""></a>
+                            <a type=" button" class="btn bg-gradient-success">Success</a>
                             <a type="button" class="btn bg-gradient-danger">Danger</a>
                             <a type="button" class="btn bg-gradient-warning">Warning</a>
                           </td>
@@ -178,6 +181,7 @@
       <script async defer src="https://buttons.github.io/buttons.js"></script>
       <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
       <script src="/admin/js/material-dashboard.min.js?v=3.0.0"></script>
+
     </body>
 
     </html>
