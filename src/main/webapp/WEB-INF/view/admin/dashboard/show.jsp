@@ -28,8 +28,11 @@
 
         <body class="g-sidenav-show  bg-gray-200">
             <!-- Sidebar -->
-            <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-                <jsp:include page="../layout/sidebar.jsp" />
+            <aside
+                class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+                id="sidenav-main">
+                <% request.setAttribute("pageTitle", "Dashboard" ); %>
+                    <jsp:include page="../layout/sidebar.jsp" />
             </aside>
             <!-- End Sidebar -->
             <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -699,7 +702,7 @@
                             </div>
                         </a>
                         <!-- Sidenav Type -->
-                        
+
                         <div class="d-flex">
                             <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark"
                                 onclick="sidebarType(this)">Dark</button>
