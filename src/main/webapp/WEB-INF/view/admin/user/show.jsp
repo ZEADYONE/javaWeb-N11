@@ -82,10 +82,11 @@
                             <p class="text-sm font-weight-bold mb-0">0869668798</p>
                           </td>
                           <td>
-                            <a type=" button" class="bi bi-info-square""></a>
-                            <a type=" button" class="btn bg-gradient-success">Success</a>
+                            <!-- <a type=" button" class="bi bi-info-square""></a> -->
+                            <i class="fa-utility fa-semibold fa-house"></i>
+                            <!-- <a type=" button" class="btn bg-gradient-success">Success</a>
                             <a type="button" class="btn bg-gradient-danger">Danger</a>
-                            <a type="button" class="btn bg-gradient-warning">Warning</a>
+                            <a type="button" class="btn bg-gradient-warning">Warning</a> -->
                           </td>
                         </tr>
                         <tr>
