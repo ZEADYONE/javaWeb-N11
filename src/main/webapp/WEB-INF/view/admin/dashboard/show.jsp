@@ -22,7 +22,7 @@
             <!-- Material Icons -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
             <!-- CSS Files -->
-            <link id="pagestyle" href="/admin/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+            <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
         </head>
 
 
@@ -118,9 +118,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    <jsp:include page="../layout/footer.jsp"/>
+
+
+                    <jsp:include page="../layout/footer.jsp" />
                 </div>
             </main>
             <!--   Core JS Files   -->
