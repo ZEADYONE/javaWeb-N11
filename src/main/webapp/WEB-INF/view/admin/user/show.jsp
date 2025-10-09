@@ -50,7 +50,7 @@
                     href="/admin/user/create" role="button">Create user</a>
                 </div>
                 <div class="card-body px-0 pb-2">
-                  <div class="table-responsive p-0">
+                  <div class="table-responsive p-0" style="height: 800px">
                     <table class="table align-items-center justify-content-center mb-0">
                       <thead>
                         <tr>
