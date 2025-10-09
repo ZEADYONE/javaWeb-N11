@@ -50,7 +50,7 @@
                     href="/admin/user/create" role="button">Create user</a>
                 </div>
                 <div class="card-body px-0 pb-2">
-                  <div class="table-responsive p-0" style="height: 800px">
+                  <div class="table-responsive p-0" style="height: 80vh;">
                     <table class="table align-items-center justify-content-center mb-0">
                       <thead>
                         <tr>
@@ -64,7 +64,8 @@
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Phone number</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Action</th>
+                            <i style="padding-left: 20px; font-style: normal;">ACTION</i>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -76,26 +77,19 @@
                                 <h6 class="mb-0 text-sm">${user.id}</h6>
                               </div>
                             </td>
-                            <td style="width: 400px;">
+                            <td style="width: 300px;">
                               <p class="text-sm font-weight-bold mb-0">${user.fullName}</p>
                             </td>
-                            <td style="width: 400px;">
+                            <td style="width: 300px;">
                               <span class="text-xs font-weight-bold">${user.email}</span>
                             </td>
                             <td>
                               <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
                             </td>
                             <td>
-                              <div class="dropdown">
-                                <i class="bi bi-list" type="button" data-bs-toggle="dropdown" aria-expanded="false" ,
-                                  style="padding-left: 12px" ,>
-                                </i>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">View</a></li>
-                                  <li><a class="dropdown-item" href="#">Update</a></li>
-                                  <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                              </div>
+                              <i class="bi bi-person-vcard mx-2"></i>
+                              <i class="bi bi-person-gear mx-2"></i>
+                              <i class="bi bi-trash mx-2"></i>
                             </td>
                           </tr>
                         </c:forEach>
