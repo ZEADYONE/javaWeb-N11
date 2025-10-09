@@ -7,5 +7,5 @@ import com.n11.sportshop.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-    
+
 }

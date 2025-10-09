@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.n11.sportshop.domain.User;
+
 @Controller
 public class DashboardController {
     @GetMapping("/home")
@@ -27,7 +29,8 @@ public class DashboardController {
     }
 
     @GetMapping("/admin/user/create")
-    public String getUserCreatePage() {
+    public String getUserCreatePage(Model model) {
+        model.addAttribute("useNayDeNhap", new User());
         return "admin/user/create";
     }
 
