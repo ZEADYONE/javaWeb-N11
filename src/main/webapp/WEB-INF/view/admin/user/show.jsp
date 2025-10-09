@@ -32,8 +32,7 @@
       <aside
         class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
         id="sidenav-main">
-        <% request.setAttribute("pageTitle", "User" ); %>
-          <jsp:include page="../layout/sidebar.jsp" />
+        <jsp:include page="../layout/sidebar.jsp" />
       </aside>
       <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <jsp:include page="../layout/header.jsp" />
@@ -45,6 +44,9 @@
                   <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                     <h6 class="text-white text-capitalize ps-3">User table</h6>
                   </div>
+                </div>
+                <div style="padding: 30px 20px 30px;"><a type="button" class="btn btn-primary"
+                    style="background-color: #ffba00;" href="/admin/user/create">Create user</a>
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive p-0">

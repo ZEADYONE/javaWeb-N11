@@ -26,6 +26,11 @@ public class DashboardController {
         return "admin/user/show";
     }
 
+    @GetMapping("/admin/user/create")
+    public String getUserCreatePage() {
+        return "admin/user/create";
+    }
+
     @GetMapping("/admin/product")
     public String getProductPage() {
         return "admin/product/show";
