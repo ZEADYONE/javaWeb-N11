@@ -83,8 +83,8 @@
                           </td>
                           <td>
                             <div class="dropdown">
-                              <i class="bi bi-info-square" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                , style="padding-left: 12px" ,>
+                              <i class="bi bi-list" type="button" data-bs-toggle="dropdown" aria-expanded="false" ,
+                                style="padding-left: 12px" ,>
                               </i>
                               <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">View</a></li>
