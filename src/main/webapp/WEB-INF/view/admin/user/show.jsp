@@ -87,9 +87,9 @@
                                 , style="padding-left: 12px" ,>
                               </i>
                               <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">View</a></li>
+                                <li><a class="dropdown-item" href="#">Update</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
                               </ul>
                             </div>
                           </td>

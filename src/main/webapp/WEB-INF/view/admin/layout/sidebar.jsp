@@ -41,7 +41,7 @@
                     <a class="nav-link text-white ${path == '/WEB-INF/view/admin/order/show.jsp' ? 'active bg-gradient-primary' : ''}"
                         href="${contextPath}/admin/order">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="ni ni-single-copy-04"></i>
                         </div>
                         <span class="nav-link-text ms-1">Order</span>
                     </a>
@@ -50,7 +50,7 @@
                     <a class="nav-link text-white ${path == '/WEB-INF/view/admin/user/show.jsp' ? 'active bg-gradient-primary' : ''}"
                         href="${contextPath}/admin/user">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
+                            <i class="ni ni-circle-08"></i>
                         </div>
                         <span class="nav-link-text ms-1">User</span>
                     </a>
@@ -59,7 +59,8 @@
                     <a class="nav-link text-white ${path == '/WEB-INF/view/admin/product/show.jsp' ? 'active bg-gradient-primary' : ''}"
                         href="${contextPath}/admin/product">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">storefront</i>
+                            <i class="ni ni-box-2"></i>
+
 
                         </div>
                         <span class="nav-link-text ms-1">Product</span>
