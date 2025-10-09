@@ -51,6 +51,22 @@
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
       <script src="/client/js/gmaps.min.js"></script>
       <script src="/client/js/main.js"></script>
+      <script>
+        $(document).ready(function () {
+          $(".active-banner-slider").owlCarousel({
+            items: 1,                // 1 slide mỗi lần hiển thị
+            loop: true,              // lặp vô tận
+            autoplay: true,          // tự động chạy
+            autoplayTimeout: 3000,   // đổi slide mỗi 3 giây
+            autoplayHoverPause: false, // không dừng khi rê chuột vào
+            smartSpeed: 800,         // tốc độ chuyển (ms)
+            animateOut: 'fadeOut',   // hiệu ứng mờ dần
+            dots: true,              // chấm chỉ slide
+            nav: true,               // nút prev/next
+            navText: ["<", ">"]      // icon nút
+          });
+        });
+      </script>
     </head>
 
     <body>
@@ -68,32 +84,29 @@
               <div class="active-banner-slider owl-carousel owl-theme owl-loaded">
                 <!-- single-slide -->
                 <div class="row single-slide align-items-center d-flex">
-                  <div class="col-lg-3 col-md-5">
-                    <div class="banner-content">
-                      <h1>Sport <br>Collection!</h1>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                      
-                    </div>
-                  </div>
-                  <div class="col-lg-9">
+                  <div class="col-lg-8 text-center">
                     <div class="banner-img">
                       <img class="img-fluid" src="/client/img/banner/main.png" alt="">
                     </div>
                   </div>
+                  <div class="col-lg-3 col-md-5">
+                    <div class="banner-content">
+                      <h1>Sport <br>Collection!</h1>
+                      <p>Shop bán đồ thể thao</p>
+
+                    </div>
+                  </div>
                 </div>
+                <!-- single-slide -->
                 <div class="row single-slide align-items-center d-flex">
                   <div class="col-lg-3 col-md-5">
                     <div class="banner-content">
                       <h1>Sport <br>Collection!</h1>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                      
+                      <p>Shop bán đồ thể thao</p>
                     </div>
                   </div>
-                  <div class="col-lg-9">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-8">
                     <div class="banner-img">
                       <img class="img-fluid" src="/client/img/banner/main2.jpg" alt="">
                     </div>
@@ -228,7 +241,7 @@
         <!-- single product slide -->
         <div class="single-product-slider">
           <div class="container">
-              <div class="row justify-content-center">
+            <div class="row justify-content-center">
               <div class="col-lg-6 text-center">
                 <div class="section-title">
                   <h1>Latest Products</h1>
@@ -514,7 +527,7 @@
       <jsp:include page="../layout/footer.jsp" />
       <!-- End footer Area -->
 
-      
+
     </body>
 
     </html>
