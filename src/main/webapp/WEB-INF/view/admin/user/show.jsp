@@ -42,11 +42,12 @@
               <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                   <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">User table</h6>
+                    <h6 class="text-white text-capitalize ps-3">Manager User</h6>
                   </div>
                 </div>
-                <div style="padding: 30px 20px 30px;"><a type="button" class="btn btn-primary"
-                    style="background-color: #ffba00;" href="/admin/user/create">Create user</a>
+                <div><a type="button" class="btn btn-primary"
+                    style="background-color: #ffba00;margin-top: 20px; margin-left: 20px; margin-bottom: 0px;"
+                    href="/admin/user/create" role="button">Create user</a>
                 </div>
                 <div class="card-body px-0 pb-2">
                   <div class="table-responsive p-0">
