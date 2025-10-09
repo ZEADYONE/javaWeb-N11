@@ -37,7 +37,7 @@
       <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <jsp:include page="../layout/header.jsp" />
         <div class="container-fluid py-4">
-          <div class="row">
+          <div class=" row">
             <div class="col-12">
               <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -46,61 +46,61 @@
                   </div>
                 </div>
                 <div><a type="button" class="btn btn-primary"
-                    style="background-color: #ffba00;margin-top: 20px; margin-left: 20px; margin-bottom: 0px;"
+                    style="background-color: #ffba00;margin-top: 20px; margin-left: 30px; margin-bottom: 0px;"
                     href="/admin/user/create" role="button">Create user</a>
                 </div>
-                <div class="card-body px-0 pb-2">
-                  <div class="table-responsive p-0" style="height: 80vh;">
-                    <table class="table align-items-center justify-content-center mb-0">
-                      <thead>
-                        <tr>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                            style="text-align: center; vertical-align: middle;">
-                            ID</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Name</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Email</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Phone number</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            <i style="padding-left: 20px; font-style: normal;">ACTION</i>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
-                        <c:forEach var="user" items="${users}">
-                          <tr>
-                            <td style="text-align: center; vertical-align: middle;">
-                              <div class="my-auto">
-                                <h6 class="mb-0 text-sm">${user.id}</h6>
-                              </div>
-                            </td>
-                            <td style="width: 300px;">
-                              <p class="text-sm font-weight-bold mb-0">${user.fullName}</p>
-                            </td>
-                            <td style="width: 300px;">
-                              <span class="text-xs font-weight-bold">${user.email}</span>
-                            </td>
-                            <td>
-                              <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
-                            </td>
-                            <td>
-                              <i class="bi bi-person-vcard mx-2"></i>
-                              <i class="bi bi-person-gear mx-2"></i>
-                              <i class="bi bi-trash mx-2"></i>
-                            </td>
-                          </tr>
-                        </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>
+                <div class="card-body px-0 pb-2" style="height:70vh;>
+                  <div class=" table-responsive p-0" ">
+                    <table class=" table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        style="text-align: center; vertical-align: middle;">
+                        ID</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                        Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                        Email</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                        Phone number</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                        <i style="padding-left: 30px; font-style: normal;">ACTION</i>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
+                    <c:forEach var="user" items="${users}">
+                      <tr>
+                        <td style="text-align: center; vertical-align: middle;">
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm">${user.id}</h6>
+                          </div>
+                        </td>
+                        <td style="width: 300px;">
+                          <p class="text-sm font-weight-bold mb-0">${user.fullName}</p>
+                        </td>
+                        <td style="width: 300px;">
+                          <span class="text-xs font-weight-bold">${user.email}</span>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
+                        </td>
+                        <td>
+                          <i class="bi bi-person-vcard mx-2"></i>
+                          <i class="bi bi-person-gear mx-2"></i>
+                          <i class="bi bi-trash mx-2"></i>
+                        </td>
+                      </tr>
+                    </c:forEach>
+                  </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
-          <jsp:include page="../layout/footer.jsp" />
+        </div>
+        <jsp:include page="../layout/footer.jsp" />
         </div>
       </main>
 
