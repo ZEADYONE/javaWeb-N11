@@ -87,9 +87,10 @@
                           <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
                         </td>
                         <td>
-                          <i class="bi bi-person-vcard mx-2"></i>
-                          <i class="bi bi-person-gear mx-2"></i>
-                          <i class="bi bi-trash mx-2"></i>
+                          <a href="" class="bi bi-person-vcard mx-2" type="button"></a>
+                          <a href="" class="bi bi-person-gear mx-2" type="button"></a>
+                          <a href="" class="bi bi-trash mx-2" type="button"></a>
+
                         </td>
                       </tr>
                     </c:forEach>
