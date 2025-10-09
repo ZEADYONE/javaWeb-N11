@@ -30,7 +30,7 @@ public class DashboardController {
 
     @GetMapping("/admin/user/create")
     public String getUserCreatePage(Model model) {
-        model.addAttribute("useNayDeNhap", new User());
+        model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
