@@ -77,7 +77,7 @@
                               </div>
                             </td>
                             <td style="width: 400px;">
-                              <p class="text-sm font-weight-bold mb-0">${user.name}</p>
+                              <p class="text-sm font-weight-bold mb-0">${user.fullName}</p>
                             </td>
                             <td style="width: 400px;">
                               <span class="text-xs font-weight-bold">${user.email}</span>

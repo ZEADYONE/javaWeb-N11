@@ -1,13 +1,11 @@
 package com.n11.sportshop.domain;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,8 +13,7 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private int user_id;
+    private int id;
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -28,9 +25,7 @@ public class User {
     private String phoneNumber;
     private String address;
 
-    public int getUser_id() {
-        return user_id;
-    }
+    
     public String getUsername() {
         return username;
     }
@@ -49,9 +44,7 @@ public class User {
     public String getAddress() {
         return address;
     }
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
+    
     public void setUsername(String username) {
         this.username = username;
     }
@@ -69,6 +62,22 @@ public class User {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 

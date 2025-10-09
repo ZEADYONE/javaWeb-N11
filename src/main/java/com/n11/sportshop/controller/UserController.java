@@ -21,11 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/admin/user")
-    public String getUserPage() {
-        return "admin/user/show";
-    }
-
     @GetMapping("/admin/user/create")
     public String getUserCreatePage(Model model) {
         model.addAttribute("newUser", new User());
@@ -38,7 +33,7 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    @GetMapping("/admin/user/show")
+    @GetMapping("/admin/user")
     public String getUserList(Model model) {
         List<User> users = this.userService.getUserList();
         model.addAttribute("users", users);
