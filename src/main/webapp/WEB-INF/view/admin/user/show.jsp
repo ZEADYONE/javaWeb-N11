@@ -49,59 +49,61 @@
                     style="background-color: #ffba00;margin-top: 20px; margin-left: 30px; margin-bottom: 0px;"
                     href="/admin/user/create" role="button">Create user</a>
                 </div>
-                <div class="card-body px-0 pb-2" style="height:70vh;>
-                  <div class=" table-responsive p-0" ">
-                    <table class=" table align-items-center justify-content-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                        style="text-align: center; vertical-align: middle;">
-                        ID</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Email</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Phone number</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        <i style="padding-left: 30px; font-style: normal;">ACTION</i>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
-                    <c:forEach var="user" items="${users}">
-                      <tr>
-                        <td style="text-align: center; vertical-align: middle;">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">${user.id}</h6>
-                          </div>
-                        </td>
-                        <td style="width: 300px;">
-                          <p class="text-sm font-weight-bold mb-0">${user.fullName}</p>
-                        </td>
-                        <td style="width: 300px;">
-                          <span class="text-xs font-weight-bold">${user.email}</span>
-                        </td>
-                        <td>
-                          <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
-                        </td>
-                        <td>
-                          <a href="" class="bi bi-person-vcard mx-2" type="button"></a>
-                          <a href="" class="bi bi-person-gear mx-2" type="button"></a>
-                          <a href="" class="bi bi-trash mx-2" type="button"></a>
+                <div class="card-body px-0 pb-2" style="height:70vh;">
 
-                        </td>
-                      </tr>
-                    </c:forEach>
-                  </tbody>
-                  </table>
+                  <div class="table-responsive p-0">
+                    <table class=" table align-items-center justify-content-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                            style="text-align: center; vertical-align: middle;">
+                            ID</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Name</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Email</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Phone number</th>
+                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            <i style="padding-left: 30px; font-style: normal;">ACTION</i>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
+                        <c:forEach var="user" items="${users}">
+                          <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">${user.id}</h6>
+                              </div>
+                            </td>
+                            <td style="width: 300px;">
+                              <p class="text-sm font-weight-bold mb-0">${user.fullName}</p>
+                            </td>
+                            <td style="width: 300px;">
+                              <span class="text-xs font-weight-bold">${user.email}</span>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
+                            </td>
+                            <td>
+                              <a href="" class="bi bi-person-vcard mx-2" type="button"></a>
+                              <a href="" class="bi bi-person-gear mx-2" type="button"></a>
+                              <a href="" class="bi bi-trash mx-2" type="button"></a>
+
+                            </td>
+                          </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
+
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <jsp:include page="../layout/footer.jsp" />
+          <jsp:include page="../layout/footer.jsp" />
         </div>
       </main>
 
