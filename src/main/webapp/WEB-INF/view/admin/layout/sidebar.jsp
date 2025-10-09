@@ -84,7 +84,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white ${path == '/WEB-INF/view/admin/user/show.jsp' ? 'active bg-gradient-primary' : ''}"
+                                    <a class="nav-link text-white ${fn:contains(path, '/WEB-INF/view/admin/user/') ? 'active bg-gradient-primary' : ''}"
                                         href="${contextPath}/admin/user">
                                         <div
                                             class="text-white text-center me-2 d-flex align-items-center justify-content-center">
