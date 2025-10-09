@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
     @GetMapping("/home")
     public String getHomePage(Model model) {
-        return "client/homepage/index";
+        return "client/homepage/show";
     }
 
     @GetMapping("/admin")
