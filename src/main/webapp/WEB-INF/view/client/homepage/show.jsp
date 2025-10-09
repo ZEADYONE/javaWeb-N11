@@ -65,7 +65,7 @@
         <div class="container">
           <div class="row fullscreen align-items-center justify-content-start">
             <div class="col-lg-12">
-              <div>
+              <div class="active-banner-slider owl-carousel owl-theme owl-loaded">
                 <!-- single-slide -->
                 <div class="row single-slide align-items-center d-flex">
                   <div class="col-lg-3 col-md-5">
@@ -80,6 +80,22 @@
                   <div class="col-lg-9">
                     <div class="banner-img">
                       <img class="img-fluid" src="/client/img/banner/main.png" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="row single-slide align-items-center d-flex">
+                  <div class="col-lg-3 col-md-5">
+                    <div class="banner-content">
+                      <h1>Sport <br>Collection!</h1>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                      
+                    </div>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="banner-img">
+                      <img class="img-fluid" src="/client/img/banner/main2.jpg" alt="">
                     </div>
                   </div>
                 </div>
