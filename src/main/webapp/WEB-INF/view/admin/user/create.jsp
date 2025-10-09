@@ -82,15 +82,16 @@
                                                         <button type="submit" class="btn btn-primary"
                                                             style="background-color: #ffba00;">Create</button>
                                                     </form:form>
-                                                    <jsp:include page="../layout/footer.jsp" />
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
+                            </div>
+                        </div>
+                    </div>
+                    <jsp:include page="../layout/footer.jsp" />
                 </main>
 
             </body>
