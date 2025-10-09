@@ -69,6 +69,36 @@
                       </thead>
                       <tbody>
                         <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
+                        <c:forEach var="user" items="${users}">
+                          <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">${user.id}</h6>
+                              </div>
+                            </td>
+                            <td style="width: 400px;">
+                              <p class="text-sm font-weight-bold mb-0">${user.name}</p>
+                            </td>
+                            <td style="width: 400px;">
+                              <span class="text-xs font-weight-bold">${user.email}</span>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
+                            </td>
+                            <td>
+                              <div class="dropdown">
+                                <i class="bi bi-list" type="button" data-bs-toggle="dropdown" aria-expanded="false" ,
+                                  style="padding-left: 12px" ,>
+                                </i>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">View</a></li>
+                                  <li><a class="dropdown-item" href="#">Update</a></li>
+                                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                                </ul>
+                              </div>
+                            </td>
+                          </tr>
+                        </c:forEach>
                         <tr>
                           <td style="text-align: center; vertical-align: middle;">
                             <div class="my-auto">

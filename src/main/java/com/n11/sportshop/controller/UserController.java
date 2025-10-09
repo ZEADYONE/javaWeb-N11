@@ -1,5 +1,7 @@
 package com.n11.sportshop.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.UserService;
+
 
 @Controller
 public class UserController {
@@ -34,5 +37,13 @@ public class UserController {
         this.userService.saveUser(user);
         return "redirect:/admin/user";
     }
+
+    @GetMapping("/admin/user/show")
+    public String getUserList(Model model) {
+        List<User> users = this.userService.getUserList();
+        model.addAttribute("users", users);
+        return "admin/user/show";
+    }
+    
 
 }

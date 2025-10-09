@@ -1,5 +1,7 @@
 package com.n11.sportshop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.n11.sportshop.domain.User;
@@ -16,5 +18,9 @@ public class UserService {
 
     public void saveUser (User user) {
         this.userRepository.save(user);
+    }
+
+    public List<User> getUserList() {
+        return this.userRepository.findAll(); 
     }
 }
