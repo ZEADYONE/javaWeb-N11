@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.n11.sportshop.domain.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer> {
+    void deleteById(int id);
 
+    User findFirstById(int id);
 }

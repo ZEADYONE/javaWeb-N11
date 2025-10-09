@@ -88,9 +88,9 @@
                               <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
                             </td>
                             <td>
-                              <a href="" class="bi bi-person-vcard mx-2" type="button"></a>
-                              <a href="" class="bi bi-person-gear mx-2" type="button"></a>
-                              <a href="" class="bi bi-trash mx-2" type="button"></a>
+                              <a href="/admin/user/detail/${user.id}" class="bi bi-person-vcard mx-2" type="button"></a>
+                              <a href="/admin/user/update/${user.id}" class="bi bi-person-gear mx-2" type="button"></a>
+                              <a href="/admin/user/delete/${user.id}" class="bi bi-trash mx-2" type="button"></a>
 
                             </td>
                           </tr>

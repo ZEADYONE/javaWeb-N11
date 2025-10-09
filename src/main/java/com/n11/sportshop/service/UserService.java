@@ -15,12 +15,23 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
-    public void saveUser (User user) {
+    public void saveUser(User user) {
         this.userRepository.save(user);
     }
 
     public List<User> getUserList() {
-        return this.userRepository.findAll(); 
+        return this.userRepository.findAll();
+    }
+
+    public void deleteUser(int id) {
+        this.userRepository.deleteById(id);
+    }
+
+    public User getUserByID(int id) {
+        return this.userRepository.findFirstById(id);
+    }
+
+    public User handelSaveUser(User user) {
+        return this.userRepository.save(user);
     }
 }
