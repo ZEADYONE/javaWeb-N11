@@ -12,7 +12,7 @@
                 <link rel="apple-touch-icon" sizes="76x76" href="/admin/img/apple-icon.png">
                 <link rel="icon" type="image/png" href="/admin/img/favicon.png">
                 <title>
-                    Material Dashboard 2 by Creative Tim
+                    Create user
                 </title>
 
             </head>
@@ -28,11 +28,6 @@
                     <div class="container-fluid py-4">
                         <div class="col-12">
                             <div class="card my-4">
-                                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                        <h6 class="text-white text-capitalize ps-3">Manager User</h6>
-                                    </div>
-                                </div>
                                 <div class="table-responsive p-0">
                                     <div class="container-fluid py-4">
                                         <div class="container mt-5">
@@ -77,6 +72,16 @@
                                                             <form:input type="text"
                                                                 class="form-control border border-primary"
                                                                 style="padding-left: 20px;" path="address" />
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Select role</label>
+                                                            <form:select class="form-select border border-primary"
+                                                                style="padding-left: 20px;" path="role.name">
+                                                                <form:option value="">-----</form:option>
+                                                                <form:option value="ADMIN">ADMIN</form:option>
+                                                                <form:option value="USER">USER</form:option>
+                                                            </form:select>
                                                         </div>
 
                                                         <button type="submit" class="btn btn-primary"

@@ -105,16 +105,7 @@
                                 <form:input type="text" class="form-control border border-primary"
                                   style="padding-left: 20px;" path="phoneNumber" />
                               </div>
-                              <!-- 
-                              <div class="mb-3 col-6">
-                                <label class="form-label">Select role</label>
-                                <form:select class="form-select border border-primary" style="padding-left: 20px;"
-                                  path="role.name">
-                                  <form:option value="">-----</form:option>
-                                  <form:option value="ADMIN">ADMIN</form:option>
-                                  <form:option value="USER">USER</form:option>
-                                </form:select>
-                              </div> -->
+                              
 
                               <div class="col-md-12 mb-3">
                                 <label class="form-label fw-bold">Address:</label>
