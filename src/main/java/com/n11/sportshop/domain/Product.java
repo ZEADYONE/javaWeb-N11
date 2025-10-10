@@ -3,6 +3,7 @@ package com.n11.sportshop.domain;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Product")
@@ -40,26 +41,17 @@ public class Product {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+     // 🔹 Thêm thuộc tính ảnh
+    @Column(name = "image_url", length = 500)
+    private String imageUrl;  
 
+    // 🔽 Quan hệ hai chiều với OrderDetail
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetail> orderDetails;
     
-    public Product() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Product(String name, String description, BigDecimal price, int stockQuantity,
-                   Category category, Brand brand) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-        this.category = category;
-        this.brand = brand;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
     
+
+    //Getters and setters
     public int getProductId() { return productId; }
     public void setProductId(int productId) { this.productId = productId; }
 
@@ -87,6 +79,11 @@ public class Product {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    
+    public List<OrderDetail> getOrderDetails() { return orderDetails; }
+    public void setOrderDetails(List<OrderDetail> orderDetails) { this.orderDetails = orderDetails; }
     
     @Override
     public String toString() {

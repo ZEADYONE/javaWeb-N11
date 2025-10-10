@@ -3,6 +3,7 @@ package com.n11.sportshop.domain;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Orders")
@@ -24,24 +25,21 @@ public class Order {
     @Column(name = "status")
     private OrderStatus status = OrderStatus.pending;
 
-    @Column(name = "total_amount", precision = 12, scale = 2, nullable = false)
+    //@Column(name = "total_amount", precision = 12, scale = 2, nullable = false)
     private BigDecimal totalAmount;
 
     @ManyToOne
     @JoinColumn(name = "voucher_id")
     private Voucher voucher; // khóa ngoại -> Voucher(voucher_id)
 
-    // ====== Constructors ======
-    public Order() {}
+    // 🔽 Quan hệ hai chiều với OrderDetail
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetail> orderDetails;
+    
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
-    public Order(Customer customer, LocalDateTime orderDate, OrderStatus status, BigDecimal totalAmount, Voucher voucher) {
-        this.customer = customer;
-        this.orderDate = orderDate;
-        this.status = status;
-        this.totalAmount = totalAmount;
-        this.voucher = voucher;
-    }
-
+    
     // ====== Getters & Setters ======
     public int getOrderId() { return orderId; }
     public void setOrderId(int orderId) { this.orderId = orderId; }
@@ -60,4 +58,8 @@ public class Order {
 
     public Voucher getVoucher() { return voucher; }
     public void setVoucher(Voucher voucher) { this.voucher = voucher; }
+    public List<OrderDetail> getOrderDetails() { return orderDetails; }
+    public void setOrderDetails(List<OrderDetail> orderDetails) { this.orderDetails = orderDetails; }
+     public Payment getPayment() { return payment; }
+    public void setPayment(Payment payment) { this.payment = payment; }
 }

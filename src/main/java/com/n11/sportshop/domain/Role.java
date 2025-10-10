@@ -27,12 +27,7 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User> users;
 
-    // ===== Constructors =====
-    public Role() {}
-
-    public Role(String name) {
-        this.name = name;
-    }
+   
 
     // ===== Getters & Setters =====
     public int getId() { return id; }

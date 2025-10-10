@@ -19,12 +19,7 @@ public class Customer {
     private int loyaltyPoints;
 
     
-    public Customer() {}
-
-    public Customer(User user, int loyaltyPoints) {
-        this.user = user;
-        this.loyaltyPoints = loyaltyPoints;
-    }
+    
 
     
     public int getCustomerId() { return customerId; }

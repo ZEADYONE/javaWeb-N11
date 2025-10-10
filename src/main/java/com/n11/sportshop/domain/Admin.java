@@ -19,13 +19,7 @@ public class Admin {
     private String position;
 
    
-    public Admin() {
-    }
-
-    public Admin(User user, String position) {
-        this.user = user;
-        this.position = position;
-    }
+    
 
     
     public int getAdminId() {

@@ -18,14 +18,7 @@ public class Staff {
     @Column(name = "department", length = 100)
     private String department;
 
-    // ===== Constructor =====
-    public Staff() {
-    }
-
-    public Staff(User user, String department) {
-        this.user = user;
-        this.department = department;
-    }
+    
 
     // ===== Getter & Setter =====
     public int getStaffId() {
