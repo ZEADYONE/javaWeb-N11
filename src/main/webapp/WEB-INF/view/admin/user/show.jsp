@@ -240,10 +240,90 @@
 
 
                                 <!-- Edit -->
-                                <a href="/admin/user/update/${user.id}" class="btn btn-sm btn-outline-primary mx-1"
-                                  title="Edit">
+                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1 btn-edit"
+                                  data-bs-toggle="modal" data-bs-target="#updateModal" data-id="${user.id}"
+                                  data-email="${user.email}" data-username="${user.username}"
+                                  data-phone="${user.phoneNumber}" data-fullname="${user.fullName}"
+                                  data-address="${user.address}">
                                   <i class="bi bi-person-gear"></i>
                                 </a>
+
+                                <!-- Modal Update -->
+                                <div class="modal fade" id="updateModal" tabindex="-1"
+                                  aria-labelledby="updateModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content border-0 shadow-lg">
+                                      <!-- Header -->
+                                      <div class="modal-header bg-gradient-primary text-white rounded-top-4">
+                                        <h5 class="modal-title" id="updateModalLabel">Update User</h5>
+                                        <button type="button" class="btn-close btn-close-white"
+                                          data-bs-dismiss="modal"></button>
+                                      </div>
+
+                                      <!-- Body -->
+                                      <div class="modal-body py-4 px-5">
+                                        <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
+                                          <div class="row">
+                                            <!-- ID hidden -->
+                                            <div class="mb-3" style="display: none;">
+                                              <form:input type="int" class="form-control" path="id" id="updateId" />
+                                            </div>
+
+                                            <div class="col-md-12 mb-3">
+                                              <label class="form-label fw-bold">Email:</label>
+                                              <form:input type="email" class="form-control border border-primary"
+                                                style="padding-left: 20px;" path="email" id="updateEmail"
+                                                disabled="true" />
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                              <label class="form-label fw-bold">User name:</label>
+                                              <form:input type="text" class="form-control border border-primary"
+                                                style="padding-left: 20px;" path="username" id="updateUsername" />
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                              <label class="form-label fw-bold">Full name:</label>
+                                              <form:input type="text" class="form-control border border-primary"
+                                                style="padding-left: 20px;" path="fullName" id="updateFullName" />
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                              <label class="form-label fw-bold">Phone number:</label>
+                                              <form:input type="text" class="form-control border border-primary"
+                                                style="padding-left: 20px;" path="phoneNumber" id="updatePhone" />
+                                            </div>
+
+                                            <!-- <div class="col-md-6 mb-3">
+                                              <label class="form-label fw-bold">Select role:</label>
+                                              <form:select class="form-select border border-primary"
+                                                style="padding-left: 20px;" path="role.name" id="updateRole">
+                                                <form:option value="">-----</form:option>
+                                                <form:option value="ADMIN">ADMIN</form:option>
+                                                <form:option value="USER">USER</form:option>
+                                              </form:select>
+                                            </div> -->
+
+                                            <div class="col-md-12 mb-3">
+                                              <label class="form-label fw-bold">Address:</label>
+                                              <form:textarea class="form-control border border-primary"
+                                                style="padding-left: 20px;" path="address" id="updateAddress" />
+                                            </div>
+                                          </div>
+
+                                          <div class="text-center mt-4">
+                                            <button type="submit" class="btn text-white px-4 py-2"
+                                              style="background-color: #ffba00;">
+                                              Update
+                                            </button>
+                                          </div>
+                                        </form:form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
 
                                 <!-- Delete (modal trigger) -->
                                 <button type="button" class="btn btn-sm btn-outline-danger mx-1" data-bs-toggle="modal"
@@ -321,27 +401,50 @@
         </script>
         <script>
           document.addEventListener("DOMContentLoaded", function () {
+            // Modal View (Detail)
             const detailModal = document.getElementById("detailModal");
-
             detailModal.addEventListener("show.bs.modal", function (event) {
-              const button = event.relatedTarget; // button click
-              const fullname = button.getAttribute("data-fullName");
+              const button = event.relatedTarget;
+
+              const id = button.getAttribute("data-id");
+              const fullname = button.getAttribute("data-fullname");
               const username = button.getAttribute("data-username");
               const email = button.getAttribute("data-email");
               const phone = button.getAttribute("data-phone");
               const role = button.getAttribute("data-role");
               const address = button.getAttribute("data-address");
 
+              document.getElementById("detailHeader").innerText = "User Detail - ID: " + id;
               document.getElementById("detailFullName").innerText = fullname;
               document.getElementById("detailUserName").innerText = username;
               document.getElementById("detailEmail").innerText = email;
               document.getElementById("detailPhone").innerText = phone;
               document.getElementById("detailRole").innerText = role;
               document.getElementById("detailAddress").innerText = address;
-              document.getElementById("detailHeader").innerText = "User Detail - ID: " + button.getAttribute("data-id");
+            });
+
+            // Modal Edit (Update)
+            const updateModal = document.getElementById("updateModal");
+            updateModal.addEventListener("show.bs.modal", function (event) {
+              const button = event.relatedTarget;
+
+              const id = button.getAttribute("data-id");
+              const email = button.getAttribute("data-email");
+              const username = button.getAttribute("data-username");
+              const phone = button.getAttribute("data-phone");
+              const fullname = button.getAttribute("data-fullname");
+              const address = button.getAttribute("data-address");
+
+              document.getElementById("updateId").value = id;
+              document.getElementById("updateEmail").value = email;
+              document.getElementById("updateUsername").value = username;
+              document.getElementById("updatePhone").value = phone;
+              document.getElementById("updateFullName").value = fullname;
+              document.getElementById("updateAddress").value = address;
             });
           });
         </script>
+
 
 
       </body>
