@@ -11,21 +11,21 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private int orderId;
+    
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer; // khóa ngoại -> Customer(customer_id)
 
-    @Column(name = "order_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    
     private OrderStatus status = OrderStatus.pending;
 
-    //@Column(name = "total_amount", precision = 12, scale = 2, nullable = false)
+    //@Column( precision = 12, scale = 2, nullable = false)
     private BigDecimal totalAmount;
 
     @ManyToOne
@@ -41,8 +41,8 @@ public class Order {
 
     
     // ====== Getters & Setters ======
-    public int getOrderId() { return orderId; }
-    public void setOrderId(int orderId) { this.orderId = orderId; }
+    public int getId() { return id; }
+    public void setId(int orderId) { this.id = orderId; }
 
     public Customer getCustomer() { return customer; }
     public void setCustomer(Customer customer) { this.customer = customer; }

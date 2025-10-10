@@ -10,25 +10,25 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
+    
     private int id;
 
     @OneToOne
     @JoinColumn(name = "order_id")//, nullable = false)
     private Order order;
 
-    //@Column(name = "payment_date", nullable = false)
+    //@Column( nullable = false)
     private LocalDateTime paymentDate = LocalDateTime.now();
 
-    //@Column(name = "amount", precision = 12, scale = 2, nullable = false)
+    //@Column( precision = 12, scale = 2, nullable = false)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    //@Column(name = "method", nullable = false)
+    //@Column( nullable = false)
     private PaymentMethod method;
 
     @Enumerated(EnumType.STRING)
-    //@Column(name = "status", nullable = false)
+    //@Column(nullable = false)
     private PaymentStatus status = PaymentStatus.PENDING;
 
     

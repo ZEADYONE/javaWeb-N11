@@ -8,26 +8,26 @@ public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "admin_id")
-    private int adminId;
+   
+    private int id;
 
     @OneToOne
     @JoinColumn(name = "user_id", unique = true, referencedColumnName = "user_id")
     private User user; 
 
-    @Column(name = "position", length = 100)
+    @Column( length = 100)
     private String position;
 
    
     
 
     
-    public int getAdminId() {
-        return adminId;
+    public int getId() {
+        return id;
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
+    public void setId(int adminId) {
+        this.id =adminId;
     }
 
     public User getUser() {
@@ -46,12 +46,5 @@ public class Admin {
         this.position = position;
     }
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "adminId=" + adminId +
-                ", user=" + (user != null ? user.getUsername() : "null") +
-                ", position='" + position + '\'' +
-                '}';
-    }
+    
 }

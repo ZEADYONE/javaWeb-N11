@@ -11,24 +11,24 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private int productId;
+    
+    private int id;
 
-    @Column(name = "name", nullable = false, length = 200)
+    //@Column( nullable = false, length = 200)
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "price", nullable = false, precision = 12, scale = 2)
+    //@Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "stock_quantity", nullable = false)
+    //@Column(nullable = false)
     private int stockQuantity = 0;
 
     // Quan hệ nhiều sản phẩm thuộc một category
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JoinColumn( referencedColumnName = "category_id")
     private Category category;
 
     // Quan hệ nhiều sản phẩm thuộc một brand
@@ -36,13 +36,13 @@ public class Product {
     @JoinColumn(name = "brand_id", referencedColumnName = "brand_id")
     private Brand brand;
 
-    @Column(name = "created_at", updatable = false)
+    @Column( updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    
     private LocalDateTime updatedAt;
      // 🔹 Thêm thuộc tính ảnh
-    @Column(name = "image_url", length = 500)
+    @Column(length = 500)
     private String imageUrl;  
 
     // 🔽 Quan hệ hai chiều với OrderDetail
@@ -52,8 +52,8 @@ public class Product {
     
 
     //Getters and setters
-    public int getProductId() { return productId; }
-    public void setProductId(int productId) { this.productId = productId; }
+    public int getId() { return id; }
+    public void setId(int productId) { this.id = productId; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -81,21 +81,8 @@ public class Product {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
-    
+
     public List<OrderDetail> getOrderDetails() { return orderDetails; }
     public void setOrderDetails(List<OrderDetail> orderDetails) { this.orderDetails = orderDetails; }
     
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId=" + productId +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", stockQuantity=" + stockQuantity +
-                ", category=" + (category != null ? category.getName() : "null") +
-                ", brand=" + (brand != null ? brand.getName() : "null") +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }
