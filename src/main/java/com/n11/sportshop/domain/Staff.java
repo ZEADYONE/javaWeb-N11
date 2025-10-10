@@ -8,25 +8,25 @@ public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "staff_id")
-    private int staffId;
+   
+    private int id;
 
     @OneToOne
     @JoinColumn(name = "user_id", unique = true, referencedColumnName = "user_id")
     private User user; // ánh xạ đến bảng Users
 
-    @Column(name = "department", length = 100)
+    @Column(length = 100)
     private String department;
 
     
 
     // ===== Getter & Setter =====
-    public int getStaffId() {
-        return staffId;
+    public int getId() {
+        return id;
     }
 
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
+    public void setId(int staffId) {
+        this.id= staffId;
     }
 
     public User getUser() {
@@ -45,13 +45,4 @@ public class Staff {
         this.department = department;
     }
 
-    // ===== toString =====
-    @Override
-    public String toString() {
-        return "Staff{" +
-                "staffId=" + staffId +
-                ", user=" + (user != null ? user.getUsername() : "null") +
-                ", department='" + department + '\'' +
-                '}';
-    }
 }

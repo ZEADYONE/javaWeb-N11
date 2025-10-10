@@ -12,18 +12,18 @@ public class OrderDetail {
 
     @ManyToOne
     @MapsId("orderId") // ánh xạ khóa ngoại vào phần order_id trong khóa chính
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id")//, nullable = false)
     private Order order;
 
     @ManyToOne
     @MapsId("productId") // ánh xạ khóa ngoại vào phần product_id trong khóa chính
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id")//, nullable = false)
     private Product product;
 
-    @Column(name = "quantity", nullable = false)
+    @Column( nullable = false)
     private int quantity;
 
-    @Column(name = "price", precision = 12, scale = 2, nullable = false)
+    @Column(precision = 12, scale = 2)//, nullable = false)
     private BigDecimal price;
 
     

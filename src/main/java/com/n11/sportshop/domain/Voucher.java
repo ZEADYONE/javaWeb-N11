@@ -10,48 +10,38 @@ public class Voucher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "voucher_id")
-    private int voucherId;
+   
+    private int id;
 
-    @Column(name = "code", unique = true, nullable = false, length = 50)
+    //@Column( unique = true, nullable = false, length = 50)
     private String code;
 
-    @Column(name = "description", length = 255)
+    @Column( length = 255)
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "discount_type", nullable = false)
+    //@Column( nullable = false)
     private DiscountType discountType;
 
-    @Column(name = "discount_value", precision = 12, scale = 2, nullable = false)
+    //@Column( precision = 12, scale = 2, nullable = false)
     private BigDecimal discountValue;
 
-    @Column(name = "start_date", nullable = false)
+    //@Column(nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "end_date", nullable = false)
+   // @Column(nullable = false)
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    //@Column(nullable = false)
     private VoucherStatus status = VoucherStatus.active;
 
    
-    public Voucher() {}
-
-    public Voucher(String code, String description, DiscountType discountType, BigDecimal discountValue, LocalDate startDate, LocalDate endDate, VoucherStatus status) {
-        this.code = code;
-        this.description = description;
-        this.discountType = discountType;
-        this.discountValue = discountValue;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-    }
+    
 
     
-    public int getVoucherId() { return voucherId; }
-    public void setVoucherId(int voucherId) { this.voucherId = voucherId; }
+    public int getId() { return id; }
+    public void setId(int voucherId) { this.id = voucherId; }
 
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }

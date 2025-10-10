@@ -18,10 +18,10 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    
     private int id;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column( unique = true, length = 50)//,nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

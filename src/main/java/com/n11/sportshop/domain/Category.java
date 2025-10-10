@@ -8,22 +8,22 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private int categoryId;
+    
+    private int id;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(  length = 100)//,nullable = false)
     private String name;
 
     
    
 
    
-    public int getCategoryId() {
-        return categoryId;
+    public int getId() {
+        return id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setId(int categoryId) {
+        this.id = categoryId;
     }
 
     public String getName() {
@@ -35,11 +35,5 @@ public class Category {
     }
 
    
-    @Override
-    public String toString() {
-        return "Category{" +
-                "categoryId=" + categoryId +
-                ", name='" + name + '\'' +
-                '}';
-    }
+   
 }

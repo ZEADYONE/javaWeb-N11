@@ -8,23 +8,23 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
-    private int customerId;
+    
+    private int id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", unique = true, nullable = false)
+    @JoinColumn(name = "user_id", unique = true)//, nullable = false)
     private User user;
 
-    @Column(name = "loyalty_points", columnDefinition = "INT DEFAULT 0")
+    @Column( columnDefinition = "INT DEFAULT 0")
     private int loyaltyPoints;
 
     
     
 
     
-    public int getCustomerId() { return customerId; }
-    public void setCustomerId(int customerId) { 
-        this.customerId = customerId; 
+    public int getId() { return id; }
+    public void setId(int customerId) { 
+        this.id = customerId; 
     }
 
     public User getUser() { return user; }
