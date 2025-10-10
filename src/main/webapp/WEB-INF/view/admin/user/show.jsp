@@ -123,39 +123,16 @@
                                 </a>
 
                                 <!-- Modal View Detail -->
-                                <!-- ✅ Phải truyền từng dữ liệu sang file detail.jsp
-                                vì trong file detail.jsp không có đối tượng 'user' trong phạm vi hiện tại. -->
-                                <jsp:include page="../user/detail.jsp">
-                                  <jsp:param name="id" value="${user.id}" />
-                                  <jsp:param name="username" value="${user.username}" />
-                                  <jsp:param name="fullname" value="${user.fullName}" />
-                                  <jsp:param name="email" value="${user.email}" />
-                                  <jsp:param name="phone" value="${user.phoneNumber}" />
-                                  <jsp:param name="address" value="${user.address}" />
-                                  <jsp:param name="role" value="${user.role.name}" />
-                                </jsp:include>
-
+                                <!-- sửa lại thành chuyển thẳng biến user qua detail luôn -->
+                                <c:set var="user" value="${user}" scope="request" />
+                                <jsp:include page="../user/detail.jsp" />
 
 
                                 <!-- Edit -->
-                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1 btn-edit"
-                                  data-bs-toggle="modal" data-bs-target="#updateModal${user.id}">
+                                <a href="/admin/user/update/${user.id}"
+                                  class="btn btn-sm btn-outline-primary mx-1 btn-edit">
                                   <i class="bi bi-person-gear"></i>
                                 </a>
-
-                                <!-- Modal Update -->
-                                <jsp:include page="../user/update.jsp">
-                                  <jsp:param name="id" value="${user.id}" />
-                                  <jsp:param name="username" value="${user.username}" />
-                                  <jsp:param name="fullname" value="${user.fullName}" />
-                                  <jsp:param name="email" value="${user.email}" />
-                                  <jsp:param name="phone" value="${user.phoneNumber}" />
-                                  <jsp:param name="address" value="${user.address}" />
-                                  <jsp:param name="role" value="${user.role.name}" />
-                                </jsp:include>
-
-
-
 
                                 <!-- Delete (modal trigger) -->
                                 <button type="button" class="btn btn-sm btn-outline-danger mx-1" data-bs-toggle="modal"
