@@ -170,15 +170,30 @@
 
                                 <!-- Edit -->
                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1 btn-edit"
-                                  data-bs-toggle="modal" data-bs-target="#updateModal" data-id="${user.id}"
-                                  data-email="${user.email}" data-username="${user.username}"
-                                  data-phone="${user.phoneNumber}" data-fullname="${user.fullName}"
-                                  data-address="${user.address}">
+                                  data-bs-toggle="modal" data-bs-target="#updateModal">
                                   <i class="bi bi-person-gear"></i>
                                 </a>
 
                                 <!-- Modal Update -->
-                                <jsp:include page="../user/update.jsp" />
+                                <div class="modal fade" id="updateModal" tabindex="-1"
+                                  aria-labelledby="updateModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content border-0 shadow-lg">
+                                      <!-- Header -->
+                                      <div class="modal-header bg-gradient-primary text-white rounded-top-4">
+                                        <h5 class="modal-title" id="updateModalLabel">Update User</h5>
+                                        <button type="button" class="btn-close btn-close-white"
+                                          data-bs-dismiss="modal"></button>
+                                      </div>
+
+                                      <!-- Body -->
+                                      <div class="modal-body py-4 px-5">
+                                        <jsp:include page="../user/update.jsp" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
 
 
                                 <!-- Delete (modal trigger) -->
@@ -279,25 +294,7 @@
               document.getElementById("detailAddress").innerText = address;
             });
 
-            // Modal Edit (Update)
-            const updateModal = document.getElementById("updateModal");
-            updateModal.addEventListener("show.bs.modal", function (event) {
-              const button = event.relatedTarget;
 
-              const id = button.getAttribute("data-id");
-              const email = button.getAttribute("data-email");
-              const username = button.getAttribute("data-username");
-              const phone = button.getAttribute("data-phone");
-              const fullname = button.getAttribute("data-fullname");
-              const address = button.getAttribute("data-address");
-
-              document.getElementById("updateId").value = id;
-              document.getElementById("updateEmail").value = email;
-              document.getElementById("updateUsername").value = username;
-              document.getElementById("updatePhone").value = phone;
-              document.getElementById("updateFullName").value = fullname;
-              document.getElementById("updateAddress").value = address;
-            });
           });
         </script>
 
