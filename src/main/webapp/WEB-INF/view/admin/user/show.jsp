@@ -26,11 +26,11 @@
         <!-- CSS Files -->
         <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
 
+
         <style>
-          /* Làm nền modal mờ nhẹ thay vì đen đậm */
           .modal-backdrop.show {
             opacity: 0.15 !important;
-            /* mặc định Bootstrap là 0.5 */
+
           }
         </style>
       </head>
@@ -105,10 +105,20 @@
                                 <form:input type="text" class="form-control border border-primary"
                                   style="padding-left: 20px;" path="phoneNumber" />
                               </div>
+                              <!-- 
+                              <div class="mb-3 col-6">
+                                <label class="form-label">Select role</label>
+                                <form:select class="form-select border border-primary" style="padding-left: 20px;"
+                                  path="role.name">
+                                  <form:option value="">-----</form:option>
+                                  <form:option value="ADMIN">ADMIN</form:option>
+                                  <form:option value="USER">USER</form:option>
+                                </form:select>
+                              </div> -->
 
-                              <div class="col-md-6 mb-3">
+                              <div class="col-md-12 mb-3">
                                 <label class="form-label fw-bold">Address:</label>
-                                <form:input type="text" class="form-control border border-primary"
+                                <form:textarea type="text" class="form-control border border-primary"
                                   style="padding-left: 20px;" path="address" />
                               </div>
                             </div>
@@ -177,11 +187,57 @@
 
                               <!-- Action -->
                               <td class="text-center">
-                                <!-- View -->
-                                <a href="/admin/user/detail/${user.id}" class="btn btn-sm btn-outline-info mx-1"
-                                  title="View">
+                                <!-- View Detail-->
+                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1 btn-view"
+                                  data-bs-toggle="modal" data-bs-target="#detailModal" data-fullname="${user.fullName}"
+                                  data-username="${user.username}" data-email="${user.email}" data-id="${user.id}"
+                                  data-phone="${user.phoneNumber}" data-role="${user.role.name}"
+                                  data-address="${user.address}" title="View">
                                   <i class="bi bi-person-vcard"></i>
                                 </a>
+                                <!-- Modal View Detail -->
+                                <div class="modal fade" id="detailModal" tabindex="-1"
+                                  aria-labelledby="detailModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content border-0 shadow-lg">
+
+                                      <!-- Header -->
+                                      <div class="modal-header bg-gradient-primary text-white">
+                                        <h5 class="modal-title" id="detailModalLabel">User Detail</h5>
+                                        <button type="button" class="btn-close btn-close-white"
+                                          data-bs-dismiss="modal"></button>
+                                      </div>
+
+                                      <!-- Body -->
+                                      <div class="modal-body px-4 py-4">
+                                        <h4 class="text-dark mb-3" id="detailHeader"></h4>
+                                        <hr class="my-3" />
+
+                                        <div class="card border-0 shadow-sm">
+                                          <div class="card-header bg-light fw-bold text-dark">
+                                            Account Information
+                                          </div>
+                                          <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><strong>Full Name:</strong> <span
+                                                id="detailFullName"></span></li>
+                                            <li class="list-group-item"><strong>Username:</strong> <span
+                                                id="detailUserName"></span></li>
+                                            <li class="list-group-item"><strong>Email:</strong> <span
+                                                id="detailEmail"></span></li>
+                                            <li class="list-group-item"><strong>Address:</strong> <span
+                                                id="detailAddress"></span></li>
+                                            <li class="list-group-item"><strong>Phone Number:</strong> <span
+                                                id="detailPhone"></span></li>
+                                            <li class="list-group-item"><strong>Role:</strong> <span
+                                                id="detailRole"></span></li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
 
                                 <!-- Edit -->
                                 <a href="/admin/user/update/${user.id}" class="btn btn-sm btn-outline-primary mx-1"
@@ -263,10 +319,30 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
           }
         </script>
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="/admin/js/material-dashboard.min.js?v=3.0.0"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const detailModal = document.getElementById("detailModal");
+
+            detailModal.addEventListener("show.bs.modal", function (event) {
+              const button = event.relatedTarget; // button click
+              const fullname = button.getAttribute("data-fullName");
+              const username = button.getAttribute("data-username");
+              const email = button.getAttribute("data-email");
+              const phone = button.getAttribute("data-phone");
+              const role = button.getAttribute("data-role");
+              const address = button.getAttribute("data-address");
+
+              document.getElementById("detailFullName").innerText = fullname;
+              document.getElementById("detailUserName").innerText = username;
+              document.getElementById("detailEmail").innerText = email;
+              document.getElementById("detailPhone").innerText = phone;
+              document.getElementById("detailRole").innerText = role;
+              document.getElementById("detailAddress").innerText = address;
+              document.getElementById("detailHeader").innerText = "User Detail - ID: " + button.getAttribute("data-id");
+            });
+          });
+        </script>
+
 
       </body>
 
