@@ -87,7 +87,6 @@
                                                         <button type="submit" class="btn btn-primary"
                                                             style="background-color: #ffba00;">Create</button>
                                                     </form:form>
-
                                                 </div>
                                             </div>
                                         </div>

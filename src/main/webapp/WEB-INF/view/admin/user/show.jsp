@@ -53,12 +53,17 @@
                     </div>
                   </div>
                   <!-- Nút mở modal Create -->
-                  <button type="button" class="btn btn-primary"
+                  <!-- <button type="button" class="btn btn-primary"
                     style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;" data-bs-toggle="modal"
                     data-bs-target="#CreateModal" title="Create">
                     Create User
-                  </button>
+                  </button> -->
 
+                  <a href="/admin/user/create" type="button" class="btn btn-primary"
+                    style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;"
+                    title="Create">
+                    Create User
+                </a>
                   <!-- Modal Create -->
                   <div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel"
                     aria-hidden="true">
@@ -106,7 +111,6 @@
                                   style="padding-left: 20px;" path="phoneNumber" />
                               </div>
                               
-
                               <div class="col-md-12 mb-3">
                                 <label class="form-label fw-bold">Address:</label>
                                 <form:textarea type="text" class="form-control border border-primary"

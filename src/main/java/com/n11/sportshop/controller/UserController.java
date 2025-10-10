@@ -8,28 +8,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.service.RoleService;
 import com.n11.sportshop.service.UserService;
 
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/admin/user/create")
     public String getUserCreatePage(Model model) {
+        model.addAttribute("role", new Role());
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
     @PostMapping("/admin/user/create")
     public String postCreateUser(@ModelAttribute("newUser") User user) {
+        // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại. Không được để id trống !!!
+        Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
+        user.setRole(roleInDataBase);
         this.userService.saveUser(user);
         return "redirect:/admin/user";
     }
