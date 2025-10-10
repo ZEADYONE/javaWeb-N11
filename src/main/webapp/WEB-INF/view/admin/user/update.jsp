@@ -3,7 +3,7 @@
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 
-            <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel"
+            <div class="modal fade" id="updateModal${user.id}" tabindex="-1" aria-labelledby="updateModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content border-0 shadow-lg">

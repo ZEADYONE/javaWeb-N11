@@ -117,23 +117,42 @@
                               <!-- Action -->
                               <td class="text-center">
                                 <!-- View Detail-->
-                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1 btn-view"
-                                  data-bs-toggle="modal" data-bs-target="#detailModal" title="View">
+                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1"
+                                  data-bs-toggle="modal" data-bs-target="#detailModal${user.id}">
                                   <i class="bi bi-person-vcard"></i>
                                 </a>
+
                                 <!-- Modal View Detail -->
-                                <jsp:include page="../user/detail.jsp" />
+                                <!-- ✅ Phải truyền từng dữ liệu sang file detail.jsp
+                                vì trong file detail.jsp không có đối tượng 'user' trong phạm vi hiện tại. -->
+                                <jsp:include page="../user/detail.jsp">
+                                  <jsp:param name="id" value="${user.id}" />
+                                  <jsp:param name="username" value="${user.username}" />
+                                  <jsp:param name="fullname" value="${user.fullName}" />
+                                  <jsp:param name="email" value="${user.email}" />
+                                  <jsp:param name="phone" value="${user.phoneNumber}" />
+                                  <jsp:param name="address" value="${user.address}" />
+                                  <jsp:param name="role" value="${user.role.name}" />
+                                </jsp:include>
 
 
 
                                 <!-- Edit -->
                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1 btn-edit"
-                                  data-bs-toggle="modal" data-bs-target="#updateModal">
+                                  data-bs-toggle="modal" data-bs-target="#updateModal${user.id}">
                                   <i class="bi bi-person-gear"></i>
                                 </a>
 
                                 <!-- Modal Update -->
-                                <jsp:include page="../user/update.jsp" />
+                                <jsp:include page="../user/update.jsp">
+                                  <jsp:param name="id" value="${user.id}" />
+                                  <jsp:param name="username" value="${user.username}" />
+                                  <jsp:param name="fullname" value="${user.fullName}" />
+                                  <jsp:param name="email" value="${user.email}" />
+                                  <jsp:param name="phone" value="${user.phoneNumber}" />
+                                  <jsp:param name="address" value="${user.address}" />
+                                  <jsp:param name="role" value="${user.role.name}" />
+                                </jsp:include>
 
 
 
