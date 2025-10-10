@@ -25,7 +25,13 @@
       <!-- CSS Files -->
       <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
 
-
+      <style>
+        /* Làm nền modal mờ nhẹ thay vì đen đậm */
+        .modal-backdrop.show {
+          opacity: 0.15 !important;
+          /* mặc định Bootstrap là 0.5 */
+        }
+      </style>
     </head>
 
     <body class="g-sidenav-show  bg-gray-200">
@@ -87,12 +93,54 @@
                             <td>
                               <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
                             </td>
-                            <td>
-                              <a href="/admin/user/detail/${user.id}" class="bi bi-person-vcard mx-2" type="button"></a>
-                              <a href="/admin/user/update/${user.id}" class="bi bi-person-gear mx-2" type="button"></a>
-                              <a href="/admin/user/delete/${user.id}" class="bi bi-trash mx-2" type="button"></a>
+                            <td style="text-align: center; vertical-align: middle;">
+                              <!-- Nút xem chi tiết -->
+                              <a href="/admin/user/detail/${user.id}" class="bi bi-person-vcard mx-2" type="button"
+                                title="View"></a>
 
+                              <!-- Nút cập nhật -->
+                              <a href="/admin/user/update/${user.id}" class="bi bi-person-gear mx-2" type="button"
+                                title="Edit"></a>
+
+                              <!-- Nút xoá (mở modal) -->
+                              <a class="bi bi-trash mx-2" type="button" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal${user.id}" title="Delete"></a>
+
+                              <!-- Modal xác nhận xoá -->
+                              <div class="modal fade" id="deleteModal${user.id}" tabindex="-1"
+                                aria-labelledby="deleteModalLabel${user.id}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+
+                                    <!-- Header -->
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="deleteModalLabel${user.id}">Confirm Delete</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                    </div>
+
+                                    <!-- Body -->
+                                    <div class="modal-body">
+                                      Are you sure you want to delete <b>${user.fullName}</b>?
+                                    </div>
+
+                                    <!-- Footer -->
+                                    <div class="modal-footer">
+                                      <form method="post" action="/admin/user/delete">
+                                        <!-- Ẩn ID người dùng -->
+                                        <input type="hidden" name="id" value="${user.id}">
+                                        <button type="button" class="btn btn-secondary"
+                                          data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary"
+                                          style="background-color: #ffba00;">Delete</button>
+                                      </form>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
                             </td>
+
                           </tr>
                         </c:forEach>
                       </tbody>
