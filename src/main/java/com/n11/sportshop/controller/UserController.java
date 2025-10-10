@@ -38,6 +38,7 @@ public class UserController {
     public String getUserList(Model model) {
         List<User> users = this.userService.getUserList();
         model.addAttribute("users", users);
+        model.addAttribute("newUser", new User());
         return "admin/user/show";
     }
 
