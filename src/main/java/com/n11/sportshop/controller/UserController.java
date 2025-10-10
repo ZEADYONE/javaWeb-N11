@@ -35,6 +35,7 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String postCreateUser(@ModelAttribute("newUser") User user) {
         // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại. Không được để id trống !!!
+        // Nhớ thêm ADMIN, USER và database 
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
         user.setRole(roleInDataBase);
         this.userService.saveUser(user);
