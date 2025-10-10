@@ -34,8 +34,9 @@ public class UserController {
 
     @PostMapping("/admin/user/create")
     public String postCreateUser(@ModelAttribute("newUser") User user) {
-        // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại. Không được để id trống !!!
-        // Nhớ thêm ADMIN, USER và database 
+        // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại.
+        // Không được để id trống !!!
+        // Nhớ thêm ADMIN, USER và database
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
         user.setRole(roleInDataBase);
         this.userService.saveUser(user);
@@ -67,7 +68,7 @@ public class UserController {
 
     // Detail-User
     @GetMapping("/admin/user/detail/{id}")
-    public String getUserDetailPage(Model model, @PathVariable int id) {
+    public String getUserDetailPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("user", user);
         return "admin/user/detail";
@@ -75,7 +76,7 @@ public class UserController {
 
     // Upate-User
     @GetMapping("/admin/user/update/{id}")
-    public String getUpdateUserPage(Model model, @PathVariable int id) {
+    public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("newUser", user);
         return "admin/user/update";

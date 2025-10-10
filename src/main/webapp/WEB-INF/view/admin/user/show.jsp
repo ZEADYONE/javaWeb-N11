@@ -118,53 +118,11 @@
                               <td class="text-center">
                                 <!-- View Detail-->
                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1 btn-view"
-                                  data-bs-toggle="modal" data-bs-target="#detailModal" data-fullname="${user.fullName}"
-                                  data-username="${user.username}" data-email="${user.email}" data-id="${user.id}"
-                                  data-phone="${user.phoneNumber}" data-role="${user.role.name}"
-                                  data-address="${user.address}" title="View">
+                                  data-bs-toggle="modal" data-bs-target="#detailModal" title="View">
                                   <i class="bi bi-person-vcard"></i>
                                 </a>
                                 <!-- Modal View Detail -->
-                                <div class="modal fade" id="detailModal" tabindex="-1"
-                                  aria-labelledby="detailModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content border-0 shadow-lg">
-
-                                      <!-- Header -->
-                                      <div class="modal-header bg-gradient-primary text-white">
-                                        <h5 class="modal-title" id="detailModalLabel">User Detail</h5>
-                                        <button type="button" class="btn-close btn-close-white"
-                                          data-bs-dismiss="modal"></button>
-                                      </div>
-
-                                      <!-- Body -->
-                                      <div class="modal-body px-4 py-4">
-                                        <h4 class="text-dark mb-3" id="detailHeader"></h4>
-                                        <hr class="my-3" />
-
-                                        <div class="card border-0 shadow-sm">
-                                          <div class="card-header bg-light fw-bold text-dark">
-                                            Account Information
-                                          </div>
-                                          <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><strong>Full Name:</strong> <span
-                                                id="detailFullName"></span></li>
-                                            <li class="list-group-item"><strong>Username:</strong> <span
-                                                id="detailUserName"></span></li>
-                                            <li class="list-group-item"><strong>Email:</strong> <span
-                                                id="detailEmail"></span></li>
-                                            <li class="list-group-item"><strong>Address:</strong> <span
-                                                id="detailAddress"></span></li>
-                                            <li class="list-group-item"><strong>Phone Number:</strong> <span
-                                                id="detailPhone"></span></li>
-                                            <li class="list-group-item"><strong>Role:</strong> <span
-                                                id="detailRole"></span></li>
-                                          </ul>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <jsp:include page="../user/detail.jsp" />
 
 
 
@@ -175,24 +133,8 @@
                                 </a>
 
                                 <!-- Modal Update -->
-                                <div class="modal fade" id="updateModal" tabindex="-1"
-                                  aria-labelledby="updateModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content border-0 shadow-lg">
-                                      <!-- Header -->
-                                      <div class="modal-header bg-gradient-primary text-white rounded-top-4">
-                                        <h5 class="modal-title" id="updateModalLabel">Update User</h5>
-                                        <button type="button" class="btn-close btn-close-white"
-                                          data-bs-dismiss="modal"></button>
-                                      </div>
+                                <jsp:include page="../user/update.jsp" />
 
-                                      <!-- Body -->
-                                      <div class="modal-body py-4 px-5">
-                                        <jsp:include page="../user/update.jsp" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
 
 
 
@@ -270,32 +212,7 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
           }
         </script>
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            // Modal View (Detail)
-            const detailModal = document.getElementById("detailModal");
-            detailModal.addEventListener("show.bs.modal", function (event) {
-              const button = event.relatedTarget;
 
-              const id = button.getAttribute("data-id");
-              const fullname = button.getAttribute("data-fullname");
-              const username = button.getAttribute("data-username");
-              const email = button.getAttribute("data-email");
-              const phone = button.getAttribute("data-phone");
-              const role = button.getAttribute("data-role");
-              const address = button.getAttribute("data-address");
-
-              document.getElementById("detailHeader").innerText = "User Detail - ID: " + id;
-              document.getElementById("detailFullName").innerText = fullname;
-              document.getElementById("detailUserName").innerText = username;
-              document.getElementById("detailEmail").innerText = email;
-              document.getElementById("detailPhone").innerText = phone;
-              document.getElementById("detailRole").innerText = role;
-              document.getElementById("detailAddress").innerText = address;
-            });
-
-
-          });
         </script>
 
 
