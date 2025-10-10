@@ -53,85 +53,19 @@
                     </div>
                   </div>
                   <!-- Nút mở modal Create -->
-                  <!-- <button type="button" class="btn btn-primary"
+                  <button type="button" class="btn btn-primary"
                     style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;" data-bs-toggle="modal"
                     data-bs-target="#CreateModal" title="Create">
                     Create User
-                  </button> -->
+                  </button>
 
-                  <a href="/admin/user/create" type="button" class="btn btn-primary"
+                  <!-- <a href="/admin/user/create" type="button" class="btn btn-primary"
                     style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;"
                     title="Create">
                     Create User
-                </a>
+                </a> -->
                   <!-- Modal Create -->
-                  <div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                      <div class="modal-content border-0 shadow-lg rounded-4">
-
-                        <!-- Header -->
-                        <div class="modal-header bg-gradient-primary text-white rounded-top-4">
-                          <h5 class="modal-title" id="CreateModalLabel">Create User</h5>
-                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                        </div>
-
-                        <!-- Body -->
-                        <div class="modal-body py-4 px-5">
-                          <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
-                            <div class="row">
-                              <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Email:</label>
-                                <form:input type="email" class="form-control border border-primary"
-                                  style="padding-left: 20px;" path="email" />
-                              </div>
-
-                              <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">User name:</label>
-                                <form:input type="text" class="form-control border border-primary"
-                                  style="padding-left: 20px;" path="username" />
-                              </div>
-
-                              <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Password:</label>
-                                <form:input type="password" class="form-control border border-primary"
-                                  style="padding-left: 20px;" path="password" />
-                              </div>
-
-                              <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Full name:</label>
-                                <form:input type="text" class="form-control border border-primary"
-                                  style="padding-left: 20px;" path="fullName" />
-                              </div>
-
-                              <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Phone number:</label>
-                                <form:input type="text" class="form-control border border-primary"
-                                  style="padding-left: 20px;" path="phoneNumber" />
-                              </div>
-                              
-                              <div class="col-md-12 mb-3">
-                                <label class="form-label fw-bold">Address:</label>
-                                <form:textarea type="text" class="form-control border border-primary"
-                                  style="padding-left: 20px;" path="address" />
-                              </div>
-                            </div>
-
-                            <div class="text-center mt-4">
-                              <button type="submit" class="btn text-white px-4 py-2" style="background-color: #ffba00;">
-                                Create
-                              </button>
-                            </div>
-                          </form:form>
-                        </div>
-
-                        <!-- Footer -->
-                        <div class="modal-footer justify-content-center border-0 pb-3"></div>
-
-                      </div>
-                    </div>
-                  </div>
+                  <jsp:include page="../user/create.jsp" />
 
                   <div class="card-body px-0 pb-2" style="height:70vh;">
 
@@ -184,139 +118,23 @@
                               <td class="text-center">
                                 <!-- View Detail-->
                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1 btn-view"
-                                  data-bs-toggle="modal" data-bs-target="#detailModal" data-fullname="${user.fullName}"
-                                  data-username="${user.username}" data-email="${user.email}" data-id="${user.id}"
-                                  data-phone="${user.phoneNumber}" data-role="${user.role.name}"
-                                  data-address="${user.address}" title="View">
+                                  data-bs-toggle="modal" data-bs-target="#detailModal" title="View">
                                   <i class="bi bi-person-vcard"></i>
                                 </a>
                                 <!-- Modal View Detail -->
-                                <div class="modal fade" id="detailModal" tabindex="-1"
-                                  aria-labelledby="detailModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content border-0 shadow-lg">
-
-                                      <!-- Header -->
-                                      <div class="modal-header bg-gradient-primary text-white">
-                                        <h5 class="modal-title" id="detailModalLabel">User Detail</h5>
-                                        <button type="button" class="btn-close btn-close-white"
-                                          data-bs-dismiss="modal"></button>
-                                      </div>
-
-                                      <!-- Body -->
-                                      <div class="modal-body px-4 py-4">
-                                        <h4 class="text-dark mb-3" id="detailHeader"></h4>
-                                        <hr class="my-3" />
-
-                                        <div class="card border-0 shadow-sm">
-                                          <div class="card-header bg-light fw-bold text-dark">
-                                            Account Information
-                                          </div>
-                                          <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><strong>Full Name:</strong> <span
-                                                id="detailFullName"></span></li>
-                                            <li class="list-group-item"><strong>Username:</strong> <span
-                                                id="detailUserName"></span></li>
-                                            <li class="list-group-item"><strong>Email:</strong> <span
-                                                id="detailEmail"></span></li>
-                                            <li class="list-group-item"><strong>Address:</strong> <span
-                                                id="detailAddress"></span></li>
-                                            <li class="list-group-item"><strong>Phone Number:</strong> <span
-                                                id="detailPhone"></span></li>
-                                            <li class="list-group-item"><strong>Role:</strong> <span
-                                                id="detailRole"></span></li>
-                                          </ul>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <jsp:include page="../user/detail.jsp" />
 
 
 
                                 <!-- Edit -->
                                 <a href="javascript:void(0);" class="btn btn-sm btn-outline-primary mx-1 btn-edit"
-                                  data-bs-toggle="modal" data-bs-target="#updateModal" data-id="${user.id}"
-                                  data-email="${user.email}" data-username="${user.username}"
-                                  data-phone="${user.phoneNumber}" data-fullname="${user.fullName}"
-                                  data-address="${user.address}">
+                                  data-bs-toggle="modal" data-bs-target="#updateModal">
                                   <i class="bi bi-person-gear"></i>
                                 </a>
 
                                 <!-- Modal Update -->
-                                <div class="modal fade" id="updateModal" tabindex="-1"
-                                  aria-labelledby="updateModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content border-0 shadow-lg">
-                                      <!-- Header -->
-                                      <div class="modal-header bg-gradient-primary text-white rounded-top-4">
-                                        <h5 class="modal-title" id="updateModalLabel">Update User</h5>
-                                        <button type="button" class="btn-close btn-close-white"
-                                          data-bs-dismiss="modal"></button>
-                                      </div>
+                                <jsp:include page="../user/update.jsp" />
 
-                                      <!-- Body -->
-                                      <div class="modal-body py-4 px-5">
-                                        <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
-                                          <div class="row">
-                                            <!-- ID hidden -->
-                                            <div class="mb-3" style="display: none;">
-                                              <form:input type="int" class="form-control" path="id" id="updateId" />
-                                            </div>
-
-                                            <div class="col-md-12 mb-3">
-                                              <label class="form-label fw-bold">Email:</label>
-                                              <form:input type="email" class="form-control border border-primary"
-                                                style="padding-left: 20px;" path="email" id="updateEmail"
-                                                disabled="true" />
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-bold">User name:</label>
-                                              <form:input type="text" class="form-control border border-primary"
-                                                style="padding-left: 20px;" path="username" id="updateUsername" />
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-bold">Full name:</label>
-                                              <form:input type="text" class="form-control border border-primary"
-                                                style="padding-left: 20px;" path="fullName" id="updateFullName" />
-                                            </div>
-
-                                            <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-bold">Phone number:</label>
-                                              <form:input type="text" class="form-control border border-primary"
-                                                style="padding-left: 20px;" path="phoneNumber" id="updatePhone" />
-                                            </div>
-
-                                            <!-- <div class="col-md-6 mb-3">
-                                              <label class="form-label fw-bold">Select role:</label>
-                                              <form:select class="form-select border border-primary"
-                                                style="padding-left: 20px;" path="role.name" id="updateRole">
-                                                <form:option value="">-----</form:option>
-                                                <form:option value="ADMIN">ADMIN</form:option>
-                                                <form:option value="USER">USER</form:option>
-                                              </form:select>
-                                            </div> -->
-
-                                            <div class="col-md-12 mb-3">
-                                              <label class="form-label fw-bold">Address:</label>
-                                              <form:textarea class="form-control border border-primary"
-                                                style="padding-left: 20px;" path="address" id="updateAddress" />
-                                            </div>
-                                          </div>
-
-                                          <div class="text-center mt-4">
-                                            <button type="submit" class="btn text-white px-4 py-2"
-                                              style="background-color: #ffba00;">
-                                              Update
-                                            </button>
-                                          </div>
-                                        </form:form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
 
 
 
@@ -394,50 +212,7 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
           }
         </script>
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            // Modal View (Detail)
-            const detailModal = document.getElementById("detailModal");
-            detailModal.addEventListener("show.bs.modal", function (event) {
-              const button = event.relatedTarget;
 
-              const id = button.getAttribute("data-id");
-              const fullname = button.getAttribute("data-fullname");
-              const username = button.getAttribute("data-username");
-              const email = button.getAttribute("data-email");
-              const phone = button.getAttribute("data-phone");
-              const role = button.getAttribute("data-role");
-              const address = button.getAttribute("data-address");
-
-              document.getElementById("detailHeader").innerText = "User Detail - ID: " + id;
-              document.getElementById("detailFullName").innerText = fullname;
-              document.getElementById("detailUserName").innerText = username;
-              document.getElementById("detailEmail").innerText = email;
-              document.getElementById("detailPhone").innerText = phone;
-              document.getElementById("detailRole").innerText = role;
-              document.getElementById("detailAddress").innerText = address;
-            });
-
-            // Modal Edit (Update)
-            const updateModal = document.getElementById("updateModal");
-            updateModal.addEventListener("show.bs.modal", function (event) {
-              const button = event.relatedTarget;
-
-              const id = button.getAttribute("data-id");
-              const email = button.getAttribute("data-email");
-              const username = button.getAttribute("data-username");
-              const phone = button.getAttribute("data-phone");
-              const fullname = button.getAttribute("data-fullname");
-              const address = button.getAttribute("data-address");
-
-              document.getElementById("updateId").value = id;
-              document.getElementById("updateEmail").value = email;
-              document.getElementById("updateUsername").value = username;
-              document.getElementById("updatePhone").value = phone;
-              document.getElementById("updateFullName").value = fullname;
-              document.getElementById("updateAddress").value = address;
-            });
-          });
         </script>
 
 

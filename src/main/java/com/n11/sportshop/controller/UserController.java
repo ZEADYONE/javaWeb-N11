@@ -34,7 +34,9 @@ public class UserController {
 
     @PostMapping("/admin/user/create")
     public String postCreateUser(@ModelAttribute("newUser") User user) {
-        // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại. Không được để id trống !!!
+        // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại.
+        // Không được để id trống !!!
+        // Nhớ thêm ADMIN, USER và database
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
         user.setRole(roleInDataBase);
         this.userService.saveUser(user);
@@ -66,7 +68,7 @@ public class UserController {
 
     // Detail-User
     @GetMapping("/admin/user/detail/{id}")
-    public String getUserDetailPage(Model model, @PathVariable int id) {
+    public String getUserDetailPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("user", user);
         return "admin/user/detail";
@@ -74,7 +76,7 @@ public class UserController {
 
     // Upate-User
     @GetMapping("/admin/user/update/{id}")
-    public String getUpdateUserPage(Model model, @PathVariable int id) {
+    public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("newUser", user);
         return "admin/user/update";
@@ -83,7 +85,7 @@ public class UserController {
     @PostMapping("/admin/user/update")
     public String updateUserPage(Model model, @ModelAttribute("newUser") User user) {
         User currentUser = this.userService.getUserByID(user.getId());
-
+        currentUser.setRole(this.roleService.getRoleByName(user.getRole().getName()));
         if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty()) {
             currentUser.setPhoneNumber(user.getPhoneNumber());
         }
@@ -95,9 +97,6 @@ public class UserController {
         }
         if (user.getUsername() != null && !user.getUsername().isEmpty()) {
             currentUser.setUsername(user.getUsername());
-        }
-        if (user.getRole() != null) {
-            currentUser.setRole(user.getRole());
         }
 
         this.userService.handelSaveUser(currentUser);
