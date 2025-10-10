@@ -84,7 +84,7 @@ public class UserController {
     @PostMapping("/admin/user/update")
     public String updateUserPage(Model model, @ModelAttribute("newUser") User user) {
         User currentUser = this.userService.getUserByID(user.getId());
-
+        currentUser.setRole(this.roleService.getRoleByName(user.getRole().getName()));
         if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty()) {
             currentUser.setPhoneNumber(user.getPhoneNumber());
         }
@@ -96,9 +96,6 @@ public class UserController {
         }
         if (user.getUsername() != null && !user.getUsername().isEmpty()) {
             currentUser.setUsername(user.getUsername());
-        }
-        if (user.getRole() != null) {
-            currentUser.setRole(user.getRole());
         }
 
         this.userService.handelSaveUser(currentUser);
