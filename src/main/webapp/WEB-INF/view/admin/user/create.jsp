@@ -1,103 +1,81 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+            <div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+
+                        <!-- Header -->
+                        <div class="modal-header bg-gradient-primary text-white rounded-top-4">
+                            <h5 class="modal-title" id="CreateModalLabel">Create User</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="modal-body py-4 px-5">
+                            <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Email:</label>
+                                        <form:input type="email" class="form-control border border-primary"
+                                            style="padding-left: 20px;" path="email" />
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">User name:</label>
+                                        <form:input type="text" class="form-control border border-primary"
+                                            style="padding-left: 20px;" path="username" />
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Password:</label>
+                                        <form:input type="password" class="form-control border border-primary"
+                                            style="padding-left: 20px;" path="password" />
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Full name:</label>
+                                        <form:input type="text" class="form-control border border-primary"
+                                            style="padding-left: 20px;" path="fullName" />
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Phone number:</label>
+                                        <form:input type="text" class="form-control border border-primary"
+                                            style="padding-left: 20px;" path="phoneNumber" />
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Select role</label>
+                                        <form:select class="form-select border border-primary"
+                                            style="padding-left: 20px;" path="role.name">
+                                            <form:option value="">-----</form:option>
+                                            <form:option value="ADMIN">ADMIN</form:option>
+                                            <form:option value="USER">USER</form:option>
+                                        </form:select>
+                                    </div>
 
 
-            <!DOCTYPE html>
-            <html lang="en">
-
-            <head>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <link rel="apple-touch-icon" sizes="76x76" href="/admin/img/apple-icon.png">
-                <link rel="icon" type="image/png" href="/admin/img/favicon.png">
-                <title>
-                    Create user
-                </title>
-
-            </head>
-
-            <body>
-                <aside
-                    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
-                    id="sidenav-main">
-                    <jsp:include page="../layout/sidebar.jsp" />
-                </aside>
-                <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-                    <jsp:include page="../layout/header.jsp" />
-                    <div class="container-fluid py-4">
-                        <div class="col-12">
-                            <div class="card my-4">
-                                <div class="table-responsive p-0">
-                                    <div class="container-fluid py-4">
-                                        <div class="container mt-5">
-                                            <div class="row">
-                                                <div class="col-md-6 col-12 mx-auto">
-                                                    <h3 style="color: black;">Create a user</h3>
-                                                    <hr />
-                                                    <form:form method="post" action="/admin/user/create"
-                                                        modelAttribute="newUser">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Email:</label>
-                                                            <form:input type="email"
-                                                                class="form-control border border-primary"
-                                                                style="padding-left: 20px;" path="email" />
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">User name:</label>
-                                                            <form:input type="text"
-                                                                class="form-control border border-primary"
-                                                                style="padding-left: 20px;" path="username" />
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Password:</label>
-                                                            <form:input type="password"
-                                                                class="form-control border border-primary"
-                                                                style="padding-left: 20px;" path="password" />
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Full name:</label>
-                                                            <form:input type="text"
-                                                                class="form-control border border-primary"
-                                                                style="padding-left: 20px;" path="fullName" />
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Phone number:</label>
-                                                            <form:input type="text"
-                                                                class="form-control border border-primary"
-                                                                style="padding-left: 20px;" path="phoneNumber" />
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Address:</label>
-                                                            <form:input type="text"
-                                                                class="form-control border border-primary"
-                                                                style="padding-left: 20px;" path="address" />
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Select role</label>
-                                                            <form:select class="form-select border border-primary"
-                                                                style="padding-left: 20px;" path="role.name">
-                                                                <form:option value="">-----</form:option>
-                                                                <form:option value="ADMIN">ADMIN</form:option>
-                                                                <form:option value="USER">USER</form:option>
-                                                            </form:select>
-                                                        </div>
-
-                                                        <button type="submit" class="btn btn-primary"
-                                                            style="background-color: #ffba00;">Create</button>
-                                                    </form:form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Address:</label>
+                                        <form:textarea type="text" class="form-control border border-primary"
+                                            style="padding-left: 20px;" path="address" />
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn text-white px-4 py-2"
+                                        style="background-color: #ffba00;">
+                                        Create
+                                    </button>
+                                </div>
+                            </form:form>
                         </div>
+
+                        <!-- Footer -->
+                        <div class="modal-footer justify-content-center border-0 pb-3"></div>
+
                     </div>
-                    <jsp:include page="../layout/footer.jsp" />
-                </main>
-
-            </body>
-
-            </html>
+                </div>
+            </div>
