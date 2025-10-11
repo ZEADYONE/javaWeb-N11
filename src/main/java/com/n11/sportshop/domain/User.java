@@ -1,6 +1,5 @@
 package com.n11.sportshop.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,28 +13,28 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false) // khóa ngoại trỏ tới Role
+    @JoinColumn(name = "role_id")
     private Role role;
-    @Column(nullable = false, unique = true, length = 100)
+
+    //@Column(nullable = false, unique = true, length = 100)
     private String username;
 
     //@Column(nullable = false)
     private String password;
 
-    @Column(length = 150)//,nullable = false)
+    //@Column(length = 150)//,nullable = false)
     private String fullName;
 
-    @Column(unique = true, length = 150)
+    // @Column(unique = true, length = 150)
     private String email;
 
-    @Column( length = 20)
+   // @Column( length = 20)
     private String phoneNumber;
 
-    @Column(length = 255)
+    //@Column(length = 255)
     private String address;
 
     public int getId() {
