@@ -58,11 +58,6 @@
                     Create User
                   </button>
 
-                  <!-- <a href="/admin/user/create" type="button" class="btn btn-primary"
-                    style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;"
-                    title="Create">
-                    Create User
-                </a> -->
                   <!-- Modal Create -->
                   <jsp:include page="../user/create.jsp" />
 

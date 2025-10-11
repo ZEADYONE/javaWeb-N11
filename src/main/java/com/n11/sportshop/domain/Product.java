@@ -20,18 +20,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //@Column( nullable = false, length = 200)
+    // @Column( nullable = false, length = 200)
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    //@Column(nullable = false, precision = 12, scale = 2)
+    // @Column(nullable = false, precision = 12, scale = 2)
     private Double price;
 
-    //@Column(nullable = false)
+    // @Column(nullable = false)
     private int stockQuantity = 0;
-    
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -40,36 +40,81 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    private String image;  
+    private String image;
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;
-    
-    public int getId() { return id; }
-    public void setId(int productId) { this.id = productId; }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public int getId() {
+        return id;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public void setId(int productId) {
+        this.id = productId;
+    }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public String getName() {
+        return name;
+    }
 
-    public int getStockQuantity() { return stockQuantity; }
-    public void setStockQuantity(int stockQuantity) { this.stockQuantity = stockQuantity; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Category getCategory() { return category; }
-    public void setCategory(Category category) { this.category = category; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Brand getBrand() { return brand; }
-    public void setBrand(Brand brand) { this.brand = brand; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
+    public Double getPrice() {
+        return price;
+    }
 
-    public List<OrderDetail> getOrderDetails() { return orderDetails; }
-    public void setOrderDetails(List<OrderDetail> orderDetails) { this.orderDetails = orderDetails; }
-    
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
 }

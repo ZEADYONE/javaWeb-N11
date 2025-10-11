@@ -52,8 +52,8 @@ public class ProductController {
     }
 
     // Xóa sản phẩm
-    @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable("id") int id) {
+    @PostMapping("/delete")
+    public String deleteProduct(@RequestParam("id") int id) {
         productService.deleteById(id);
         return "redirect:/admin/product";
     }
