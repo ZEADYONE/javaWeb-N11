@@ -1,4 +1,4 @@
-package com.n11.sportshop.controller;
+package com.n11.sportshop.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
       <!DOCTYPE html>
       <html lang="en">
 
@@ -25,8 +26,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
         <!-- CSS Files -->
         <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
-
-
         <style>
           .modal-backdrop.show {
             opacity: 0.15 !important;
@@ -42,7 +41,7 @@
           <jsp:include page="../layout/sidebar.jsp" />
         </aside>
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-          <jsp:include page="../layout/header.jsp" />
+
           <div class="container-fluid py-4">
             <div class=" row">
               <div class="col-12">

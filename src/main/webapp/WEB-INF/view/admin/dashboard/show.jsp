@@ -37,7 +37,6 @@
             <!-- End Sidebar -->
             <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
                 <!-- Header -->
-                <jsp:include page="../layout/header.jsp" />
                 <!-- End Header -->
                 <div class="container-fluid py-4">
                     <div class="row">

@@ -7,7 +7,7 @@
             <!-- Mobile Specific Meta -->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- Favicon-->
-            <link rel="shortcut icon" href="/client/imgfav.png">
+            <link rel="shortcut icon" href="/client/img/fav.png">
             <!-- Author Meta -->
             <meta name="author" content="CodePixar">
             <!-- Meta Description -->
@@ -32,23 +32,9 @@
             <link rel="stylesheet" href="/client/css/ion.rangeSlider.skinFlat.css" />
             <link rel="stylesheet" href="/client/css/magnific-popup.css">
             <link rel="stylesheet" href="/client/css/main.css">
-        </head>
-
-        <body>
-            <header class="header_area" >
-                <div class="main_menu">
-                    <jsp:include page="../layout/navigation.jsp" />
-                </div>
-                <div class="search_input" id="search_input_box">
-                    <div class="container">
-                        <form class="d-flex justify-content-between">
-                            <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                            <button type="submit" class="btn"></button>
-                            <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-                        </form>
-                    </div>
-                </div>
-            </header>
+            <!--
+        Javascript
+		============================================= -->
             <script src="/client/js/vendor/jquery-2.2.4.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
                 integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
@@ -65,4 +51,21 @@
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
             <script src="/client/js/gmaps.min.js"></script>
             <script src="/client/js/main.js"></script>
+        </head>
+
+        <body>
+            <header class="header_area">
+                <div class="main_menu">
+                    <jsp:include page="../layout/navigation.jsp" />
+                </div>
+                <div class="search_input" id="search_input_box">
+                    <div class="container">
+                        <form class="d-flex justify-content-between">
+                            <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                            <button type="submit" class="btn"></button>
+                            <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+                        </form>
+                    </div>
+                </div>
+            </header>
         </body>

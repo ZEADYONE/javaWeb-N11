@@ -7,7 +7,7 @@
             <!-- Mobile Specific Meta -->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- Favicon-->
-            <link rel="shortcut icon" href="/client/imgfav.png">
+            <link rel="shortcut icon" href="/client/img/fav.png">
             <!-- Author Meta -->
             <meta name="author" content="CodePixar">
             <!-- Meta Description -->
@@ -32,6 +32,25 @@
             <link rel="stylesheet" href="/client/css/ion.rangeSlider.skinFlat.css" />
             <link rel="stylesheet" href="/client/css/magnific-popup.css">
             <link rel="stylesheet" href="/client/css/main.css">
+            <!--
+        Javascript
+		============================================= -->
+            <script src="/client/js/vendor/jquery-2.2.4.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+                integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+                crossorigin="anonymous"></script>
+            <script src="/client/js/vendor/bootstrap.min.js"></script>
+            <script src="/client/js/jquery.ajaxchimp.min.js"></script>
+            <script src="/client/js/jquery.nice-select.min.js"></script>
+            <script src="/client/js/jquery.sticky.js"></script>
+            <script src="/client/js/nouislider.min.js"></script>
+            <script src="/client/js/countdown.js"></script>
+            <script src="/client/js/jquery.magnific-popup.min.js"></script>
+            <script src="/client/js/owl.carousel.min.js"></script>
+            <!--gmaps Js-->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+            <script src="/client/js/gmaps.min.js"></script>
+            <script src="/client/js/main.js"></script>
         </head>
 
         <body>
@@ -49,13 +68,13 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">Shop</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="single-product.html">Product
+                                    <li class="nav-item"><a class="nav-link" href="/allproduct">Shop Category</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/productdetail">Product
                                             Details</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a>
@@ -78,7 +97,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">Pages</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                                     <li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
                                     <li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
                                 </ul>
@@ -95,21 +114,5 @@
                 </div>
             </nav>
         </body>
-        <script src="/client/js/vendor/jquery-2.2.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-            crossorigin="anonymous"></script>
-        <script src="/client/js/vendor/bootstrap.min.js"></script>
-        <script src="/client/js/jquery.ajaxchimp.min.js"></script>
-        <script src="/client/js/jquery.nice-select.min.js"></script>
-        <script src="/client/js/jquery.sticky.js"></script>
-        <script src="/client/js/nouislider.min.js"></script>
-        <script src="/client/js/countdown.js"></script>
-        <script src="/client/js/jquery.magnific-popup.min.js"></script>
-        <script src="/client/js/owl.carousel.min.js"></script>
-        <!--gmaps Js-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-        <script src="/client/js/gmaps.min.js"></script>
-        <script src="/client/js/main.js"></script>
 
         </html>

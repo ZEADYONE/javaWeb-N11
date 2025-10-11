@@ -1,4 +1,5 @@
-package com.n11.sportshop.controller;
+package com.n11.sportshop.controller.admin;
+
 import org.springframework.ui.Model;
 
 import org.springframework.stereotype.Controller;
@@ -11,28 +12,30 @@ import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.service.ProductService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
     private final ProductService productService;
-    public ProductController(ProductService productService){
-        this.productService=productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
-    //hien thi danh sach san pham
+
+    // hien thi danh sach san pham
     @GetMapping
     public String getProductPage(Model model) {
-        model.addAttribute("products",productService.getAllProducts());
+        model.addAttribute("products", productService.getAllProducts());
         return "admin/product/show";
     }
-    //hien thi form moi
+
+    // hien thi form moi
     @GetMapping("/new")
-    public String showAddForm(Model model){
-        model.addAttribute("product",new Product());
+    public String showAddForm(Model model) {
+        model.addAttribute("product", new Product());
         return "admin/product/add";
     }
-     // Xử lý lưu sản phẩm mới
+
+    // Xử lý lưu sản phẩm mới
     @PostMapping("/save")
     public String saveProduct(@ModelAttribute("product") Product product) {
         productService.saveProduct(product);
@@ -70,11 +73,4 @@ public class ProductController {
         productService.saveProduct(product); // save() cũng có thể dùng để update
         return "redirect:/admin/product";
     }
-} 
-
-
-
-
-
-
-
+}
