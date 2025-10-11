@@ -1,6 +1,10 @@
 package com.n11.sportshop.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Category")
@@ -11,12 +15,7 @@ public class Category {
     
     private int id;
 
-    @Column(  length = 100)//,nullable = false)
     private String name;
-
-    
-   
-
    
     public int getId() {
         return id;

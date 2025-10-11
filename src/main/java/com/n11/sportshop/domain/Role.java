@@ -1,8 +1,6 @@
 package com.n11.sportshop.domain;
 
-import jakarta.persistence.*;
 import java.util.List;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,18 +16,13 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     private int id;
 
-    @Column( unique = true, length = 50)//,nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "role")
     private List<User> users;
 
-   
-
-    // ===== Getters & Setters =====
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

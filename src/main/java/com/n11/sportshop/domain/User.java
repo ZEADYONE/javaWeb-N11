@@ -1,7 +1,6 @@
 package com.n11.sportshop.domain;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,7 +38,6 @@ public class User {
     @Column(length = 255)
     private String address;
 
-    // ===== Getters & Setters =====
     public int getId() {
         return id;
     }

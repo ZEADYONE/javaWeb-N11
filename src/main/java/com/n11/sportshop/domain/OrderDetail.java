@@ -1,36 +1,36 @@
 package com.n11.sportshop.domain;
 
-import jakarta.persistence.*;
-import java.math.BigDecimal;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "OrderDetail")
 public class OrderDetail {
 
-    @EmbeddedId
-    private OrderDetailId id; // khóa chính kết hợp (order_id + product_id)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
-    @MapsId("orderId") // ánh xạ khóa ngoại vào phần order_id trong khóa chính
     @JoinColumn(name = "order_id")//, nullable = false)
     private Order order;
 
     @ManyToOne
-    @MapsId("productId") // ánh xạ khóa ngoại vào phần product_id trong khóa chính
     @JoinColumn(name = "product_id")//, nullable = false)
     private Product product;
 
     @Column( nullable = false)
     private int quantity;
 
-    @Column(precision = 12, scale = 2)//, nullable = false)
-    private BigDecimal price;
+    private Double price;
 
     
-    // ===== Getters & Setters =====
-    public OrderDetailId getId() { return id; }
-    public void setId(OrderDetailId id) { this.id = id; }
-
     public Order getOrder() { return order; }
     public void setOrder(Order order) { this.order = order; }
 
@@ -40,6 +40,12 @@ public class OrderDetail {
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }
