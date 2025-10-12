@@ -28,11 +28,12 @@ public class ImageService {
         try {
             bytes = file.getBytes();
 
+            // Dẫn đến lưu file ảnh
             File dir = new File(rootPath + File.separator + target);
             if (!dir.exists())
                 dir.mkdirs();
 
-            // Create the file on server
+            // Lấy tên file ảnh và path của file ảnh
             finalName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
             File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName);
 
@@ -49,6 +50,8 @@ public class ImageService {
         return finalName;
     }
 
+    // Phục vụ cho việc xóa người dùng hoặc cập nhật ảnh thì xóa luôn file ảnh trên
+    // ổ cứng
     public void deleteImage(String fileName, String target) {
         String uploadDir = "src/main/webapp/resources/images/" + target + "/";
         Path path = Paths.get(uploadDir + fileName);
