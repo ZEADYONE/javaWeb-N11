@@ -160,7 +160,7 @@
 
                                       <!-- Footer -->
                                       <div class="modal-footer justify-content-center border-0 pb-4">
-                                        <form method="post" action="/admin/product/delete">
+                                        <form method="post" action="/admin/product/delete/${product.id}">
                                           <input type="hidden" name="id" value="${product.id}">
                                           <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
                                             Cancel
