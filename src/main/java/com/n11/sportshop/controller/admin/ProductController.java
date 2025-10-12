@@ -80,12 +80,12 @@ public class ProductController {
     }
 
     // Sửa sản phẩm (hiển thị form)
-    @GetMapping("/edit/{id}")
+    @GetMapping("/update/{id}")
     public String editProductForm(@PathVariable("id") int id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + id));
         model.addAttribute("product", product);
-        return "admin/product/edit";
+        return "admin/product/update";
     }
 
     // Cập nhật sản phẩm

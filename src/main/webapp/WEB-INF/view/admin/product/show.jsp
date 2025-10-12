@@ -63,7 +63,6 @@
 
 
                   <div class="card-body px-0 pb-2" style="height:70vh;">
-
                     <div class="table-responsive p-0">
                       <table class="table align-items-center mb-0">
                         <thead class="bg-light">
@@ -119,12 +118,12 @@
 
                                 <!-- Modal View Detail -->
                                 <!-- sửa lại thành chuyển thẳng biến user qua detail luôn -->
-                                <c:set var="user" value="${user}" scope="request" />
-                                <jsp:include page="../user/detail.jsp" />
+                                <c:set var="product" value="${product}" scope="request" />
+                                <jsp:include page="../product/detail.jsp" />
 
 
                                 <!-- Edit -->
-                                <a href="/admin/user/update/${user.id}"
+                                <a href="/admin/product/update/${product.id}"
                                   class="btn btn-sm btn-outline-primary mx-1 btn-edit">
                                   <i class="bi bi-person-gear"></i>
                                 </a>
