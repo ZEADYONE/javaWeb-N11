@@ -8,37 +8,58 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.n11.sportshop.domain.Brand;
+import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.service.ProductService;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.n11.sportshop.service.CategoryService;
+import com.n11.sportshop.service.BrandService;
 
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
     private final ProductService productService;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService,
+            BrandService brandService) {
         this.productService = productService;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
     }
 
     // hien thi danh sach san pham
     @GetMapping
     public String getProductPage(Model model) {
         model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("newProduct", new Product());
         return "admin/product/show";
     }
 
     // hien thi form moi
-    @GetMapping("/new")
-    public String showAddForm(Model model) {
-        model.addAttribute("product", new Product());
-        return "admin/product/add";
+    @GetMapping("/create")
+    public String getProductCreatePage(Model model) {
+        model.addAttribute("newProduct", new Product());
+        model.addAttribute("categorie", new Category());
+        model.addAttribute("brand", new Brand());
+        return "admin/product/create";
     }
 
     // Xử lý lưu sản phẩm mới
-    @PostMapping("/save")
-    public String saveProduct(@ModelAttribute("product") Product product) {
-        productService.saveProduct(product);
+    @PostMapping("/create")
+    public String postCreateProduct(@ModelAttribute("newProduct") Product product) {
+        // Nhớ thêm tạm Shirt, Pant vào database category
+        // Nhớ thêm tạm Hehe, Hihi vào database brand
+
+        Category categoryInDataBase = this.categoryService.getCategoryByName(product.getCategory().getName());
+        product.setCategory(categoryInDataBase);
+
+        Brand brandInDataBase = this.brandService.getBrandByName(product.getBrand().getName());
+        product.setBrand(brandInDataBase);
+
+        this.productService.saveProduct(product);
         return "redirect:/admin/product";
     }
 
