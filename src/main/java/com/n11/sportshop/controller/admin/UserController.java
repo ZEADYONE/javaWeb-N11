@@ -16,10 +16,13 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.RoleService;
 import com.n11.sportshop.service.UserService;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 @Controller
+@RequestMapping("/admin/user")
 public class UserController {
-
     private final UserService userService;
     private final RoleService roleService;
     private final ImageService imageService;
@@ -30,39 +33,28 @@ public class UserController {
         this.imageService = imageService;
     }
 
-    @GetMapping("/admin/user/create")
+    @GetMapping("/create")
     public String getUserCreatePage(Model model) {
         model.addAttribute("role", new Role());
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
-    @PostMapping("/admin/user/create")
+    @PostMapping("/create") 
     public String postCreateUser(@ModelAttribute("newUser") User user, @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
+
         // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại.
         // Không được để id trống !!!
         // Nhớ thêm ADMIN, USER và database
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
-
         user.setRole(roleInDataBase);
-
-        // Xử lý ảnh
-        String imageName;
-        if (file != null && !file.isEmpty()) {
-            // Nếu người dùng có upload ảnh
-            imageName = this.imageService.handelImage(file, "avatar");
-        } else {
-            // Nếu không upload, dùng ảnh mặc định
-            imageName = "defaultavatar.jpg";
-        }
-        user.setImage(imageName);
-
+        user.setImage(this.imageService.handelImage(file, "avatar"));
         this.userService.saveUser(user);
         return "redirect:/admin/user";
     }
 
-    @GetMapping("/admin/user")
+    @GetMapping
     public String getUserList(Model model) {
         List<User> users = this.userService.getUserList();
         model.addAttribute("users", users);
@@ -71,25 +63,22 @@ public class UserController {
     }
 
     // Delete-User
-    @GetMapping("/admin/user/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("user", user);
         return "admin/user/delete";
     }
 
-    @PostMapping("/admin/user/delete")
+    @PostMapping("/delete")
     public String postMethodName(Model model, @ModelAttribute("user") User user) {
-        // Chỉ xóa ảnh nếu KHÔNG phải ảnh mặc định
-        if (user.getImage() != null && !user.getImage().equals("defaultavatar.jpg")) {
-            imageService.deleteImage(user.getImage(), "avatar");
-        }
+        this.imageService.deleteImage(user.getImage(), "avatar");
         this.userService.deleteUser(user.getId());
         return "redirect:/admin/user";
     }
 
     // Detail-User
-    @GetMapping("/admin/user/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String getUserDetailPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("user", user);
@@ -97,17 +86,18 @@ public class UserController {
     }
 
     // Upate-User
-    @GetMapping("/admin/user/update/{id}")
+    @GetMapping("/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         model.addAttribute("newUser", user);
         return "admin/user/update";
     }
 
-    @PostMapping("/admin/user/update")
+    @PostMapping("/update")
     public String updateUserPage(Model model, @ModelAttribute("newUser") User user,
             @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
+
         User currentUser = this.userService.getUserByID(user.getId());
 
         currentUser.setRole(this.roleService.getRoleByName(user.getRole().getName()));
@@ -128,15 +118,11 @@ public class UserController {
         // Kiểm tra xem người dùng có cập nhật ảnh không nếu có thì cập nhật
         String updateImage = this.imageService.handelImage(file, "avatar");
         if (updateImage != null && !updateImage.isEmpty()) {
-            // Kiểm tra xem người dùng hiện tại có ảnh và KHÔNG phải ảnh mặc định thì mới
-            // xóa
-            if (currentUser.getImage() != null
-                    && !currentUser.getImage().isEmpty()
-                    && !currentUser.getImage().equals("defaultavatar.jpg")) {
-                this.imageService.deleteImage(currentUser.getImage(), "avatar");
+            // Kiểm tra xem người dùng có sẵn avatar chưa nếu có thì xóa để thay thế bằng
+            // avatar mới
+            if (user.getImage() != null && !user.getImage().isEmpty()) {
+                this.imageService.deleteImage(user.getImage(), "avatar");
             }
-
-            // Cập nhật ảnh mới
             currentUser.setImage(updateImage);
         }
 
