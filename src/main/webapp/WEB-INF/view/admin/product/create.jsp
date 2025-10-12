@@ -17,54 +17,51 @@
 
                         <!-- Body -->
                         <div class="modal-body py-4 px-5">
-                            <form:form method="post" action="/admin/product/save" modelAttribute="newUser">
+                            <form:form method="post" action="/admin/product/create" modelAttribute="newProduct">
 
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Email:</label>
-                                        <form:input type="email" class="form-control border "
-                                            style="padding-left: 20px;" path="email" />
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">User name:</label>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Name:</label>
                                         <form:input type="text" class="form-control border " style="padding-left: 20px;"
-                                            path="username" />
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Password:</label>
-                                        <form:input type="password" class="form-control border"
-                                            style="padding-left: 20px;" path="password" />
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Full name:</label>
-                                        <form:input type="text" class="form-control border " style="padding-left: 20px;"
-                                            path="fullName" />
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Phone number:</label>
-                                        <form:input type="text" class="form-control border" style="padding-left: 20px;"
-                                            path="phoneNumber" />
+                                            path="name" />
                                     </div>
 
                                     <div class="mb-3 col-md-6">
-                                        <label class="form-label">Select role</label>
+                                        <label class="form-label">Category</label>
                                         <form:select class="form-select border" style="padding-left: 20px;"
-                                            path="role.name">
+                                            path="category.name">
                                             <form:option value="">-----</form:option>
-                                            <form:option value="ADMIN">ADMIN</form:option>
-                                            <form:option value="USER">USER</form:option>
+                                            <form:option value="Shirt">Shirt</form:option>
+                                            <form:option value="Pant">Pant</form:option>
                                         </form:select>
                                     </div>
 
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Brand</label>
+                                        <form:select class="form-select border" style="padding-left: 20px;"
+                                            path="brand.name">
+                                            <form:option value="">-----</form:option>
+                                            <form:option value="Hehe">Hehe</form:option>
+                                            <form:option value="Hihi">Hihi</form:option>
+                                        </form:select>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Price:</label>
+                                        <form:input type="text" class="form-control border " style="padding-left: 20px;"
+                                            path="price" />
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Stock:</label>
+                                        <form:input type="text" class="form-control border " style="padding-left: 20px;"
+                                            path="stockQuantity" />
+                                    </div>
 
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label fw-bold">Address:</label>
+                                        <label class="form-label fw-bold">Description:</label>
                                         <form:textarea class="form-control border" style="padding-left: 20px;"
-                                            path="address"></form:textarea>
+                                            path="description"></form:textarea>
                                     </div>
 
                                     <div class="col-md-12 mb-3 ">

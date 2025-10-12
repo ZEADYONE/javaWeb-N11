@@ -57,11 +57,9 @@
                     data-bs-target="#CreateModal" title="Create">
                     Add product
                   </button>
-                  <p style="text-align: center;">Tạo tạm bằng sql đi mới có hiện danh sách với xoá thôi phương thức tạo
-                    của ông tùng lạ quá buộc
-                    phải chuyển hướng trang</hp>
-                    <!-- Modal Add -->
 
+                  <!-- Modal create -->
+                  <jsp:include page="../product/create.jsp" />
 
 
                   <div class="card-body px-0 pb-2" style="height:70vh;">
