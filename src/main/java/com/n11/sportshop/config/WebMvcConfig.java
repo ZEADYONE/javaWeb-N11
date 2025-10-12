@@ -38,6 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/client/**").addResourceLocations("/resources/client/");
         registry.addResourceHandler("/admin/**").addResourceLocations("/resources/admin/");
+        registry.addResourceHandler("/admin/**").addResourceLocations("/resources/images/avatar/");
         // Nếu tiền tố là client thì sẽ tự động tìm trong resources
     }
 }

@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.RoleService;
 import com.n11.sportshop.service.UserService;
 
@@ -19,10 +22,12 @@ public class UserController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final ImageService imageService;
 
-    public UserController(UserService userService, RoleService roleService) {
+    public UserController(UserService userService, RoleService roleService, ImageService imageService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/admin/user/create")
@@ -33,12 +38,17 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String postCreateUser(@ModelAttribute("newUser") User user) {
+    public String postCreateUser(@ModelAttribute("newUser") User user, @RequestParam("images") MultipartFile file) {
+        // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
         // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại.
         // Không được để id trống !!!
         // Nhớ thêm ADMIN, USER và database
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
+
         user.setRole(roleInDataBase);
+
+        user.setImage(this.imageService.handelImage(file, "avatar"));
+
         this.userService.saveUser(user);
         return "redirect:/admin/user";
     }
@@ -54,14 +64,14 @@ public class UserController {
     // Delete-User
     @GetMapping("/admin/user/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable int id) {
-        User user = new User();
-        user.setId(id);
+        User user = this.userService.getUserByID(id);
         model.addAttribute("user", user);
         return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")
     public String postMethodName(Model model, @ModelAttribute("user") User user) {
+        this.imageService.deleteImage(user.getImage(), "avatar");
         this.userService.deleteUser(user.getId());
         return "redirect:/admin/user";
     }
@@ -83,9 +93,13 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String updateUserPage(Model model, @ModelAttribute("newUser") User user) {
+    public String updateUserPage(Model model, @ModelAttribute("newUser") User user,
+            @RequestParam("images") MultipartFile file) {
+        // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
         User currentUser = this.userService.getUserByID(user.getId());
+
         currentUser.setRole(this.roleService.getRoleByName(user.getRole().getName()));
+
         if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty()) {
             currentUser.setPhoneNumber(user.getPhoneNumber());
         }
@@ -97,6 +111,17 @@ public class UserController {
         }
         if (user.getUsername() != null && !user.getUsername().isEmpty()) {
             currentUser.setUsername(user.getUsername());
+        }
+
+        // Kiểm tra xem người dùng có cập nhật ảnh không nếu có thì cập nhật
+        String updateImage = this.imageService.handelImage(file, "avatar");
+        if (updateImage != null && !updateImage.isEmpty()) {
+            // Kiểm tra xem người dùng có sẵn avatar chưa nếu có thì xóa để thay thế bằng
+            // avatar mới
+            if (user.getImage() != null && !user.getImage().isEmpty()) {
+                this.imageService.deleteImage(user.getImage(), "avatar");
+            }
+            currentUser.setImage(updateImage);
         }
 
         this.userService.handelSaveUser(currentUser);

@@ -22,7 +22,9 @@
                             <div class="card-body px-5 py-4">
                                 <div class="row justify-content-center">
                                     <div class="col-md-8">
-                                        <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
+                                        <!-- Sử dụng enctype="multipart/form-data" để sever biết là đang đẩy lên 1 kiểu dữ liệu là file -->
+                                        <form:form method="post" action="/admin/user/update" modelAttribute="newUser"
+                                            enctype="multipart/form-data">
                                             <!-- Hidden ID -->
                                             <form:input type="hidden" path="id" />
 
@@ -67,6 +69,12 @@
                                                         style="padding-left: 20px;" path="address"></form:textarea>
                                                 </div>
 
+                                                <div class="col-md-6 mb-3" style="display: none;">
+                                                    <label class="form-label fw-bold">Image:</label>
+                                                    <form:input type="text" class="form-control border"
+                                                        style="padding-left: 20px;" path="image" />
+                                                </div>
+
                                                 <div class="col-md-12 mb-3 ">
                                                     <label class="form-label fw-bold">Avatar:</label>
                                                     <div class="d-flex align-items-center gap-3">
@@ -75,8 +83,9 @@
                                                             <span>Upload image</span>
                                                         </label>
 
-                                                        <input type="file" id="formFileLg" accept="image/*"
-                                                            onchange="previewImage(event)">
+                                                        <!-- Sử dụng name="images" để RequestParam -->
+                                                        <input type="file" id="formFileLg" name="images"
+                                                            accept="image/*" onchange="previewImage(event)">
                                                         <img id="preview" alt="preview">
                                                     </div>
 

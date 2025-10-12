@@ -31,6 +31,8 @@
                                     <li class="list-group-item"><strong>Phone Number: </strong>${user.phoneNumber}
                                     </li>
                                     <li class="list-group-item"><strong>Role: </strong>${user.role.name}</li>
+                                    <!-- Show ảnh -->
+                                    <img src="${user.image}" alt="Avatar Preview">
                                 </ul>
                             </div>
                         </div>

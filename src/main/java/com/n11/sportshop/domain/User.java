@@ -1,5 +1,6 @@
 package com.n11.sportshop.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,23 +20,26 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    //@Column(nullable = false, unique = true, length = 100)
+    // @Column(nullable = false, unique = true, length = 100)
     private String username;
 
-    //@Column(nullable = false)
+    // @Column(nullable = false)
     private String password;
 
-    //@Column(length = 150)//,nullable = false)
+    // @Column(length = 150)//,nullable = false)
     private String fullName;
 
     // @Column(unique = true, length = 150)
     private String email;
 
-   // @Column( length = 20)
+    // @Column( length = 20)
     private String phoneNumber;
 
-    //@Column(length = 255)
+    // @Column(length = 255)
     private String address;
+
+    @Column
+    String image;
 
     public int getId() {
         return id;
@@ -99,5 +103,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
