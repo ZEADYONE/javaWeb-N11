@@ -91,7 +91,13 @@ public class ProductController {
     // Cập nhật sản phẩm
     @PostMapping("/update")
     public String updateProduct(@ModelAttribute("product") Product product) {
-        productService.saveProduct(product); // save() cũng có thể dùng để update
+        Category categoryInDataBase = this.categoryService.getCategoryByName(product.getCategory().getName());
+        product.setCategory(categoryInDataBase);
+
+        Brand brandInDataBase = this.brandService.getBrandByName(product.getBrand().getName());
+        product.setBrand(brandInDataBase);
+
+        this.productService.saveProduct(product);
         return "redirect:/admin/product";
     }
 }
