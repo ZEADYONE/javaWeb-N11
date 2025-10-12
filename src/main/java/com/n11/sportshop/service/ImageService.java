@@ -22,6 +22,9 @@ public class ImageService {
     }
 
     public String handelImage(MultipartFile file, String target) {
+        if (file == null || file.isEmpty()) {
+            return null;
+        }
         String finalName = "";
         String rootPath = this.servletContext.getRealPath("/resources/images");
         byte[] bytes;
