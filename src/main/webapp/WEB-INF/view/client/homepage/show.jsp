@@ -47,6 +47,16 @@
       <script src="/client/js/countdown.js"></script>
       <script src="/client/js/jquery.magnific-popup.min.js"></script>
       <script src="/client/js/owl.carousel.min.js"></script>
+      <style>
+        /* ép chiều cao cho 2 slide bằng nhau */
+        .single-slide {
+          max-height: 400px;
+          display: flex;
+          align-items: center;
+
+        }
+      </style>
+
       <!--gmaps Js-->
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
       <script src="/client/js/gmaps.min.js"></script>
@@ -82,7 +92,8 @@
           <div class="row fullscreen align-items-center justify-content-start">
             <div class="col-lg-12">
               <div class="active-banner-slider owl-carousel owl-theme owl-loaded">
-                <!-- single-slide -->
+
+                <!-- single-slide 1 -->
                 <div class="row single-slide align-items-center d-flex">
                   <div class="col-lg-8 text-center">
                     <div class="banner-img">
@@ -93,11 +104,11 @@
                     <div class="banner-content">
                       <h1>Sport <br>Collection!</h1>
                       <p>Shop bán đồ thể thao</p>
-
                     </div>
                   </div>
                 </div>
-                <!-- single-slide -->
+
+                <!-- single-slide 2 -->
                 <div class="row single-slide align-items-center d-flex">
                   <div class="col-lg-3 col-md-5">
                     <div class="banner-content">
@@ -106,12 +117,13 @@
                     </div>
                   </div>
                   <div class="col-lg-1"></div>
-                  <div class="col-lg-8">
+                  <div class="col-lg-8 text-center">
                     <div class="banner-img">
                       <img class="img-fluid" src="/client/img/banner/main2.jpg" alt="">
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>

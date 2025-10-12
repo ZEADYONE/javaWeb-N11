@@ -32,4 +32,10 @@ public class HomepageController {
     public String getLoginPage() {
         return "client/auth/login";
     }
+
+    @GetMapping("/registration")
+    public String getRegistrationPage() {
+        return "client/auth/registration";
+    }
+
 }
