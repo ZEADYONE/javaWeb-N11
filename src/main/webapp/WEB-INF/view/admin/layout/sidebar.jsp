@@ -29,6 +29,12 @@
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
                     rel="stylesheet" />
 
+                <style>
+                    .modal-backdrop.show {
+                        opacity: 0.15 !important;
+                    }
+                </style>
+
             </head>
 
             <body>

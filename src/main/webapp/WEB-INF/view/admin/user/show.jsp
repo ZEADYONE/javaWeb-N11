@@ -26,12 +26,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
         <!-- CSS Files -->
         <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
-        <style>
-          .modal-backdrop.show {
-            opacity: 0.15 !important;
 
-          }
-        </style>
       </head>
 
       <body class="g-sidenav-show  bg-gray-200">

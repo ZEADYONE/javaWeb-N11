@@ -70,87 +70,21 @@
                                     </div>
 
                                     <!-- Upload ảnh -->
-                                    <style>
-                                        /* Hộp upload */
-                                        .upload-box {
-                                            display: inline-flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            flex-direction: column;
-                                            width: 140px;
-                                            height: 140px;
-                                            border: 2px dashed #ccc;
-                                            border-radius: 12px;
-                                            cursor: pointer;
-                                            transition: all 0.3s ease;
-                                            color: #777;
-                                            background-color: #fafafa;
-                                        }
-
-                                        .upload-box:hover {
-                                            border-color: #007bff;
-                                            color: #007bff;
-                                            background-color: #f0f8ff;
-                                        }
-
-                                        .upload-box i {
-                                            font-size: 2rem;
-                                            margin-bottom: 8px;
-                                        }
-
-                                        /* Ẩn input gốc */
-                                        #formFileLg {
-                                            display: none;
-                                        }
-
-                                        /* Ảnh preview */
-                                        #preview {
-                                            width: 140px;
-                                            height: 140px;
-                                            object-fit: cover;
-                                            border-radius: 12px;
-                                            border: 2px solid #ddd;
-                                        }
-                                    </style>
-
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-12 mb-3 ">
                                         <label class="form-label fw-bold">Avatar:</label>
-                                        <div class="d-flex align-items-center gap-4 flex-wrap">
-
-                                            <!-- Ô upload -->
+                                        <div class="d-flex align-items-center gap-3">
                                             <label for="formFileLg" class="upload-box">
                                                 <i class="bi bi-cloud-upload"></i>
                                                 <span>Upload image</span>
                                             </label>
 
-                                            <!-- Input thật -->
-                                            <!-- Sử dụng name="images" để RequestParam -->
                                             <input type="file" id="formFileLg" name="images" accept="image/*"
                                                 onchange="previewImage(event)">
-
-                                            <!-- Ảnh preview -->
-                                            <img id="preview" src="" alt="Preview">
+                                            <img id="preview" alt="preview">
                                         </div>
+
                                     </div>
 
-                                    <!-- <script>
-                                        Không hiểu chatgpt chỗ này nma vẫn chạy đc :))) -Cương
-
-                                        function previewImage(event) {
-                                            const preview = document.getElementById('preview');
-                                            const file = event.target.files[0];
-
-                                            if (file) {
-                                                const reader = new FileReader();
-                                                reader.onload = function (e) {
-                                                    preview.src = e.target.result;
-                                                };
-                                                reader.readAsDataURL(file);
-                                            } else {
-                                                preview.src = "";
-                                            }
-                                        }
-                                    </script> -->
                                 </div>
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn text-white px-4 py-2"
