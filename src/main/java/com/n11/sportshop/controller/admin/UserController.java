@@ -18,8 +18,6 @@ import com.n11.sportshop.service.RoleService;
 import com.n11.sportshop.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
@@ -40,7 +38,7 @@ public class UserController {
         return "admin/user/create";
     }
 
-    @PostMapping("/create") 
+    @PostMapping("/create")
     public String postCreateUser(@ModelAttribute("newUser") User user, @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
 
@@ -49,7 +47,17 @@ public class UserController {
         // Nhớ thêm ADMIN, USER và database
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
         user.setRole(roleInDataBase);
-        user.setImage(this.imageService.handelImage(file, "avatar"));
+
+        String imageName;
+        if (file != null && !file.isEmpty()) {
+            // Nếu người dùng có upload ảnh
+            imageName = this.imageService.handelImage(file, "avatar");
+        } else {
+            // Nếu không upload, dùng ảnh mặc định
+            imageName = "defaultavatar.jpg";
+        }
+        user.setImage(imageName);
+
         this.userService.saveUser(user);
         return "redirect:/admin/user";
     }
@@ -72,7 +80,10 @@ public class UserController {
 
     @PostMapping("/delete")
     public String postMethodName(Model model, @ModelAttribute("user") User user) {
-        this.imageService.deleteImage(user.getImage(), "avatar");
+        // Chỉ xóa ảnh nếu KHÔNG phải ảnh mặc định
+        if (user.getImage() != null && !user.getImage().equals("defaultavatar.jpg")) {
+            imageService.deleteImage(user.getImage(), "avatar");
+        }
         this.userService.deleteUser(user.getId());
         return "redirect:/admin/user";
     }
@@ -118,15 +129,17 @@ public class UserController {
         // Kiểm tra xem người dùng có cập nhật ảnh không nếu có thì cập nhật
         String updateImage = this.imageService.handelImage(file, "avatar");
         if (updateImage != null && !updateImage.isEmpty()) {
-            // Kiểm tra xem người dùng có sẵn avatar chưa nếu có thì xóa để thay thế bằng
-            // avatar mới
-            if (user.getImage() != null && !user.getImage().isEmpty()) {
-                this.imageService.deleteImage(user.getImage(), "avatar");
+            // Kiểm tra xem người dùng hiện tại có ảnh và KHÔNG phải ảnh mặc định thì mới
+            // xóa
+            if (currentUser.getImage() != null
+                    && !currentUser.getImage().isEmpty()
+                    && !currentUser.getImage().equals("defaultavatar.jpg")) {
+                this.imageService.deleteImage(currentUser.getImage(), "avatar");
             }
             currentUser.setImage(updateImage);
         }
-
         this.userService.handelSaveUser(currentUser);
         return "redirect:/admin/user";
+
     }
 }
