@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.RegisterDTO;
-import com.n11.sportshop.service.UserService;
 import com.n11.sportshop.service.ImageService;
+import com.n11.sportshop.service.UserService;
 
 @Controller
 public class HomepageController {
@@ -65,14 +65,7 @@ public class HomepageController {
         user.setEmail(newUser.getEmail());
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
-        String imageName;
-        if (file != null && !file.isEmpty()) {
-            // Nếu người dùng có upload ảnh
-            imageName = this.imageService.handelImage(file, "avatar");
-        } else {
-            // Nếu không upload, dùng ảnh mặc định
-            imageName = "defaultavatar.jpg";
-        }
+        String imageName = "defaultavatar.jpg";
         user.setImage(imageName);
 
         this.userService.saveUser(user);

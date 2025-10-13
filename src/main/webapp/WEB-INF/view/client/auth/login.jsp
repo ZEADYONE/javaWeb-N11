@@ -1,8 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	        <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-
 		<!-- Start Header Area -->
 		<jsp:include page="../layout/header.jsp" />
 		<!-- End Header Area -->
