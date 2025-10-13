@@ -3,7 +3,8 @@ package com.n11.sportshop.controller.client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.n11.sportshop.domain.dto.RegisterDTO;
 
 @Controller
 public class HomepageController {
@@ -18,24 +19,25 @@ public class HomepageController {
         return "client/homepage/show";
     }
 
-    @GetMapping("/allproduct")
+    @GetMapping("/products")
     public String getAllProductPage() {
         return "client/product/show";
     }
 
-    @GetMapping("/productdetail")
+    @GetMapping("/products/{id}")
     public String getDetailProductPage() {
         return "client/product/detail";
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(Model model) {
+        model.addAttribute("registerUser", new RegisterDTO());
         return "client/auth/login";
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/register")
     public String getRegistrationPage() {
-        return "client/auth/registration";
+        return "client/auth/register";
     }
 
 }

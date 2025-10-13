@@ -2,12 +2,14 @@ package com.n11.sportshop.controller.admin;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +18,6 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.RoleService;
 import com.n11.sportshop.service.UserService;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin/user")
@@ -24,11 +25,17 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
     private final ImageService imageService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, RoleService roleService, ImageService imageService) {
+
+    
+
+    public UserController(UserService userService, RoleService roleService, ImageService imageService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleService = roleService;
         this.imageService = imageService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/create")
@@ -47,7 +54,8 @@ public class UserController {
         // Nhớ thêm ADMIN, USER và database
         Role roleInDataBase = this.roleService.getRoleByName(user.getRole().getName());
         user.setRole(roleInDataBase);
-
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        
         String imageName;
         if (file != null && !file.isEmpty()) {
             // Nếu người dùng có upload ảnh
