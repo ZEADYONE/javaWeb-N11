@@ -106,9 +106,9 @@
                               <!-- Action -->
                               <td class="text-center">
                                 <!-- View Detail-->
-                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1"
+                                <a href="javascript:void(0);" class="btn btn-sm btn-info border-0"
                                   data-bs-toggle="modal" data-bs-target="#detailModal${user.id}">
-                                  <i class="bi bi-person-vcard"></i>
+                                  <i class="bi bi-person-vcard fs-5 "></i>
                                 </a>
 
                                 <!-- Modal View Detail -->
@@ -118,15 +118,14 @@
 
 
                                 <!-- Edit -->
-                                <a href="/admin/user/update/${user.id}"
-                                  class="btn btn-sm btn-outline-primary mx-1 btn-edit">
-                                  <i class="bi bi-person-gear"></i>
+                                <a href="/admin/user/update/${user.id}" class="btn btn-sm btn-primary border-0">
+                                  <i class="bi bi-person-gear fs-5"></i>
                                 </a>
 
                                 <!-- Delete (modal trigger) -->
-                                <button type="button" class="btn btn-sm btn-outline-danger mx-1" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-danger border-0" data-bs-toggle="modal"
                                   data-bs-target="#deleteModal${user.id}" title="Delete">
-                                  <i class="bi bi-trash"></i>
+                                  <i class="bi bi-trash fs-5"></i>
                                 </button>
 
                                 <!-- Modal Delete -->

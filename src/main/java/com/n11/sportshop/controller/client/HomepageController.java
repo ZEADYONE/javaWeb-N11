@@ -10,22 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.service.UserService;
-
+import com.n11.sportshop.service.ImageService;
 
 @Controller
 public class HomepageController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    public HomepageController(PasswordEncoder passwordEncoder, UserService userService) {
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-    }
-
+    private final ImageService imageService;
 
     @GetMapping("/")
     public String autoDirectHomePage() {
         return "redirect:/home";
+    }
+
+    public HomepageController(PasswordEncoder passwordEncoder, UserService userService, ImageService imageService) {
+        this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/home")
@@ -62,6 +64,17 @@ public class HomepageController {
         user.setUsername(newUser.getUsername());
         user.setEmail(newUser.getEmail());
         user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
+        String imageName;
+        if (file != null && !file.isEmpty()) {
+            // Nếu người dùng có upload ảnh
+            imageName = this.imageService.handelImage(file, "avatar");
+        } else {
+            // Nếu không upload, dùng ảnh mặc định
+            imageName = "defaultavatar.jpg";
+        }
+        user.setImage(imageName);
+
         this.userService.saveUser(user);
         return "client/auth/login";
     }
