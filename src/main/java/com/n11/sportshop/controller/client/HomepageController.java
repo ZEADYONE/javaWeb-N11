@@ -10,6 +10,9 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+
 @Controller
 public class HomepageController {
 
@@ -24,7 +27,7 @@ public class HomepageController {
         return "redirect:/home";
     }
     @GetMapping("/home")
-    public String getHomePage(Model model) {
+    public String getHomePage(Model model, HttpServletRequest request) {
         return "client/homepage/show";
     }
 
@@ -61,5 +64,9 @@ public class HomepageController {
         return "client/auth/deny";
     }
 
+    @GetMapping("/account")
+    public String getAccountPage() {
+        return new String();
+    }
     
 }

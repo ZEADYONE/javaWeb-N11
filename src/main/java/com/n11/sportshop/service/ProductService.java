@@ -5,14 +5,20 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.repository.CategoryRepository;
 import com.n11.sportshop.repository.ProductRepository;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    public ProductService (ProductRepository productRepository){
-        this.productRepository=productRepository;
+    private final CategoryRepository categoryRepository;
+    
+    
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
     //them moi san pham
     public void saveProduct(Product product){
@@ -29,5 +35,9 @@ public class ProductService {
     //xoa san pham
     public void deleteById(int id){
         productRepository.deleteById(id);
+    }
+
+    public List<Category> getAllCategories() {
+        return this.categoryRepository.findAll();
     }
 }

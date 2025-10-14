@@ -37,7 +37,7 @@ public class UserService {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
+        user.setRole(this.roleRepository.findByName("USER"));
         String imageName = "defaultavatar.jpg";
         user.setImage(imageName);
         

@@ -1,8 +1,7 @@
 package com.n11.sportshop.controller.admin;
 
-import org.springframework.ui.Model;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
-import com.n11.sportshop.service.ProductService;
-import com.n11.sportshop.service.CategoryService;
 import com.n11.sportshop.service.BrandService;
+import com.n11.sportshop.service.CategoryService;
+import com.n11.sportshop.service.ProductService;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -42,7 +41,7 @@ public class ProductController {
     @GetMapping("/create")
     public String getProductCreatePage(Model model) {
         model.addAttribute("newProduct", new Product());
-        model.addAttribute("category", new Category());
+        model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("brand", new Brand());
         return "admin/product/create";
     }

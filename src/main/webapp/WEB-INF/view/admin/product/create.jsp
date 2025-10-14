@@ -28,10 +28,11 @@
 
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Category</label>
-                                        <form:select class="form-select border" style="padding-left: 20px;"
-                                            path="category.code">
-                                            <form:options value="${category.code}">${category.name}</form:options>
+                                        <form:select path="category.code" class="form-select border"
+                                            style="padding-left: 20px;">
+                                            <form:options items="${categories}" itemValue="code" itemLabel="name" />
                                         </form:select>
+
                                     </div>
 
                                     <div class="mb-3 col-md-6">
