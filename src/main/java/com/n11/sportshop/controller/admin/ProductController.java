@@ -12,8 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Product;
-import com.n11.sportshop.service.BrandService;
-import com.n11.sportshop.service.CategoryService;
 import com.n11.sportshop.service.ProductService;
 
 @Controller
@@ -21,14 +19,10 @@ import com.n11.sportshop.service.ProductService;
 public class ProductController {
 
     private final ProductService productService;
-    private final CategoryService categoryService;
-    private final BrandService brandService;
+    
 
-    public ProductController(ProductService productService, CategoryService categoryService,
-            BrandService brandService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.categoryService = categoryService;
-        this.brandService = brandService;
     }
 
     // hien thi danh sach san pham
