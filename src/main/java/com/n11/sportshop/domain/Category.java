@@ -14,6 +14,14 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private int id;
+    private String code;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     private String name;
    

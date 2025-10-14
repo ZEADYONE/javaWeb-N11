@@ -29,10 +29,8 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Category</label>
                                         <form:select class="form-select border" style="padding-left: 20px;"
-                                            path="category.name">
-                                            <form:option value="">-----</form:option>
-                                            <form:option value="Shirt">Shirt</form:option>
-                                            <form:option value="Pant">Pant</form:option>
+                                            path="category.code">
+                                            <form:options value="${category.code}">${category.name}</form:options>
                                         </form:select>
                                     </div>
 

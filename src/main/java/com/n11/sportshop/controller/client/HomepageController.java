@@ -60,4 +60,6 @@ public class HomepageController {
     public String getDenyPage(Model model) {
         return "client/auth/deny";
     }
+
+    
 }

@@ -42,7 +42,7 @@ public class ProductController {
     @GetMapping("/create")
     public String getProductCreatePage(Model model) {
         model.addAttribute("newProduct", new Product());
-        model.addAttribute("categorie", new Category());
+        model.addAttribute("category", new Category());
         model.addAttribute("brand", new Brand());
         return "admin/product/create";
     }
