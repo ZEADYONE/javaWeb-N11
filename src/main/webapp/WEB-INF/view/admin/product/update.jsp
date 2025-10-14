@@ -72,14 +72,14 @@
                                                         style="padding-left: 20px;" path="description"></form:textarea>
                                                 </div>
 
-                                                <!-- <div class="col-md-6 mb-3" style="display: none;">
+                                                <div class="col-md-6 mb-3" style="display: none;">
                                                     <label class="form-label fw-bold">Image:</label>
                                                     <form:input type="text" class="form-control border"
                                                         style="padding-left: 20px;" path="image" />
-                                                </div> -->
+                                                </div>
 
-                                                <!-- <div class="col-md-12 mb-3 ">
-                                                    <label class="form-label fw-bold">Avatar:</label>
+                                                <div class="col-md-12 mb-3 ">
+                                                    <label class="form-label fw-bold">Product image:</label>
                                                     <div class="d-flex align-items-center gap-3">
                                                         <label for="formFileLg" class="upload-box">
                                                             <i class="bi bi-cloud-upload"></i>
@@ -91,7 +91,7 @@
                                                         <img id="preview" alt="preview">
                                                     </div>
 
-                                                </div> -->
+                                                </div>
 
                                             </div>
 
