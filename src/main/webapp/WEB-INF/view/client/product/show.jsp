@@ -120,9 +120,11 @@
                                 <c:forEach var="product" items="${products}">
                                     <div class="col-lg-4 col-md-6">
                                         <div class="single-product">
-                                            <img class="img-fluid" src="/client/img/product/p1.jpg" alt="">
+                                            <img class="img-fluid" src="/images/product/${product.image}" alt="">
                                             <div class="product-details">
-                                                <h6>${product.name}</h6>
+                                                <a href="/products/${product.id}">
+                                                    <h6>${product.name}</h6>
+                                                </a>
                                                 <div class="price">
                                                     <h6>${product.price}</h6>
                                                 </div>
@@ -131,14 +133,6 @@
                                                     <a href="" class="social-info">
                                                         <span class="ti-bag"></span>
                                                         <p class="hover-text">add to bag</p>
-                                                    </a>
-                                                    <a href="" class="social-info">
-                                                        <span class="lnr lnr-heart"></span>
-                                                        <p class="hover-text">Wishlist</p>
-                                                    </a>
-                                                    <a href="" class="social-info">
-                                                        <span class="lnr lnr-sync"></span>
-                                                        <p class="hover-text">compare</p>
                                                     </a>
                                                     <a href="" class="social-info">
                                                         <span class="lnr lnr-move"></span>
