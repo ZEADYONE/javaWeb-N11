@@ -1,6 +1,5 @@
 package com.n11.sportshop.domain;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -21,7 +20,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+
     private int id;
 
     @ManyToOne
@@ -31,7 +30,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.pending;
 
-    private BigDecimal totalAmount;
+    private Integer totalAmount;
 
     @ManyToOne
     @JoinColumn(name = "voucher_id")
@@ -39,29 +38,62 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
-    
+
     @OneToOne(mappedBy = "order")
     private Payment payment;
 
-    
-    public int getId() { return id; }
-    public void setId(int orderId) { this.id = orderId; }
+    public int getId() {
+        return id;
+    }
 
-    public OrderStatus getStatus() { return status; }
-    public void setStatus(OrderStatus status) { this.status = status; }
+    public void setId(int orderId) {
+        this.id = orderId;
+    }
 
-    public BigDecimal getTotalAmount() { return totalAmount; }
-    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
+    public OrderStatus getStatus() {
+        return status;
+    }
 
-    public Voucher getVoucher() { return voucher; }
-    public void setVoucher(Voucher voucher) { this.voucher = voucher; }
-    public List<OrderDetail> getOrderDetails() { return orderDetails; }
-    public void setOrderDetails(List<OrderDetail> orderDetails) { this.orderDetails = orderDetails; }
-     public Payment getPayment() { return payment; }
-    public void setPayment(Payment payment) { this.payment = payment; }
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public Voucher getVoucher() {
+        return voucher;
+    }
+
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
+    }
+
+    public Integer getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Integer totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
