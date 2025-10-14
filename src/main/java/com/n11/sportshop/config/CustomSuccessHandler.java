@@ -62,12 +62,13 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());
             // int sum = user.getCart() == null ? 0 : user.getCart().getSum();
-            // session.setAttribute("avatar", user.getAvatar());
+            session.setAttribute("avatar", user.getImage());
             // session.setAttribute("sum", sum);
 
-            /* Ở Front-end lấy ra thông tin từ session : 
-                <p>Xin chào, ${sessionScope.fullName}</p>
-                <p>Email: ${sessionScope.email}</p>
+            /*
+             * Ở Front-end lấy ra thông tin từ session :
+             * <p>Xin chào, ${sessionScope.fullName}</p>
+             * <p>Email: ${sessionScope.email}</p>
              */
         }
     }
