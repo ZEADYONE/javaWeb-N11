@@ -54,8 +54,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         /* Xóa đi lỗi đăng nhập nếu trước đó người dùng login không thành công */
 
-        String email = authentication.getName();
-        User user = this.userService.getUserByUsername(email);
+        String username = authentication.getName(); // Bug tại đây
+        User user = this.userService.getUserByUsername(username);
 
         if (user != null) {
             session.setAttribute("fullName", user.getFullName());

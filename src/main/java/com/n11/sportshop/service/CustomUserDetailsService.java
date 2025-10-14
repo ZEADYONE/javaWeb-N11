@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService{
          * Nếu có sẽ gán quyền cho tài khoản đó (Ví dụ : ROLE_ADMIN)
          */
         return new User(
-            user.getEmail(), 
+            user.getUsername(), 
             user.getPassword(), 
             Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName())));
     }
