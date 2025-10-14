@@ -17,7 +17,7 @@
       <!-- meta character set -->
       <meta charset="UTF-8">
       <!-- Site Title -->
-      <title>Karma Shop</title>
+      <title>Sport Shop</title>
       <!--
 		CSS
 		============================================= -->
@@ -32,6 +32,8 @@
       <link rel="stylesheet" href="/client/css/ion.rangeSlider.skinFlat.css" />
       <link rel="stylesheet" href="/client/css/magnific-popup.css">
       <link rel="stylesheet" href="/client/css/main.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
       <!-- 
     Javascript
 		============================================= -->
@@ -47,6 +49,7 @@
       <script src="/client/js/countdown.js"></script>
       <script src="/client/js/jquery.magnific-popup.min.js"></script>
       <script src="/client/js/owl.carousel.min.js"></script>
+
       <style>
         /* ép chiều cao cho 2 slide bằng nhau */
         .single-slide {
@@ -63,17 +66,16 @@
       <script src="/client/js/main.js"></script>
       <script>
         $(document).ready(function () {
-          $(".active-banner-slider").owlCarousel({
+          $(".active-banner-slider-custom").owlCarousel({
             items: 1,                // 1 slide mỗi lần hiển thị
             loop: true,              // lặp vô tận
             autoplay: true,          // tự động chạy
             autoplayTimeout: 3000,   // đổi slide mỗi 3 giây
             autoplayHoverPause: false, // không dừng khi rê chuột vào
             smartSpeed: 800,         // tốc độ chuyển (ms)
-            animateOut: 'fadeOut',   // hiệu ứng mờ dần
+            animateOut: 'animate__slideOutLeft',  // Slide cũ đi sang trái
+            animateIn: 'animate__slideInRight',   // Slide mới đi từ phải sang
             dots: true,              // chấm chỉ slide
-            nav: true,               // nút prev/next
-            navText: ["<", ">"]      // icon nút
           });
         });
       </script>
@@ -91,7 +93,7 @@
         <div class="container">
           <div class="row fullscreen align-items-center justify-content-start">
             <div class="col-lg-12">
-              <div class="active-banner-slider owl-carousel owl-theme owl-loaded">
+              <div class="active-banner-slider-custom owl-carousel owl-theme owl-loaded">
 
                 <!-- single-slide 1 -->
                 <div class="row single-slide align-items-center d-flex">
@@ -411,14 +413,6 @@
                         <p class="hover-text">add to bag</p>
                       </a>
                       <a href="" class="social-info">
-                        <span class="lnr lnr-heart"></span>
-                        <p class="hover-text">Wishlist</p>
-                      </a>
-                      <a href="" class="social-info">
-                        <span class="lnr lnr-sync"></span>
-                        <p class="hover-text">compare</p>
-                      </a>
-                      <a href="" class="social-info">
                         <span class="lnr lnr-move"></span>
                         <p class="hover-text">view more</p>
                       </a>
@@ -534,7 +528,6 @@
         </div>
       </section>
       <!-- end product Area -->
-
       <!-- start footer Area -->
       <jsp:include page="../layout/footer.jsp" />
       <!-- End footer Area -->
