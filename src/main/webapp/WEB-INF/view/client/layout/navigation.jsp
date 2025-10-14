@@ -70,9 +70,9 @@
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
                             <li class="nav-item"><a class="nav-link" href="/products">Sản phẩm</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Giỏ hàng</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Tài khoản</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/contact">Liên hệ</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/cart">Giỏ hàng</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/account">Tài khoản</a></li>
                         </ul>
                         <!-- <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
