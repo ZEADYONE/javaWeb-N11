@@ -152,6 +152,7 @@
                                       <!-- Footer -->
                                       <div class="modal-footer justify-content-center border-0 pb-4">
                                         <form method="post" action="/admin/user/delete">
+                                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                           <input type="hidden" name="id" value="${user.id}">
                                           <input type="hidden" name="image" value="${user.image}">
                                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
