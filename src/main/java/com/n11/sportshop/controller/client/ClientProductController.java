@@ -2,7 +2,7 @@ package com.n11.sportshop.controller.client;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.service.ProductService;
 
-@Service
+@Controller
 public class ClientProductController {
     private final ProductService productService;
 
