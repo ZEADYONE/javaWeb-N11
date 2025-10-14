@@ -85,7 +85,7 @@
                                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                                 id="userDropdown" role="button" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="false">
-                                                <img src="${sessionScope.image}" alt="Avatar" class="rounded-circle"
+                                                <img src="${sessionScope.avatar}" alt="Avatar" class="rounded-circle"
                                                     width="30" height="30">
                                                 <span class="ml-2">${sessionScope.fullName}</span>
                                             </a>
