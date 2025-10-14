@@ -52,7 +52,7 @@ public class ProductController {
         // Nhớ thêm tạm Shirt, Pant vào database category
         // Nhớ thêm tạm Hehe, Hihi vào database brand
 
-        Category categoryInDataBase = this.categoryService.getCategoryByName(product.getCategory().getName());
+        Category categoryInDataBase = this.categoryService.getCategoryByName(product.getCategory().getCode());
         product.setCategory(categoryInDataBase);
 
         Brand brandInDataBase = this.brandService.getBrandByName(product.getBrand().getName());
