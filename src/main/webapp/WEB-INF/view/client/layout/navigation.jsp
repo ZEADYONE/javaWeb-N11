@@ -84,15 +84,24 @@
                                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                                 id="userDropdown" role="button" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="false">
-                                                <img src="${sessionScope.avatar}" alt="Avatar" class="rounded-circle"
-                                                    width="30" height="30">
+                                                <img src="/images/avatar/${sessionScope.avatar}" alt="Avatar"
+                                                    class="rounded-circle" width="30" height="30">
                                                 <span class="ml-2">${sessionScope.fullName}</span>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right"
                                                 aria-labelledby="userDropdown">
                                                 <a class="dropdown-item" href="/">Thông tin tài khoản</a>
-                                                <a class="dropdown-item" href="/logout">Đăng xuất</a>
+
+                                                <form id="logoutForm" action="/logout" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}" />
+                                                    <button type="submit"
+                                                        class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
+                                                        Logout
+                                                    </button>
+                                                </form>
                                             </div>
+
                                         </c:otherwise>
                                     </c:choose>
                                 </li>
