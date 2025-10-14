@@ -37,16 +37,19 @@ public class ProductService {
         product.setBrand(brandInDataBase);
         productRepository.save(product);
     }
-    //xem danh sach tat ca san pham
-    public List<Product> getAllProducts(){
+
+    // xem danh sach tat ca san pham
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
-    //xem chi tiet 1 san pham theo id
-    public Optional<Product> getProductById(int id){
+
+    // xem chi tiet 1 san pham theo id
+    public Optional<Product> getProductById(int id) {
         return productRepository.findById(id);
     }
-    //xoa san pham
-    public void deleteById(int id){
+
+    // xoa san pham
+    public void deleteById(int id) {
         productRepository.deleteById(id);
     }
 
