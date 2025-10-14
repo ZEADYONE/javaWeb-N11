@@ -55,28 +55,49 @@
                 <script src="/client/js/main.js"></script>
             </head>
 
-        <body>
-            <nav class="navbar navbar-expand-lg navbar-light main_box">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="/client/img/logo.png" alt=""></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/products">Sản phẩm</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/contact">Liên hệ</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/cart">Giỏ hàng</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/account">Tài khoản</a></li>
-                        </ul>
-                        <!-- <ul class="nav navbar-nav navbar-right">
+            <body>
+                <nav class="navbar navbar-expand-lg navbar-light main_box">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <a class="navbar-brand logo_h" href="index.html"><img src="/client/img/logo.png" alt=""></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/products">Sản phẩm</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/contact">Liên hệ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/cart">Giỏ hàng</a></li>
+                                <li class="nav-item dropdown">
+                                    <c:choose>
+                                        <c:when test="${empty sessionScope.fullName}">
+                                            <a class="nav-link" href="/login">Đăng nhập</a>
+                                        </c:when>
+
+                                        <c:otherwise>
+                                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                                                id="userDropdown" role="button" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <img src="${sessionScope.avatar}" alt="Avatar" class="rounded-circle"
+                                                    width="30" height="30">
+                                                <span class="ml-2">${sessionScope.fullName}</span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="userDropdown">
+                                                <a class="dropdown-item" href="/">Thông tin tài khoản</a>
+                                                <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </li>
+                            </ul>
+                            <!-- <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
                             <li class="nav-item">
                                 <a href="#" class="cart"><span class="ti-bag"></span></a></li> -->
