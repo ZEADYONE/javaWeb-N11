@@ -17,7 +17,8 @@
 
                         <!-- Body -->
                         <div class="modal-body py-4 px-5">
-                            <form:form method="post" action="/admin/product/create" modelAttribute="newProduct">
+                            <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
+                            enctype="multipart/form-data">
 
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
@@ -79,7 +80,7 @@
                                                 <span>Upload image</span>
                                             </label>
 
-                                            <input type="file" id="formFileLg" accept="image/*"
+                                            <input type="file" id="formFileLg" accept="image/*" name="images"
                                                 onchange="previewImage(event)">
                                             <img id="preview" alt="preview">
                                         </div>

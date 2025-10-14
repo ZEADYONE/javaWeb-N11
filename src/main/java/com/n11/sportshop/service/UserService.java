@@ -48,10 +48,10 @@ public class UserService {
         user.setRole(roleInDataBase);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        String imageName = "";
+        String imageName = "defaultavatar.jpg";
         if (file != null && !file.isEmpty()) {
             // Nếu người dùng có upload ảnh
-            imageName = this.imageService.handelImage(file, "img");
+            imageName = this.imageService.handelImage(file, "avatar");
         }
         user.setImage(imageName);
         this.userRepository.save(user);

@@ -35,6 +35,11 @@ public class ProductService {
         product.setCategory(categoryInDataBase);
         Brand brandInDataBase = this.brandRepository.findByName(product.getBrand().getName());
         product.setBrand(brandInDataBase);
+        String imageName = "defaultavatar.jpg";
+        if (file != null && !file.isEmpty()) {
+            imageName = this.imageService.handelImage(file, "product");
+        }
+        product.setImage(imageName);
         productRepository.save(product);
     }
 
