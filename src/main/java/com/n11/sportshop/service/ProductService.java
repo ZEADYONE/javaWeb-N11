@@ -15,6 +15,7 @@ import com.n11.sportshop.repository.ProductRepository;
 
 @Service
 public class ProductService {
+
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ImageService imageService;
@@ -26,20 +27,18 @@ public class ProductService {
         this.imageService = imageService;
         this.productRepository = productRepository;
     }
-    
-    
-    
+
     //them moi san pham
-    public void saveProduct(Product product, MultipartFile file){
+    public void saveProduct(Product product, MultipartFile file) {
         Category categoryInDataBase = this.categoryRepository.findByCode(product.getCategory().getCode());
         product.setCategory(categoryInDataBase);
         Brand brandInDataBase = this.brandRepository.findByName(product.getBrand().getName());
         product.setBrand(brandInDataBase);
-        String imageName = "defaultavatar.jpg";
+        String imageName = "";
         if (file != null && !file.isEmpty()) {
             imageName = this.imageService.handelImage(file, "product");
+            product.setImage(imageName);
         }
-        product.setImage(imageName);
         productRepository.save(product);
     }
 
