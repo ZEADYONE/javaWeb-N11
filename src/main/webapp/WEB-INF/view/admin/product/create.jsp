@@ -30,8 +30,11 @@
                                         <label class="form-label">Category</label>
                                         <form:select path="category.code" class="form-select border"
                                             style="padding-left: 20px;">
-                                            <form:options items="${categories}" itemValue="code" itemLabel="name" />
+                                            <form:options items="${categories}" itemValue="id" itemLabel="name" />
                                         </form:select>
+                                        <c:forEach var="c" items="${categories}">
+                                            ${c.id} - ${c.name}<br>
+                                        </c:forEach>
 
                                     </div>
 

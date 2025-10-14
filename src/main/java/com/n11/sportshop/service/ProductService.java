@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.repository.CategoryRepository;
 import com.n11.sportshop.repository.ProductRepository;
 
@@ -14,14 +17,24 @@ import com.n11.sportshop.repository.ProductRepository;
 public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
-    
-    
-    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
-        this.productRepository = productRepository;
+    private final ImageService imageService;
+    private final BrandRepository brandRepository;
+
+    public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository, ImageService imageService, ProductRepository productRepository) {
+        this.brandRepository = brandRepository;
         this.categoryRepository = categoryRepository;
+        this.imageService = imageService;
+        this.productRepository = productRepository;
     }
+    
+    
+    
     //them moi san pham
-    public void saveProduct(Product product){
+    public void saveProduct(Product product, MultipartFile file){
+        Category categoryInDataBase = this.categoryRepository.findByCode(product.getCategory().getCode());
+        product.setCategory(categoryInDataBase);
+        Brand brandInDataBase = this.brandRepository.findByName(product.getBrand().getName());
+        product.setBrand(brandInDataBase);
         productRepository.save(product);
     }
     //xem danh sach tat ca san pham

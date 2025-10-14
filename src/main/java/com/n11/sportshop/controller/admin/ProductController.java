@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Brand;
-import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.service.BrandService;
 import com.n11.sportshop.service.CategoryService;
@@ -18,6 +19,7 @@ import com.n11.sportshop.service.ProductService;
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
+
     private final ProductService productService;
     private final CategoryService categoryService;
     private final BrandService brandService;
@@ -48,17 +50,10 @@ public class ProductController {
 
     // Xử lý lưu sản phẩm mới
     @PostMapping("/create")
-    public String postCreateProduct(@ModelAttribute("newProduct") Product product) {
-        // Nhớ thêm tạm Shirt, Pant vào database category
-        // Nhớ thêm tạm Hehe, Hihi vào database brand
-
-        Category categoryInDataBase = this.categoryService.getCategoryByName(product.getCategory().getName());
-        product.setCategory(categoryInDataBase);
-
-        Brand brandInDataBase = this.brandService.getBrandByName(product.getBrand().getName());
-        product.setBrand(brandInDataBase);
-
-        this.productService.saveProduct(product);
+    public String postCreateProduct(
+            @ModelAttribute("newProduct") Product product,
+            @RequestParam("images") MultipartFile file) {
+        this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
 
@@ -89,14 +84,10 @@ public class ProductController {
 
     // Cập nhật sản phẩm
     @PostMapping("/update")
-    public String updateProduct(@ModelAttribute("product") Product product) {
-        Category categoryInDataBase = this.categoryService.getCategoryByName(product.getCategory().getName());
-        product.setCategory(categoryInDataBase);
-
-        Brand brandInDataBase = this.brandService.getBrandByName(product.getBrand().getName());
-        product.setBrand(brandInDataBase);
-
-        this.productService.saveProduct(product);
+    public String updateProduct(
+        @ModelAttribute("product") Product product,
+        @RequestParam("images") MultipartFile file) {
+        this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
 }
