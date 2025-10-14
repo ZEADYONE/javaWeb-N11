@@ -59,16 +59,7 @@ public class HomepageController {
 
     @PostMapping("/register")
     public String postCreateAccount(@ModelAttribute("newUser") RegisterDTO newUser) {
-        User user = new User();
-        user.setFullName(newUser.getFirstName() + " " + newUser.getLastName());
-        user.setUsername(newUser.getUsername());
-        user.setEmail(newUser.getEmail());
-        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
-
-        String imageName = "defaultavatar.jpg";
-        user.setImage(imageName);
-
-        this.userService.saveUser(user);
+        this.userService.createUserByClient(newUser);
         return "client/auth/login";
     }
 
