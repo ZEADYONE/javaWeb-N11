@@ -17,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 public class HomepageController {
 
     private final UserService userService;
-
     public HomepageController(UserService userService) {
         this.userService = userService;
     }
@@ -29,16 +28,6 @@ public class HomepageController {
     @GetMapping("/home")
     public String getHomePage(Model model, HttpServletRequest request) {
         return "client/homepage/show";
-    }
-
-    @GetMapping("/products")
-    public String getAllProductPage() {
-        return "client/product/show";
-    }
-
-    @GetMapping("/products/{id}")
-    public String getDetailProductPage() {
-        return "client/product/detail";
     }
 
     @GetMapping("/login")
@@ -62,11 +51,6 @@ public class HomepageController {
     @GetMapping("/access-deny")
     public String getDenyPage(Model model) {
         return "client/auth/deny";
-    }
-
-    @GetMapping("/account")
-    public String getAccountPage() {
-        return new String();
     }
     
 }
