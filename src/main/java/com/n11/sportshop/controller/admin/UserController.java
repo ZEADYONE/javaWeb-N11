@@ -75,7 +75,7 @@ public class UserController {
         return "admin/user/detail";
     }
 
-    // Upate-User
+    // Update-User
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);

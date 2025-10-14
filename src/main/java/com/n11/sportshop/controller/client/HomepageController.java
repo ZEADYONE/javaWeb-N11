@@ -1,6 +1,5 @@
 package com.n11.sportshop.controller.client;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,27 +8,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.RegisterDTO;
-import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.UserService;
 
 @Controller
 public class HomepageController {
 
-    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    private final ImageService imageService;
 
+    public HomepageController(UserService userService) {
+        this.userService = userService;
+    }
+    
     @GetMapping("/")
     public String autoDirectHomePage() {
         return "redirect:/home";
     }
-
-    public HomepageController(PasswordEncoder passwordEncoder, UserService userService, ImageService imageService) {
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-        this.imageService = imageService;
-    }
-
     @GetMapping("/home")
     public String getHomePage(Model model) {
         return "client/homepage/show";
