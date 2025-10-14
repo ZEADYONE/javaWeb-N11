@@ -1,5 +1,7 @@
 package com.n11.sportshop.domain;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +29,7 @@ public class OrderDetail {
     // @Column( nullable = false)
     private int quantity;
 
-    private Double price;
+    private BigDecimal price;
 
     
     public Order getOrder() { return order; }
@@ -39,8 +41,8 @@ public class OrderDetail {
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
-    public Double getPrice() { return price; }
-    public void setPrice(Double price) { this.price = price; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
     public int getId() {
         return id;
     }

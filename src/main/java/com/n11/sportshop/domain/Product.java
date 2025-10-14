@@ -1,5 +1,6 @@
 package com.n11.sportshop.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -27,7 +28,7 @@ public class Product {
     private String description;
 
     // @Column(nullable = false, precision = 12, scale = 2)
-    private Double price;
+    private BigDecimal price;
 
     // @Column(nullable = false)
     private int stockQuantity = 0;
@@ -69,11 +70,11 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
