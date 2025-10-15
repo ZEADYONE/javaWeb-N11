@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
 import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartItem;
 import com.n11.sportshop.domain.Order;
@@ -34,7 +33,7 @@ public class OrderService {
     }
      @Transactional
     public Order checkout(User user) {
-        Cart cart = cartRepo.findByCustomerAndStatus(user, "active")
+        Cart cart = cartRepo.findByUserAndStatus(user, "active")
                             .orElseThrow(() -> new RuntimeException("Không có giỏ hàng!"));
 
         Order order = new Order();
