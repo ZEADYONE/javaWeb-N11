@@ -17,7 +17,7 @@ public class Cart {
     private int cartId;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
