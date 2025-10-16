@@ -35,7 +35,7 @@ public class OrderService {
 
     @Transactional
     public Order checkout(User user) {
-        Cart cart = cartRepo.findByCustomerAndStatus(user, "active")
+        Cart cart = cartRepo.findByUserAndStatus(user, "active")
                 .orElseThrow(() -> new RuntimeException("Không có giỏ hàng!"));
 
         Order order = new Order();
