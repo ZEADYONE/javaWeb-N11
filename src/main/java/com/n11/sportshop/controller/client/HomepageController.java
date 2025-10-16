@@ -30,6 +30,11 @@ public class HomepageController {
         return "client/homepage/show";
     }
 
+    @GetMapping("/cart")
+    public String getCartPage(Model model, HttpServletRequest request) {
+        return "client/cart/show";
+    }
+
     @GetMapping("/login")
     public String getLoginPage(Model model) {
         model.addAttribute("registerUser", new User());
