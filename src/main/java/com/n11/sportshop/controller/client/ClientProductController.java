@@ -30,7 +30,7 @@ public class ClientProductController {
     @GetMapping("/products")
     public String getAllProductPage(Model model, @RequestParam("page") Optional<String> pageOptinal) {
 
-        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 5);
+        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 6);
 
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());

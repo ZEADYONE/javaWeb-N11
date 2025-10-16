@@ -23,7 +23,7 @@
             </section>
             <!-- End Banner Area -->
             <div class="container">
-                <div class="row">
+                <div class="row" style="margin-bottom: 100px; margin-top: 100px;">
                     <div class="col-xl-3 col-lg-4 col-md-5">
                         <div class="sidebar-categories">
                             <div class="head">Browse Categories</div>

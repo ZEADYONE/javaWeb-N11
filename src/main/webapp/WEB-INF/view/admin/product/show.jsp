@@ -62,7 +62,7 @@
                   <!-- Modal create -->
                   <jsp:include page="../product/create.jsp" />
 
-                  <div class="card-body px-0 pb-2" style="height:70vh;">
+                  <div class="card-body px-0 pb-2" style="height:80vh;">
                     <div class="table-responsive p-0">
                       <table class="table align-items-center mb-0">
                         <thead class="bg-light">
@@ -111,27 +111,25 @@
                               <!-- Action -->
                               <td class="text-center">
                                 <!-- View Detail-->
-                                <a href="javascript:void(0);" class="btn btn-sm btn-outline-info mx-1"
+                                <a href="javascript:void(0);" class="btn btn-sm btn-info border-0"
                                   data-bs-toggle="modal" data-bs-target="#detailModal${product.id}">
-                                  <i class="bi bi-person-vcard"></i>
+                                  <i class="bi bi-person-vcard fs-5"></i>
                                 </a>
 
                                 <!-- Modal View Detail -->
-                                <!-- sửa lại thành chuyển thẳng biến user qua detail luôn -->
                                 <c:set var="product" value="${product}" scope="request" />
                                 <jsp:include page="../product/detail.jsp" />
 
 
                                 <!-- Edit -->
-                                <a href="/admin/product/update/${product.id}"
-                                  class="btn btn-sm btn-outline-primary mx-1 btn-edit">
-                                  <i class="bi bi-person-gear"></i>
+                                <a href="/admin/product/update/${product.id}" class="btn btn-sm btn-primary border-0">
+                                  <i class="bi bi-person-gear fs-5"></i>
                                 </a>
 
                                 <!-- Delete (modal trigger) -->
-                                <button type="button" class="btn btn-sm btn-outline-danger mx-1" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-danger border-0" data-bs-toggle="modal"
                                   data-bs-target="#deleteModal${product.id}" title="Delete">
-                                  <i class="bi bi-trash"></i>
+                                  <i class="bi bi-trash fs-5"></i>
                                 </button>
 
                                 <!-- Modal Delete -->

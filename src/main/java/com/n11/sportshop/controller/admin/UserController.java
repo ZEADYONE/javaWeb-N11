@@ -56,7 +56,7 @@ public class UserController {
     @GetMapping
     public String getUserList(Model model, @RequestParam("page") Optional<String> pageOptinal) {
 
-        PaginationQuery<User> paginationQuery = this.paginationServie.handelUserPagination(pageOptinal, 4);
+        PaginationQuery<User> paginationQuery = this.paginationServie.handelUserPagination(pageOptinal, 10);
 
         // --------------- Lấy tất cả sản phẩm-------------------
         model.addAttribute("users", paginationQuery.getPrs().getContent());
