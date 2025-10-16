@@ -25,7 +25,7 @@ public class CartService {
     }
 
     public Cart getActiveCart(User user) {
-        return cartRepo.findByUserAndStatus(user, "active")
+        return cartRepo.findByCustomerAndStatus(user, "active")
                 .orElseGet(() -> {
                     Cart cart = new Cart();
                     cart.setUser(user);
