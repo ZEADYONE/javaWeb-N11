@@ -3,6 +3,8 @@ package com.n11.sportshop.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,14 +23,15 @@ public class ProductService {
     private final ImageService imageService;
     private final BrandRepository brandRepository;
 
-    public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository, ImageService imageService, ProductRepository productRepository) {
+    public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository,
+            ImageService imageService, ProductRepository productRepository) {
         this.brandRepository = brandRepository;
         this.categoryRepository = categoryRepository;
         this.imageService = imageService;
         this.productRepository = productRepository;
     }
 
-    //them moi san pham
+    // them moi san pham
     public void saveProduct(Product product, MultipartFile file) {
         Category categoryInDataBase = this.categoryRepository.findByCode(product.getCategory().getCode());
         product.setCategory(categoryInDataBase);
@@ -59,5 +62,9 @@ public class ProductService {
 
     public List<Category> getAllCategories() {
         return this.categoryRepository.findAll();
+    }
+
+    public Page<Product> fetchProducts(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 }

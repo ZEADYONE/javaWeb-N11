@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
 import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartItem;
 import com.n11.sportshop.domain.Order;
@@ -25,6 +24,7 @@ public class OrderService {
     private final CartItemRepository cartItemRepo;
     private final OrderRepository orderRepo;
     private final OrderDetailRepository orderDetailRepo;
+
     public OrderService(CartRepository cartRepo, CartItemRepository cartItemRepo, OrderRepository orderRepo,
             OrderDetailRepository orderDetailRepo) {
         this.cartRepo = cartRepo;
@@ -32,10 +32,11 @@ public class OrderService {
         this.orderRepo = orderRepo;
         this.orderDetailRepo = orderDetailRepo;
     }
-     @Transactional
+
+    @Transactional
     public Order checkout(User user) {
-        Cart cart = cartRepo.findByCustomerAndStatus(user, "active")
-                            .orElseThrow(() -> new RuntimeException("Không có giỏ hàng!"));
+        Cart cart = cartRepo.findByUserAndStatus(user, "active")
+                .orElseThrow(() -> new RuntimeException("Không có giỏ hàng!"));
 
         Order order = new Order();
         order.setUser(user);
@@ -68,5 +69,4 @@ public class OrderService {
         return orderRepo.findByUser(user);
     }
 
-    
 }

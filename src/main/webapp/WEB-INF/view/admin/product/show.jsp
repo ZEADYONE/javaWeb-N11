@@ -51,6 +51,7 @@
                       <h6 class="text-white text-capitalize ps-3">Manager Product</h6>
                     </div>
                   </div>
+
                   <!-- Nút mở modal Create -->
                   <button type="button" class="btn btn-primary"
                     style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;" data-bs-toggle="modal"
@@ -60,7 +61,6 @@
 
                   <!-- Modal create -->
                   <jsp:include page="../product/create.jsp" />
-
 
                   <div class="card-body px-0 pb-2" style="height:70vh;">
                     <div class="table-responsive p-0">
@@ -158,7 +158,11 @@
                                       <!-- Footer -->
                                       <div class="modal-footer justify-content-center border-0 pb-4">
                                         <form method="post" action="/admin/product/delete/${product.id}">
+                                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                           <input type="hidden" name="id" value="${product.id}">
+                                          <input type="hidden" name="image" value="${user.image}">
+                                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                                           <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
                                             Cancel
                                           </button>
@@ -179,6 +183,32 @@
                         </tbody>
                       </table>
 
+                      <!-- ------------------Phân trang----------------------------- -->
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="page-item">
+                            <a class="${ 1 eq currentPage ? 'disabled page-link' : 'page-link' }"
+                              href="/admin/product?page=${currentPage-1}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <!-- -----------forEach này chia số sản phẩm cho mỗi trang---------- -->
+                          <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                            <li class="page-item">
+                              <a class="${ loop.index eq currentPage ? 'active page-link' : 'page-link' }"
+                                href="/admin/product?page=${loop.index}">
+                                ${loop.index}
+                              </a>
+                            </li>
+                          </c:forEach>
+                          <li class="page-item">
+                            <a class="${ totalPage eq currentPage ? 'disabled page-link' : 'page-link' }"
+                              href="/admin/product?page=${currentPage+1}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
 
                     </div>
                   </div>

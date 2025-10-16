@@ -1,7 +1,11 @@
 package com.n11.sportshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.n11.sportshop.domain.PaginationQuery;
+import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.service.PaginationServie;
 import com.n11.sportshop.service.UserService;
 
 @Controller
@@ -21,9 +28,11 @@ import com.n11.sportshop.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final PaginationServie paginationServie;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PaginationServie paginationServie) {
         this.userService = userService;
+        this.paginationServie = paginationServie;
     }
 
     @GetMapping("/create")
@@ -45,9 +54,19 @@ public class UserController {
     }
 
     @GetMapping
-    public String getUserList(Model model) {
-        List<User> users = this.userService.getUserList();
-        model.addAttribute("users", users);
+    public String getUserList(Model model, @RequestParam("page") Optional<String> pageOptinal) {
+
+        PaginationQuery<User> paginationQuery = this.paginationServie.handelUserPagination(pageOptinal, 4);
+
+        // --------------- Lấy tất cả sản phẩm-------------------
+        model.addAttribute("users", paginationQuery.getPrs().getContent());
+
+        // --------------Lấy STT trang hiện tại-------------------
+        model.addAttribute("currentPage", paginationQuery.getPage());
+
+        // ---------------Lấy tổng số trang ------------------
+        model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
+
         model.addAttribute("newUser", new User());
         return "admin/user/show";
     }

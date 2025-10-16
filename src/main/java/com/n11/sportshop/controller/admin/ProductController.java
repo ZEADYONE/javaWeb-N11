@@ -1,5 +1,11 @@
 package com.n11.sportshop.controller.admin;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Brand;
+import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.service.ImageService;
+import com.n11.sportshop.service.PaginationServie;
 import com.n11.sportshop.service.ProductService;
 
 @Controller
@@ -19,16 +28,31 @@ import com.n11.sportshop.service.ProductService;
 public class ProductController {
 
     private final ProductService productService;
-    
+    private final ImageService imageService;
+    private final PaginationServie paginationServie;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ImageService imageService,
+            PaginationServie paginationServie) {
         this.productService = productService;
+        this.imageService = imageService;
+        this.paginationServie = paginationServie;
     }
 
     // hien thi danh sach san pham
     @GetMapping
-    public String getProductPage(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
+    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptinal) {
+
+        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 5);
+
+        // --------------- Lấy tất cả sản phẩm-------------------
+        model.addAttribute("products", paginationQuery.getPrs().getContent());
+
+        // --------------Lấy STT trang hiện tại-------------------
+        model.addAttribute("currentPage", paginationQuery.getPage());
+
+        // ---------------Lấy tổng số trang ------------------
+        model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
+
         model.addAttribute("newProduct", new Product());
         return "admin/product/show";
     }
@@ -63,7 +87,10 @@ public class ProductController {
     // Xóa sản phẩm
     @PostMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
+        Product product = productService.getProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + id));
         productService.deleteById(id);
+        imageService.deleteImage(product.getImage(), "product");
         return "redirect:/admin/product";
     }
 
@@ -79,8 +106,8 @@ public class ProductController {
     // Cập nhật sản phẩm
     @PostMapping("/update")
     public String updateProduct(
-        @ModelAttribute("product") Product product,
-        @RequestParam("images") MultipartFile file) {
+            @ModelAttribute("product") Product product,
+            @RequestParam("images") MultipartFile file) {
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }

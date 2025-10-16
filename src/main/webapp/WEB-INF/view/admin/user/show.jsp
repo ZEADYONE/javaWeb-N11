@@ -174,7 +174,30 @@
                           </c:forEach>
                         </tbody>
                       </table>
-
+                      <!-- ------------------Phân trang----------------------------- -->
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                          <li class="${ 1 eq currentPage ? 'page-item disabled' : 'page-item' }">
+                            <a class="page-link" href="/admin/user?page=${currentPage-1}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>
+                          <!-- -----------forEach này chia số sản phẩm cho mỗi trang---------- -->
+                          <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                            <li class="page-item">
+                              <a class="${ loop.index eq currentPage ? 'active page-link' : 'page-link' }"
+                                href="/admin/user?page=${loop.index}">
+                                ${loop.index}
+                              </a>
+                            </li>
+                          </c:forEach>
+                          <li class="${ totalPage eq currentPage ? 'page-item disabled' : 'page-item' }">
+                            <a class="page-link" href="/admin/user?page=${currentPage+1}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
 
                     </div>
                   </div>

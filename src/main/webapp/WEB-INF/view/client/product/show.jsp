@@ -100,17 +100,31 @@
                                     <option value="1">Show 12</option>
                                 </select>
                             </div>
-                            <div class="pagination">
-                                <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left"
-                                        aria-hidden="true"></i></a>
-                                <a href="#" class="active">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                                <a href="#">6</a>
-                                <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right"
-                                        aria-hidden="true"></i></a>
-                            </div>
+                            <!-- ------------------Phân trang----------------------------- -->
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="${ 1 eq currentPage ? 'page-item disabled' : 'page-item' }">
+                                        <a class="page-link" href="/products?page=${currentPage-1}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <!-- -----------forEach này chia số sản phẩm cho mỗi trang---------- -->
+                                    <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                                        <li class="page-item">
+                                            <a class="${ loop.index eq currentPage ? 'active page-link' : 'page-link' }"
+                                                href="/products?page=${loop.index}">
+                                                ${loop.index}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="${ totalPage eq currentPage ? 'page-item disabled' : 'page-item' }">
+                                        <a class="page-link" href="/products?page=${currentPage+1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                         <!-- End Filter Bar -->
                         <!-- Start Best Seller -->
@@ -155,17 +169,32 @@
                                     <option value="1">Show 12</option>
                                 </select>
                             </div>
-                            <div class="pagination">
-                                <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left"
-                                        aria-hidden="true"></i></a>
-                                <a href="#" class="active">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-                                <a href="#">6</a>
-                                <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right"
-                                        aria-hidden="true"></i></a>
-                            </div>
+
+                            <!-- ------------------Phân trang----------------------------- -->
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="${ 1 eq currentPage ? 'page-item disabled' : 'page-item' }">
+                                        <a class="page-link" href="/products?page=${currentPage-1}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <!-- -----------forEach này chia số sản phẩm cho mỗi trang---------- -->
+                                    <c:forEach begin="1" end="${totalPage}" varStatus="loop">
+                                        <li class="page-item">
+                                            <a class="${ loop.index eq currentPage ? 'active page-link' : 'page-link' }"
+                                                href="/products?page=${loop.index}">
+                                                ${loop.index}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="${ totalPage eq currentPage ? 'page-item disabled' : 'page-item' }">
+                                        <a class="page-link" href="/products?page=${currentPage+1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                         <!-- End Filter Bar -->
                     </div>

@@ -2,6 +2,8 @@ package com.n11.sportshop.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,9 +42,10 @@ public class UserService {
         user.setRole(this.roleRepository.findByName("USER"));
         String imageName = "defaultavatar.jpg";
         user.setImage(imageName);
-        
+
         this.userRepository.save(user);
     }
+
     public void createUserByAdmin(User user, MultipartFile file) {
         Role roleInDataBase = this.roleRepository.findByName(user.getRole().getName());
         user.setRole(roleInDataBase);
@@ -110,5 +113,9 @@ public class UserService {
 
     public User getUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
+    }
+
+    public Page<User> fetchUsers(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
     }
 }
