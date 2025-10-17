@@ -23,6 +23,10 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.PaginationServie;
 import com.n11.sportshop.service.UserService;
 
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
@@ -43,12 +47,20 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String postCreateUser(@ModelAttribute("newUser") User user, @RequestParam("images") MultipartFile file) {
+    public String postCreateUser(Model model, @ModelAttribute("newUser") @Valid User user, BindingResult bindingResult,
+            @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
 
         // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại.
         // Không được để id trống !!!
         // Nhớ thêm ADMIN, USER và database
+
+        // Validate
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
         this.userService.createUserByAdmin(user, file);
         return "redirect:/admin/user";
     }

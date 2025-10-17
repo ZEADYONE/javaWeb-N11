@@ -9,6 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -21,21 +26,29 @@ public class User {
     private Role role;
 
     // @Column(nullable = false, unique = true, length = 100)
+    @NotNull
+    @Size(min = 2, max = 100)
     private String username;
 
     // @Column(nullable = false)
+    @NotNull
     private String password;
 
     // @Column(length = 150)//,nullable = false)
+    @NotNull
+    @Size(min = 2, max = 150)
     private String fullName;
 
     // @Column(unique = true, length = 150)
+    @Email
     private String email;
 
     // @Column( length = 20)
+    @Size(min = 2, max = 20)
     private String phoneNumber;
 
     // @Column(length = 255)
+    @Size(min = 2, max = 255)
     private String address;
 
     @Column
