@@ -18,7 +18,7 @@
                         <!-- Body -->
                         <div class="modal-body py-4 px-5">
                             <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
-                            enctype="multipart/form-data">
+                                enctype="multipart/form-data">
 
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
@@ -32,15 +32,8 @@
                                         <form:select class="form-select border" style="padding-left: 20px;"
                                             path="category.code">
                                             <form:option value="">-----</form:option>
-                                            <form:option value="APPAREL">Quần áo thể thao</form:option>
-                                            <form:option value="TENNIS">Vợt Tennis</form:option>
-                                            <form:option value="BADMINTON">Vợt Cầu Lông</form:option>
-                                            <form:option value="PICKLEBALL">Vợt Pickleball</form:option>
-                                            <form:option value="SHOES">Giày Thể Thao</form:option>
+                                            <form:options items="${categories}" itemValue="code" itemLabel="name" />
                                         </form:select>
-                                        <c:forEach var="c" items="${categories}">
-                                            ${c.id} - ${c.name}<br>
-                                        </c:forEach>
 
                                     </div>
 

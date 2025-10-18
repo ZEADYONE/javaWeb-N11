@@ -62,7 +62,7 @@
                   <!-- Modal create -->
                   <jsp:include page="../product/create.jsp" />
 
-                  <div class="card-body px-0 pb-2" style="height:80vh;">
+                  <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
                       <table class="table align-items-center mb-0">
                         <thead class="bg-light">
@@ -113,7 +113,7 @@
                                 <!-- View Detail-->
                                 <a href="javascript:void(0);" class="btn btn-sm btn-info border-0"
                                   data-bs-toggle="modal" data-bs-target="#detailModal${product.id}">
-                                  <i class="bi bi-person-vcard fs-5"></i>
+                                  <i class="bi bi-card-text fs-5"></i>
                                 </a>
 
                                 <!-- Modal View Detail -->
@@ -123,7 +123,7 @@
 
                                 <!-- Edit -->
                                 <a href="/admin/product/update/${product.id}" class="btn btn-sm btn-primary border-0">
-                                  <i class="bi bi-person-gear fs-5"></i>
+                                  <i class="bi bi-pencil-square fs-5"></i>
                                 </a>
 
                                 <!-- Delete (modal trigger) -->

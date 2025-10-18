@@ -42,7 +42,7 @@ public class ProductController {
     @GetMapping
     public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptinal) {
 
-        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 10);
+        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 8);
 
         // --------------- Lấy tất cả sản phẩm-------------------
         model.addAttribute("products", paginationQuery.getPrs().getContent());
@@ -52,6 +52,7 @@ public class ProductController {
 
         // ---------------Lấy tổng số trang ------------------
         model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
+        model.addAttribute("categories", this.productService.getAllCategories());
 
         model.addAttribute("newProduct", new Product());
         return "admin/product/show";
@@ -61,7 +62,6 @@ public class ProductController {
     @GetMapping("/create")
     public String getProductCreatePage(Model model) {
         model.addAttribute("newProduct", new Product());
-        model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("brand", new Brand());
         return "admin/product/create";
     }
@@ -99,6 +99,7 @@ public class ProductController {
     public String editProductForm(@PathVariable("id") int id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + id));
+        model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("product", product);
         return "admin/product/update";
     }

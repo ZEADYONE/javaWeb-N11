@@ -8,17 +8,14 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
 
-                        <!-- Header -->
                         <div class="modal-header bg-gradient-primary">
-                            <h5 class="modal-title fw-bold" id="detailModalLabel${user.id}">
+                            <h5 class="modal-title fw-bold text-white" id="detailModalLabel${user.id}">
                                 <i class="bi bi-person-vcard me-2"></i> User Details
                             </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
 
-                        <!-- Body -->
                         <div class="modal-body p-4">
-                            <!-- Avatar + Basic Info -->
                             <div class="text-center mb-4">
                                 <img src="/images/avatar/${user.image}" alt="Avatar Preview"
                                     class="rounded-circle shadow-sm border border-3"
@@ -33,7 +30,6 @@
                                 </span>
                             </div>
 
-                            <!-- Info Card -->
                             <div class="card border-0 shadow-sm rounded-3">
                                 <div class="card-header fw-semibold">
                                     <i class="bi bi-info-circle me-2"></i> Account Information
@@ -64,9 +60,8 @@
                             </div>
                         </div>
 
-                        <!-- Footer -->
                         <div class="modal-footer border-0">
-                            <button type="button" class="btn bg-gradient-primary" font-weight:500;"
+                            <button type="button" class="btn bg-gradient-primary" style="font-weight:500;"
                                 data-bs-dismiss="modal">
                                 Close
                             </button>
