@@ -32,6 +32,9 @@
             <link rel="stylesheet" href="/client/css/ion.rangeSlider.skinFlat.css" />
             <link rel="stylesheet" href="/client/css/magnific-popup.css">
             <link rel="stylesheet" href="/client/css/main.css">
+            <link rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
             <!--
         Javascript
 		============================================= -->
@@ -57,15 +60,6 @@
             <header class="header_area">
                 <div class="main_menu">
                     <jsp:include page="../layout/navigation.jsp" />
-                </div>
-                <div class="search_input" id="search_input_box">
-                    <div class="container">
-                        <form class="d-flex justify-content-between">
-                            <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                            <button type="submit" class="btn"></button>
-                            <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-                        </form>
-                    </div>
                 </div>
             </header>
         </body>

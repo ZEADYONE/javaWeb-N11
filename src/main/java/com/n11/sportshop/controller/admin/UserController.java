@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.PaginationQuery;
-import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.PaginationServie;
