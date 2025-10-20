@@ -28,21 +28,35 @@
 
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorEmail">
+                                                        <form:errors path="email" cssClass="invalid-feedback"/>
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Email:</label>
-                                                    <form:input type="email" class="form-control border "
+                                                    <form:input 
+                                                        type="email" 
+                                                        class="form-control border ${not empty errorEmail ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="email" />
+                                                    ${errorEmail}
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorUsername">
+                                                        <form:errors path="username" cssClass="invalid-feedback"/>
+                                                    </c:set>
                                                     <label class="form-label fw-bold">User name:</label>
-                                                    <form:input type="text" class="form-control border "
+                                                    <form:input type="text" class="form-control border ${not empty errorUsername ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="username" />
+                                                    ${errorUsername}
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorPassword">
+                                                        <form:errors path="password" cssClass="invalid-feedback"/>
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Password:</label>
-                                                    <form:input type="password" class="form-control border"
+                                                    <form:input type="password" class="form-control border ${not empty errorPassword ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="password" />
+                                                    ${errorPassword}
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">

@@ -115,6 +115,10 @@ public class UserService {
         return this.userRepository.findByUsername(username);
     }
 
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
     public Page<User> fetchUsers(Pageable pageable) {
         return this.userRepository.findAll(pageable);
     }

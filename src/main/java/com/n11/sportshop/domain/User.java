@@ -1,5 +1,8 @@
 package com.n11.sportshop.domain;
 
+import com.n11.sportshop.service.Validator.RegisterChecked;
+import com.n11.sportshop.service.Validator.StrongPassword;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,28 +30,26 @@ public class User {
 
     // @Column(nullable = false, unique = true, length = 100)
     @NotNull
-    @Size(min = 2, max = 100)
+    @Size(min = 2, message = "Tên đăng nhập không hợp lệ")
     private String username;
 
     // @Column(nullable = false)
     @NotNull
+    @StrongPassword
     private String password;
 
     // @Column(length = 150)//,nullable = false)
-    @NotNull
-    @Size(min = 2, max = 150)
     private String fullName;
 
     // @Column(unique = true, length = 150)
-    @Email
+    @NotBlank(message = "Cần nhập email.")
+    @Email(message = "Email không hợp lệ.", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
     // @Column( length = 20)
-    @Size(min = 2, max = 20)
     private String phoneNumber;
 
     // @Column(length = 255)
-    @Size(min = 2, max = 255)
     private String address;
 
     @Column
