@@ -27,10 +27,10 @@ public class ClientProductController {
     @GetMapping("/products")
     public String getAllProductPage(
             Model model,
-            @RequestParam("page") Optional<String> pageOptinal,
-            @RequestParam("name") Optional<String> nameOptinal) {
-
-        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 6);
+            @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("categories") Optional<String> categoriesOptional) {
+        // dang test voi loc bang code
+        PaginationQuery<Product> paginationQuery = this.paginationServie.handelFilterProductPagination(pageOptional, 6, categoriesOptional);
 
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());
@@ -41,9 +41,10 @@ public class ClientProductController {
         model.addAttribute("products", paginationQuery.getPrs().getContent());
         model.addAttribute("categories", this.productService.getAllCategories());
 
+        
         return "client/product/show";
     }
-
+    
     @GetMapping("/products/{id}")
     public String getDetailProductPage(Model model, @PathVariable("id") int id) {
         Product product = this.productService.getProductById(id).get();
@@ -51,3 +52,4 @@ public class ClientProductController {
         return "client/product/detail";
     }
 }
+
