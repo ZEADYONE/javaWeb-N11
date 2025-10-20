@@ -43,28 +43,55 @@
 									</div>
 
 									<div class="col-md-12 form-group">
-										<form:input type="text" class="form-control" id="username" path="username"
+										<c:set var="errorUsername">
+                                            <form:errors path="username" cssClass="invalid-feedback"/>
+                                        </c:set>
+										<form:input 
+											type="text" 
+											class="form-control ${not empty errorUsername ? 'is-invalid' : ''}" 
+											id="username" path="username"
 											placeholder="Username" onfocus="this.placeholder=''"
 											onblur="this.placeholder='Username'" />
+										${errorUsername}
 									</div>
 
 									<div class="col-md-12 form-group">
-										<form:input type="email" class="form-control" id="email" path="email"
+										<c:set var="errorEmail">
+                                            <form:errors path="email" cssClass="invalid-feedback"/>
+                                        </c:set>
+										<form:input 
+											type="email" 
+											class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" 
+											id="email" path="email"
 											placeholder="Email Address" onfocus="this.placeholder=''"
 											onblur="this.placeholder='Email Address'" />
+										${errorEmail}
 									</div>
 
 									<div class="col-md-12 form-group">
-										<form:input type="password" class="form-control" id="password" path="password"
+										<c:set var="errorPassword">
+                                            <form:errors path="password" cssClass="invalid-feedback"/>
+                                        </c:set>
+										<form:input 
+											type="password" 
+											class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" 
+											id="password" path="password"
 											placeholder="Password" onfocus="this.placeholder=''"
 											onblur="this.placeholder='Password'" />
+										${errorPassword}
 									</div>
 
 									<div class="col-md-12 form-group">
-										<form:input type="password" class="form-control"
+										<c:set var="errorComfirmPassword">
+                                            <form:errors path="confirmPassword" cssClass="invalid-feedback"/>
+                                        </c:set>
+										<form:input 
+											type="password" 
+											class="form-control ${not empty errorComfirmPassword ? 'is-invalid' : ''}"
 											path="confirmPassword" placeholder="Confirm Password"
 											onfocus="this.placeholder=''"
 											onblur="this.placeholder='Confirm Password'" />
+										${errorComfirmPassword}
 									</div>
 
 									<div class="col-md-12 form-group">
