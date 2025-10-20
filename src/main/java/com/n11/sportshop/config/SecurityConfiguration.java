@@ -4,14 +4,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import com.n11.sportshop.service.CustomUserDetailsService;
 import com.n11.sportshop.service.UserService;
+
+import jakarta.servlet.DispatcherType;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -60,27 +65,27 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-                                DispatcherType.INCLUDE)
-                        .permitAll()
-                        .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**", "/product/**",
-                                "/register", "/images/**", "/home", "/products")
-                        .permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
+                .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                        DispatcherType.INCLUDE)
+                .permitAll()
+                .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**", "/product/**",
+                        "/register", "/images/**", "/home", "/products")
+                .permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated())
                 .sessionManagement((sessionManagement) -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/logout?expired")
-                        .maximumSessions(1) // Giới hạn session
-                        .maxSessionsPreventsLogin(false)) // Không ngăn chặn logic nhưng sẽ đá người trước ra
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .invalidSessionUrl("/logout?expired")
+                .maximumSessions(1) // Giới hạn session
+                .maxSessionsPreventsLogin(false)) // Không ngăn chặn logic nhưng sẽ đá người trước ra
 
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .failureUrl("/login?error")
-                        .successHandler(customSuccessHandler())
-                        .permitAll())
+                .loginPage("/login")
+                .failureUrl("/login?error")
+                .successHandler(customSuccessHandler())
+                .permitAll())
                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
         return http.build();
     }
