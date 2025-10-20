@@ -63,5 +63,23 @@ public class PaginationServie {
 
         return new PaginationQuery<>(page, prs);
     }
+    // Đang test thử filter 
+    public PaginationQuery<Product> handelFilterProductPagination(Optional<String> pageOptinal, int size, Optional<String> codeOptional) {
+        int page = 1;
 
+        try {
+            if (pageOptinal.isPresent()) {
+                page = Integer.parseInt(pageOptinal.get());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        
+        String code = codeOptional.isPresent() ? codeOptional.get() : "";
+        Page<Product> prs = this.productService.fetchProductsByName(pageable, code);
+        return new PaginationQuery<>(page, prs);
+    }
 }
