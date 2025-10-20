@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.PaginationServie;
 import com.n11.sportshop.service.ProductService;
@@ -28,15 +29,18 @@ import jakarta.validation.Valid;
 @RequestMapping("/admin/product")
 public class ProductController {
 
+    private final BrandRepository brandRepository;
+
     private final ProductService productService;
     private final ImageService imageService;
     private final PaginationServie paginationServie;
 
     public ProductController(ProductService productService, ImageService imageService,
-            PaginationServie paginationServie) {
+            PaginationServie paginationServie, BrandRepository brandRepository) {
         this.productService = productService;
         this.imageService = imageService;
         this.paginationServie = paginationServie;
+        this.brandRepository = brandRepository;
     }
 
     // hien thi danh sach san pham
