@@ -112,7 +112,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end mt-5 pt-4 border-top gap-3">
-                                    <a href="/profile/edit" class="btn fw-semibold text-white theme-gradient-bg">
+                                    <a href="/profile/update" class="btn fw-semibold text-white theme-gradient-bg">
                                         <i class="bi bi-pencil-square me-1"></i> Chỉnh sửa hồ sơ
                                     </a>
                                 </div>
