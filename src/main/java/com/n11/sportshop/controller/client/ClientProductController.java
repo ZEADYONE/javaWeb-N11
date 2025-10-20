@@ -1,11 +1,7 @@
 package com.n11.sportshop.controller.client;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +15,7 @@ import com.n11.sportshop.service.ProductService;
 
 @Controller
 public class ClientProductController {
+
     private final ProductService productService;
     private final PaginationServie paginationServie;
 
@@ -28,7 +25,10 @@ public class ClientProductController {
     }
 
     @GetMapping("/products")
-    public String getAllProductPage(Model model, @RequestParam("page") Optional<String> pageOptinal) {
+    public String getAllProductPage(
+            Model model,
+            @RequestParam("page") Optional<String> pageOptinal,
+            @RequestParam("name") Optional<String> nameOptinal) {
 
         PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 6);
 
