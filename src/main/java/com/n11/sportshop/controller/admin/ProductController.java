@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.domain.User;
 import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.PaginationServie;
@@ -132,4 +133,6 @@ public class ProductController {
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
+
+    
 }
