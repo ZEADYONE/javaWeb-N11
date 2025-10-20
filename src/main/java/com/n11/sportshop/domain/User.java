@@ -42,7 +42,7 @@ public class User {
     private String fullName;
 
     // @Column(unique = true, length = 150)
-    @NotBlank(message = "Cần nhập email.")
+    @NotNull(message = "Cần nhập email.")
     @Email(message = "Email không hợp lệ.", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 

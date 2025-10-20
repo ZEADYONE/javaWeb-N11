@@ -46,7 +46,8 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String postCreateUser(Model model, @ModelAttribute("newUser") @Valid User user, BindingResult bindingResult,
+    public String postCreateUser(Model model, @ModelAttribute("newUser") @Valid User user,
+            BindingResult userBindingResult,
             @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
 
@@ -55,9 +56,13 @@ public class UserController {
         // Nhớ thêm ADMIN, USER và database
 
         // Validate
-        List<FieldError> errors = bindingResult.getFieldErrors();
+        List<FieldError> errors = userBindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        if (userBindingResult.hasErrors()) {
+            return "admin/user/create";
         }
 
         this.userService.createUserByAdmin(user, file);

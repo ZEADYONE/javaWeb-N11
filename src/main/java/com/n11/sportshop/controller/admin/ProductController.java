@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,10 @@ import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.PaginationServie;
 import com.n11.sportshop.service.ProductService;
+
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -69,8 +74,21 @@ public class ProductController {
     // Xử lý lưu sản phẩm mới
     @PostMapping("/create")
     public String postCreateProduct(
-            @ModelAttribute("newProduct") Product product,
+            @ModelAttribute("newProduct") @Valid Product product,
+            BindingResult productBindingResult,
             @RequestParam("images") MultipartFile file) {
+
+        // Dùng để debug validate
+        List<FieldError> errors = productBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        // Validate trả lỗi về màn hình trang product create
+        if (productBindingResult.hasErrors()) {
+            return "admin/product/create";
+        }
+
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }

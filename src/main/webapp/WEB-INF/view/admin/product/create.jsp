@@ -27,9 +27,13 @@
 
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
+                                                    <c:set var="errorName">
+                                                        <form:errors path="name" cssClass="invalid-feedback"/>
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Name:</label>
-                                                    <form:input type="text" class="form-control border "
+                                                    <form:input type="text" class="form-control border ${not empty errorName ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="name" />
+                                                    ${errorName}
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
@@ -54,9 +58,13 @@
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorPrice">
+                                                        <form:errors path="price" cssClass="invalid-feedback"/>
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Price:</label>
-                                                    <form:input type="text" class="form-control border "
+                                                    <form:input type="text" class="form-control border ${not empty errorPrice ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="price" />
+                                                    ${errorPrice}
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
