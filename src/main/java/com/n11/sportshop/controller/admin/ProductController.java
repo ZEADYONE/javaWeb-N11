@@ -68,6 +68,7 @@ public class ProductController {
         model.addAttribute("newProduct", new Product());
         model.addAttribute("brand", new Brand());
         model.addAttribute("categories", this.productService.getAllCategories());
+        model.addAttribute("brands", this.productService.getAllBrands());
         return "admin/product/create";
     }
 
@@ -76,7 +77,7 @@ public class ProductController {
     public String postCreateProduct(
             @ModelAttribute("newProduct") @Valid Product product,
             BindingResult productBindingResult,
-            @RequestParam("images") MultipartFile file) {
+            @RequestParam("images") MultipartFile file, Model model) {
 
         // Dùng để debug validate
         List<FieldError> errors = productBindingResult.getFieldErrors();
@@ -85,12 +86,15 @@ public class ProductController {
         }
 
         // Validate trả lỗi về màn hình trang product create
-        if (productBindingResult.hasErrors()) {
-            return "admin/product/create";
-        }
+        // if (productBindingResult.hasErrors() == true) {
+        //     model.addAttribute("categories", this.productService.getAllCategories());
+        //     model.addAttribute("brands", this.productService.getAllBrands());
+        //     return "admin/product/create";
+        // } 
+            this.productService.saveProduct(product, file);
+            return "redirect:/admin/product";
+        
 
-        this.productService.saveProduct(product, file);
-        return "redirect:/admin/product";
     }
 
     // Hiển thị chi tiết 1 sản phẩm

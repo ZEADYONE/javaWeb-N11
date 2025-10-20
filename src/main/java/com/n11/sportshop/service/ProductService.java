@@ -64,6 +64,10 @@ public class ProductService {
         return this.categoryRepository.findAll();
     }
 
+    public List<Brand> getAllBrands() {
+        return this.brandRepository.findAll();
+    }
+
     public Page<Product> fetchProducts(Pageable pageable) {
         return this.productRepository.findAll(pageable);
     }
