@@ -24,7 +24,7 @@ public class SecurityConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Để mã hóa password cho người dùng 
+        // Để mã hóa password cho người dùng
         return new BCryptPasswordEncoder();
     }
 
@@ -34,14 +34,15 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public DaoAuthenticationProvider authProvider(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    public DaoAuthenticationProvider authProvider(PasswordEncoder passwordEncoder,
+            UserDetailsService userDetailsService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         // authProvider.setHideUserNotFoundExceptions(false);
         /*
          * Hiện ra lỗi đăng nhập (User not found, Bad credentials)
-         * Nhưng để đảm bảo an toàn thì người dùng kh được phép biết lỗi cụ thể 
+         * Nhưng để đảm bảo an toàn thì người dùng kh được phép biết lỗi cụ thể
          * Chỉ dùng trong dev, test
          */
         return authProvider;
@@ -60,31 +61,32 @@ public class SecurityConfiguration {
         return rememberMeServices;
     }
 
-    // @Bean
-    // SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    //     http
-    //             .authorizeHttpRequests(authorize -> authorize
-    //             .dispatcherTypeMatchers(DispatcherType.FORWARD,
-    //                     DispatcherType.INCLUDE).permitAll()
-    //             .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**", "/product/**",
-    //                     "/register", "/images/**", "/home", "/products")
-    //             .permitAll()
-    //             .requestMatchers("/admin/**").hasRole("ADMIN")
-    //             .anyRequest().authenticated())
-    //             .sessionManagement((sessionManagement) -> sessionManagement
-    //             .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-    //             .invalidSessionUrl("/logout?expired")
-    //             .maximumSessions(1) // Giới hạn session 
-    //             .maxSessionsPreventsLogin(false)) // Không ngăn chặn logic nhưng sẽ đá người trước ra
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                DispatcherType.INCLUDE)
+                        .permitAll()
+                        .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**", "/product/**",
+                                "/register", "/images/**", "/home", "/products")
+                        .permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/logout?expired")
+                        .maximumSessions(1) // Giới hạn session
+                        .maxSessionsPreventsLogin(false)) // Không ngăn chặn logic nhưng sẽ đá người trước ra
 
-    //             .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
-    //             .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
-    //             .formLogin(formLogin -> formLogin
-    //             .loginPage("/login")
-    //             .failureUrl("/login?error")
-    //             .successHandler(customSuccessHandler())
-    //             .permitAll())
-    //             .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
-    //     return http.build();
-    // }
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+                .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/login?error")
+                        .successHandler(customSuccessHandler())
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+        return http.build();
+    }
 }

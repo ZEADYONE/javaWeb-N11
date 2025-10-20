@@ -45,6 +45,15 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
             valid = false;
         }
 
+        // check username có tồn tại hay không
+        if (this.userService.checkUsernameExist(user.getUsername())) {
+            context.buildConstraintViolationWithTemplate("Tên đăng nhập đã tồn tại")
+                    .addPropertyNode("username")
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+            valid = false;
+        }
+
         return valid;
     }
 }

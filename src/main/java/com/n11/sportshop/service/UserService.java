@@ -119,6 +119,10 @@ public class UserService {
         return this.userRepository.existsByEmail(email);
     }
 
+    public boolean checkUsernameExist(String username) {
+        return this.userRepository.existsByUsername(username);
+    }
+
     public Page<User> fetchUsers(Pageable pageable) {
         return this.userRepository.findAll(pageable);
     }

@@ -8,7 +8,6 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         // kiểm tra sring email có ký tự in hoa, ký tự đặc biệt và số
-        return value.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!*()]).{8,}$");
-
+        return value.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$");
     }
 }

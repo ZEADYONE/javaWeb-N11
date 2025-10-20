@@ -1,6 +1,5 @@
 package com.n11.sportshop.domain;
 
-import com.n11.sportshop.service.Validator.RegisterChecked;
 import com.n11.sportshop.service.Validator.StrongPassword;
 
 import jakarta.persistence.Column;
@@ -42,8 +41,8 @@ public class User {
     private String fullName;
 
     // @Column(unique = true, length = 150)
-    @NotNull(message = "Cần nhập email.")
-    @Email(message = "Email không hợp lệ.", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @NotBlank(message = "Cần nhập email.")
+    @Email(message = "email không hợp lệ.")
     private String email;
 
     // @Column( length = 20)
