@@ -48,7 +48,6 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @NotBlank(message = "Ảnh sản phẩm không được để trống.")
     private String image;
 
     @OneToMany(mappedBy = "product")

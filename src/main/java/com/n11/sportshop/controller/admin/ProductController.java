@@ -82,15 +82,13 @@ public class ProductController {
         }
 
         // Validate trả lỗi về màn hình trang product create
-        // if (productBindingResult.hasErrors() == true) {
-        //     model.addAttribute("categories", this.productService.getAllCategories());
-        //     model.addAttribute("brands", this.productService.getAllBrands());
-        //     return "admin/product/create";
-        // } 
-            this.productService.saveProduct(product, file);
-            return "redirect:/admin/product";
-        
-
+        if (productBindingResult.hasErrors() == true) {
+            model.addAttribute("categories", this.productService.getAllCategories());
+            model.addAttribute("brands", this.productService.getAllBrands());
+            return "admin/product/create";
+        }
+        this.productService.saveProduct(product, file);
+        return "redirect:/admin/product";
     }
 
     // Hiển thị chi tiết 1 sản phẩm
