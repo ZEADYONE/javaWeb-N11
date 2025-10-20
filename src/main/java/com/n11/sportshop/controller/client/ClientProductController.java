@@ -39,6 +39,7 @@ public class ClientProductController {
         model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
 
         model.addAttribute("products", paginationQuery.getPrs().getContent());
+        model.addAttribute("categories", this.productService.getAllCategories());
 
         
         return "client/product/show";

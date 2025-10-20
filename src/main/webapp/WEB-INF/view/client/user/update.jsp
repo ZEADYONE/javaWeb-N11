@@ -1,7 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-            <link id="pagestyle" href="/admin/css/form-input.css" rel="stylesheet" />
             <style>
                 .theme-gradient-bg {
                     background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
@@ -39,16 +38,57 @@
                     margin-bottom: 50px;
                 }
 
-                .info-label {
-                    font-size: 0.85rem;
-                    font-weight: 500;
-                    color: #6c757d;
-                    margin-bottom: 0.25rem;
+                .upload-box {
+                    border: 2px dashed #0d6efd;
+                    border-radius: 10px;
+                    background-color: #f8f9fa;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    cursor: pointer;
+                    transition: 0.2s;
+                    width: 100%;
+                    min-height: 150px;
+                    height: auto;
                 }
 
-                .info-value {
-                    font-weight: 600;
-                    color: #343a40;
+                .upload-box:hover {
+                    background-color: #e9f2ff;
+                    border-color: #007bff;
+                }
+
+                .upload-box i {
+                    font-size: 28px;
+                    color: #0d6efd;
+                    margin-bottom: 8px;
+                }
+
+                .upload-box span {
+                    color: #6c757d;
+                    font-size: 14px;
+                }
+
+                #formFileLg {
+                    display: none;
+                }
+
+                #preview {
+                    display: none;
+                    width: auto;
+                    max-width: 200px;
+                    max-height: 250px;
+                    margin-bottom: 8px;
+                    object-fit: contain;
+                    border-radius: 10px;
+                    border: 1px solid #ddd;
+                    transition: 0.3s;
+                }
+
+                .form-control:focus,
+                .form-select:focus,
+                textarea:focus {
+                    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25) !important;
                 }
             </style>
 

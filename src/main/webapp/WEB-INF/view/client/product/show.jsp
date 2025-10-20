@@ -28,36 +28,39 @@
                         <div class="sidebar-categories">
                             <div class="head">Browse Categories</div>
                             <ul class="main-categories">
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable"
-                                        aria-expanded="false" aria-controls="fruitsVegetable"><span
-                                            class="lnr lnr-arrow-right"></span>Fruits and Vegetables<span
-                                            class="number">(53)</span></a>
-                                </li>
+                                <c:forEach var="category" items="${categories}">
 
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#meatFish"
-                                        aria-expanded="false" aria-controls="meatFish"><span
-                                            class="lnr lnr-arrow-right"></span>Meat and Fish<span
-                                            class="number">(53)</span></a>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable"
+                                            aria-expanded="false" aria-controls="fruitsVegetable"><span
+                                                class="lnr lnr-arrow-right"></span>${category.name}<span
+                                                class="number">(53)</span></a>
+                                    </li>
 
-                                </li>
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#cooking"
-                                        aria-expanded="false" aria-controls="cooking"><span
-                                            class="lnr lnr-arrow-right"></span>Cooking<span
-                                            class="number">(53)</span></a>
+                                    <!-- <li class="main-nav-list"><a data-toggle="collapse" href="#meatFish"
+                                            aria-expanded="false" aria-controls="meatFish"><span
+                                                class="lnr lnr-arrow-right"></span>Meat and Fish<span
+                                                class="number">(53)</span></a>
 
-                                </li>
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#beverages"
-                                        aria-expanded="false" aria-controls="beverages"><span
-                                            class="lnr lnr-arrow-right"></span>Beverages<span
-                                            class="number">(24)</span></a>
+                                    </li>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#cooking"
+                                            aria-expanded="false" aria-controls="cooking"><span
+                                                class="lnr lnr-arrow-right"></span>Cooking<span
+                                                class="number">(53)</span></a>
 
-                                </li>
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#homeClean"
-                                        aria-expanded="false" aria-controls="homeClean"><span
-                                            class="lnr lnr-arrow-right"></span>Home and
-                                        Cleaning<span class="number">(53)</span></a>
+                                    </li>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#beverages"
+                                            aria-expanded="false" aria-controls="beverages"><span
+                                                class="lnr lnr-arrow-right"></span>Beverages<span
+                                                class="number">(24)</span></a>
 
-                                </li>
+                                    </li>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#homeClean"
+                                            aria-expanded="false" aria-controls="homeClean"><span
+                                                class="lnr lnr-arrow-right"></span>Home and
+                                            Cleaning<span class="number">(53)</span></a>
+
+                                    </li> -->
+                                </c:forEach>
 
                             </ul>
                         </div>
