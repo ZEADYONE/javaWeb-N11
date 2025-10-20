@@ -47,16 +47,12 @@
                     </div>
                   </div>
                   <!-- Nút mở modal Create -->
-                  <button type="button" class="btn btn-primary"
-                    style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;" data-bs-toggle="modal"
-                    data-bs-target="#CreateModal" title="Create">
-                    Create User
-                  </button>
+                  <a href="/admin/user/create" type="button" class="btn btn-primary"
+                    style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;">Create User</a>
 
-                  <!-- Modal Create -->
-                  <jsp:include page="../user/create.jsp" />
+            
 
-                  <div class="card-body px-0 pb-2" >
+                  <div class="card-body px-0 pb-2">
 
                     <div class="table-responsive p-0">
                       <table class="table align-items-center mb-0">

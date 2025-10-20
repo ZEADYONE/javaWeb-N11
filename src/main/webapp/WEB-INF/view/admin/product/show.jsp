@@ -52,15 +52,8 @@
                     </div>
                   </div>
 
-                  <!-- Nút mở modal Create -->
-                  <button type="button" class="btn btn-primary"
-                    style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;" data-bs-toggle="modal"
-                    data-bs-target="#CreateModal" title="Create">
-                    Add product
-                  </button>
-
-                  <!-- Modal create -->
-                  <jsp:include page="../product/create.jsp" />
+                  <a href="/admin/product/create" type="button" class="btn btn-primary"
+                    style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;">Add product</a>
 
                   <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">

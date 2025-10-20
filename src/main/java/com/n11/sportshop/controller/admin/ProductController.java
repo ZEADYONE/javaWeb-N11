@@ -52,7 +52,6 @@ public class ProductController {
 
         // ---------------Lấy tổng số trang ------------------
         model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
-        model.addAttribute("categories", this.productService.getAllCategories());
 
         model.addAttribute("newProduct", new Product());
         return "admin/product/show";
@@ -63,6 +62,7 @@ public class ProductController {
     public String getProductCreatePage(Model model) {
         model.addAttribute("newProduct", new Product());
         model.addAttribute("brand", new Brand());
+        model.addAttribute("categories", this.productService.getAllCategories());
         return "admin/product/create";
     }
 
