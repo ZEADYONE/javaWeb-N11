@@ -116,14 +116,14 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label fw-bold">Email:</label>
-                                            <form:input type="email" class="form-control border"
-                                                style="padding-left: 20px;" path="email" />
+                                            <form:input type="email" class="form-control border bg-light"
+                                                style="padding-left: 20px;" path="email" readonly="true"/>
                                         </div>
 
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label fw-bold">User name:</label>
-                                            <form:input type="text" class="form-control border "
-                                                style="padding-left: 20px;" path="username" />
+                                            <form:input type="text" class="form-control border bg-light"
+                                                style="padding-left: 20px;" path="username" readonly="true"/>
                                         </div>
 
                                         <div class="col-md-6 mb-3">
