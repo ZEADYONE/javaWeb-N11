@@ -147,7 +147,7 @@
                                                         <!-- Nút mở modal thêm mới -->
                                                         <button class="btn btn-sm btn-primary mt-3"
                                                             data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                                                            <i class="ni ni-fat-add"></i> Add Category
+                                                            Add Category
                                                         </button>
 
                                                         <!-- Modal thêm Category -->
@@ -300,7 +300,7 @@
                                                         <!-- Nút mở modal thêm mới -->
                                                         <button class="btn btn-sm btn-primary mt-3"
                                                             data-bs-toggle="modal" data-bs-target="#addBrandModal">
-                                                            <i class="ni ni-fat-add"></i> Add Category
+                                                            Add Brand
                                                         </button>
 
                                                         <!-- Modal thêm Brand -->
