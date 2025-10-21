@@ -30,10 +30,11 @@
                             <ul class="main-categories">
                                 <c:forEach var="category" items="${categories}">
 
-                                    <li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable"
-                                            aria-expanded="false" aria-controls="fruitsVegetable"><span
-                                                class="lnr lnr-arrow-right"></span>${category.name}<span
-                                                class="number">(53)</span></a>
+
+                                    <li class="main-nav-list"><a href="products?page=1&categories="
+                                            data-toggle="collapse" aria-expanded="false"
+                                            aria-controls="fruitsVegetable"><span
+                                                class="lnr lnr-arrow-right"></span>${category.name}</a>
                                     </li>
 
                                     <!-- <li class="main-nav-list"><a data-toggle="collapse" href="#meatFish"
@@ -70,17 +71,23 @@
                                 <div class="head">Brands</div>
                                 <form action="#">
                                     <ul>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="apple"
-                                                name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
-                                                name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
-                                                name="brand"><label for="gionee">Gionee<span>(19)</span></label></li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax"
-                                                name="brand"><label for="micromax">Micromax<span>(19)</span></label>
-                                        </li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
-                                                name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
+                                        <c:forEach var="brand" items="${brands}">
+                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="apple"
+                                                    name="brand"><label for="apple">${brand.name}</label></li>
+                                            <!-- <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
+                                                    name="brand"><label for="asus">Asus<span>(29)</span></label></li>
+                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
+                                                    name="brand"><label for="gionee">Gionee<span>(19)</span></label>
+                                            </li>
+                                            <li class="filter-list"><input class="pixel-radio" type="radio"
+                                                    id="micromax" name="brand"><label
+                                                    for="micromax">Micromax<span>(19)</span></label>
+                                            </li>
+                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
+                                                    name="brand"><label for="samsung">Samsung<span>(19)</span></label>
+                                            </li> -->
+                                        </c:forEach>
+
                                     </ul>
                                 </form>
                             </div>
