@@ -107,10 +107,6 @@ public class UserService {
         return this.userRepository.findFirstById(id);
     }
 
-    public User handelSaveUser(User user) {
-        return this.userRepository.save(user);
-    }
-
     public User getUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
