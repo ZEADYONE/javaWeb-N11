@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,21 +18,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.service.PaginationServie;
+import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.UserService;
 
 import jakarta.validation.Valid;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
 
     private final UserService userService;
-    private final PaginationServie paginationServie;
+    private final PaginationService paginationServie;
 
-    public UserController(UserService userService, PaginationServie paginationServie) {
+    public UserController(UserService userService, PaginationService paginationServie) {
         this.userService = userService;
         this.paginationServie = paginationServie;
     }

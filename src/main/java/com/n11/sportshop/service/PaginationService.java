@@ -12,12 +12,12 @@ import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 
 @Service
-public class PaginationServie {
+public class PaginationService {
 
     private final UserService userService;
     private final ProductService productService;
 
-    public PaginationServie(UserService userService, ProductService productService) {
+    public PaginationService(UserService userService, ProductService productService) {
         this.userService = userService;
         this.productService = productService;
     }

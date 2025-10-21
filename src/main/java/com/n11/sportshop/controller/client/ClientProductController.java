@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
-import com.n11.sportshop.service.PaginationServie;
+import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
 
 @Controller
 public class ClientProductController {
 
     private final ProductService productService;
-    private final PaginationServie paginationServie;
+    private final PaginationService paginationService;
 
-    public ClientProductController(ProductService productService, PaginationServie paginationServie) {
+    public ClientProductController(ProductService productService, PaginationService paginationServie) {
         this.productService = productService;
-        this.paginationServie = paginationServie;
+        this.paginationService = paginationServie;
     }
 
     @GetMapping("/products")
@@ -30,7 +30,7 @@ public class ClientProductController {
             @RequestParam("page") Optional<String> pageOptional,
             @RequestParam("categories") Optional<String> categoriesOptional) {
         // dang test voi loc bang code
-        PaginationQuery<Product> paginationQuery = this.paginationServie.handelFilterProductPagination(pageOptional, 6, categoriesOptional);
+        PaginationQuery<Product> paginationQuery = this.paginationService.handelFilterProductPagination(pageOptional, 6, categoriesOptional);
 
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());

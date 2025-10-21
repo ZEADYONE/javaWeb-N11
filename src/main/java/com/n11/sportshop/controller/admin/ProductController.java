@@ -20,7 +20,7 @@ import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.service.ImageService;
-import com.n11.sportshop.service.PaginationServie;
+import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
 
 import jakarta.validation.Valid;
@@ -33,10 +33,10 @@ public class ProductController {
 
     private final ProductService productService;
     private final ImageService imageService;
-    private final PaginationServie paginationServie;
+    private final PaginationService paginationServie;
 
     public ProductController(ProductService productService, ImageService imageService,
-            PaginationServie paginationServie, BrandRepository brandRepository) {
+            PaginationService paginationServie, BrandRepository brandRepository) {
         this.productService = productService;
         this.imageService = imageService;
         this.paginationServie = paginationServie;
