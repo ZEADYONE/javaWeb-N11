@@ -31,7 +31,7 @@ public class ClientProductController {
             @RequestParam("categories") Optional<String> categoriesOptional,
             @RequestParam("brand") Optional<String> brandOptional) {
         // dang test voi loc bang code
-        PaginationQuery<Product> paginationQuery = this.paginationService.handelFilterProductPagination(pageOptional, 6,
+        PaginationQuery<Product> paginationQuery = this.paginationService.handelFilterProductPagination(pageOptional, 9,
                 categoriesOptional);
 
         // --------------Lấy STT trang hiện tại-------------------

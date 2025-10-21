@@ -22,9 +22,10 @@ public class PaginationService {
         this.productService = productService;
     }
 
-    // pageOptinal chứa số thứ tự trang do client truyền lên (có thể null hoặc rỗng)
-    // size :Số lượng sản phẩm hiển thị trên mỗi trang
+    
     public PaginationQuery<Product> handelProductPagination(Optional<String> pageOptinal, int size) {
+        // pageOptinal chứa số thứ tự trang do client truyền lên (có thể null hoặc rỗng)
+        // size :Số lượng sản phẩm hiển thị trên mỗi trang
         int page = 1; // Mặc định nếu client không truyền số trang thì sẽ hiển thị trang đầu tiên
 
         try {
@@ -63,10 +64,11 @@ public class PaginationService {
 
         return new PaginationQuery<>(page, prs);
     }
+
+
     // Đang test thử filter 
     public PaginationQuery<Product> handelFilterProductPagination(Optional<String> pageOptinal, int size, Optional<String> codeOptional) {
         int page = 1;
-
         try {
             if (pageOptinal.isPresent()) {
                 page = Integer.parseInt(pageOptinal.get());
@@ -74,12 +76,9 @@ public class PaginationService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
         Pageable pageable = PageRequest.of(page - 1, size);
-
-        
         String code = codeOptional.isPresent() ? codeOptional.get() : "";
-        Page<Product> prs = this.productService.fetchProductsByName(pageable, code);
+        Page<Product> prs = this.productService.fetchProductsByCode(pageable, code);
         return new PaginationQuery<>(page, prs);
     }
 }

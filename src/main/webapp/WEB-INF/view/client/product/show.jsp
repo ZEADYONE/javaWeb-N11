@@ -72,8 +72,10 @@
                                 <form action="#">
                                     <ul>
                                         <c:forEach var="brand" items="${brands}">
-                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="apple"
-                                                    name="brand"><label for="apple">${brand.name}</label></li>
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="apple" name="brand">
+                                                <label for="apple">${brand.name}</label>
+                                            </li>
                                             <!-- <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
                                                     name="brand"><label for="asus">Asus<span>(29)</span></label></li>
                                             <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
