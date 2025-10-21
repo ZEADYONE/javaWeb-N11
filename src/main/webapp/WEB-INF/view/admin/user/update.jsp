@@ -31,7 +31,7 @@
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label fw-bold">Email:</label>
-                                                    <form:input type="email" class="form-control border"
+                                                    <form:input type="email" class="form-control border bg-light"
                                                         style="padding-left: 20px;" path="email" readonly="true" />
                                                 </div>
 
