@@ -58,7 +58,7 @@ public class UserController {
 
         PaginationQuery<User> paginationQuery = this.paginationServie.handelUserPagination(pageOptinal, 10);
 
-        // --------------- Lấy tất cả sản phẩm-------------------
+        // --------------- Lấy tất cả user-------------------
         model.addAttribute("users", paginationQuery.getPrs().getContent());
 
         // --------------Lấy STT trang hiện tại-------------------
