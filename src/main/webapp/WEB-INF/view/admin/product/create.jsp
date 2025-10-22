@@ -3,102 +3,116 @@
         <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
             <link id="pagestyle" href="/admin/css/form-input.css" rel="stylesheet" />
 
-            <div class="modal fade" id="CreateModal" tabindex="-1" aria-labelledby="CreateModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content border-0 shadow-lg rounded-4">
+            <aside
+                class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+                id="sidenav-main">
+                <jsp:include page="../layout/sidebar.jsp" />
+            </aside>
 
-                        <!-- Header -->
-                        <div class="modal-header bg-gradient-primary text-white rounded-top-4">
-                            <h5 class="modal-title" id="CreateModalLabel">Add product</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-
-                        <!-- Body -->
-                        <div class="modal-body py-4 px-5">
-                            <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
-                            enctype="multipart/form-data">
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label fw-bold">Name:</label>
-                                        <form:input type="text" class="form-control border " style="padding-left: 20px;"
-                                            path="name" />
-                                    </div>
-
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label">Category</label>
-                                        <form:select class="form-select border" style="padding-left: 20px;"
-                                            path="category.code">
-                                            <form:option value="">-----</form:option>
-                                            <form:option value="APPAREL">Quần áo thể thao</form:option>
-                                            <form:option value="TENNIS">Vợt Tennis</form:option>
-                                            <form:option value="BADMINTON">Vợt Cầu Lông</form:option>
-                                            <form:option value="PICKLEBALL">Vợt Pickleball</form:option>
-                                            <form:option value="SHOES">Giày Thể Thao</form:option>
-                                        </form:select>
-                                        <c:forEach var="c" items="${categories}">
-                                            ${c.id} - ${c.name}<br>
-                                        </c:forEach>
-
-                                    </div>
-
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label">Brand</label>
-                                        <form:select class="form-select border" style="padding-left: 20px;"
-                                            path="brand.name">
-                                            <form:option value="">-----</form:option>
-                                            <form:option value="Hehe">Hehe</form:option>
-                                            <form:option value="Hihi">Hihi</form:option>
-                                        </form:select>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Price:</label>
-                                        <form:input type="text" class="form-control border " style="padding-left: 20px;"
-                                            path="price" />
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Stock:</label>
-                                        <form:input type="text" class="form-control border " style="padding-left: 20px;"
-                                            path="stockQuantity" />
-                                    </div>
-
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label fw-bold">Description:</label>
-                                        <form:textarea class="form-control border" style="padding-left: 20px;"
-                                            path="description"></form:textarea>
-                                    </div>
-
-                                    <div class="col-md-12 mb-3 ">
-                                        <label class="form-label fw-bold">Avatar:</label>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <label for="formFileLg" class="upload-box">
-                                                <i class="bi bi-cloud-upload"></i>
-                                                <span>Upload image</span>
-                                            </label>
-
-                                            <input type="file" id="formFileLg" accept="image/*" name="images"
-                                                onchange="previewImage(event)">
-                                            <img id="preview" alt="preview">
-                                        </div>
-
-                                    </div>
-
+            <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+                <div class="container-fluid py-4">
+                    <div class="col-12">
+                        <div class="card my-4">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                    <h6 class="text-white text-capitalize ps-3">Add Product</h6>
                                 </div>
-                                <div class="text-center mt-4">
-                                    <button type="submit" class="btn text-white px-4 py-2"
-                                        style="background-color: #ffba00;">
-                                        Create
-                                    </button>
+                            </div>
+
+                            <div class="card-body px-5 py-4">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <form:form method="post" action="/admin/product/create"
+                                            modelAttribute="newProduct" enctype="multipart/form-data">
+
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <c:set var="errorName">
+                                                        <form:errors path="name" cssClass="invalid-feedback" />
+                                                    </c:set>
+                                                    <label class="form-label fw-bold">Name:</label>
+                                                    <form:input type="text"
+                                                        class="form-control border ${not empty errorName ? 'is-invalid' : ''}"
+                                                        style="padding-left: 20px;" path="name" />
+                                                    ${errorName}
+                                                </div>
+
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label">Category</label>
+                                                    <form:select class="form-select border" style="padding-left: 20px;"
+                                                        path="category.code" required="true">
+                                                        <form:option value="">-----</form:option>
+                                                        <form:options items="${categories}" itemValue="code"
+                                                            itemLabel="name" />
+                                                    </form:select>
+
+                                                </div>
+
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label">Brand</label>
+                                                    <form:select class="form-select border" style="padding-left: 20px;"
+                                                        path="brand.name" required="true">
+                                                        <form:option value="">-----</form:option>
+                                                        <form:options items="${brands}" itemValue="name"
+                                                            itemLabel="name" />
+                                                    </form:select>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <c:set var="errorPrice">
+                                                        <form:errors path="price" cssClass="invalid-feedback" />
+                                                    </c:set>
+                                                    <label class="form-label fw-bold">Price:</label>
+                                                    <form:input type="text"
+                                                        class="form-control border ${not empty errorPrice ? 'is-invalid' : ''}"
+                                                        style="padding-left: 20px;" path="price" />
+                                                    ${errorPrice}
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label fw-bold">Stock:</label>
+                                                    <form:input type="text" class="form-control border "
+                                                        style="padding-left: 20px;" path="stockQuantity" />
+                                                </div>
+
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label fw-bold">Description:</label>
+                                                    <form:textarea class="form-control border"
+                                                        style="padding-left: 20px;" path="description"></form:textarea>
+                                                </div>
+
+
+                                                <div class="col-md-12 mb-3 ">
+                                                    <label class="form-label fw-bold">Avatar:</label>
+                                                    <div class="d-flex align-items-center gap-3">
+                                                        <label for="formFileLg" class="upload-box">
+                                                            <i class="bi bi-cloud-upload"></i>
+                                                            <span>Upload image</span>
+                                                        </label>
+
+                                                        <input type="file" id="formFileLg" accept="image/*"
+                                                            name="images" onchange="previewImage(event)">
+                                                        <img id="preview" alt="preview">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <button type="submit" class="btn text-white px-4 py-2"
+                                                    style="background-color: #ffba00;">
+                                                    Create
+                                                </button>
+                                            </div>
+                                        </form:form>
+                                    </div>
                                 </div>
-                            </form:form>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
 
             <script>
                 function previewImage(event) {

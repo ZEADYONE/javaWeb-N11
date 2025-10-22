@@ -13,6 +13,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+
 @Entity
 @Table(name = "Product")
 public class Product {
@@ -22,12 +26,14 @@ public class Product {
     private int id;
 
     // @Column( nullable = false, length = 200)
+    @NotBlank(message = "Tên sản phẩm không được để trống.")
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
     // @Column(nullable = false, precision = 12, scale = 2)
+    @NotNull(message = "Giá sản phẩm không được để trống.")
     private BigDecimal price;
 
     // @Column(nullable = false)

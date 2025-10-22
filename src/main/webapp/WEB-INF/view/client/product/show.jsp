@@ -28,36 +28,40 @@
                         <div class="sidebar-categories">
                             <div class="head">Browse Categories</div>
                             <ul class="main-categories">
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable"
-                                        aria-expanded="false" aria-controls="fruitsVegetable"><span
-                                            class="lnr lnr-arrow-right"></span>Fruits and Vegetables<span
-                                            class="number">(53)</span></a>
-                                </li>
+                                <c:forEach var="category" items="${categories}">
 
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#meatFish"
-                                        aria-expanded="false" aria-controls="meatFish"><span
-                                            class="lnr lnr-arrow-right"></span>Meat and Fish<span
-                                            class="number">(53)</span></a>
 
-                                </li>
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#cooking"
-                                        aria-expanded="false" aria-controls="cooking"><span
-                                            class="lnr lnr-arrow-right"></span>Cooking<span
-                                            class="number">(53)</span></a>
+                                    <li class="main-nav-list"><a href="products?page=1&categories="
+                                            data-toggle="collapse" aria-expanded="false"
+                                            aria-controls="fruitsVegetable"><span
+                                                class="lnr lnr-arrow-right"></span>${category.name}</a>
+                                    </li>
 
-                                </li>
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#beverages"
-                                        aria-expanded="false" aria-controls="beverages"><span
-                                            class="lnr lnr-arrow-right"></span>Beverages<span
-                                            class="number">(24)</span></a>
+                                    <!-- <li class="main-nav-list"><a data-toggle="collapse" href="#meatFish"
+                                            aria-expanded="false" aria-controls="meatFish"><span
+                                                class="lnr lnr-arrow-right"></span>Meat and Fish<span
+                                                class="number">(53)</span></a>
 
-                                </li>
-                                <li class="main-nav-list"><a data-toggle="collapse" href="#homeClean"
-                                        aria-expanded="false" aria-controls="homeClean"><span
-                                            class="lnr lnr-arrow-right"></span>Home and
-                                        Cleaning<span class="number">(53)</span></a>
+                                    </li>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#cooking"
+                                            aria-expanded="false" aria-controls="cooking"><span
+                                                class="lnr lnr-arrow-right"></span>Cooking<span
+                                                class="number">(53)</span></a>
 
-                                </li>
+                                    </li>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#beverages"
+                                            aria-expanded="false" aria-controls="beverages"><span
+                                                class="lnr lnr-arrow-right"></span>Beverages<span
+                                                class="number">(24)</span></a>
+
+                                    </li>
+                                    <li class="main-nav-list"><a data-toggle="collapse" href="#homeClean"
+                                            aria-expanded="false" aria-controls="homeClean"><span
+                                                class="lnr lnr-arrow-right"></span>Home and
+                                            Cleaning<span class="number">(53)</span></a>
+
+                                    </li> -->
+                                </c:forEach>
 
                             </ul>
                         </div>
@@ -67,17 +71,25 @@
                                 <div class="head">Brands</div>
                                 <form action="#">
                                     <ul>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="apple"
-                                                name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
-                                                name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
-                                                name="brand"><label for="gionee">Gionee<span>(19)</span></label></li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax"
-                                                name="brand"><label for="micromax">Micromax<span>(19)</span></label>
-                                        </li>
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
-                                                name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
+                                        <c:forEach var="brand" items="${brands}">
+                                            <li class="filter-list">
+                                                <input class="pixel-radio" type="radio" id="apple" name="brand">
+                                                <label for="apple">${brand.name}</label>
+                                            </li>
+                                            <!-- <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
+                                                    name="brand"><label for="asus">Asus<span>(29)</span></label></li>
+                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
+                                                    name="brand"><label for="gionee">Gionee<span>(19)</span></label>
+                                            </li>
+                                            <li class="filter-list"><input class="pixel-radio" type="radio"
+                                                    id="micromax" name="brand"><label
+                                                    for="micromax">Micromax<span>(19)</span></label>
+                                            </li>
+                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
+                                                    name="brand"><label for="samsung">Samsung<span>(19)</span></label>
+                                            </li> -->
+                                        </c:forEach>
+
                                     </ul>
                                 </form>
                             </div>
@@ -205,82 +217,3 @@
             <!-- start footer Area -->
             <jsp:include page="../layout/footer.jsp" />
             <!-- End footer Area -->
-
-            <!-- Modal Quick Product View -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="container relative">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <div class="product-quick-view">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6">
-                                    <div class="quick-view-carousel">
-                                        <div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-                                        </div>
-                                        <div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-                                        </div>
-                                        <div class="item" style="background: url(img/organic-food/q1.jpg);">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="quick-view-content">
-                                        <div class="top">
-                                            <h3 class="head">Mill Oil 1000W Heater, White</h3>
-                                            <div class="price d-flex align-items-center"><span
-                                                    class="lnr lnr-tag"></span>
-                                                <span class="ml-10">$149.99</span>
-                                            </div>
-                                            <div class="category">Category: <span>Household</span></div>
-                                            <div class="available">Availibility: <span>In Stock</span></div>
-                                        </div>
-                                        <div class="middle">
-                                            <p class="content">Mill Oil is an innovative oil filled radiator with the
-                                                most
-                                                modern technology. If you are
-                                                looking for something that can make your interior look awesome, and at
-                                                the same
-                                                time give you the pleasant
-                                                warm feeling during the winter.</p>
-                                            <a href="#" class="view-full">View full Details <span
-                                                    class="lnr lnr-arrow-right"></span></a>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="color-picker d-flex align-items-center">Color:
-                                                <span class="single-pick"></span>
-                                                <span class="single-pick"></span>
-                                                <span class="single-pick"></span>
-                                                <span class="single-pick"></span>
-                                                <span class="single-pick"></span>
-                                            </div>
-                                            <div class="quantity-container d-flex align-items-center mt-15">
-                                                Quantity:
-                                                <input type="text" class="quantity-amount ml-15" value="1" />
-                                                <div class="arrow-btn d-inline-flex flex-column">
-                                                    <button class="increase arrow" type="button"
-                                                        title="Increase Quantity"><span
-                                                            class="lnr lnr-chevron-up"></span></button>
-                                                    <button class="decrease arrow" type="button"
-                                                        title="Decrease Quantity"><span
-                                                            class="lnr lnr-chevron-down"></span></button>
-                                                </div>
-
-                                            </div>
-                                            <div class="d-flex mt-20">
-                                                <a href="#" class="view-btn color-2"><span>Add to Cart</span></a>
-                                                <a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
-                                                <a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>

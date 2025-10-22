@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-// @SpringBootApplication(exclude = {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class })
+// @SpringBootApplication(exclude =
+// {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
+// })
 public class SportshopApplication {
 	public static void main(String[] args) {
 		ApplicationContext beans = SpringApplication.run(SportshopApplication.class, args);

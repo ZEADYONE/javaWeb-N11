@@ -107,12 +107,16 @@ public class UserService {
         return this.userRepository.findFirstById(id);
     }
 
-    public User handelSaveUser(User user) {
-        return this.userRepository.save(user);
-    }
-
     public User getUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
+    }
+
+    public boolean checkEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    public boolean checkUsernameExist(String username) {
+        return this.userRepository.existsByUsername(username);
     }
 
     public Page<User> fetchUsers(Pageable pageable) {

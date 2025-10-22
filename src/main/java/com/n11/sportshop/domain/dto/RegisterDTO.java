@@ -1,11 +1,29 @@
 package com.n11.sportshop.domain.dto;
 
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+
+import com.n11.sportshop.service.Validator.RegisterChecked;
+import com.n11.sportshop.service.Validator.StrongPassword;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;
+
+    @NotBlank(message = "Tên đăng nhập không được để trống.")
     private String username;
+
+    @Email(message = "Email không hợp lệ.")
+    @NotBlank(message = "Email không được để trống.")
     private String email;
+
+    @StrongPassword
     private String password;
+
     private String confirmPassword;
 
     public String getFirstName() {

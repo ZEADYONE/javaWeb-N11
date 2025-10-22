@@ -14,6 +14,7 @@ import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.repository.CategoryRepository;
 import com.n11.sportshop.repository.ProductRepository;
+import com.n11.sportshop.service.specification.ProductSpecs;
 
 @Service
 public class ProductService {
@@ -22,7 +23,6 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final ImageService imageService;
     private final BrandRepository brandRepository;
-
     public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository,
             ImageService imageService, ProductRepository productRepository) {
         this.brandRepository = brandRepository;
@@ -64,7 +64,19 @@ public class ProductService {
         return this.categoryRepository.findAll();
     }
 
+    public List<Brand> getAllBrands() {
+        return this.brandRepository.findAll();
+    }
+
     public Page<Product> fetchProducts(Pageable pageable) {
         return this.productRepository.findAll(pageable);
+    }
+
+    public Page<Product> fetchProductsByName(Pageable pageable, String name) {
+        return this.productRepository.findAll(ProductSpecs.nameLike(name) ,pageable);
+    }
+
+    public Page<Product> fetchProductsByCode(Pageable pageable, String code) {
+        return this.productRepository.findAll(ProductSpecs.filterCategories(code) ,pageable);
     }
 }

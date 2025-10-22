@@ -1,5 +1,7 @@
 package com.n11.sportshop.controller.client;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +13,24 @@ import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
-
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 @Controller
 public class HomepageController {
 
     private final UserService userService;
+
     public HomepageController(UserService userService) {
         this.userService = userService;
     }
-    
+
     @GetMapping("/")
     public String autoDirectHomePage() {
         return "redirect:/home";
     }
+
     @GetMapping("/home")
     public String getHomePage(Model model, HttpServletRequest request) {
         return "client/homepage/show";
@@ -48,7 +54,20 @@ public class HomepageController {
     }
 
     @PostMapping("/register")
-    public String postCreateAccount(@ModelAttribute("newUser") RegisterDTO newUser) {
+    public String postCreateAccount(
+            @ModelAttribute("newUser") @Valid RegisterDTO newUser,
+            BindingResult AccountBindingResult) {
+
+        List<FieldError> errors = AccountBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        // Validate trả lỗi về màn hình trang product create
+        if (AccountBindingResult.hasErrors()) {
+            return "client/auth/register";
+        }
+
         this.userService.createUserByClient(newUser);
         return "client/auth/login";
     }
@@ -57,5 +76,5 @@ public class HomepageController {
     public String getDenyPage(Model model) {
         return "client/auth/deny";
     }
-    
+
 }

@@ -3,11 +3,10 @@ package com.n11.sportshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,20 +16,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.PaginationQuery;
-import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.service.PaginationServie;
+import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
 
     private final UserService userService;
-    private final PaginationServie paginationServie;
+    private final PaginationService paginationServie;
 
-    public UserController(UserService userService, PaginationServie paginationServie) {
+    public UserController(UserService userService, PaginationService paginationServie) {
         this.userService = userService;
         this.paginationServie = paginationServie;
     }
@@ -43,12 +43,25 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String postCreateUser(@ModelAttribute("newUser") User user, @RequestParam("images") MultipartFile file) {
+    public String postCreateUser(Model model, @ModelAttribute("newUser") @Valid User user,
+            BindingResult userBindingResult,
+            @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
 
         // User có Role {id : null, name = "..."} -> về RoleRepo để tìm id và lưu lại.
         // Không được để id trống !!!
         // Nhớ thêm ADMIN, USER và database
+
+        // Validate
+        List<FieldError> errors = userBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        if (userBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+
         this.userService.createUserByAdmin(user, file);
         return "redirect:/admin/user";
     }
@@ -56,7 +69,7 @@ public class UserController {
     @GetMapping
     public String getUserList(Model model, @RequestParam("page") Optional<String> pageOptinal) {
 
-        PaginationQuery<User> paginationQuery = this.paginationServie.handelUserPagination(pageOptinal, 10);
+        PaginationQuery<User> paginationQuery = this.paginationServie.handelUserPagination(pageOptinal, 8);
 
         // --------------- Lấy tất cả user-------------------
         model.addAttribute("users", paginationQuery.getPrs().getContent());

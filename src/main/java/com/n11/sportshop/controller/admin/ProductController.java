@@ -3,11 +3,10 @@ package com.n11.sportshop.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,23 +18,29 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.service.ImageService;
-import com.n11.sportshop.service.PaginationServie;
+import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/product")
 public class ProductController {
 
+    private final BrandRepository brandRepository;
+
     private final ProductService productService;
     private final ImageService imageService;
-    private final PaginationServie paginationServie;
+    private final PaginationService paginationServie;
 
     public ProductController(ProductService productService, ImageService imageService,
-            PaginationServie paginationServie) {
+            PaginationService paginationServie, BrandRepository brandRepository) {
         this.productService = productService;
         this.imageService = imageService;
         this.paginationServie = paginationServie;
+        this.brandRepository = brandRepository;
     }
 
     // hien thi danh sach san pham
@@ -61,16 +66,31 @@ public class ProductController {
     @GetMapping("/create")
     public String getProductCreatePage(Model model) {
         model.addAttribute("newProduct", new Product());
-        model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("brand", new Brand());
+        model.addAttribute("categories", this.productService.getAllCategories());
+        model.addAttribute("brands", this.productService.getAllBrands());
         return "admin/product/create";
     }
 
     // Xử lý lưu sản phẩm mới
     @PostMapping("/create")
     public String postCreateProduct(
-            @ModelAttribute("newProduct") Product product,
-            @RequestParam("images") MultipartFile file) {
+            @ModelAttribute("newProduct") @Valid Product product,
+            BindingResult productBindingResult,
+            @RequestParam("images") MultipartFile file, Model model) {
+
+        // Dùng để debug validate
+        List<FieldError> errors = productBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        // Validate trả lỗi về màn hình trang product create
+        if (productBindingResult.hasErrors() == true) {
+            model.addAttribute("categories", this.productService.getAllCategories());
+            model.addAttribute("brands", this.productService.getAllBrands());
+            return "admin/product/create";
+        }
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
@@ -99,6 +119,7 @@ public class ProductController {
     public String editProductForm(@PathVariable("id") int id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + id));
+        model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("product", product);
         return "admin/product/update";
     }
@@ -111,4 +132,5 @@ public class ProductController {
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
+
 }

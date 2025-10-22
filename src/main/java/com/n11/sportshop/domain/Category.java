@@ -15,6 +15,7 @@ public class Category {
     
     private int id;
     private String code;
+    
     public String getCode() {
         return code;
     }

@@ -37,10 +37,10 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label class="form-label">Category</label>
                                                     <form:select class="form-select border" style="padding-left: 20px;"
-                                                        path="category.name">
+                                                        path="category.code">
                                                         <form:option value="">-----</form:option>
-                                                        <form:option value="Shirt">Shirt</form:option>
-                                                        <form:option value="Pant">Pant</form:option>
+                                                        <form:options items="${categories}" itemValue="code"
+                                                            itemLabel="name" />
                                                     </form:select>
                                                 </div>
 
