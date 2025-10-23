@@ -42,7 +42,7 @@ public class ProductService {
         product.setBrand(brandInDataBase);
         String imageName = "";
         if (file != null && !file.isEmpty()) {
-            imageName = this.imageService.handelImage(file, "product");
+            imageName = this.imageService.handelImageForProduct(file, "product", product);
             product.setImage(imageName);
         }
         productRepository.save(product);

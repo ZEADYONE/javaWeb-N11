@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,7 @@ public class PaginationService {
         // Pageable: đại diện cho thông tin phân trang mà Spring Data JPA sử dụng
         // page - 1 vì trong Spring Data JPA, số trang bắt đầu từ 0 (0 = trang 1, 1 =
         // trang 2, ...)
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("category.code").ascending().and(Sort.by("name").ascending()));
         // 1 trang luu size sanr pham;
         // fetchProducts(pageable) trả về một Page<Product> gồm danh sách sản phẩm +
         // tổng số trang + tổng số phần tử
@@ -83,7 +84,7 @@ public class PaginationService {
             e.printStackTrace();
         }
 
-        Pageable pageable = PageRequest.of(page - 1, 9);
+        Pageable pageable = PageRequest.of(page - 1, 9, Sort.by("name").ascending());
         if (productCriteriaDTO.getBrand() == null
                 && productCriteriaDTO.getCategories() == null
                 && productCriteriaDTO.getMinPrice() == null
