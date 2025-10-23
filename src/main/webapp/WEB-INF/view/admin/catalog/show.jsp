@@ -75,9 +75,16 @@
                                                             <tbody>
                                                                 <c:forEach var="cate" items="${categories}">
                                                                     <tr>
-                                                                        <td class="text-center">${cate.id}</td>
-                                                                        <td>${cate.name}</td>
-                                                                        <td>${cate.code}</td>
+                                                                        <td class="text-center">
+                                                                            <h6 class="mb-0 text-sm">${cate.id}</h6>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="text-sm font-weight-bold mb-0">
+                                                                                ${cate.name}</p>
+                                                                        </td>
+                                                                        <td> <span
+                                                                                class="text-xs font-weight-bold">${cate.code}</span>
+                                                                        </td>
                                                                         <td class="text-center">
                                                                             <button class="btn btn-sm btn-danger"
                                                                                 data-bs-toggle="modal"
@@ -229,8 +236,13 @@
                                                                     varStatus="loop">
 
                                                                     <tr>
-                                                                        <td class="text-center">${brand.id}</td>
-                                                                        <td style="min-width: 180px;">${brand.name}</td>
+                                                                        <td class="text-center">
+                                                                            <h6 class="mb-0 text-sm">${brand.id}</h6>
+                                                                        </td>
+                                                                        <td style="min-width: 180px;">
+                                                                            <p class="text-sm font-weight-bold mb-0">
+                                                                                ${brand.name}</p>
+                                                                        </td>
                                                                         <td class="text-center">
                                                                             <button class="btn btn-sm btn-danger"
                                                                                 data-bs-toggle="modal"

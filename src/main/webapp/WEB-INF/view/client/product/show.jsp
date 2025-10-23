@@ -5,6 +5,19 @@
             <!-- Start Header Area -->
             <jsp:include page="../layout/header.jsp" />
             <!-- End Header Area -->
+            <style>
+                .pagination .page-link {
+                    color: #ffba00;
+                    border-color: #ffba00;
+                }
+
+                .pagination .page-item.active .page-link {
+                    background-color: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+
+                    color: #fff;
+                    border-color: #ffba00;
+                }
+            </style>
 
             <!-- Start Banner Area -->
             <section class="banner-area organic-breadcrumb">
@@ -97,47 +110,39 @@
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <!-- Start Filter Bar -->
-                        <div class="filter-bar d-flex flex-wrap align-items-center">
-                            <div class="sorting">
-                                <select>
-                                    <option value="1">Default sorting</option>
-                                    <option value="1">Default sorting</option>
-                                    <option value="1">Default sorting</option>
-                                </select>
-                            </div>
-                            <div class="sorting mr-auto">
-                                <select>
-                                    <option value="1">Show 12</option>
-                                    <option value="1">Show 12</option>
-                                    <option value="1">Show 12</option>
-                                </select>
-                            </div>
+
+                        <div class="filter-bar d-flex flex-wrap align-items-center justify-content-end">
                             <!-- ------------------Phân trang----------------------------- -->
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="${ 1 eq currentPage ? 'page-item disabled' : 'page-item' }">
-                                        <a class="page-link" href="/products?page=${currentPage-1}"
+                                <ul class="pagination">
+                                    <li class="${1 eq currentPage ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="/products?page=${currentPage - 1}"
                                             aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <!-- -----------forEach này chia số sản phẩm cho mỗi trang---------- -->
+
+                                    <!-- Hiển thị chỉ vài số quanh trang hiện tại -->
                                     <c:forEach begin="1" end="${totalPage}" varStatus="loop">
-                                        <li class="page-item">
-                                            <a class="${ loop.index eq currentPage ? 'active page-link' : 'page-link' }"
-                                                href="/products?page=${loop.index}">
-                                                ${loop.index}
-                                            </a>
-                                        </li>
+                                        <c:if test="${loop.index >= currentPage - 2 && loop.index <= currentPage + 2}">
+                                            <li class="page-item">
+                                                <a class="${loop.index eq currentPage ? 'active page-link' : 'page-link'}"
+                                                    href="/products?page=${loop.index}">
+                                                    ${loop.index}
+                                                </a>
+                                            </li>
+                                        </c:if>
                                     </c:forEach>
-                                    <li class="${ totalPage eq currentPage ? 'page-item disabled' : 'page-item' }">
-                                        <a class="page-link" href="/products?page=${currentPage+1}" aria-label="Next">
+
+                                    <li class="${totalPage eq currentPage ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="/products?page=${currentPage + 1}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
+
                         <!-- End Filter Bar -->
                         <!-- Start Best Seller -->
                         <section class="lattest-product-area pb-40 category-list">
@@ -173,41 +178,38 @@
                         </section>
                         <!-- End Best Seller -->
                         <!-- Start Filter Bar -->
-                        <div class="filter-bar d-flex flex-wrap align-items-center">
-                            <div class="sorting mr-auto">
-                                <select>
-                                    <option value="1">Show 12</option>
-                                    <option value="1">Show 12</option>
-                                    <option value="1">Show 12</option>
-                                </select>
-                            </div>
-
+                        <div class="filter-bar d-flex flex-wrap align-items-center justify-content-end">
                             <!-- ------------------Phân trang----------------------------- -->
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="${ 1 eq currentPage ? 'page-item disabled' : 'page-item' }">
-                                        <a class="page-link" href="/products?page=${currentPage-1}"
+                                <ul class="pagination">
+                                    <li class="${1 eq currentPage ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="/products?page=${currentPage - 1}"
                                             aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <!-- -----------forEach này chia số sản phẩm cho mỗi trang---------- -->
+
+                                    <!-- Hiển thị chỉ vài số quanh trang hiện tại -->
                                     <c:forEach begin="1" end="${totalPage}" varStatus="loop">
-                                        <li class="page-item">
-                                            <a class="${ loop.index eq currentPage ? 'active page-link' : 'page-link' }"
-                                                href="/products?page=${loop.index}">
-                                                ${loop.index}
-                                            </a>
-                                        </li>
+                                        <c:if test="${loop.index >= currentPage - 2 && loop.index <= currentPage + 2}">
+                                            <li class="page-item">
+                                                <a class="${loop.index eq currentPage ? 'active page-link' : 'page-link'}"
+                                                    href="/products?page=${loop.index}">
+                                                    ${loop.index}
+                                                </a>
+                                            </li>
+                                        </c:if>
                                     </c:forEach>
-                                    <li class="${ totalPage eq currentPage ? 'page-item disabled' : 'page-item' }">
-                                        <a class="page-link" href="/products?page=${currentPage+1}" aria-label="Next">
+
+                                    <li class="${totalPage eq currentPage ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="/products?page=${currentPage + 1}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
+
                         <!-- End Filter Bar -->
                     </div>
                 </div>
