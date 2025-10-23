@@ -48,28 +48,37 @@
                                 <li><a href="#"><span>Availibility</span> : ${product.stockQuantity}</a></li>
                             </ul>
                             <p>${product.description}</p>
-                            <div class="product_count">
-                                <label for="qty">Quantity:</label>
-                                <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                    class="input-text qty">
-                                <button
-                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                    class="increase items-count" type="button"><i
-                                        class="lnr lnr-chevron-up"></i></button>
-                                <button
-                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN(sst) && sst > 0 ) result.value--; return false;"
-                                    class="reduced items-count" type="button"><i
-                                        class="lnr lnr-chevron-down"></i></button>
-                            </div>
-                            <div class="card_area d-flex align-items-center">
-                                <a class="primary-btn" href="#">Add to Cart</a>
-                                <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-                                <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-                            </div>
+                            <form action="/products/add-product-to-cart/${product.id}" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                                <div class="product_count">
+                                    <label for="sst">Quantity:</label>
+                                    <input type="number" name="quantity" id="sst" min="1" value="1" title="Quantity:"
+                                        class="input-text qty">
+
+                                    <button type="button" class="increase items-count"
+                                        onclick="var result = document.getElementById('sst'); var sst = parseInt(result.value); if(!isNaN(sst)) result.value = sst + 1;">
+                                        <i class="lnr lnr-chevron-up"></i>
+                                    </button>
+
+                                    <button type="button" class="reduced items-count"
+                                        onclick="var result = document.getElementById('sst'); var sst = parseInt(result.value); if(!isNaN(sst) && sst > 1) result.value = sst - 1;">
+                                        <i class="lnr lnr-chevron-down"></i>
+                                    </button>
+                                </div>
+
+                                <div class="card_area d-flex align-items-center">
+                                    <a class="primary-btn" href="#"
+                                        onclick="this.closest('form').submit(); return false;">
+                                        Add to Cart
+                                    </a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <!--================End Single Product Area =================-->
 
