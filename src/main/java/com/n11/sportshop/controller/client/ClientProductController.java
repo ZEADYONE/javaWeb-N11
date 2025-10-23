@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.PaginationQuery;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/products")
 public class ClientProductController {
 
     private final CartService cartService;
@@ -38,7 +40,7 @@ public class ClientProductController {
         this.userService = userService;
     }
 
-    @GetMapping("/products")
+    @GetMapping
     public String getAllProductPage(
             Model model,
             ProductCriteriaDTO productCriteriaDTO) {
@@ -63,7 +65,7 @@ public class ClientProductController {
         return "client/product/show";
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public String getDetailProductPage(Model model, @PathVariable("id") int id) {
         Product product = this.productService.getProductById(id).get();
         model.addAttribute("product", product);
@@ -72,7 +74,6 @@ public class ClientProductController {
 
     @PostMapping("/add-product-to-cart/{id}")
     public String addProductToCart(@PathVariable("id") int id,
-            @RequestParam(defaultValue = "1") int quantity,
             HttpSession session, HttpServletRequest request) {
 
         // Lấy user từ session
@@ -81,15 +82,11 @@ public class ClientProductController {
             return "redirect:/login"; // chưa đăng nhập
         }
 
-        // Lấy user từ database
         User user = userService.getUserByID(userId);
-
-        // Thêm sản phẩm vào giỏ
-        this.cartService.addToCart(user, id, quantity);
-
+        this.cartService.addToCart(user, id, 1);
+        
         // Lấy trang hiện tại (Referer)
         String referer = request.getHeader("Referer");
-
         // Chuyển hướng lại trang hiện tại
         return "redirect:" + referer;
     }

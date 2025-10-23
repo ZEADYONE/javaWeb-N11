@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.n11.sportshop.domain.Cart;
-import com.n11.sportshop.domain.CartItem;
+import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.repository.CartItemRepository;
+import com.n11.sportshop.repository.CartDetailRepository;
 import com.n11.sportshop.repository.CartRepository;
 import com.n11.sportshop.repository.OrderDetailRepository;
 import com.n11.sportshop.repository.OrderRepository;
@@ -21,14 +21,14 @@ import jakarta.transaction.Transactional;
 @Service
 public class OrderService {
     private final CartRepository cartRepo;
-    private final CartItemRepository cartItemRepo;
+    private final CartDetailRepository cartDetailRepo;
     private final OrderRepository orderRepo;
     private final OrderDetailRepository orderDetailRepo;
 
-    public OrderService(CartRepository cartRepo, CartItemRepository cartItemRepo, OrderRepository orderRepo,
+    public OrderService(CartRepository cartRepo, CartDetailRepository cartDetailRepo, OrderRepository orderRepo,
             OrderDetailRepository orderDetailRepo) {
         this.cartRepo = cartRepo;
-        this.cartItemRepo = cartItemRepo;
+        this.cartDetailRepo = cartDetailRepo;
         this.orderRepo = orderRepo;
         this.orderDetailRepo = orderDetailRepo;
     }
@@ -45,8 +45,8 @@ public class OrderService {
 
         BigDecimal total = BigDecimal.ZERO;
 
-        List<CartItem> items = cartItemRepo.findByCart(cart);
-        for (CartItem item : items) {
+        List<CartDetail> items = cartDetailRepo.findByCart(cart);
+        for (CartDetail item : items) {
             OrderDetail detail = new OrderDetail();
             detail.setOrder(order);
             detail.setProduct(item.getProduct());

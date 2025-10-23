@@ -122,7 +122,7 @@
                                                     <h6>${product.price}</h6>
                                                 </div>
                                                 <div class="prd-bottom">
-                                                    <form action="/add-product-to-cart/${product.id}" method="post"
+                                                    <form action="/products/add-product-to-cart/${product.id}" method="post"
                                                         class="d-inline">
                                                         <input type="hidden" name="${_csrf.parameterName}"
                                                             value="${_csrf.token}" />
