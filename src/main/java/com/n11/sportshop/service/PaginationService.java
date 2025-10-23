@@ -48,7 +48,7 @@ public class PaginationService {
         // 1 trang luu size sanr pham;
         // fetchProducts(pageable) trả về một Page<Product> gồm danh sách sản phẩm +
         // tổng số trang + tổng số phần tử
-        Page<Product> prs = this.productService.fetchProducts(pageable);
+        Page<Product> prs = this.productService.getAllProducts(pageable);
 
         return new PaginationQuery<>(page, prs);
     }
