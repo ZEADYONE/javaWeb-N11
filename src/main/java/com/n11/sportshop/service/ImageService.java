@@ -84,8 +84,8 @@ public class ImageService {
                 dir.mkdirs();
 
             // Lấy tên file ảnh và path của file ảnh
-            finalName = product.getId() + "-" + product.getCategory().getCode();
-            File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName + ".jpg");
+            finalName = product.getId() + "-" + product.getCategory().getCode() + ".jpg";
+            File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName);
 
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(serverFile));

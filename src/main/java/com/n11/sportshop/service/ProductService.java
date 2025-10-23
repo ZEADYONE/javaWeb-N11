@@ -5,18 +5,15 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
-import com.n11.sportshop.domain.dto.ProductCriteriaDTO;
 import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.repository.CategoryRepository;
 import com.n11.sportshop.repository.ProductRepository;
-import com.n11.sportshop.service.specification.ProductSpecs;
 
 @Service
 public class ProductService {
@@ -42,6 +39,7 @@ public class ProductService {
         product.setBrand(brandInDataBase);
         String imageName = "";
         if (file != null && !file.isEmpty()) {
+            this.imageService.deleteImage(product.getImage(), "product");
             imageName = this.imageService.handelImageForProduct(file, "product", product);
             product.setImage(imageName);
         }
