@@ -81,6 +81,7 @@ public class PaginationService {
                 page = productCriteriaDTO.getPage().get();
             }
         } catch (Exception e) {
+            productCriteriaDTO.setPage(Optional.of(1));
             e.printStackTrace();
         }
 
