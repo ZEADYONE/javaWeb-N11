@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                         <div class="product_count">
-                                            <input type="text" name="qty" id="sst" maxlength="12" value="1"
+                                            <input type="text" name="qty" id="sst" maxlength="12" value="${item.quantity}"
                                                 title="Quantity:" class="input-text qty">
                                             <button
                                                 onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
@@ -65,7 +65,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h5>Chưa chỉnh</h5>
+                                        <h5>${item.quantity * item.product.price}</h5>
                                     </td>
                                 </tr>
                                 </c:forEach>
