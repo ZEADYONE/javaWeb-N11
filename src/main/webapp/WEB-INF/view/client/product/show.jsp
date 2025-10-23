@@ -43,13 +43,14 @@
                             <ul class="main-categories">
                                 <c:forEach var="category" items="${categories}">
                                     <li class="filter-list">
-                                        <input class="pixel-radio" type="radio" id="apple" name="brand">
-                                        <label for="apple">${category.name}</label>
+                                        <input class="pixel-radio" type="radio" id="category-${category.id}"
+                                            name="category" value="${category.id}">
+                                        <label for="category-${category.id}">${category.name}</label>
                                     </li>
                                 </c:forEach>
-
                             </ul>
                         </div>
+
                         <div class="sidebar-filter mt-50">
                             <div class="top-filter-head">Product Filters</div>
                             <div class="common-filter">
@@ -58,17 +59,17 @@
                                     <ul>
                                         <c:forEach var="brand" items="${brands}">
                                             <li class="filter-list">
-                                                <input class="pixel-radio" type="radio" id="apple" name="brand">
-                                                <label for="apple">${brand.name}</label>
+                                                <input class="pixel-radio" type="radio" id="brand-${brand.id}"
+                                                    name="brand" value="${brand.id}">
+                                                <label for="brand-${brand.id}">${brand.name}</label>
                                             </li>
-
                                         </c:forEach>
-
                                     </ul>
                                 </form>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <!-- Start Filter Bar -->
 
