@@ -38,37 +38,54 @@
             <div class="container">
                 <div class="row" style="margin-bottom: 100px; margin-top: 100px;">
                     <div class="col-xl-3 col-lg-4 col-md-5">
-                        <div class="sidebar-categories">
-                            <div class="head">Browse Categories</div>
-                            <ul class="main-categories">
-                                <c:forEach var="category" items="${categories}">
-                                    <li class="filter-list">
-                                        <input class="pixel-radio" type="radio" id="category-${category.id}"
-                                            name="category" value="${category.id}">
-                                        <label for="category-${category.id}">${category.name}</label>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-
-                        <div class="sidebar-filter mt-50">
+                        <div class="sidebar-filter mt-50" style="margin-top: 0px;">
                             <div class="top-filter-head">Product Filters</div>
                             <div class="common-filter">
+                                <div class="head">Categories</div>
+                                <ul>
+                                    <c:forEach var="category" items="${categories}">
+                                        <li class="filter-list">
+                                            <div id="cateFilter">
+                                                <input class="form-check-input" type="checkbox" name="categories"
+                                                    id="category-${category.id}" value="${category.code}" <c:if
+                                                    test="${criteria.categories.present && criteria.categories.get().contains(category.code)}">checked
+                                                </c:if>
+                                                >
+                                                <label for="category-${category.id}">${category.name}</label>
+                                            </div>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
                                 <div class="head">Brands</div>
-                                <form action="#">
-                                    <ul>
-                                        <c:forEach var="brand" items="${brands}">
-                                            <li class="filter-list">
-                                                <input class="pixel-radio" type="radio" id="brand-${brand.id}"
-                                                    name="brand" value="${brand.id}">
+                                <ul>
+                                    <c:forEach var="brand" items="${brands}">
+                                        <li class="filter-list">
+                                            <div id="brandFilter">
+                                                <input class="form-check-input" type="checkbox" name="brand"
+                                                    id="brand-${brand.id}" value="${brand.name}" <c:if
+                                                    test="${criteria.brand.present && criteria.brand.get().contains(brand.name)}">checked
+                                                </c:if>
+                                                >
                                                 <label for="brand-${brand.id}">${brand.name}</label>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </form>
+                                            </div>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+
+                            <!-- Lọc theo giá -->
+
+                            <!-- Nút lọc -->
+                            <div class="text-center mt-3">
+                                <button id="btnFilter" type="button" class="primary-btn w-100">
+                                    Lọc sản phẩm
+                                </button>
                             </div>
                         </div>
+
+
                     </div>
+
 
                     <div class="col-xl-9 col-lg-8 col-md-7">
                         <!-- Start Filter Bar -->
@@ -122,8 +139,8 @@
                                                     <h6>${product.price}</h6>
                                                 </div>
                                                 <div class="prd-bottom">
-                                                    <form action="/products/add-product-to-cart/${product.id}" method="post"
-                                                        class="d-inline">
+                                                    <form action="/products/add-product-to-cart/${product.id}"
+                                                        method="post" class="d-inline">
                                                         <input type="hidden" name="${_csrf.parameterName}"
                                                             value="${_csrf.token}" />
                                                         <a href="#" class="social-info"

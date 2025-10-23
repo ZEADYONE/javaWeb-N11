@@ -1,7 +1,5 @@
 package com.n11.sportshop.domain.dto;
 
-import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.NotNull;
 
 import com.n11.sportshop.service.Validator.RegisterChecked;
 import com.n11.sportshop.service.Validator.StrongPassword;

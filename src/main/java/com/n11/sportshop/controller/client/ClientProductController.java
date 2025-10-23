@@ -76,8 +76,8 @@ public class ClientProductController {
 
     @PostMapping("/add-product-to-cart/{id}")
     public String addProductToCart(
-        @PathVariable("id") int id,
-        @RequestParam("quantity") Optional<Integer> quantity,
+            @PathVariable("id") int id,
+            @RequestParam("quantity") Optional<Integer> quantity,
             HttpSession session, HttpServletRequest request) {
 
         // Lấy user từ session
@@ -90,7 +90,7 @@ public class ClientProductController {
         }
         User user = userService.getUserByID(userId);
         this.cartService.addToCart(user, id, quantity.get());
-        
+
         // Lấy trang hiện tại (Referer)
         String referer = request.getHeader("Referer");
         // Chuyển hướng lại trang hiện tại
