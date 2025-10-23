@@ -1,15 +1,14 @@
 package com.n11.sportshop.controller.client;
 
-import java.util.Optional;
-
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.domain.dto.ProductCriteriaDTO;
 import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
 
@@ -27,11 +26,11 @@ public class ClientProductController {
     @GetMapping("/products")
     public String getAllProductPage(
             Model model,
-            @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("categories") Optional<String> categoriesOptional,
-            @RequestParam("brand") Optional<String> brandOptional) {
-        // dang test voi loc bang code
-        PaginationQuery<Product> paginationQuery = this.paginationService.handelProductPagination(pageOptional, 9);
+            ProductCriteriaDTO productCriteriaDTO) {
+        // PaginationQuery<Product> paginationQuery = this.paginationService.AdminProductPagination(productCriteriaDTO.getPage(), 9);
+        
+        Page<Product> productPage = this.paginationService.ClientProductsPagination(productCriteriaDTO);
+        PaginationQuery<Product> paginationQuery = new PaginationQuery<>(9, productPage);
 
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());

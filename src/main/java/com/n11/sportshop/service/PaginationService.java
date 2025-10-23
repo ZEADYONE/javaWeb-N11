@@ -5,25 +5,30 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.dto.ProductCriteriaDTO;
+import com.n11.sportshop.repository.ProductRepository;
+import com.n11.sportshop.service.specification.ProductSpecs;
 
 @Service
 public class PaginationService {
 
     private final UserService userService;
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
-    public PaginationService(UserService userService, ProductService productService) {
-        this.userService = userService;
+    public PaginationService(ProductRepository productRepository, ProductService productService, UserService userService) {
+        this.productRepository = productRepository;
         this.productService = productService;
+        this.userService = userService;
     }
 
-    
-    public PaginationQuery<Product> handelProductPagination(Optional<String> pageOptinal, int size) {
+    public PaginationQuery<Product> AdminProductPagination(Optional<String> pageOptinal, int size) {
         // pageOptinal chứa số thứ tự trang do client truyền lên (có thể null hoặc rỗng)
         // size :Số lượng sản phẩm hiển thị trên mỗi trang
         int page = 1; // Mặc định nếu client không truyền số trang thì sẽ hiển thị trang đầu tiên
@@ -48,7 +53,7 @@ public class PaginationService {
         return new PaginationQuery<>(page, prs);
     }
 
-    public PaginationQuery<User> handelUserPagination(Optional<String> pageOptinal, int size) {
+    public PaginationQuery<User> AdminUserPagination(Optional<String> pageOptinal, int size) {
         int page = 1;
 
         try {
@@ -65,20 +70,33 @@ public class PaginationService {
         return new PaginationQuery<>(page, prs);
     }
 
-
-    // Đang test thử filter 
-    public PaginationQuery<Product> handelFilterProductPagination(Optional<String> pageOptinal, int size, Optional<String> codeOptional) {
+    
+    public Page<Product> ClientProductsPagination(ProductCriteriaDTO productCriteriaDTO) {
+        Specification<Product> combineSpecs = Specification.where(null);
         int page = 1;
+
         try {
-            if (pageOptinal.isPresent()) {
-                page = Integer.parseInt(pageOptinal.get());
+            if (productCriteriaDTO.getPage().isPresent()) {
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Pageable pageable = PageRequest.of(page - 1, size);
-        String code = codeOptional.isPresent() ? codeOptional.get() : "";
-        Page<Product> prs = this.productService.fetchProductsByCode(pageable, code);
-        return new PaginationQuery<>(page, prs);
+
+        Pageable pageable = PageRequest.of(page - 1, 9);
+        if (productCriteriaDTO.getBrand() == null
+                && productCriteriaDTO.getCategories() == null
+                && productCriteriaDTO.getPrice() == null) {
+            return this.productRepository.findAll(combineSpecs, pageable);
+        } else {
+            if (productCriteriaDTO.getBrand() != null && productCriteriaDTO.getBrand().isPresent()) {
+                combineSpecs.and(ProductSpecs.filterBrand(productCriteriaDTO.getBrand().get()));
+            }
+            if (productCriteriaDTO.getCategories() != null && productCriteriaDTO.getCategories().isPresent()) {
+                combineSpecs.and(ProductSpecs.filterCategories(productCriteriaDTO.getCategories().get()));
+            }
+
+            return this.productRepository.findAll(combineSpecs, pageable);
+        }
     }
 }

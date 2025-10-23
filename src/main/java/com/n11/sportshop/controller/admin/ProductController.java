@@ -47,7 +47,7 @@ public class ProductController {
     @GetMapping
     public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptinal) {
 
-        PaginationQuery<Product> paginationQuery = this.paginationServie.handelProductPagination(pageOptinal, 8);
+        PaginationQuery<Product> paginationQuery = this.paginationServie.AdminProductPagination(pageOptinal, 8);
 
         // --------------- Lấy tất cả sản phẩm-------------------
         model.addAttribute("products", paginationQuery.getPrs().getContent());

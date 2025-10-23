@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.domain.dto.ProductCriteriaDTO;
 import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.repository.CategoryRepository;
 import com.n11.sportshop.repository.ProductRepository;
@@ -23,6 +25,7 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final ImageService imageService;
     private final BrandRepository brandRepository;
+
     public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository,
             ImageService imageService, ProductRepository productRepository) {
         this.brandRepository = brandRepository;
@@ -72,11 +75,10 @@ public class ProductService {
         return this.productRepository.findAll(pageable);
     }
 
-    public Page<Product> fetchProductsByName(Pageable pageable, String name) {
-        return this.productRepository.findAll(ProductSpecs.nameLike(name) ,pageable);
-    }
-
-    public Page<Product> fetchProductsByCode(Pageable pageable, String code) {
-        return this.productRepository.findAll(ProductSpecs.filterCategories(code) ,pageable);
-    }
+    // public Page<Product> fetchProductsByName(Pageable pageable, String name) {
+    //     return this.productRepository.findAll(ProductSpecs.filterName(name) ,pageable);
+    // }
+    // public Page<Product> fetchProductsByCode(Pageable pageable, String code) {
+    //     return this.productRepository.findAll(ProductSpecs.filterCategories(code) ,pageable);
+    // }
 }
