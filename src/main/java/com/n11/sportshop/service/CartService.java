@@ -50,7 +50,7 @@ public class CartService {
         cartDetailRepo.save(item);
     }
 
-    public List<CartDetail> getCartItems(User user) {
+    public List<CartDetail> getCartDetails(User user) {
         return cartDetailRepo.findByCart(getActiveCart(user));
     }
 }

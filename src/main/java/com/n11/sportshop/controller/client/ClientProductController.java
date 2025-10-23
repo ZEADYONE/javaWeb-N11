@@ -1,5 +1,7 @@
 package com.n11.sportshop.controller.client;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,7 +77,7 @@ public class ClientProductController {
     @PostMapping("/add-product-to-cart/{id}")
     public String addProductToCart(
         @PathVariable("id") int id,
-        @RequestParam("quantity") int quantity,
+        @RequestParam("quantity") Optional<Integer> quantity,
             HttpSession session, HttpServletRequest request) {
 
         // Lấy user từ session
@@ -83,9 +85,11 @@ public class ClientProductController {
         if (userId == null) {
             return "redirect:/login"; // chưa đăng nhập
         }
-
+        if (!quantity.isPresent()) {
+            quantity = Optional.of(1);
+        }
         User user = userService.getUserByID(userId);
-        this.cartService.addToCart(user, id, quantity);
+        this.cartService.addToCart(user, id, quantity.get());
         
         // Lấy trang hiện tại (Referer)
         String referer = request.getHeader("Referer");
