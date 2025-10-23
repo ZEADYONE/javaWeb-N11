@@ -75,14 +75,14 @@ public class ClientProductController {
             @RequestParam(defaultValue = "1") int quantity,
             HttpSession session, HttpServletRequest request) {
 
-        // Lấy email từ session
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
+        // Lấy user từ session
+        Integer userId = (Integer) session.getAttribute("id");
+        if (userId == null) {
             return "redirect:/login"; // chưa đăng nhập
         }
 
         // Lấy user từ database
-        User user = userService.getUserByUsername(username);
+        User user = userService.getUserByID(userId);
 
         // Thêm sản phẩm vào giỏ
         this.cartService.addToCart(user, id, quantity);
