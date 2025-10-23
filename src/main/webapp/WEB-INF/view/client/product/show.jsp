@@ -122,11 +122,18 @@
                                                     <h6>${product.price}</h6>
                                                 </div>
                                                 <div class="prd-bottom">
+                                                    <form action="/add-product-to-cart/${product.id}" method="post"
+                                                        class="d-inline">
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
+                                                        <a href="#" class="social-info"
+                                                            onclick="this.closest('form').submit(); return false;">
+                                                            <span class="ti-bag"></span>
+                                                            <p class="hover-text">add to bag</p>
+                                                        </a>
+                                                    </form>
 
-                                                    <a href="" class="social-info">
-                                                        <span class="ti-bag"></span>
-                                                        <p class="hover-text">add to bag</p>
-                                                    </a>
+
                                                     <a href="" class="social-info">
                                                         <span class="lnr lnr-move"></span>
                                                         <p class="hover-text">view more</p>
