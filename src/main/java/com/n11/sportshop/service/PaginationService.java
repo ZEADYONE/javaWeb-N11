@@ -32,7 +32,7 @@ public class PaginationService {
         // pageOptinal chứa số thứ tự trang do client truyền lên (có thể null hoặc rỗng)
         // size :Số lượng sản phẩm hiển thị trên mỗi trang
         int page = 1; // Mặc định nếu client không truyền số trang thì sẽ hiển thị trang đầu tiên
-
+        // ?page = 1&name=acb
         try {
             // Nếu client có truyền số trang (ví dụ ?page=2) → parse từ String sang int
             if (pageOptinal.isPresent()) {
@@ -45,7 +45,7 @@ public class PaginationService {
         // page - 1 vì trong Spring Data JPA, số trang bắt đầu từ 0 (0 = trang 1, 1 =
         // trang 2, ...)
         Pageable pageable = PageRequest.of(page - 1, size);
-
+        // 1 trang luu size sanr pham;
         // fetchProducts(pageable) trả về một Page<Product> gồm danh sách sản phẩm +
         // tổng số trang + tổng số phần tử
         Page<Product> prs = this.productService.fetchProducts(pageable);
