@@ -42,38 +42,10 @@
                             <div class="head">Browse Categories</div>
                             <ul class="main-categories">
                                 <c:forEach var="category" items="${categories}">
-
-
-                                    <li class="main-nav-list"><a href="products?page=1&categories="
-                                            data-toggle="collapse" aria-expanded="false"
-                                            aria-controls="fruitsVegetable"><span
-                                                class="lnr lnr-arrow-right"></span>${category.name}</a>
+                                    <li class="filter-list">
+                                        <input class="pixel-radio" type="radio" id="apple" name="brand">
+                                        <label for="apple">${category.name}</label>
                                     </li>
-
-                                    <!-- <li class="main-nav-list"><a data-toggle="collapse" href="#meatFish"
-                                            aria-expanded="false" aria-controls="meatFish"><span
-                                                class="lnr lnr-arrow-right"></span>Meat and Fish<span
-                                                class="number">(53)</span></a>
-
-                                    </li>
-                                    <li class="main-nav-list"><a data-toggle="collapse" href="#cooking"
-                                            aria-expanded="false" aria-controls="cooking"><span
-                                                class="lnr lnr-arrow-right"></span>Cooking<span
-                                                class="number">(53)</span></a>
-
-                                    </li>
-                                    <li class="main-nav-list"><a data-toggle="collapse" href="#beverages"
-                                            aria-expanded="false" aria-controls="beverages"><span
-                                                class="lnr lnr-arrow-right"></span>Beverages<span
-                                                class="number">(24)</span></a>
-
-                                    </li>
-                                    <li class="main-nav-list"><a data-toggle="collapse" href="#homeClean"
-                                            aria-expanded="false" aria-controls="homeClean"><span
-                                                class="lnr lnr-arrow-right"></span>Home and
-                                            Cleaning<span class="number">(53)</span></a>
-
-                                    </li> -->
                                 </c:forEach>
 
                             </ul>
@@ -89,18 +61,7 @@
                                                 <input class="pixel-radio" type="radio" id="apple" name="brand">
                                                 <label for="apple">${brand.name}</label>
                                             </li>
-                                            <!-- <li class="filter-list"><input class="pixel-radio" type="radio" id="asus"
-                                                    name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee"
-                                                    name="brand"><label for="gionee">Gionee<span>(19)</span></label>
-                                            </li>
-                                            <li class="filter-list"><input class="pixel-radio" type="radio"
-                                                    id="micromax" name="brand"><label
-                                                    for="micromax">Micromax<span>(19)</span></label>
-                                            </li>
-                                            <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung"
-                                                    name="brand"><label for="samsung">Samsung<span>(19)</span></label>
-                                            </li> -->
+
                                         </c:forEach>
 
                                     </ul>
