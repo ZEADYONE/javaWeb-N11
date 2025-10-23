@@ -23,8 +23,15 @@ public class ProductSpecs {
     }
 
     public static Specification<Product> filterPrice(Integer minPrice, Integer maxPrice) {
+        int finalMinPrice, finalMaxPrice;
+        if (minPrice == null) {
+            finalMinPrice = 0;
+        } else finalMinPrice = minPrice;
+        if (maxPrice == null) {
+            finalMaxPrice = 0;
+        } else finalMaxPrice = maxPrice;
         return (root, query, builder)
-        -> builder.between(root.get(Product_.PRICE), minPrice, maxPrice);
+        -> builder.between(root.get(Product_.PRICE), finalMinPrice, finalMaxPrice);
     }
 
     public static Specification<Product> filterBrand(List<String> brandName) {

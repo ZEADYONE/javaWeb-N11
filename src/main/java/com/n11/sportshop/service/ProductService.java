@@ -71,14 +71,7 @@ public class ProductService {
         return this.brandRepository.findAll();
     }
 
-    public Page<Product> fetchProducts(Pageable pageable) {
+    public Page<Product> getAllProducts(Pageable pageable) {
         return this.productRepository.findAll(pageable);
     }
-
-    // public Page<Product> fetchProductsByName(Pageable pageable, String name) {
-    //     return this.productRepository.findAll(ProductSpecs.filterName(name) ,pageable);
-    // }
-    // public Page<Product> fetchProductsByCode(Pageable pageable, String code) {
-    //     return this.productRepository.findAll(ProductSpecs.filterCategories(code) ,pageable);
-    // }
 }

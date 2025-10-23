@@ -30,7 +30,7 @@ public class ClientProductController {
         // PaginationQuery<Product> paginationQuery = this.paginationService.AdminProductPagination(productCriteriaDTO.getPage(), 9);
         
         Page<Product> productPage = this.paginationService.ClientProductsPagination(productCriteriaDTO);
-        PaginationQuery<Product> paginationQuery = new PaginationQuery<>(9, productPage);
+        PaginationQuery<Product> paginationQuery = new PaginationQuery<>(productCriteriaDTO.getPage().get(), productPage);
 
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());

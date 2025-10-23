@@ -77,7 +77,7 @@ public class PaginationService {
 
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
-                page = Integer.parseInt(productCriteriaDTO.getPage().get());
+                page = productCriteriaDTO.getPage().get();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,16 +86,20 @@ public class PaginationService {
         Pageable pageable = PageRequest.of(page - 1, 9);
         if (productCriteriaDTO.getBrand() == null
                 && productCriteriaDTO.getCategories() == null
-                && productCriteriaDTO.getPrice() == null) {
+                && productCriteriaDTO.getMinPrice() == null
+                && productCriteriaDTO.getMaxPrice() == null) {
             return this.productRepository.findAll(combineSpecs, pageable);
         } else {
             if (productCriteriaDTO.getBrand() != null && productCriteriaDTO.getBrand().isPresent()) {
-                combineSpecs.and(ProductSpecs.filterBrand(productCriteriaDTO.getBrand().get()));
+                combineSpecs = combineSpecs.and(ProductSpecs.filterBrand(productCriteriaDTO.getBrand().get()));
             }
             if (productCriteriaDTO.getCategories() != null && productCriteriaDTO.getCategories().isPresent()) {
-                combineSpecs.and(ProductSpecs.filterCategories(productCriteriaDTO.getCategories().get()));
+                combineSpecs = combineSpecs.and(ProductSpecs.filterCategories(productCriteriaDTO.getCategories().get()));
             }
-
+            
+            if (productCriteriaDTO.getMinPrice() != null || productCriteriaDTO.getMaxPrice() != null) {
+                combineSpecs = combineSpecs.and(ProductSpecs.filterPrice(productCriteriaDTO.getMinPrice().get(), productCriteriaDTO.getMaxPrice().get()));
+            }
             return this.productRepository.findAll(combineSpecs, pageable);
         }
     }
