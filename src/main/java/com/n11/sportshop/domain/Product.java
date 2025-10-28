@@ -24,14 +24,14 @@ public class Product {
     private int id;
 
     // @Column( nullable = false, length = 200)
-    @NotBlank(message = "Tên sản phẩm không được để trống.")
+    @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
     // @Column(nullable = false, precision = 12, scale = 2)
-    @NotNull(message = "Giá sản phẩm không được để trống.")
+    @NotNull(message = "Giá sản phẩm không được để trống")
     private BigDecimal price;
 
     // @Column(nullable = false)

@@ -1,6 +1,5 @@
 package com.n11.sportshop.domain.dto;
 
-
 import com.n11.sportshop.service.Validator.RegisterChecked;
 import com.n11.sportshop.service.Validator.StrongPassword;
 
@@ -12,11 +11,11 @@ public class RegisterDTO {
     private String firstName;
     private String lastName;
 
-    @NotBlank(message = "Tên đăng nhập không được để trống.")
+    @NotBlank(message = "Tên đăng nhập không được để trống")
     private String username;
 
-    @Email(message = "Email không hợp lệ.")
-    @NotBlank(message = "Email không được để trống.")
+    @Email(message = "Email không hợp lệ")
+    @NotBlank(message = "Email không được để trống")
     private String email;
 
     @StrongPassword

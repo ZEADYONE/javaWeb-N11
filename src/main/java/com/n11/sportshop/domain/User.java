@@ -41,8 +41,8 @@ public class User {
     private String fullName;
 
     // @Column(unique = true, length = 150)
-    @NotBlank(message = "Cần nhập email.")
-    @Email(message = "email không hợp lệ.")
+    @NotBlank(message = "Cần nhập email")
+    @Email(message = "email không hợp lệ")
     private String email;
 
     // @Column( length = 20)
