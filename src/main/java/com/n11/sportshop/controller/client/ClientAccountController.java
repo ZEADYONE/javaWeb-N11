@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ClientAccountController {
 
@@ -43,10 +45,12 @@ public class ClientAccountController {
             @ModelAttribute("user") User user,
             @RequestParam("images") MultipartFile file,
             Authentication authentication,
+            HttpSession session,
             RedirectAttributes redirectAttributes) {
 
-        this.userService.updateUser(user, file);
-
+        User updateUser = this.userService.updateUser(user, file);
+        session.setAttribute("fullName", updateUser.getFullName());
+        session.setAttribute("avatar", updateUser.getImage());
         return "redirect:/profile";
     }
 }

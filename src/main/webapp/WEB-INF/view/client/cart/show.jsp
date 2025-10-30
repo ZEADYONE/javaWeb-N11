@@ -36,38 +36,39 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="item" items="${items}">
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="/images/product/${item.product.image}" alt="">
+                                    <tr>
+                                        <td>
+                                            <div class="media">
+                                                <div class="d-flex">
+                                                    <img src="/images/product/${item.product.image}" alt=""
+                                                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                                </div>
+                                                <div class="media-body">
+                                                    <p>${item.product.description}</p>
+                                                </div>
                                             </div>
-                                            <div class="media-body">
-                                                <p>${item.product.description}</p>
+                                        </td>
+                                        <td>
+                                            <h5>${item.product.price}</h5>
+                                        </td>
+                                        <td>
+                                            <div class="product_count">
+                                                <input type="text" name="qty" id="sst" maxlength="12"
+                                                    value="${item.quantity}" title="Quantity:" class="input-text qty">
+                                                <button
+                                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                                    class="increase items-count" type="button"><i
+                                                        class="lnr lnr-chevron-up"></i></button>
+                                                <button
+                                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN(sst) && sst > 0 ) result.value--;return false;"
+                                                    class="reduced items-count" type="button"><i
+                                                        class="lnr lnr-chevron-down"></i></button>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${item.product.price}</h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <input type="text" name="qty" id="sst" maxlength="12" value="${item.quantity}"
-                                                title="Quantity:" class="input-text qty">
-                                            <button
-                                                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                                class="increase items-count" type="button"><i
-                                                    class="lnr lnr-chevron-up"></i></button>
-                                            <button
-                                                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN(sst) && sst > 0 ) result.value--;return false;"
-                                                class="reduced items-count" type="button"><i
-                                                    class="lnr lnr-chevron-down"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>${item.quantity * item.product.price}</h5>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <h5>${item.quantity * item.product.price}</h5>
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                                 <tr class="bottom_button">
                                     <td>
