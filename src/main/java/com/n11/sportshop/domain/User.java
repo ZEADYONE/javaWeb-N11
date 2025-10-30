@@ -1,5 +1,6 @@
 package com.n11.sportshop.domain;
 
+import com.n11.sportshop.service.Validator.AdminUserChecked;
 import com.n11.sportshop.service.Validator.StrongPassword;
 
 import jakarta.persistence.Column;
@@ -16,6 +17,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+@AdminUserChecked
 @Entity
 @Table(name = "Users")
 public class User {
