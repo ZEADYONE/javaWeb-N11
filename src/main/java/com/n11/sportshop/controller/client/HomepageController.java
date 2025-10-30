@@ -69,9 +69,7 @@ public class HomepageController {
 
     @GetMapping("/access-deny")
     public String getDenyPage(Model model) {
-        return "client/auth/deny";
+        return "redirect:https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1";
     }
-
-    
 
 }
