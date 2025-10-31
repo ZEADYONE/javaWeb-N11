@@ -55,6 +55,9 @@
             <script src="/client/js/gmaps.min.js"></script>
             <script src="/client/js/main.js"></script>
             <script src="/client/js/lazy.js"></script>
+            <meta name="_csrf" content="${_csrf.token}" />
+            <meta name="_csrf_header" content="${_csrf.headerName}" />
+
         </head>
 
         <body>

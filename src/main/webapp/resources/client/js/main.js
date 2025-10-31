@@ -610,62 +610,79 @@ $(document).ready(function () {
 
 
   // tăng/giảm
-  $(document).off('click', '.product_count button').on('click', '.product_count button', function () {
-    const btn = $(this);
-    const input = btn.siblings('input');
-    let qty = parseInt(input.val()) || 1;
+  $(document).ready(function () {
+    // ======== Lấy CSRF token từ JSP (Spring Security tự sinh ra) ========
+    const csrfToken = $("meta[name='_csrf']").attr("content");
+    const csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
-    qty = btn.hasClass('increase') ? qty + 1 : Math.max(1, qty - 1);
-    input.val(qty);
+    // ======== Tăng / giảm số lượng sản phẩm ========
+    $(document)
+      .off('click', '.product_count button')
+      .on('click', '.product_count button', function () {
+        const btn = $(this);
+        const input = btn.siblings('input');
+        let qty = parseInt(input.val()) || 1;
 
-    updateRowAndTotal(input);
+        qty = btn.hasClass('increase') ? qty + 1 : Math.max(1, qty - 1);
+        input.val(qty);
+
+        updateRowAndTotal(input);
+      });
+
+    // ======== Cập nhật dòng + tổng ========
+    function updateRowAndTotal(input) {
+      const id = input.data("item-id");
+      const price = parseFloat(input.data("item-price"));
+      const qty = parseInt(input.val());
+
+      // Gửi Ajax cập nhật server
+      updateCartOnServer(id, qty);
+
+      // Cập nhật total từng dòng
+      const rowTotal = qty * price;
+      $(`h5[data-item-id='${id}']`).text(formatCurrency(rowTotal) + " đ");
+
+      // Tính lại total toàn giỏ
+      let total = 0;
+      $(".item-total").each(function () {
+        const text = $(this).text().replace(/[^\d]/g, "");
+        total += parseFloat(text) || 0;
+      });
+
+      // Cập nhật tổng cuối
+      $(".cart-total")
+        .attr("data-item-total-price", total)
+        .text(formatCurrency(total) + " đ");
+    }
+
+    // ======== Gửi Ajax đến server (CÓ CSRF) ========
+    function updateCartOnServer(productId, quantity) {
+      $.ajax({
+        url: '/cart/update',
+        type: 'POST',
+        data: {
+          id: productId,
+          quantity: quantity
+        },
+        beforeSend: function (xhr) {
+          // Gắn token vào header
+          xhr.setRequestHeader(csrfHeader, csrfToken);
+        },
+        success: function (response) {
+          console.log('✅ AJAX: Cập nhật giỏ hàng thành công', response);
+        },
+        error: function (xhr, status, error) {
+          console.error('❌ AJAX: Lỗi khi cập nhật giỏ hàng:', error);
+        }
+      });
+    }
+
+    // ======== Hàm định dạng tiền Việt ========
+    function formatCurrency(v) {
+      return new Intl.NumberFormat('vi-VN').format(v);
+    }
   });
 
-
-  function updateRowAndTotal(input) {
-    const id = input.data("item-id");
-    const price = parseFloat(input.data("item-price"));
-    const qty = parseInt(input.val());
-
-
-    updateCartOnServer(id, qty);
-    // cập nhật total từng dòng
-    const rowTotal = qty * price;
-    $(`h5[data-item-id='${id}']`).text(formatCurrency(rowTotal) + " đ");
-
-    // tính lại total toàn giỏ
-    let total = 0;
-    $(".item-total").each(function () {
-      const text = $(this).text().replace(/[^\d]/g, "");
-      total += parseFloat(text) || 0;
-    });
-
-    // update tổng
-    $(".cart-total")
-      .attr("data-item-total-price", total)
-      .text(formatCurrency(total) + " đ");
-  }
-
-
-  function updateCartOnServer(productId, quantity) {
-    $.ajax({
-      url: '/cart/update',
-      type: 'POST',
-      data: {
-        id: productId,
-        quantity: quantity
-      },
-      success: function (response) {
-        console.log('AJAX: Cập nhật giỏ hàng thành công', response);
-      },
-      error: function (xhr, status, error) {
-        console.log('AJAX: Lỗi khi cập nhật giỏ hàng', error);
-      }
-    });
-  }
-  function formatCurrency(v) {
-    return new Intl.NumberFormat('vi-VN').format(v);
-  }
 
 });
 
