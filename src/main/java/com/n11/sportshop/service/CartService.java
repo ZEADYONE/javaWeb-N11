@@ -53,4 +53,12 @@ public class CartService {
     public List<CartDetail> getCartDetails(User user) {
         return cartDetailRepo.findByCart(getActiveCart(user));
     }
+
+    public void updateCart (User user, Integer productId, Integer quantity) {
+        Cart cart = this.cartRepo.findByUserAndStatus(user, "ACTIVE").get();
+        Product product = this.productRepo.findById(productId).get();
+        CartDetail cartDetail = this.cartDetailRepo.findByCartAndProduct(cart, product);
+        cartDetail.setQuantity(quantity);
+        this.cartDetailRepo.save(cartDetail);
+    }
 }
