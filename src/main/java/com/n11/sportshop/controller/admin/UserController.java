@@ -58,6 +58,16 @@ public class UserController {
             System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
         }
 
+        // Check trùng email
+        if (userService.checkEmailExist(user.getEmail())) {
+            userBindingResult.rejectValue("email", "error.user", "Email đã tồn tại");
+        }
+
+        // Check trùng username
+        if (userService.checkUsernameExist(user.getUsername())) {
+            userBindingResult.rejectValue("username", "error.user", "Tên đăng nhập đã tồn tại");
+        }
+
         if (userBindingResult.hasErrors()) {
             return "admin/user/create";
         }
