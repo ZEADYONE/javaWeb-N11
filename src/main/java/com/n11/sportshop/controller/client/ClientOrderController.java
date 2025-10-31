@@ -1,5 +1,6 @@
 package com.n11.sportshop.controller.client;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,10 @@ public class ClientOrderController {
     private final CartService cartService;
     private final UserService userService;
 
-    
     public ClientOrderController(CartService cartService, UserService userService) {
         this.cartService = cartService;
         this.userService = userService;
     }
-
 
     @GetMapping("/cart")
     public String getCartPage(Model model, HttpServletRequest request) {
@@ -33,7 +32,20 @@ public class ClientOrderController {
         Integer userId = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
+
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        for (CartDetail cd : cartDetails) {
+            BigDecimal price = cd.getProduct().getPrice();
+            BigDecimal quantity = BigDecimal.valueOf(cd.getQuantity());
+
+            totalPrice = totalPrice.add(price.multiply(quantity));
+        }
+
         model.addAttribute("items", cartDetails);
+        model.addAttribute("totalPrice", totalPrice);
         return "client/cart/show";
     }
+
+
 }

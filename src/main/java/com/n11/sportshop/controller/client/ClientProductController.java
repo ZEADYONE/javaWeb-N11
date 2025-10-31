@@ -66,7 +66,7 @@ public class ClientProductController {
         model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("brands", this.productService.getAllBrands());
         model.addAttribute("queryString", qs);
-
+        model.addAttribute("criteria", productCriteriaDTO);
         return "client/product/show";
     }
 

@@ -12,5 +12,8 @@ import com.n11.sportshop.domain.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
     Page<Product> findAll(Pageable pageable);
+
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
+
+    boolean existsByName(String name);
 }
