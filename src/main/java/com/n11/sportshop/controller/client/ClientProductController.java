@@ -45,15 +45,17 @@ public class ClientProductController {
     @GetMapping
     public String getAllProductPage(
             Model model,
-            ProductCriteriaDTO productCriteriaDTO) {
-        // PaginationQuery<Product> paginationQuery =
-        // this.paginationService.AdminProductPagination(productCriteriaDTO.getPage(),
-        // 9);
-
+            ProductCriteriaDTO productCriteriaDTO,
+            HttpServletRequest request) {
         Page<Product> productPage = this.paginationService.ClientProductsPagination(productCriteriaDTO);
-        PaginationQuery<Product> paginationQuery = new PaginationQuery<>(productCriteriaDTO.getPage().get(),
+        PaginationQuery<Product> paginationQuery = new PaginationQuery<>(
+                productCriteriaDTO.getPage().get(),
                 productPage);
 
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            qs = qs.replace("page=" + productCriteriaDTO.getPage(), "");
+        }
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());
 
@@ -63,6 +65,7 @@ public class ClientProductController {
         model.addAttribute("products", paginationQuery.getPrs().getContent());
         model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("brands", this.productService.getAllBrands());
+        model.addAttribute("queryString", qs);
 
         return "client/product/show";
     }

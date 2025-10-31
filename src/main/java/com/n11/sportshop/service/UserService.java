@@ -60,7 +60,7 @@ public class UserService {
         this.userRepository.save(user);
     }
 
-    public void updateUser(User user, MultipartFile file) {
+    public User updateUser(User user, MultipartFile file) {
         User currentUser = this.userRepository.findById(user.getId()).get();
 
         currentUser.setRole(this.roleRepository.findByName(user.getRole().getName()));
@@ -89,7 +89,7 @@ public class UserService {
             }
             currentUser.setImage(updateImage);
         }
-        this.userRepository.save(currentUser);
+        return this.userRepository.save(currentUser);
     }
 
     public List<User> getUserList() {
