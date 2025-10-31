@@ -47,5 +47,9 @@ public class ClientOrderController {
         return "client/cart/show";
     }
 
+    @GetMapping("/checkout")
+    public String getll(Model model, HttpServletRequest request) {
+        return "client/cart/checkout";
+    }
 
 }
