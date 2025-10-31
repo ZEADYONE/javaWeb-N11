@@ -621,20 +621,14 @@ $(document).ready(function () {
     updateRowAndTotal(input);
   });
 
-  // nhập tay
-  $(document).on('input', '.product_count input', function () {
-    let qty = parseInt($(this).val());
-    if (!qty || qty < 1) qty = 1;
-    $(this).val(qty);
-
-    updateRowAndTotal($(this));
-  });
 
   function updateRowAndTotal(input) {
     const id = input.data("item-id");
     const price = parseFloat(input.data("item-price"));
     const qty = parseInt(input.val());
 
+
+    updateCartOnServer(id, qty);
     // cập nhật total từng dòng
     const rowTotal = qty * price;
     $(`h5[data-item-id='${id}']`).text(formatCurrency(rowTotal) + " đ");
@@ -652,11 +646,26 @@ $(document).ready(function () {
       .text(formatCurrency(total) + " đ");
   }
 
+
+  function updateCartOnServer(productId, quantity) {
+    $.ajax({
+      url: '/cart/update',
+      type: 'POST',
+      data: {
+        id: productId,
+        quantity: quantity
+      },
+      success: function (response) {
+        console.log('AJAX: Cập nhật giỏ hàng thành công', response);
+      },
+      error: function (xhr, status, error) {
+        console.log('AJAX: Lỗi khi cập nhật giỏ hàng', error);
+      }
+    });
+  }
   function formatCurrency(v) {
     return new Intl.NumberFormat('vi-VN').format(v);
   }
-
-
 
 });
 
