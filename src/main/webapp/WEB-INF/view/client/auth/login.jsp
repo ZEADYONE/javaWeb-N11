@@ -22,6 +22,14 @@
 						<div class="col-lg-6">
 							<div class="login_form_inner">
 								<h3>Log in to enter</h3>
+								<c:if test="${param.error != null}">
+									<div class="col-md-12 form-group">
+										<div>
+											<strong>Đăng nhập thất bại!</strong><br>
+											Tài khoản hoặc mật khẩu không chính xác.
+										</div>
+									</div>
+								</c:if>
 								<form class="row login_form" action="/login" method="post" id="contactForm"
 									novalidate="novalidate">
 									<div class="col-md-12 form-group">
@@ -35,18 +43,12 @@
 											onblur="this.placeholder = 'Password'">
 									</div>
 
-									<div class="col-md-12 form-group">
-										<div class="creat_account">
-											<input type="checkbox" id="f-option2" name="selector">
-											<label for="f-option2">Keep me logged in</label>
-										</div>
-									</div>
 									<div>
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 									</div>
 									<div class="col-md-12 form-group">
 										<button type="submit" value="submit" class="primary-btn">Log In</button>
-										<a href="#">Forgot Password?</a>
+
 									</div>
 								</form>
 							</div>
