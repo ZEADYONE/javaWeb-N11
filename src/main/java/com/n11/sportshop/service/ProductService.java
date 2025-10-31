@@ -72,4 +72,10 @@ public class ProductService {
     public Page<Product> getAllProducts(Pageable pageable) {
         return this.productRepository.findAll(pageable);
     }
+
+    // Kiểm tra Tên sản phẩm có tồn tại hay ko
+    public boolean existsByName(String name) {
+        return this.productRepository.existsByName(name);
+    }
+
 }

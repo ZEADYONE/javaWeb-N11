@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+// @ProductNameChecked
 @Entity
 @Table(name = "Product")
 public class Product {
