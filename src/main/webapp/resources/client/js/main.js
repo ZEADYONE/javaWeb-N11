@@ -559,41 +559,54 @@ $(document).ready(function () {
     });
   }
 
-  $('#btnFilter').click(function (event) {
-    event.preventDefault();
+  $(document).ready(function () {
+    $('#btnFilter').click(function (event) {
+      event.preventDefault();
 
-    let categoryArr = [];
-    let brandArr = [];
+      let categoryArr = [];
+      let brandArr = [];
 
-    $("#cateFilter .form-check-input:checked").each(function () {
-      categoryArr.push($(this).val());
+      // Lấy danh mục được chọn
+      $(".cateFilter .form-check-input:checked").each(function () {
+        categoryArr.push($(this).val());
+      });
+
+      // Lấy thương hiệu được chọn
+      $(".brandFilter .form-check-input:checked").each(function () {
+        brandArr.push($(this).val());
+      });
+
+      // Xử lý URL
+      const currentUrl = new URL(window.location.href);
+      const searchParams = currentUrl.searchParams;
+
+      // Reset về trang 1 khi lọc
+      searchParams.set('page', '1');
+
+      // Set categories
+      if (categoryArr.length > 0) {
+        searchParams.set('categories', categoryArr.join(','));
+      } else {
+        searchParams.delete('categories');
+      }
+
+      // Set brands
+      if (brandArr.length > 0) {
+        searchParams.set('brand', brandArr.join(','));
+      } else {
+        searchParams.delete('brand');
+      }
+
+      // Tạo URL mới
+      const newUrl = currentUrl.origin + currentUrl.pathname + '?' + searchParams.toString();
+
+      // Chuyển hướng
+      window.location.href = newUrl;
     });
-
-    $("#brandFilter .form-check-input:checked").each(function () {
-      brandArr.push($(this).val());
-    });
-
-    const currentUrl = new URL(window.location.href);
-    const searchParams = currentUrl.searchParams;
-
-    searchParams.set('page', '1');
-
-    if (categoryArr.length > 0) {
-      searchParams.set('categories', categoryArr.join(','));
-    } else {
-      searchParams.delete('categories');
-    }
-
-    if (brandArr.length > 0) {
-      searchParams.set('brand', brandArr.join(','));
-    } else {
-      searchParams.delete('brand');
-    }
-
-    currentUrl.search = searchParams.toString();
-
-    window.location.href = currentUrl.toString();
   });
+
+
+
 
 
   // tăng/giảm

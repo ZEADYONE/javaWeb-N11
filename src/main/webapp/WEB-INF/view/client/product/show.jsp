@@ -49,7 +49,7 @@
                                     <ul>
                                         <c:forEach var="category" items="${categories}">
                                             <li class="filter-list">
-                                                <div id="cateFilter">
+                                                <div class="cateFilter">
                                                     <input class="form-check-input" type="checkbox" name="categories"
                                                         id="category-${category.id}" value="${category.code}" <c:if
                                                         test="${criteria.categories.present && criteria.categories.get().contains(category.code)}">checked
@@ -64,7 +64,7 @@
                                     <ul>
                                         <c:forEach var="brand" items="${brands}">
                                             <li class="filter-list">
-                                                <div id="brandFilter">
+                                                <div class="brandFilter">
                                                     <input class="form-check-input" type="checkbox" name="brand"
                                                         id="brand-${brand.id}" value="${brand.name}" <c:if
                                                         test="${criteria.brand.present && criteria.brand.get().contains(brand.name)}">checked
