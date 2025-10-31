@@ -559,19 +559,15 @@ $(document).ready(function () {
     });
   }
 
-
-
   $('#btnFilter').click(function (event) {
     event.preventDefault();
 
     let categoryArr = [];
     let brandArr = [];
 
-
     $("#cateFilter .form-check-input:checked").each(function () {
       categoryArr.push($(this).val());
     });
-
 
     $("#brandFilter .form-check-input:checked").each(function () {
       brandArr.push($(this).val());
@@ -582,20 +578,70 @@ $(document).ready(function () {
 
     searchParams.set('page', '1');
 
-
-    // searchParams.set('sort', sortValue); 
-
-
     if (categoryArr.length > 0) {
       searchParams.set('categories', categoryArr.join(','));
+    } else {
+      searchParams.delete('categories');
     }
 
     if (brandArr.length > 0) {
       searchParams.set('brand', brandArr.join(','));
+    } else {
+      searchParams.delete('brand');
     }
+
+    currentUrl.search = searchParams.toString();
 
     window.location.href = currentUrl.toString();
   });
+
+
+  // tăng/giảm
+  $(document).off('click', '.product_count button').on('click', '.product_count button', function () {
+    const btn = $(this);
+    const input = btn.siblings('input');
+    let qty = parseInt(input.val()) || 1;
+
+    qty = btn.hasClass('increase') ? qty + 1 : Math.max(1, qty - 1);
+    input.val(qty);
+
+    updateRowAndTotal(input);
+  });
+
+  // nhập tay
+  $(document).on('input', '.product_count input', function () {
+    let qty = parseInt($(this).val());
+    if (!qty || qty < 1) qty = 1;
+    $(this).val(qty);
+
+    updateRowAndTotal($(this));
+  });
+
+  function updateRowAndTotal(input) {
+    const id = input.data("item-id");
+    const price = parseFloat(input.data("item-price"));
+    const qty = parseInt(input.val());
+
+    // cập nhật total từng dòng
+    const rowTotal = qty * price;
+    $(`h5[data-item-id='${id}']`).text(formatCurrency(rowTotal) + " đ");
+
+    // tính lại total toàn giỏ
+    let total = 0;
+    $(".item-total").each(function () {
+      const text = $(this).text().replace(/[^\d]/g, "");
+      total += parseFloat(text) || 0;
+    });
+
+    // update tổng
+    $(".cart-total")
+      .attr("data-item-total-price", total)
+      .text(formatCurrency(total) + " đ");
+  }
+
+  function formatCurrency(v) {
+    return new Intl.NumberFormat('vi-VN').format(v);
+  }
 
 
 
