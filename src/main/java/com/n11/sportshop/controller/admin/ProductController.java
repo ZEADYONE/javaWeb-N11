@@ -85,12 +85,18 @@ public class ProductController {
             System.out.println(">>>>" + error.getObjectName() + " - " + error.getDefaultMessage());
         }
 
+        // Kiểm tra tên sản phẩm đã tồn tại hay chưa
+        if (productService.existsByName(product.getName())) {
+            productBindingResult.rejectValue("name", "error.product", "Tên sản phẩm đã tồn tại");
+        }
+
         // Validate trả lỗi về màn hình trang product create
         if (productBindingResult.hasErrors() == true) {
             model.addAttribute("categories", this.productService.getAllCategories());
             model.addAttribute("brands", this.productService.getAllBrands());
             return "admin/product/create";
         }
+
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
