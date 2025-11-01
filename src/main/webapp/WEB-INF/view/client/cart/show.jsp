@@ -78,8 +78,10 @@
                                                         </h5>
                                                     </td>
                                                     <td style="text-align:center;">
-                                                        <form action="/cart/remove" method="post"
+                                                        <form action="/cart/delete" method="post"
                                                             style="display:inline;">
+                                                            <input type="hidden" name="${_csrf.parameterName}"
+                                                                value="${_csrf.token}">
                                                             <input type="hidden" name="productId"
                                                                 value="${item.product.id}">
                                                             <button type="button" class="btn btn-sm btn-danger border-0"

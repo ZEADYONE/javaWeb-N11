@@ -667,12 +667,6 @@ $(document).ready(function () {
         beforeSend: function (xhr) {
           // Gắn token vào header
           xhr.setRequestHeader(csrfHeader, csrfToken);
-        },
-        success: function (response) {
-          console.log('✅ AJAX: Cập nhật giỏ hàng thành công', response);
-        },
-        error: function (xhr, status, error) {
-          console.error('❌ AJAX: Lỗi khi cập nhật giỏ hàng:', error);
         }
       });
     }
