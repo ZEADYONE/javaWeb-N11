@@ -89,9 +89,11 @@
                                         <li><a>Subtotal <span>
                                                     <fmt:formatNumber value="${totalPrice}" type="currency" />
                                                 </span></a></li>
-                                        <li><a>Shipping <span>Flat rate: $50.00</span></a></li>
+                                        <li><a>Shipping <span>
+                                                    <fmt:formatNumber value="30000" type="currency" />
+                                                </span></a></li>
                                         <li><a>Total <span>
-                                                    <fmt:formatNumber value="${totalPrice}" type="currency" />
+                                                    <fmt:formatNumber value="${totalPrice + 30000}" type="currency" />
                                                 </span></a></li>
                                     </ul>
                                     <div class="payment_item">
