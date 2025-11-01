@@ -49,6 +49,22 @@ public class ClientOrderController {
 
     @GetMapping("/checkout")
     public String getll(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("id");
+        User user = this.userService.getUserByID(userId);
+        List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
+
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        for (CartDetail cd : cartDetails) {
+            BigDecimal price = cd.getProduct().getPrice();
+            BigDecimal quantity = BigDecimal.valueOf(cd.getQuantity());
+
+            totalPrice = totalPrice.add(price.multiply(quantity));
+        }
+
+        model.addAttribute("items", cartDetails);
+        model.addAttribute("totalPrice", totalPrice);
         return "client/cart/checkout";
     }
 

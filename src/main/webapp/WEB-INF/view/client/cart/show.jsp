@@ -26,81 +26,116 @@
                 <div class="container">
                     <div class="cart_inner">
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="item" items="${items}">
-                                        <tr>
-                                            <td>
-                                                <div class="media">
-                                                    <div class="d-flex"> <img
-                                                            src="/images/product/${item.product.image}" alt=""
-                                                            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <p>${item.product.description}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5>
-                                                    <fmt:formatNumber value="${item.product.price}" /> đ
-                                                </h5>
-                                            </td>
-                                            <td>
-                                                <div class="product_count"> <input type="text" name="qty" maxlength="12"
-                                                        value="${item.quantity}" title="Quantity:"
-                                                        class="input-text qty" data-item-price="${item.product.price}"
-                                                        data-item-id="${item.product.id}"> <button class="increase"
-                                                        type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                                    <button class="reduced" type="button"><i
-                                                            class="lnr lnr-chevron-down"></i></button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h5 data-item-id="${item.product.id}" class="item-total">
-                                                    <fmt:formatNumber value="${item.quantity * item.product.price}"
-                                                        type="number" /> đ
-                                                </h5>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    <tr class="bottom_button">
-                                        <td> <a class="gray_btn" href="#">Update Cart</a> </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <h5>Subtotal</h5>
-                                        </td>
-                                        <td>
-                                            <h5 class="cart-total" data-item-total-price="${totalPrice}">
-                                                <fmt:formatNumber value="${totalPrice}" /> đ
-                                            </h5>
-                                        </td>
-                                    </tr>
-                                    <tr class="out_button_area">
-                                        <td> </td>
-                                        <td> </td>
-                                        <td> </td>
-                                        <td>
-                                            <div class="checkout_btn_inner d-flex align-items-center"> <a
-                                                    class="primary-btn" href="#">Proceed to checkout</a> </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <c:choose>
+
+                                <c:when test="${not empty items}">
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="item" items="${items}">
+                                                <tr>
+                                                    <td>
+                                                        <div class="media">
+                                                            <div class="d-flex"> <img
+                                                                    src="/images/product/${item.product.image}" alt=""
+                                                                    style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <p>${item.product.name}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            <fmt:formatNumber value="${item.product.price}" /> đ
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <div class="product_count"> <input type="text" name="qty"
+                                                                maxlength="12" value="${item.quantity}"
+                                                                title="Quantity:" class="input-text qty"
+                                                                data-item-price="${item.product.price}"
+                                                                data-item-id="${item.product.id}" readonly>
+                                                            <button class="increase" type="button"><i
+                                                                    class="lnr lnr-chevron-up"></i></button>
+                                                            <button class="reduced" type="button"><i
+                                                                    class="lnr lnr-chevron-down"></i></button>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5 data-item-id="${item.product.id}" class="item-total">
+                                                            <fmt:formatNumber
+                                                                value="${item.quantity * item.product.price}"
+                                                                type="number" /> đ
+                                                        </h5>
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <form action="/cart/remove" method="post"
+                                                            style="display:inline;">
+                                                            <input type="hidden" name="productId"
+                                                                value="${item.product.id}">
+                                                            <button type="button" class="btn btn-sm btn-danger border-0"
+                                                                title="Delete">
+                                                                <i class="bi bi-trash fs-5"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+
+                                                </tr>
+                                            </c:forEach>
+                                            <tr class="bottom_button">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <h5>Subtotal</h5>
+                                                </td>
+                                                <td>
+                                                    <h5 class="cart-total" data-item-total-price="${totalPrice}">
+                                                        <fmt:formatNumber value="${totalPrice}" /> đ
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                            <tr class="out_button_area">
+                                                <td> </td>
+                                                <td> </td>
+                                                <td> </td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="checkout_btn_inner d-flex align-items-center"> <a
+                                                            class="primary-btn" href="#">Proceed to checkout</a> </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </c:when>
+
+
+                                <c:otherwise>
+                                    <div class="container text-center" style="padding: 80px 0;">
+                                        <h3>Giỏ hàng của bạn đang trống</h3>
+                                        <p>Hãy tiếp tục mua sắm để thêm sản phẩm vào giỏ.</p>
+                                        <a href="/products" class="primary-btn">Tiếp tục mua sắm</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+
+
                         </div>
                     </div>
                 </div>

@@ -58,15 +58,13 @@
                                     <div class="product_count">
                                         <label for="sst">Quantity:</label>
                                         <input type="number" name="quantity" id="sst" min="1" value="1"
-                                            title="Quantity:" class="input-text qty">
+                                            title="Quantity:" class="input-text qty" readonly>
 
-                                        <button type="button" class="increase items-count"
-                                            onclick="var result = document.getElementById('sst'); var sst = parseInt(result.value); if(!isNaN(sst)) result.value = sst + 1;">
+                                        <button type="button" class="increase items-count">
                                             <i class="lnr lnr-chevron-up"></i>
                                         </button>
 
-                                        <button type="button" class="reduced items-count"
-                                            onclick="var result = document.getElementById('sst'); var sst = parseInt(result.value); if(!isNaN(sst) && sst > 1) result.value = sst - 1;">
+                                        <button type="button" class="reduced items-count">
                                             <i class="lnr lnr-chevron-down"></i>
                                         </button>
                                     </div>
