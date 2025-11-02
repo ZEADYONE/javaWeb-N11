@@ -61,4 +61,8 @@ public class CartService {
         cartDetail.setQuantity(quantity);
         this.cartDetailRepo.save(cartDetail);
     }
+
+    public void deleteItemInCart(int id) {
+        this.cartDetailRepo.deleteById(id);
+    }
 }

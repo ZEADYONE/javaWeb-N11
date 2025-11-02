@@ -2,13 +2,12 @@ package com.n11.sportshop.controller.client;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,9 +16,9 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.CartService;
 import com.n11.sportshop.service.UserService;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/cart")
@@ -63,9 +62,10 @@ public class ClientCartController {
         cartService.updateCart(user, id, quantity);
     }
 
-    @PostMapping("/delete")
-    public void deleteCartItem(@RequestParam("id") int id) {
-
+    @PostMapping("/delete/{id}")
+    public String deleteCartItem(@PathVariable("id") int id) {
+        this.cartService.deleteItemInCart(id);
+        return "redirect:/cart";
     }
 
     @GetMapping("/checkout")
@@ -109,4 +109,7 @@ public class ClientCartController {
         model.addAttribute("totalPrice", totalPrice);
         return "client/cart/confirmation";
     }
+
+    
+    
 }

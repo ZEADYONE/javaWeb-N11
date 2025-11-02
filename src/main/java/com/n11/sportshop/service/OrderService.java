@@ -11,6 +11,7 @@ import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.repository.CartDetailRepository;
 import com.n11.sportshop.repository.CartRepository;
 import com.n11.sportshop.repository.OrderDetailRepository;
@@ -24,6 +25,7 @@ public class OrderService {
     private final CartDetailRepository cartDetailRepo;
     private final OrderRepository orderRepo;
     private final OrderDetailRepository orderDetailRepo;
+    private 
 
     public OrderService(CartRepository cartRepo, CartDetailRepository cartDetailRepo, OrderRepository orderRepo,
             OrderDetailRepository orderDetailRepo) {
@@ -67,6 +69,10 @@ public class OrderService {
 
     public List<Order> getOrderHistory(User user) {
         return orderRepo.findByUser(user);
+    }
+
+    public Order createOrder(Integer userId, Integer vouncherId, InformationDTO informationDTO) {
+        User user = this.
     }
 
 }

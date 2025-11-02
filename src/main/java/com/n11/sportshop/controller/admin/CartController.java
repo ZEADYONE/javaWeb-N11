@@ -15,7 +15,7 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.service.CartService;
 
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/admin/cart")
 
 public class CartController {
     private final CartService cartService;
