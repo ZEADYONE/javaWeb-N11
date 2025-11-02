@@ -1,6 +1,5 @@
 package com.n11.sportshop.domain;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -31,7 +30,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.pending;
 
-    private BigDecimal totalAmount;
+    private Long totalAmount;
     private String name;
     private String phone;
     private String email;
@@ -72,11 +71,11 @@ public class Order {
         this.voucher = voucher;
     }
 
-    public BigDecimal getTotalAmount() {
+    public Long getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(BigDecimal totalAmount) {
+    public void setTotalAmount(Long totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -143,6 +142,5 @@ public class Order {
     public void setNote(String note) {
         this.note = note;
     }
-
 
 }

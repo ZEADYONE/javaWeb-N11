@@ -7,7 +7,8 @@ public class InformationDTO {
     private String address;
     private String note;
     private String payment;
-
+    private String voucherCode;
+    
     public String getName() {
         return name;
     }
@@ -46,6 +47,22 @@ public class InformationDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    public String getVoucherCode() {
+        return voucherCode;
+    }
+
+    public void setVoucherCode(String voucherCode) {
+        this.voucherCode = voucherCode;
     }
 
     

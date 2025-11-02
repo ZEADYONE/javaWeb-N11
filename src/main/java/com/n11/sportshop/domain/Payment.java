@@ -22,8 +22,7 @@ public class Payment {
     @JoinColumn(name = "order_id")//, nullable = false)
     private Order order;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 
     
     public int getId() { return id; }
@@ -31,12 +30,13 @@ public class Payment {
 
     public Order getOrder() { return order; }
     public void setOrder(Order order) { this.order = order; }
-    public PaymentMethod getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
+    
     
 
 }

@@ -1,6 +1,5 @@
 package com.n11.sportshop.controller.client;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,6 @@ import com.n11.sportshop.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 
 @Controller
 @RequestMapping("/cart")
@@ -39,13 +37,13 @@ public class ClientCartController {
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
 
-        BigDecimal totalPrice = BigDecimal.ZERO;
+        Long totalPrice = 0L;
 
         for (CartDetail cd : cartDetails) {
-            BigDecimal price = cd.getProduct().getPrice();
-            BigDecimal quantity = BigDecimal.valueOf(cd.getQuantity());
+            Long price = cd.getProduct().getPrice();
+            Long quantity = Long.valueOf(cd.getQuantity());
 
-            totalPrice = totalPrice.add(price.multiply(quantity));
+            totalPrice = totalPrice + (price * quantity);
         }
 
         model.addAttribute("items", cartDetails);
@@ -75,13 +73,13 @@ public class ClientCartController {
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
 
-        BigDecimal totalPrice = BigDecimal.ZERO;
+        Long totalPrice = 0L;
 
         for (CartDetail cd : cartDetails) {
-            BigDecimal price = cd.getProduct().getPrice();
-            BigDecimal quantity = BigDecimal.valueOf(cd.getQuantity());
+            Long price = cd.getProduct().getPrice();
+            Long quantity = Long.valueOf(cd.getQuantity());
 
-            totalPrice = totalPrice.add(price.multiply(quantity));
+            totalPrice = totalPrice + (price * quantity);
         }
 
         model.addAttribute("items", cartDetails);
@@ -96,13 +94,13 @@ public class ClientCartController {
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
 
-        BigDecimal totalPrice = BigDecimal.ZERO;
+        Long totalPrice = 0L;
 
         for (CartDetail cd : cartDetails) {
-            BigDecimal price = cd.getProduct().getPrice();
-            BigDecimal quantity = BigDecimal.valueOf(cd.getQuantity());
+            Long price = cd.getProduct().getPrice();
+            Long quantity = Long.valueOf(cd.getQuantity());
 
-            totalPrice = totalPrice.add(price.multiply(quantity));
+            totalPrice = totalPrice + (price * quantity);
         }
 
         model.addAttribute("items", cartDetails);
@@ -110,6 +108,4 @@ public class ClientCartController {
         return "client/cart/confirmation";
     }
 
-    
-    
 }
