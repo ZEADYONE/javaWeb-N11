@@ -3,6 +3,7 @@ package com.n11.sportshop.controller.client;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,11 +37,15 @@ public class ClientOrderController {
     
     @PostMapping("/create")
     public String createOrder(
-            @RequestBody InformationDTO informationDTO,
+            @ModelAttribute InformationDTO informationDTO,
             HttpServletRequest http) {
         HttpSession session = http.getSession(false);
         Integer userId = (Integer) session.getAttribute("id");
-        Order order = this.orderService.createOrder(userId, userId, informationDTO);
-        return "redirect:/cart/confirm";
+        String voucherCode = "NONE";
+        if (informationDTO.getVoucherCode() != null) {
+            voucherCode = informationDTO.getVoucherCode();
+        }
+        Order order = this.orderService.createOrder(userId, voucherCode, informationDTO);
+        return "redirect:/cart/confirmation";
     }
 }

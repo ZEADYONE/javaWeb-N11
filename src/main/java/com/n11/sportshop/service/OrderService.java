@@ -86,10 +86,11 @@ public class OrderService {
         return orderRepo.findByUser(user);
     }
 
-    public Order createOrder(Integer userId, Integer voucherId, InformationDTO informationDTO) {
+    public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
         User user = this.userRepository.findById(userId).get();
         List<CartDetail> items = this.cartService.getCartDetails(user);
         Order order = new Order();
+        order.setUser(user);
         order.setName(informationDTO.getName());
         order.setEmail(informationDTO.getEmail());
         order.setAddress(informationDTO.getAddress());
@@ -98,7 +99,8 @@ public class OrderService {
         Payment payment = this.paymentRepository.findByPaymentMethod(informationDTO.getPayment());
         order.setPayment(payment);
         order.setStatus(OrderStatus.pending);
-        Voucher voucher = this.voucherRepository.findById(voucherId).get();
+        Voucher voucher = this.voucherRepository.findByCode(voucherCode);
+        order.setVoucher(voucher);
         order = this.orderRepo.save(order);
         Long price = 0L + 30000;
         for (var item : items) {
@@ -115,5 +117,10 @@ public class OrderService {
         }
         order.setTotalAmount(price);
         return order;
+    }
+
+    public List<OrderDetail> getOrderDetails (User user) {
+        Order order = this.orderRepo.findTopByUserOrderByIdDesc(user);
+        return this.orderDetailRepo.findByOrder(order);
     }
 }

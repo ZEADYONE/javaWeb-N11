@@ -11,4 +11,5 @@ import com.n11.sportshop.domain.User;
 @Repository
 public interface OrderRepository extends JpaRepository<Order,Integer>{
     List<Order> findByUser (User user);
+    Order findTopByUserOrderByIdDesc(User user);
 }

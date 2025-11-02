@@ -65,4 +65,9 @@ public class CartService {
     public void deleteItemInCart(int id) {
         this.cartDetailRepo.deleteById(id);
     }
+
+    public void deleteCart(User user, Cart cart) {
+        this.cartDetailRepo.deleteByCart(cart);
+        this.cartRepo.deleteByUser(user);
+    }
 }

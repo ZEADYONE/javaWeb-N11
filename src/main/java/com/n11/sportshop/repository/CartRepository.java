@@ -11,5 +11,6 @@ import com.n11.sportshop.domain.User;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
     Optional<Cart> findByUserAndStatus(User user, String status);
+    void deleteByUser(User user);
 }
 

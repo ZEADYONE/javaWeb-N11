@@ -10,26 +10,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartDetail;
+import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
+import com.n11.sportshop.service.OrderService;
 import com.n11.sportshop.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Controller
 @RequestMapping("/cart")
+@Transactional
 public class ClientCartController {
 
     private final CartService cartService;
     private final UserService userService;
+    private final OrderService orderService;
 
-    public ClientCartController(CartService cartService, UserService userService) {
+    public ClientCartController(CartService cartService, OrderService orderService, UserService userService) {
         this.cartService = cartService;
+        this.orderService = orderService;
         this.userService = userService;
     }
+    
 
     @GetMapping("")
     public String getCartPage(Model model, HttpServletRequest request) {
@@ -89,22 +97,24 @@ public class ClientCartController {
     }
 
     @GetMapping("/confirmation")
-    public String getComfirmation(Model model, HttpServletRequest request) {
+    public String getConfirmation(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(userId);
-        List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
+        Cart cart = this.cartService.getActiveCart(user);
+        this.cartService.deleteCart(user, cart);
+        List<OrderDetail> orderDetails = this.orderService.getOrderDetails(user);
 
         Long totalPrice = 0L;
 
-        for (CartDetail cd : cartDetails) {
+        for (var cd : orderDetails) {
             Long price = cd.getProduct().getPrice();
             Long quantity = Long.valueOf(cd.getQuantity());
 
             totalPrice = totalPrice + (price * quantity);
         }
 
-        model.addAttribute("items", cartDetails);
+        model.addAttribute("items", orderDetails);
         model.addAttribute("totalPrice", totalPrice);
         return "client/cart/confirmation";
     }

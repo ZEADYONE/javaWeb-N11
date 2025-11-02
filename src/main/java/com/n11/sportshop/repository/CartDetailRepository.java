@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.Product;
+import com.n11.sportshop.domain.User;
 
 @Repository
 public interface CartDetailRepository extends JpaRepository<CartDetail, Integer> {
     List<CartDetail> findByCart(Cart cart);
     CartDetail findByCartAndProduct(Cart cart, Product product);
+    void deleteByCart(Cart cart);
 }
