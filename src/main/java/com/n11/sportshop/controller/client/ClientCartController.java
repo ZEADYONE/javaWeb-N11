@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
 import com.n11.sportshop.service.UserService;
 
@@ -81,7 +82,7 @@ public class ClientCartController {
 
             totalPrice = totalPrice + (price * quantity);
         }
-
+        model.addAttribute("bill", new InformationDTO());
         model.addAttribute("items", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
         return "client/cart/checkout";
