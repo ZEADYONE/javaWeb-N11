@@ -98,30 +98,37 @@
                                     </ul>
                                     <div class="payment_item">
                                         <div class="radion_btn">
-                                            <input type="radio" id="f-option5" name="selector">
-                                            <label for="f-option5">Check payments</label>
+                                            <input type="radio" id="pay_cash" name="payment_method">
+                                            <label for="pay_cash">Check payments</label>
                                             <div class="check"></div>
                                         </div>
                                         <p>Please send a check to Store Name, Store Street, Store Town, Store State /
-                                            County,
-                                            Store Postcode.</p>
+                                            County, Store Postcode.</p>
                                     </div>
-                                    <div class="payment_item active">
+
+                                    <div class="payment_item">
                                         <div class="radion_btn">
-                                            <input type="radio" id="f-option6" name="selector">
-                                            <label for="f-option6">Paypal </label>
+                                            <input type="radio" id="pay_paypal" name="payment_method">
+                                            <label for="pay_paypal">Paypal</label>
                                             <img src="img/product/card.jpg" alt="">
                                             <div class="check"></div>
                                         </div>
                                         <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
                                             account.</p>
                                     </div>
+
                                     <div class="creat_account">
-                                        <input type="checkbox" id="f-option4" name="selector">
-                                        <label for="f-option4">I’ve read and accept the </label>
+                                        <input type="checkbox" id="terms">
+                                        <label for="terms">I’ve read and accept the </label>
                                         <a href="#">terms & conditions*</a>
                                     </div>
-                                    <a class="primary-btn" href="#">Proceed to Paypal</a>
+
+                                    <!-- Buttons -->
+                                    <a class="primary-btn" id="btn-paypal" style="display:none;" href="#">Proceed to
+                                        Paypal</a>
+                                    <a class="primary-btn" id="btn-cash" style="display:none;" href="/cart/confirmation">Proceed to Cash
+                                        Payment</a>
+
                                 </div>
                             </div>
                         </div>
@@ -129,7 +136,22 @@
                 </div>
             </section>
             <!--================End Checkout Area =================-->
+            <script>
+                const paypalRadio = document.getElementById("pay_paypal");
+                const cashRadio = document.getElementById("pay_cash");
+                const btnPaypal = document.getElementById("btn-paypal");
+                const btnCash = document.getElementById("btn-cash");
 
+                paypalRadio.addEventListener("change", function () {
+                    btnPaypal.style.display = "inline-block";
+                    btnCash.style.display = "none";
+                });
+
+                cashRadio.addEventListener("change", function () {
+                    btnCash.style.display = "inline-block";
+                    btnPaypal.style.display = "none";
+                });
+            </script>
             <!-- start footer Area -->
             <jsp:include page="../layout/footer.jsp" />
             <!-- End footer Area -->

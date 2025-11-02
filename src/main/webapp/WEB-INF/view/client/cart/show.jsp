@@ -78,7 +78,7 @@
                                                         </h5>
                                                     </td>
                                                     <td style="text-align:center;">
-                                                        <form action="/cart/delete" method="post"
+                                                        <form action="/cart/delete/{item.id}" method="post"
                                                             style="display:inline;">
                                                             <input type="hidden" name="${_csrf.parameterName}"
                                                                 value="${_csrf.token}">
@@ -120,7 +120,8 @@
                                                 <td></td>
                                                 <td>
                                                     <div class="checkout_btn_inner d-flex align-items-center"> <a
-                                                            class="primary-btn" href="#">Proceed to checkout</a> </div>
+                                                            class="primary-btn" href="/cart/checkout">Proceed to
+                                                            checkout</a> </div>
                                                 </td>
                                             </tr>
                                         </tbody>
