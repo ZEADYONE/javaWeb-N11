@@ -82,8 +82,6 @@
                                                             style="display:inline;">
                                                             <input type="hidden" name="${_csrf.parameterName}"
                                                                 value="${_csrf.token}">
-                                                            <input type="hidden" name="productId"
-                                                                value="${item.product.id}">
                                                             <button type="submit" class="btn btn-sm btn-danger border-0"
                                                                 title="Delete">
                                                                 <i class="bi bi-trash fs-5"></i>
