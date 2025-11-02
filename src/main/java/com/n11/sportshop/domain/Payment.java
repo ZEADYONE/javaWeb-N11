@@ -22,12 +22,8 @@ public class Payment {
     @JoinColumn(name = "order_id")//, nullable = false)
     private Order order;
 
-    //@Column( precision = 12, scale = 2, nullable = false)
-    private Integer amount;
-
     @Enumerated(EnumType.STRING)
-    //@Column( nullable = false)
-    private PaymentMethod method;
+    private PaymentMethod paymentMethod;
 
     
     public int getId() { return id; }
@@ -35,14 +31,11 @@ public class Payment {
 
     public Order getOrder() { return order; }
     public void setOrder(Order order) { this.order = order; }
-
-    public PaymentMethod getMethod() { return method; }
-    public void setMethod(PaymentMethod method) { this.method = method; }
-    public Integer getAmount() {
-        return amount;
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
     }
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
     
 

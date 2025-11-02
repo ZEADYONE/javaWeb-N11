@@ -5,6 +5,8 @@ public class InformationDTO {
     private String phone;
     private String email;
     private String address;
+    private String note;
+    private String payment;
 
     public String getName() {
         return name;
@@ -38,5 +40,13 @@ public class InformationDTO {
         this.address = address;
     }
 
+    public String getNote() {
+        return note;
+    }
 
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    
 }
