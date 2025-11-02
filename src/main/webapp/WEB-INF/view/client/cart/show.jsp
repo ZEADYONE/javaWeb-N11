@@ -78,7 +78,7 @@
                                                         </h5>
                                                     </td>
                                                     <td style="text-align:center;">
-                                                        <form action="/cart/delete/{item.id}" method="post"
+                                                        <form action="/cart/delete/${item.id}" method="post"
                                                             style="display:inline;">
                                                             <input type="hidden" name="${_csrf.parameterName}"
                                                                 value="${_csrf.token}">
