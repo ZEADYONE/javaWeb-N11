@@ -173,9 +173,13 @@
 
                                                                     <form action="/admin/catalog/category/create"
                                                                         method="post">
-                                                                        <input type="hidden"
-                                                                            name="${_csrf.parameterName}"
-                                                                            value="${_csrf.token}">
+
+                                                                        <input type="hidden" 
+                                                                            name="${_csrf.parameterName}" 
+                                                                            value="${_csrf.token}" />
+
+                                                                       
+
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
                                                                                 <label class="form-label">Category
@@ -334,9 +338,13 @@
 
                                                                     <form action="/admin/catalog/brand/create"
                                                                         method="post">
-                                                                        <input type="hidden"
-                                                                            name="${_csrf.parameterName}"
-                                                                            value="${_csrf.token}">
+
+                                                                        <input type="hidden" 
+                                                                            name="${_csrf.parameterName}" 
+                                                                            value="${_csrf.token}" />
+
+                                                                        
+
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
                                                                                 <label class="form-label">Brand

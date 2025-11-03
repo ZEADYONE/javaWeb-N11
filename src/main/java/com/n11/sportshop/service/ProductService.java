@@ -85,9 +85,16 @@ public class ProductService {
     public void saveBrand(Brand brand) {
         brandRepository.save(brand);
     }
-
-
+    //Xóa category
+    public void deleteCategory(Integer id) {
+        categoryRepository.deleteById(id);
+    }
+    //Xóa brand
+    public void deleteBrand(Integer id) {
+        brandRepository.deleteById(id);
+    }
     public List<Product> getLatestProducts() {
         return this.productRepository.findTop8ByOrderByIdDesc();
     }
+
 }
