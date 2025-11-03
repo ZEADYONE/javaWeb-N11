@@ -122,4 +122,7 @@ public class OrderService {
     }
 
 
+    public Order getOrderById(int id) {
+        return this.orderRepo.findById(id).get();
+    }
 }

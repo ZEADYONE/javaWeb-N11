@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
+
 
 @Controller
 @RequestMapping("/admin/order")
@@ -42,12 +44,14 @@ public class OrderController {
     
 
     // Cập nhật trạng thái đơn hàng 
-    @PostMapping("/update-status")
+    @PostMapping("/update/{id}")
     public String updateOrderStatus(
-            @RequestParam("orderId") Integer orderId,
-            @RequestParam("status") String status) {
-
-        orderService.updateOrderStatus(orderId, OrderStatus.valueOf(status));
+            @RequestParam("id") Integer id) {
+        Order order = this.orderService.getOrderById(id);
+        if (order.getStatus() == OrderStatus.pending) {
+            this.orderService.updateOrderStatus(id, OrderStatus.shipped);
+        }
         return "redirect:/admin/order"; 
     }
+
 }
