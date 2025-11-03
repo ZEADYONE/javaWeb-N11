@@ -25,6 +25,7 @@ import com.n11.sportshop.repository.VoucherRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class OrderService {
 
     private final CartRepository cartRepo;
@@ -69,7 +70,9 @@ public class OrderService {
         Voucher voucher = this.voucherRepository.findByCode(voucherCode);
         order.setVoucher(voucher);
         order = this.orderRepo.save(order);
-        Long price = 0L + 30000;
+        Long price = 0L;
+        Long shipPrice = 30000L;
+        Long discountAmount = 0L;
         for (var item : items) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setPrice(item.getProduct().getPrice());
@@ -82,7 +85,14 @@ public class OrderService {
             this.orderDetailRepo.save(orderDetail);
             price += item.getQuantity() * orderDetail.getPrice();
         }
+        if (voucher.getCode().equals("FREESHIP")) {
+            shipPrice = 0L;
+        } else {
+            discountAmount = price * voucher.getDiscountValue() / 100;
+        }
         order.setTotalAmount(price);
+        order.setShipPrice(shipPrice);
+        order.setDiscountAmount(discountAmount);
         return order;
     }
 
@@ -101,6 +111,10 @@ public class OrderService {
         Order order = orderRepo.findById(orderId).get();
         order.setStatus(status);
         orderRepo.save(order);
+    }
+
+    public Order getOrderByUser(User user) {
+        return this.orderRepo.findTopByUserOrderByIdDesc(user);
     }
 
 

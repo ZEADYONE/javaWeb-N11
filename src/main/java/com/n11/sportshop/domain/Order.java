@@ -20,7 +20,6 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id;
 
     @ManyToOne
@@ -31,6 +30,17 @@ public class Order {
     private OrderStatus status = OrderStatus.pending;
 
     private Long totalAmount;
+    private Long shipPrice;
+    private Long discountAmount;
+    
+    public Long getShipPrice() {
+        return shipPrice;
+    }
+
+    public void setShipPrice(Long shipPrice) {
+        this.shipPrice = shipPrice;
+    }
+
     private String name;
     private String phone;
     private String email;
@@ -141,6 +151,14 @@ public class Order {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Long getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(Long discountAmount) {
+        this.discountAmount = discountAmount;
     }
 
 }

@@ -96,27 +96,6 @@ public class ClientCartController {
         return "client/cart/checkout";
     }
 
-    @GetMapping("/confirmation")
-    public String getConfirmation(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Integer userId = (Integer) session.getAttribute("id");
-        User user = this.userService.getUserByID(userId);
-        Cart cart = this.cartService.getActiveCart(user);
-        this.cartService.deleteCart(user, cart);
-        List<OrderDetail> orderDetails = this.orderService.getOrderDetails(user);
-
-        Long totalPrice = 0L;
-
-        for (var cd : orderDetails) {
-            Long price = cd.getProduct().getPrice();
-            Long quantity = Long.valueOf(cd.getQuantity());
-
-            totalPrice = totalPrice + (price * quantity);
-        }
-
-        model.addAttribute("items", orderDetails);
-        model.addAttribute("totalPrice", totalPrice);
-        return "client/cart/confirmation";
-    }
+    
 
 }

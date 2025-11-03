@@ -12,6 +12,8 @@ import com.n11.sportshop.repository.CartDetailRepository;
 import com.n11.sportshop.repository.CartRepository;
 import com.n11.sportshop.repository.ProductRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CartService {
     private final CartRepository cartRepo;
@@ -66,6 +68,7 @@ public class CartService {
         this.cartDetailRepo.deleteById(id);
     }
 
+    @Transactional
     public void deleteCart(User user, Cart cart) {
         this.cartDetailRepo.deleteByCart(cart);
         this.cartRepo.deleteByUser(user);
