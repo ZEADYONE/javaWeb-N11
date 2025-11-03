@@ -1,5 +1,7 @@
 package com.n11.sportshop.controller.client;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -42,6 +44,7 @@ public class ClientOrderController {
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.pending);
+        Collections.reverse(orders);
         model.addAttribute("status", "pending");
         model.addAttribute("orders", orders);
         return "client/order/show";
@@ -53,6 +56,7 @@ public class ClientOrderController {
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.shipped);
+        Collections.reverse(orders);
         model.addAttribute("status", "shipping");
         model.addAttribute("orders", orders);
         return "client/order/show";
@@ -64,6 +68,7 @@ public class ClientOrderController {
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.accept);
+        Collections.reverse(orders);
         model.addAttribute("status", "accepted");
         model.addAttribute("orders", orders);
         return "client/order/show";
@@ -75,6 +80,7 @@ public class ClientOrderController {
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.canceled);
+        Collections.reverse(orders);
         model.addAttribute("status", "canceled");
         model.addAttribute("orders", orders);
         return "client/order/show";

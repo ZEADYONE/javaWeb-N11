@@ -1,5 +1,8 @@
 package com.n11.sportshop.controller.admin;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/admin/order")
@@ -31,7 +36,9 @@ public class OrderController {
 
     @GetMapping("/pending")
     public String getOrderPending(Model model) {
-        model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.pending));
+        List<Order> orders = this.orderService.getOrderByStatus(OrderStatus.pending);
+        Collections.reverse(orders);
+        model.addAttribute("orders", orders);
         model.addAttribute("status", "Pending");
         model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
         model.addAttribute("shippingCount", this.orderService.countByStatus(OrderStatus.shipped));
@@ -42,7 +49,9 @@ public class OrderController {
 
     @GetMapping("/shipping")
     public String getOrderShipping(Model model) {
-        model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.shipped));
+        List<Order> orders = orderService.getOrderByStatus(OrderStatus.shipped);
+        Collections.reverse(orders);
+        model.addAttribute("orders", orders);
         model.addAttribute("status", "Shipping");
         model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
         model.addAttribute("shippingCount", this.orderService.countByStatus(OrderStatus.shipped));
@@ -53,7 +62,9 @@ public class OrderController {
 
     @GetMapping("/accepted")
     public String getOrderAccept(Model model) {
-        model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.accept));
+        List<Order> orders = orderService.getOrderByStatus(OrderStatus.accept);
+        Collections.reverse(orders);
+        model.addAttribute("orders", orders);
         model.addAttribute("status", "Accepted");
         model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
         model.addAttribute("shippingCount", this.orderService.countByStatus(OrderStatus.shipped));
@@ -64,7 +75,9 @@ public class OrderController {
 
     @GetMapping("/canceled")
     public String getOrderCancel(Model model) {
-        model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.canceled));
+        List<Order> orders = orderService.getOrderByStatus(OrderStatus.canceled);
+        Collections.reverse(orders);
+        model.addAttribute("orders", orders);
         model.addAttribute("status", "Canceled");
         model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
         model.addAttribute("shippingCount", this.orderService.countByStatus(OrderStatus.shipped));
@@ -83,5 +96,20 @@ public class OrderController {
         }
         return "redirect:/admin/order";
     }
+
+    @PostMapping("/cancel/{id}")
+    public String cancelOrderStatus(@PathVariable("id") Integer id) {
+        Order order = this.orderService.getOrderById(id);
+        order.setStatus(OrderStatus.canceled);
+        return "redirect:/cancel";
+    }
+
+    @PostMapping("/cancel/{id}")
+    public String acceptOrderStatus(@PathVariable("id") Integer id) {
+        Order order = this.orderService.getOrderById(id);
+        order.setStatus(OrderStatus.accept);
+        return "redirect:/accept";
+    }
+    
 
 }
