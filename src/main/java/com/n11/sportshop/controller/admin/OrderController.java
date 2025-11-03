@@ -104,7 +104,7 @@ public class OrderController {
         return "redirect:/cancel";
     }
 
-    @PostMapping("/cancel/{id}")
+    @PostMapping("/accept/{id}")
     public String acceptOrderStatus(@PathVariable("id") Integer id) {
         Order order = this.orderService.getOrderById(id);
         order.setStatus(OrderStatus.accept);
