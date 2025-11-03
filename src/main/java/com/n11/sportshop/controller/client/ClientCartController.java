@@ -105,12 +105,6 @@ public class ClientCartController {
         for (CartDetail cd : cartDetails) {
             Long price = cd.getProduct().getPrice();
             Long quantity = Long.valueOf(cd.getQuantity());
-
-            // if (hasChange) {
-            //     cartService.updateCart(user, (Integer) cd.getProduct().getId(), (Integer) cd.getQuantity());
-            //     model.addAttribute("Một số sản phẩm không còn đủ hàng",
-            //             "Chúng tôi đã cập nhật lại giỏ hàng của bạn");
-            // }
             totalPrice = totalPrice + (price * quantity);
         }
         model.addAttribute("bill", new InformationDTO());
