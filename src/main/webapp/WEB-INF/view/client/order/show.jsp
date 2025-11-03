@@ -99,8 +99,25 @@
 
                         <div class="col-lg-9 posts-list">
                             <c:forEach var="order" items="${orders}">
+
+
                                 <div class="order_details_table">
-                                    <h2>Order Details</h2>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h2>Order Details</h2>
+                                        <c:set var="badgeClass" value="" />
+
+                                        <c:choose>
+                                            <c:when test="${order.status == 'pending'}">
+                                                <c:set var="badgeClass" value="text-bg-info" />
+                                            </c:when>
+
+                                        </c:choose>
+
+                                        <span class="badge ${badgeClass}" style="padding:8px; font-size:14px;">
+                                            ${order.status}
+                                        </span>
+
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -188,6 +205,14 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="mt-3 d-flex justify-content-end gap-2">
+                                        <c:choose>
+                                            <c:when test="${order.status == 'pending'}">
+                                                <a href="/order/cancel/${order.id}"
+                                                    class="btn btn-danger btn-sm">Cancel</a>
+                                            </c:when>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </c:forEach>

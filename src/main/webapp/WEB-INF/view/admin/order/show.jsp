@@ -39,92 +39,89 @@
 
                 <div class="container-fluid py-4">
                     <div class="row">
+                        <!-- Pending -->
                         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <a href="/">
+                            <a href="/admin/order">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
-                                            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                                            <i class="material-icons opacity-10">weekend</i>
+                                            class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">
+                                            <i class="material-icons opacity-10">hourglass_empty</i>
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">PENDING</h6>
-                                            <h4 class="mb-0">$53k</h4>
+                                            <h4 class="mb-0">${pendingCount}2</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
                                     <div class="card-footer p-3">
-                                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">
-                                            </span></p>
+                                        <p class="mb-0"></p>
                                     </div>
                                 </div>
                             </a>
-
                         </div>
+
+                        <!-- Shipping -->
                         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <a href="">
+                            <a href="/admin/order/shipping">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
                                             class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                                            <i class="material-icons opacity-10">person</i>
+                                            <i class="material-icons opacity-10">local_shipping</i>
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">SHIPPING</h6>
-                                            <h4 class="mb-0">2,300</h4>
+                                            <h4 class="mb-0">${shippingCount}10</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
                                     <div class="card-footer p-3">
-                                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">
-                                            </span></p>
+                                        <p class="mb-0"></p>
                                     </div>
                                 </div>
                             </a>
-
                         </div>
-                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <a href="">
-                                <div class="card">
 
+                        <!-- Accepted -->
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <a href="/admin/order/accepted">
+                                <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
                                             class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                                            <i class="material-icons opacity-10">person</i>
+                                            <i class="material-icons opacity-10">check_circle</i>
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">ACCEPTED</h6>
-                                            <h4 class="mb-0">3,462</h4>
+                                            <h4 class="mb-0">${acceptedCount}43</h4>
                                         </div>
                                     </div>
-
-
                                     <hr class="dark horizontal my-0">
                                     <div class="card-footer p-3">
-                                        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder"></span>
-                                        </p>
+                                        <p class="mb-0"></p>
                                     </div>
                                 </div>
                             </a>
-
                         </div>
+
+                        <!-- Canceled -->
                         <div class="col-xl-3 col-sm-6">
-                            <a href="">
+                            <a href="/admin/order/canceled">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
-                                            class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                                            <i class="material-icons opacity-10">weekend</i>
+                                            class="icon icon-lg icon-shape bg-gradient-danger shadow-danger text-center border-radius-xl mt-n4 position-absolute">
+                                            <i class="material-icons opacity-10">cancel</i>
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">CANCELED</h6>
-                                            <h4 class="mb-0">$103,430</h4>
+                                            <h4 class="mb-0">${canceledCount}22</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
                                     <div class="card-footer p-3">
-                                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">
-                                            </span></p>
+                                        <p class="mb-0"></p>
                                     </div>
                                 </div>
                             </a>
@@ -132,12 +129,13 @@
                     </div>
 
 
+
                     <jsp:include page="../layout/footer.jsp" />
                 </div>
                 <div class="col-md-12 mt-4">
                     <div class="card">
                         <div class="card-header pb-0 px-3">
-                            <h6 class="mb-0">Order Pendding</h6>
+                            <h6 class="mb-0">Order Pending</h6>
                         </div>
                         <div class="card-body pt-4 p-3">
                             <ul class="list-group">
@@ -153,6 +151,16 @@
                                                     class="text-dark ms-sm-2 font-weight-bold">${order.address}</span></span> -->
                                         </div>
                                         <div class="ms-auto text-end">
+                                            <c:if test="${order.status == 'pending'}">
+                                                <form method="post" action="/admin/order/update/${order.id}">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+
+                                                    <button class="btn btn-link text-warning text-gradient px-3 mb-0"
+                                                        type="submit"><i class="material-icons text-sm
+                                                            me-2">local_shipping</i>Shipping</button>
+                                                </form>
+                                            </c:if>
                                             <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                 href="javascript:;"><i
                                                     class="material-icons text-sm me-2">delete</i>Delete</a>
