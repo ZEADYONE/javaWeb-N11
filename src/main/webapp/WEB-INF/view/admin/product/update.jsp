@@ -45,12 +45,12 @@
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
-                                                    <label class="form-label">Brand</label>
+                                                    <label class="form-label">Category</label>
                                                     <form:select class="form-select border" style="padding-left: 20px;"
                                                         path="brand.name">
                                                         <form:option value="">-----</form:option>
-                                                        <form:option value="Hehe">Hehe</form:option>
-                                                        <form:option value="Hihi">Hihi</form:option>
+                                                        <form:options items="${brands}" itemValue="name"
+                                                            itemLabel="name" />
                                                     </form:select>
                                                 </div>
 
