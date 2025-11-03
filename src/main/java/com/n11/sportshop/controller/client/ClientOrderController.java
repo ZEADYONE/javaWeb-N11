@@ -53,7 +53,7 @@ public class ClientOrderController {
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.shipped);
-        model.addAttribute("status", "shipped");
+        model.addAttribute("status", "shipping");
         model.addAttribute("orders", orders);
         return "client/order/show";
     }
