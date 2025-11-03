@@ -140,12 +140,12 @@
                         <div class="card-body pt-4 p-3">
                             <ul class="list-group">
                                 <c:forEach var="order" items="${orders}">
-                                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-300 border-radius-lg">
                                         <div class="d-flex flex-column">
                                             <h6 class="mb-3 text-sm">Order ID: ${order.id}</h6>
-                                            <span class="mb-2 text-xs">User id: <span
+                                            <span class="mb-2 text-xs" style="color: black;">User id: <span
                                                     class="text-dark font-weight-bold ms-sm-2">${order.user.id}</span></span>
-                                            <span class="mb-2 text-xs">Name: <span
+                                            <span class="mb-2 text-xs" style="color: black;">Name: <span
                                                     class="text-dark ms-sm-2 font-weight-bold">${order.name}</span></span>
                                             <!-- <span class="text-xs">Address: <span
                                                     class="text-dark ms-sm-2 font-weight-bold">${order.address}</span></span> -->

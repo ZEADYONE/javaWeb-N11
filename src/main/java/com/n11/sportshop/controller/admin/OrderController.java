@@ -15,7 +15,6 @@ import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @Controller
 @RequestMapping("/admin/order")
 public class OrderController {
@@ -25,6 +24,7 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
     @GetMapping
     public String getOrderPage(Model model) {
         model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
@@ -101,15 +101,14 @@ public class OrderController {
     public String cancelOrderStatus(@PathVariable("id") Integer id) {
         Order order = this.orderService.getOrderById(id);
         order.setStatus(OrderStatus.canceled);
-        return "redirect:/cancel";
+        return "redirect:/order/cancel";
     }
 
     @PostMapping("/accept/{id}")
     public String acceptOrderStatus(@PathVariable("id") Integer id) {
         Order order = this.orderService.getOrderById(id);
         order.setStatus(OrderStatus.accept);
-        return "redirect:/accept";
+        return "redirect:/order/accept";
     }
-    
 
 }

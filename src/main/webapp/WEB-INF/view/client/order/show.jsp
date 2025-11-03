@@ -208,10 +208,40 @@
                                     </div>
                                     <div class="mt-3 d-flex justify-content-end gap-2">
                                         <c:choose>
-                                            <c:when test="${order.status == 'pending'}">
-                                                <a href="/order/cancel/${order.id}"
-                                                    class="btn btn-danger btn-sm">Cancel</a>
+
+
+                                            <c:when test="${status == 'pending'}">
+                                                <form action="/admin/order/cancel/${order.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
                                             </c:when>
+
+
+                                            <c:when test="${status == 'shipping'}">
+                                                <form action="/admin/order/accept/${order.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+                                                    <button class="btn btn-success btn-sm" type="submit"
+                                                        style="margin-right: 20px;">
+                                                        Accept
+                                                    </button>
+                                                </form>
+                                                <form action="/admin/order/cancel/${order.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+                                            </c:when>
+
+                                            <c:otherwise></c:otherwise>
+
                                         </c:choose>
                                     </div>
                                 </div>
