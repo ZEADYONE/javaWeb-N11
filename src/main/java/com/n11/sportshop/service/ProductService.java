@@ -79,6 +79,6 @@ public class ProductService {
     }
 
     public List<Product> getLatestProducts() {
-        return this.productRepository.findTop8ByOrderByProductIdDesc();
+        return this.productRepository.findTop8ByOrderByIdDesc();
     }
 }
