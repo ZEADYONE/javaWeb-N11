@@ -39,146 +39,169 @@
 
                 <div class="container-fluid py-4">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card my-4">
-                                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                        <h6 class="text-white text-capitalize ps-3">Order table</h6>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <a href="/">
+                                <div class="card">
+                                    <div class="card-header p-3 pt-2">
+                                        <div
+                                            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                                            <i class="material-icons opacity-10">weekend</i>
+                                        </div>
+                                        <div class="text-end pt-1">
+                                            <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                                            <h4 class="mb-0">$53k</h4>
+                                        </div>
+                                    </div>
+                                    <hr class="dark horizontal my-0">
+                                    <div class="card-footer p-3">
+                                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55%
+                                            </span>than lask week</p>
                                     </div>
                                 </div>
-                                <div class="card-body px-0 pb-2">
-                                    <div class="table-responsive p-0">
-                                        <table class="table align-items-center justify-content-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                                                        style="text-align: center; vertical-align: middle;">
-                                                        ID</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        Name</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        Email</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        Phone number</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- sẽ for Each tại đây modelAttribute = UserList nhận List<User> -->
-                                                <tr>
-                                                    <td style="text-align: center; vertical-align: middle;">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">1</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width: 400px;">
-                                                        <p class="text-sm font-weight-bold mb-0">Nguyễn Trường Giang</p>
-                                                    </td>
-                                                    <td style="width: 400px;">
-                                                        <span
-                                                            class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">0869668798</p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <i class="bi bi-info-square" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false" ,
-                                                                style="padding-left: 12px" ,>
-                                                            </i>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another action</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Something else
-                                                                        here</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center; vertical-align: middle;">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">2</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">Đỗ Trí Cương</p>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">0869668798</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center; vertical-align: middle;">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">3</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">Ngô Minh Đức</p>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">0869668798</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center; vertical-align: middle;">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">4</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">Nguyễn Văn Thanh Tùng
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">0869668798</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center; vertical-align: middle;">
-                                                        <div class="my-auto">
-                                                            <h6 class="mb-0 text-sm">5</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">Nguyễn Nhật Anh</p>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-xs font-weight-bold">truonggiang29122005@gmail.com</span>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm font-weight-bold mb-0">0869668798</p>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            </a>
+
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <a href="">
+                                <div class="card">
+                                    <div class="card-header p-3 pt-2">
+                                        <div
+                                            class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                                            <i class="material-icons opacity-10">person</i>
+                                        </div>
+                                        <div class="text-end pt-1">
+                                            <p class="text-sm mb-0 text-capitalize">Today's Users</p>
+                                            <h4 class="mb-0">2,300</h4>
+                                        </div>
+                                    </div>
+                                    <hr class="dark horizontal my-0">
+                                    <div class="card-footer p-3">
+                                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3%
+                                            </span>than lask month</p>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
+
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                            <a href="">
+                                <div class="card">
+
+                                    <div class="card-header p-3 pt-2">
+                                        <div
+                                            class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                                            <i class="material-icons opacity-10">person</i>
+                                        </div>
+                                        <div class="text-end pt-1">
+                                            <p class="text-sm mb-0 text-capitalize">New Clients</p>
+                                            <h4 class="mb-0">3,462</h4>
+                                        </div>
+                                    </div>
+
+
+                                    <hr class="dark horizontal my-0">
+                                    <div class="card-footer p-3">
+                                        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                            than
+                                            yesterday</p>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                        <div class="col-xl-3 col-sm-6">
+                            <a href="">
+                                <div class="card">
+                                    <div class="card-header p-3 pt-2">
+                                        <div
+                                            class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                                            <i class="material-icons opacity-10">weekend</i>
+                                        </div>
+                                        <div class="text-end pt-1">
+                                            <p class="text-sm mb-0 text-capitalize">Sales</p>
+                                            <h4 class="mb-0">$103,430</h4>
+                                        </div>
+                                    </div>
+                                    <hr class="dark horizontal my-0">
+                                    <div class="card-footer p-3">
+                                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5%
+                                            </span>than yesterday</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
+
+
                     <jsp:include page="../layout/footer.jsp" />
+                </div>
+                <div class="col-md-12 mt-4">
+                    <div class="card">
+                        <div class="card-header pb-0 px-3">
+                            <h6 class="mb-0">Order Pendding</h6>
+                        </div>
+                        <div class="card-body pt-4 p-3">
+                            <ul class="list-group">
+                                <c:forEach var="order" items="${orders}">
+                                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                        <div class="d-flex flex-column">
+                                            <h6 class="mb-3 text-sm">Order ID: ${order.id}</h6>
+                                            <!-- <span class="mb-2 text-xs">Phone: <span
+                                                    class="text-dark font-weight-bold ms-sm-2">${order.phone}</span></span>
+                                            <span class="mb-2 text-xs">Email: <span
+                                                    class="text-dark ms-sm-2 font-weight-bold">${order.email}</span></span>
+                                            <span class="text-xs">Address: <span
+                                                    class="text-dark ms-sm-2 font-weight-bold">${order.address}</span></span> -->
+                                        </div>
+                                        <div class="ms-auto text-end">
+                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                href="javascript:;"><i
+                                                    class="material-icons text-sm me-2">delete</i>Delete</a>
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
+                                                    class="material-icons text-sm me-2">edit</i>Edit</a>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+
+                                <!-- <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                                    <div class="d-flex flex-column">
+                                        <h6 class="mb-3 text-sm">Lucas Harper</h6>
+                                        <span class="mb-2 text-xs">Company Name: <span
+                                                class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
+                                        <span class="mb-2 text-xs">Email Address: <span
+                                                class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
+                                        <span class="text-xs">VAT Number: <span
+                                                class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                            href="javascript:;"><i
+                                                class="material-icons text-sm me-2">delete</i>Delete</a>
+                                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
+                                                class="material-icons text-sm me-2">edit</i>Edit</a>
+                                    </div>
+                                </li>
+                                <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                                    <div class="d-flex flex-column">
+                                        <h6 class="mb-3 text-sm">Ethan James</h6>
+                                        <span class="mb-2 text-xs">Company Name: <span
+                                                class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
+                                        <span class="mb-2 text-xs">Email Address: <span
+                                                class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
+                                        <span class="text-xs">VAT Number: <span
+                                                class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                            href="javascript:;"><i
+                                                class="material-icons text-sm me-2">delete</i>Delete</a>
+                                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
+                                                class="material-icons text-sm me-2">edit</i>Edit</a>
+                                    </div>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </main>
 
