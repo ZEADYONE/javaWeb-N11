@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.service.ProductService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -35,7 +35,7 @@ public class CatalogController {
     }
     //Thêm phần category
     @PostMapping("/category/create")
-        public String createCategory(@ModelAttribute("category") Category category) {
+    public String createCategory(@ModelAttribute("category") Category category) {
         productService.saveCategory(category);
         return "redirect:/admin/catalog";
     }

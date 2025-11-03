@@ -126,6 +126,7 @@ public class ProductController {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + id));
         model.addAttribute("categories", this.productService.getAllCategories());
+        model.addAttribute("brands", this.productService.getAllBrands());
         model.addAttribute("product", product);
         return "admin/product/update";
     }
