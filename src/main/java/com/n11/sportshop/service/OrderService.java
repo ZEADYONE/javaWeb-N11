@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
@@ -48,38 +47,6 @@ public class OrderService {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.voucherRepository = voucherRepository;
-    }
-
-    @Transactional
-    public Order checkout(User user) {
-        Cart cart = cartRepo.findByUserAndStatus(user, "active")
-                .orElseThrow(() -> new RuntimeException("Không có giỏ hàng!"));
-
-        Order order = new Order();
-        order.setUser(user);
-        order.setStatus(OrderStatus.paid);
-        orderRepo.save(order);
-
-        Long total = 0L;
-
-        List<CartDetail> items = cartDetailRepo.findByCart(cart);
-        for (CartDetail item : items) {
-            OrderDetail detail = new OrderDetail();
-            detail.setOrder(order);
-            detail.setProduct(item.getProduct());
-            detail.setQuantity(item.getQuantity());
-            detail.setPrice(item.getProduct().getPrice());
-            total = total + (item.getProduct().getPrice() * item.getQuantity());
-            orderDetailRepo.save(detail);
-        }
-
-        order.setTotalAmount(total);
-        orderRepo.save(order);
-
-        cart.setStatus("checked_out");
-        cartRepo.save(cart);
-
-        return order;
     }
 
     public List<Order> getOrderHistory(User user) {
