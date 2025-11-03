@@ -5,7 +5,20 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE product;
 TRUNCATE TABLE brand;
 TRUNCATE TABLE category;
+TRUNCATE TABLE voucher;
+TRUNCATE TABLE roles;
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+INSERT INTO roles (id, name) VALUES
+(1, 'ADMIN'),
+(2, 'USER');
+
+
+INSERT INTO voucher (id, code, discount_value) VALUES
+(1, 'NONE', 0),
+(2, 'DC20', 20);
 
 -- =========================================
 -- INSERT DATA FOR CATEGORY
