@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">PENDING</h6>
-                                            <h4 class="mb-0">${pendingCount}2</h4>
+                                            <h4 class="mb-0">${pendingCount}</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">SHIPPING</h6>
-                                            <h4 class="mb-0">${shippingCount}10</h4>
+                                            <h4 class="mb-0">${shippingCount}</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">ACCEPTED</h6>
-                                            <h4 class="mb-0">${acceptedCount}43</h4>
+                                            <h4 class="mb-0">${acceptedCount}</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="text-end pt-1">
                                             <h6 class="mb-0">CANCELED</h6>
-                                            <h4 class="mb-0">${canceledCount}22</h4>
+                                            <h4 class="mb-0">${canceledCount}</h4>
                                         </div>
                                     </div>
                                     <hr class="dark horizontal my-0">
@@ -135,7 +135,7 @@
                 <div class="col-md-12 mt-4">
                     <div class="card">
                         <div class="card-header pb-0 px-3">
-                            <h6 class="mb-0">Order Pending</h6>
+                            <h6 class="mb-0">Order ${status}</h6>
                         </div>
                         <div class="card-body pt-4 p-3">
                             <ul class="list-group">
@@ -143,11 +143,11 @@
                                     <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                                         <div class="d-flex flex-column">
                                             <h6 class="mb-3 text-sm">Order ID: ${order.id}</h6>
-                                            <!-- <span class="mb-2 text-xs">Phone: <span
-                                                    class="text-dark font-weight-bold ms-sm-2">${order.phone}</span></span>
-                                            <span class="mb-2 text-xs">Email: <span
-                                                    class="text-dark ms-sm-2 font-weight-bold">${order.email}</span></span>
-                                            <span class="text-xs">Address: <span
+                                            <span class="mb-2 text-xs">User id: <span
+                                                    class="text-dark font-weight-bold ms-sm-2">${order.user.id}</span></span>
+                                            <span class="mb-2 text-xs">Name: <span
+                                                    class="text-dark ms-sm-2 font-weight-bold">${order.name}</span></span>
+                                            <!-- <span class="text-xs">Address: <span
                                                     class="text-dark ms-sm-2 font-weight-bold">${order.address}</span></span> -->
                                         </div>
                                         <div class="ms-auto text-end">
@@ -168,6 +168,7 @@
                                                     class="material-icons text-sm me-2">edit</i>Edit</a>
                                         </div>
                                     </li>
+
                                 </c:forEach>
 
                                 <!-- <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
