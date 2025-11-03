@@ -57,7 +57,7 @@
 
                                         <div class="media-body">
                                             <a href="/order">
-                                                <h3>Pendding</h3>
+                                                <h3>Pending</h3>
                                             </a>
 
                                         </div>
@@ -72,8 +72,8 @@
                                     </div>
                                     <div class="media post_item">
                                         <div class="media-body">
-                                            <a href="/order/accpect">
-                                                <h3>Accpect</h3>
+                                            <a href="/order/accept">
+                                                <h3>Accept</h3>
                                             </a>
                                         </div>
                                     </div>

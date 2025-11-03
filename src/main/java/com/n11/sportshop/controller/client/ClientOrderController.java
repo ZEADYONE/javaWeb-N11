@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
+import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
@@ -36,27 +37,42 @@ public class ClientOrderController {
     }
 
     @GetMapping
-    public String getUserOrderPenddingPage(Model model, HttpServletRequest request) {
+    public String getUserOrderPendingPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
-        List<Order> orders = this.orderService.getOrderHistoryByStatus(user);
+        List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.pending);
         model.addAttribute("orders", orders);
         return "client/order/show";
     }
 
     @GetMapping("/shipping")
     public String getUserOrderShippingPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Integer id = (Integer)session.getAttribute("id");
+        User user = this.userService.getUserByID(id);
+        List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.shipped);
+        model.addAttribute("orders", orders);
         return "client/order/show";
     }
 
-    @GetMapping("/accpect")
-    public String getUserOrderAccpectPage(Model model, HttpServletRequest request) {
+    @GetMapping("/accept")
+    public String getUserOrderAcceptPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Integer id = (Integer)session.getAttribute("id");
+        User user = this.userService.getUserByID(id);
+        List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.accept);
+        model.addAttribute("orders", orders);
         return "client/order/show";
     }
 
     @GetMapping("/cancel")
     public String getUserOrderCancelPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Integer id = (Integer)session.getAttribute("id");
+        User user = this.userService.getUserByID(id);
+        List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.canceled);
+        model.addAttribute("orders", orders);
         return "client/order/show";
     }
 
