@@ -22,7 +22,7 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
-    @GetMapping()
+    @GetMapping
     public String getOrderPage(Model model) {
         model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
         model.addAttribute("shippingCount", this.orderService.countByStatus(OrderStatus.shipped));
