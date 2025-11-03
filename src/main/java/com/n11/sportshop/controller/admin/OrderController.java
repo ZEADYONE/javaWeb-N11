@@ -47,7 +47,7 @@ public class OrderController {
             @RequestParam("orderId") Integer orderId,
             @RequestParam("status") String status) {
 
-        orderService.updateOrderStatus(orderId, OrderStatus.valueOf(status.toUpperCase()));
+        orderService.updateOrderStatus(orderId, OrderStatus.valueOf(status));
         return "redirect:/admin/order"; 
     }
 }

@@ -171,7 +171,7 @@
                                                                             data-bs-dismiss="modal"></button>
                                                                     </div>
 
-                                                                    <form action="/admin/catalog/category/create"
+                                                                    <form action="/admin/catalog/category/create" 
                                                                         method="post">
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
@@ -180,14 +180,14 @@
                                                                                 <input type="text"
                                                                                     class="form-control border"
                                                                                     style="padding-left: 20px;"
-                                                                                    path="name" required>
+                                                                                    name="name" required>
                                                                             </div>
                                                                             <div class="mb-3">
                                                                                 <label class="form-label">Code</label>
                                                                                 <input type="text"
                                                                                     class="form-control border"
                                                                                     style="padding-left: 20px;"
-                                                                                    path="code" required>
+                                                                                    name="code" required>
                                                                             </div>
                                                                             <div class="text-end">
                                                                                 <button type="submit"
@@ -338,7 +338,7 @@
                                                                                 <input type="text"
                                                                                     class="form-control border"
                                                                                     style="padding-left: 20px;"
-                                                                                    path="name" required>
+                                                                                    name="name" required>
                                                                             </div>
                                                                             <div class="text-end">
                                                                                 <button type="submit"

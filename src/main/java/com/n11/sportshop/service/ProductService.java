@@ -77,6 +77,15 @@ public class ProductService {
     public boolean existsByName(String name) {
         return this.productRepository.existsByName(name);
     }
+    // Lưu Category
+    public void saveCategory(Category category) {
+        categoryRepository.save(category);
+    }
+    //Lưu Brand
+    public void saveBrand(Brand brand) {
+        brandRepository.save(brand);
+    }
+
 
     public List<Product> getLatestProducts() {
         return this.productRepository.findTop8ByOrderByIdDesc();
