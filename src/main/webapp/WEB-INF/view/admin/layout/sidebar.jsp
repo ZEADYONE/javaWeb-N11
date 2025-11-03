@@ -70,16 +70,6 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white ${path == '/WEB-INF/view/admin/dashboard/tables.jsp' ? 'active bg-gradient-primary' : ''}"
-                                        href="${contextPath}/admin/table">
-                                        <div
-                                            class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                            <i class="material-icons opacity-10">table_view</i>
-                                        </div>
-                                        <span class="nav-link-text ms-1">Tables</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link text-white ${path == '/WEB-INF/view/admin/order/show.jsp' ? 'active bg-gradient-primary' : ''}"
                                         href="${contextPath}/admin/order">
                                         <div
