@@ -63,7 +63,6 @@
                                         </div>
                                     </div>
                                     <div class="media post_item">
-
                                         <div class="media-body">
                                             <a href="/order/shipping">
                                                 <h3>Shipping</h3>
@@ -73,7 +72,7 @@
                                     </div>
                                     <div class="media post_item">
                                         <div class="media-body">
-                                            <a href="/order/accpect>
+                                            <a href="/order/accpect">
                                                 <h3>Accpect</h3>
                                             </a>
                                         </div>
@@ -85,112 +84,112 @@
                                             </a>
 
                                         </div>
-
-                                        <div class="br"></div>
                                     </div>
+                                    <div class="br"></div>
+
                             </div>
+                            </aside>
+                            <aside class="single_sidebar_widget ads_widget">
+                                <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
+                                <div class="br"></div>
+                            </aside>
+
+
                         </div>
-                        </aside>
-                        <aside class="single_sidebar_widget ads_widget">
-                            <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
-                            <div class="br"></div>
-                        </aside>
-
-
                     </div>
-                </div>
-                <div class="col-lg-9 posts-list">
-                    <c:forEach var="order" items="${orders}">
-                        <div class="order_details_table">
-                            <h2>Order Details</h2>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="item" items="${order.orderDetails}">
+                    <div class="col-lg-9 posts-list">
+                        <c:forEach var="order" items="${orders}">
+                            <div class="order_details_table">
+                                <h2>Order Details</h2>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="item" items="${order.orderDetails}">
+
+                                                <tr>
+                                                    <td>
+                                                        <p>${item.product.name}</p>
+                                                    </td>
+                                                    <td>
+                                                        <h5>x ${item.quantity}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <p>
+                                                            <fmt:formatNumber
+                                                                value="${item.product.price * item.quantity}"
+                                                                type="currency" />
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
 
                                             <tr>
                                                 <td>
-                                                    <p>${item.product.name}</p>
+                                                    <h4>Subtotal</h4>
                                                 </td>
                                                 <td>
-                                                    <h5>x ${item.quantity}</h5>
+                                                    <h5></h5>
+                                                </td>
+                                                <td>
+                                                    <fmt:formatNumber value="${subTotal}" type="currency" />
+                                                    <p></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h4>Shipping</h4>
+                                                </td>
+                                                <td>
+                                                    <h5></h5>
                                                 </td>
                                                 <td>
                                                     <p>
-                                                        <fmt:formatNumber value="${item.product.price * item.quantity}"
-                                                            type="currency" />
+                                                        <fmt:formatNumber value="${shipping}" type="currency" />
                                                     </p>
                                                 </td>
                                             </tr>
-                                        </c:forEach>
-
-                                        <tr>
-                                            <td>
-                                                <h4>Subtotal</h4>
-                                            </td>
-                                            <td>
-                                                <h5></h5>
-                                            </td>
-                                            <td>
-                                                <fmt:formatNumber value="${subTotal}" type="currency" />
-                                                <p></p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4>Shipping</h4>
-                                            </td>
-                                            <td>
-                                                <h5></h5>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    <fmt:formatNumber value="${shipping}" type="currency" />
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4>Discount</h4>
-                                            </td>
-                                            <td>
-                                                <h5></h5>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    <fmt:formatNumber value="${discountAmount}" type="currency" />
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4>Total</h4>
-                                            </td>
-                                            <td>
-                                                <h5></h5>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    <fmt:formatNumber value="${totalPrice}" type="currency" />
-                                                </p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td>
+                                                    <h4>Discount</h4>
+                                                </td>
+                                                <td>
+                                                    <h5></h5>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <fmt:formatNumber value="${discountAmount}" type="currency" />
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h4>Total</h4>
+                                                </td>
+                                                <td>
+                                                    <h5></h5>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <fmt:formatNumber value="${totalPrice}" type="currency" />
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
 
 
 
-                </div>
+                    </div>
 
                 </div>
                 </div>
