@@ -3,6 +3,7 @@ package com.n11.sportshop.controller.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +47,7 @@ public class OrderController {
     // Cập nhật trạng thái đơn hàng 
     @PostMapping("/update/{id}")
     public String updateOrderStatus(
-            @RequestParam("id") Integer id) {
+            @PathVariable("id") Integer id) {
         Order order = this.orderService.getOrderById(id);
         if (order.getStatus() == OrderStatus.pending) {
             this.orderService.updateOrderStatus(id, OrderStatus.shipped);
