@@ -1,5 +1,7 @@
 package com.n11.sportshop.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,4 +18,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
 
     boolean existsByName(String name);
+
+    List<Product> findTop8ByOrderByProductIdDesc();
 }

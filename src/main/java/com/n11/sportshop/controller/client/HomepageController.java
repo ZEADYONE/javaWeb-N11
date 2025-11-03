@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.RegisterDTO;
+import com.n11.sportshop.service.ProductService;
 import com.n11.sportshop.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,9 +23,12 @@ import jakarta.validation.Valid;
 public class HomepageController {
 
     private final UserService userService;
-
-    public HomepageController(UserService userService) {
+    private final ProductService productService;
+    
+    
+    public HomepageController(UserService userService, ProductService productService) {
         this.userService = userService;
+        this.productService = productService;
     }
 
     @GetMapping("/")
@@ -33,6 +38,8 @@ public class HomepageController {
 
     @GetMapping("/home")
     public String getHomePage(Model model, HttpServletRequest request) {
+        List<Product> latestProducts = this.productService.getLatestProducts();
+        model.addAttribute("latestProducts", latestProducts);
         return "client/homepage/show";
     }
 
