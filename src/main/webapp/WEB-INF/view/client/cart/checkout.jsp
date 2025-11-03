@@ -39,23 +39,24 @@
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input type="text" path="name" class="form-control" />
-                                            <span class="placeholder" data-placeholder="Name"></span>
+                                            <form:input type="text" path="name" class="form-control"
+                                                placeholder="Name" />
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input type="text" class="form-control" path="phone" />
-                                            <span class="placeholder" data-placeholder="Phone number"></span>
+                                            <form:input type="text" path="phone" class="form-control"
+                                                placeholder="Phone number" />
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input type="text" class="form-control" path="email" />
-                                            <span class="placeholder" data-placeholder="Email Address"></span>
+                                            <form:input type="text" path="email" class="form-control"
+                                                placeholder="Email Address" />
                                         </div>
+
 
                                         <div class="col-md-12 form-group p_star">
                                             <form:textarea class="form-control" rows="1" path="address"
-                                                placeholder="Address line 01"></form:textarea>
+                                                placeholder="Address"></form:textarea>
                                         </div>
 
                                         <div class="col-md-12 form-group">
@@ -79,7 +80,8 @@
                                                                 <fmt:formatNumber
                                                                     value="${item.product.price * item.quantity}"
                                                                     type="currency" />
-                                                            </span></a>
+                                                            </span>
+                                                        </a>
                                                     </li>
                                                 </c:forEach>
 
@@ -140,12 +142,6 @@
                                                     account.</p>
                                             </div>
 
-                                            <div class="creat_account">
-                                                <input type="checkbox" id="terms">
-                                                <label for="terms">I’ve read and accept the </label>
-                                                <a href="#">terms & conditions*</a>
-                                            </div>
-
                                             <!-- Buttons -->
                                             <a class="primary-btn" id="btn-paypal" style="display:none;"
                                                 href="#">Proceed to
@@ -154,8 +150,6 @@
                                                 style="display:none;">
                                                 Proceed to Cash Payment
                                             </button>
-
-
                                         </div>
                                     </div>
                                 </div>
