@@ -1,15 +1,11 @@
 package com.n11.sportshop.controller.client;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.n11.sportshop.domain.Cart;
-import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
@@ -19,6 +15,7 @@ import com.n11.sportshop.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequestMapping("/order")
@@ -33,8 +30,12 @@ public class ClientOrderController {
         this.orderService = orderService;
         this.userService = userService;
     }
-    
-    
+
+    @GetMapping("")
+    public String getUserOrderPage(Model model, HttpServletRequest request) {
+        return "/client/order/show";
+    }
+
     @PostMapping("/create")
     public String createOrder(
             @ModelAttribute InformationDTO informationDTO,
