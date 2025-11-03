@@ -19,5 +19,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     boolean existsByName(String name);
 
-    List<Product> findTop8ByOrderByProductIdDesc();
+    List<Product> findTop8ByOrderByIdDesc();
 }
