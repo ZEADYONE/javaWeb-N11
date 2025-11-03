@@ -54,7 +54,8 @@ public class ClientProductController {
 
         String qs = request.getQueryString();
         if (qs != null && !qs.isBlank()) {
-            qs = qs.replace("page=" + productCriteriaDTO.getPage(), "");
+            String page = "page=" + productCriteriaDTO.getPage().get();
+            qs = qs.replace(page, "");
         }
         // --------------Lấy STT trang hiện tại-------------------
         model.addAttribute("currentPage", paginationQuery.getPage());
