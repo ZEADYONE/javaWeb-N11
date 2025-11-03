@@ -38,7 +38,7 @@ public class ClientCartController {
         this.userService = userService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String getCartPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");
@@ -46,29 +46,11 @@ public class ClientCartController {
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
 
         Long totalPrice = 0L;
-        boolean hasChange = false;
+        
 
         for (CartDetail cd : cartDetails) {
             Long price = cd.getProduct().getPrice();
             Long quantity = Long.valueOf(cd.getQuantity());
-
-            long stock = cd.getProduct().getStockQuantity();
-
-            if (stock == 0) {
-                // sản phẩm hết hàng -> có thể gỡ khỏi giỏ hoặc đặt quantity=0
-                cd.setQuantity(0);
-                hasChange = true;
-            } else if (quantity > stock) {
-                // số lượng trong giỏ vượt quá stock -> giảm xuống tối đa
-                cd.setQuantity((int) stock);
-                hasChange = true;
-            }
-
-            if (hasChange) {
-                cartService.updateCart(user, (Integer) cd.getProduct().getId(), (Integer) cd.getQuantity());
-                model.addAttribute("Một số sản phẩm không còn đủ hàng",
-                        "Chúng tôi đã cập nhật lại giỏ hàng của bạn");
-            }
 
             totalPrice = totalPrice + (price * quantity);
         }
@@ -101,12 +83,31 @@ public class ClientCartController {
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
 
         Long totalPrice = 0L;
-
+        boolean hasChange = false;
         for (CartDetail cd : cartDetails) {
             Long price = cd.getProduct().getPrice();
             Long quantity = Long.valueOf(cd.getQuantity());
+            long stock = cd.getProduct().getStockQuantity();
+
+            if (stock == 0) {
+                // sản phẩm hết hàng -> có thể gỡ khỏi giỏ hoặc đặt quantity=0
+                cd.setQuantity(0);
+                hasChange = true;
+            } else if (quantity > stock) {
+                // số lượng trong giỏ vượt quá stock -> giảm xuống tối đa
+                cd.setQuantity((int) stock);
+                hasChange = true;
+            }
+
+            if (hasChange) {
+                cartService.updateCart(user, (Integer) cd.getProduct().getId(), (Integer) cd.getQuantity());
+                model.addAttribute("error",
+                        "Một số sản phẩm không còn đủ hàng, Chúng tôi đã cập nhật lại giỏ hàng của bạn");
+                return "redirect:/cart";
+            }
             totalPrice = totalPrice + (price * quantity);
         }
+        model.addAttribute("error", "");
         model.addAttribute("bill", new InformationDTO());
         model.addAttribute("items", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
