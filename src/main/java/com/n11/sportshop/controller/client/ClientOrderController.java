@@ -36,7 +36,22 @@ public class ClientOrderController {
     }
 
     @GetMapping
-    public String getUserOrderPage(Model model, HttpServletRequest request) {
+    public String getUserOrderPenddingPage(Model model, HttpServletRequest request) {
+        return "client/order/show";
+    }
+
+    @GetMapping("/shipping")
+    public String getUserOrderShippingPage(Model model, HttpServletRequest request) {
+        return "client/order/show";
+    }
+
+    @GetMapping("/accpect")
+    public String getUserOrderAccpectPage(Model model, HttpServletRequest request) {
+        return "client/order/show";
+    }
+
+    @GetMapping("/cancel")
+    public String getUserOrderCancelPage(Model model, HttpServletRequest request) {
         return "client/order/show";
     }
 
