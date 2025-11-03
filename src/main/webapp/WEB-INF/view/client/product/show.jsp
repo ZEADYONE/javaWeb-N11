@@ -111,7 +111,7 @@
                                                 test="${loop.index >= currentPage - 2 && loop.index <= currentPage + 2}">
                                                 <li class="page-item">
                                                     <a class="${loop.index eq currentPage ? 'active page-link' : 'page-link'}"
-                                                        href="/products?page=${loop.index}">
+                                                        href="/products?page=${loop.index}${queryString}">
                                                         ${loop.index}
                                                     </a>
                                                 </li>
