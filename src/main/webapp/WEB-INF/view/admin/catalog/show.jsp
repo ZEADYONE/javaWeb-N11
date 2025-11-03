@@ -173,13 +173,13 @@
 
                                                                     <form action="/admin/catalog/category/create"
                                                                         method="post">
-<<<<<<< HEAD
+
                                                                         <input type="hidden" 
                                                                             name="${_csrf.parameterName}" 
                                                                             value="${_csrf.token}" />
-=======
+
                                                                        
->>>>>>> d4ce931f7d8d57aeea83ba5f9c35627f1419edbe
+
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
                                                                                 <label class="form-label">Category
@@ -338,13 +338,13 @@
 
                                                                     <form action="/admin/catalog/brand/create"
                                                                         method="post">
-<<<<<<< HEAD
+
                                                                         <input type="hidden" 
                                                                             name="${_csrf.parameterName}" 
                                                                             value="${_csrf.token}" />
-=======
+
                                                                         
->>>>>>> d4ce931f7d8d57aeea83ba5f9c35627f1419edbe
+
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
                                                                                 <label class="form-label">Brand
