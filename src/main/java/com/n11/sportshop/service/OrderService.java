@@ -125,4 +125,8 @@ public class OrderService {
     public Order getOrderById(int id) {
         return this.orderRepo.findById(id).get();
     }
+
+    public Integer countByStatus(OrderStatus status) {
+        return this.orderRepo.countByStatus(status);
+    }
 }

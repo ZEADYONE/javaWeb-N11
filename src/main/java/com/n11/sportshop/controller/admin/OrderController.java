@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
+
 
 
 @Controller
@@ -22,24 +22,37 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
-    @GetMapping
+    @GetMapping()
     public String getOrderPage(Model model) {
+        model.addAttribute("pendingCount", this.orderService.countByStatus(OrderStatus.pending));
+        model.addAttribute("shippingCount", this.orderService.countByStatus(OrderStatus.shipped));
+        model.addAttribute("acceptedCount", this.orderService.countByStatus(OrderStatus.accept));
+        model.addAttribute("canceledCount", this.orderService.countByStatus(OrderStatus.canceled));
+        return "redirect:/admin/order/pending";
+    }
+    
+    @GetMapping("/pending")
+    public String getOrderPending(Model model) {
         model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.pending));
+        model.addAttribute("status", "Pending");
         return "admin/order/show";
     }
     @GetMapping("/shipping")
     public String getOrderShipping(Model model) {
         model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.shipped));
+        model.addAttribute("status", "Shipping");
         return "admin/order/show";
     }
-    @GetMapping("/accpet")
+    @GetMapping("/accepted")
     public String getOrderAccept(Model model) {
         model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.accept));
+        model.addAttribute("status", "Accepted");
         return "admin/order/show";
     }
-    @GetMapping("/cancel")
+    @GetMapping("/canceled")
     public String getOrderCancel(Model model) {
         model.addAttribute("orders", orderService.getOrderByStatus(OrderStatus.canceled));
+        model.addAttribute("status", "Canceled");
         return "admin/order/show";
     }
     
