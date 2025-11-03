@@ -123,4 +123,19 @@ public class OrderService {
         Order order = this.orderRepo.findTopByUserOrderByIdDesc(user);
         return this.orderDetailRepo.findByOrder(order);
     }
+    //lay toan bo don hang
+    public List<Order> getAllOrders() {
+        return orderRepo.findAll();
+    }
+
+    //Cap nhat trang thai trong admin/order
+    @Transactional
+    public void updateOrderStatus(Integer orderId, OrderStatus status) {
+        Order order = orderRepo.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng có ID = " + orderId));
+        order.setStatus(status);
+        orderRepo.save(order);
+    }
+
+
 }

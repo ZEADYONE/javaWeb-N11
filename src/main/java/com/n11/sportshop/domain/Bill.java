@@ -18,6 +18,7 @@ public class Bill {
     private String phone;
     private String email;
     private String address;
+    private String note;
     public int getId() {
         return id;
     }
@@ -47,6 +48,12 @@ public class Bill {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+    public String getNote() {
+        return note;
+    }
+    public void setNote(String note) {
+        this.note = note;
     }
     
 }
