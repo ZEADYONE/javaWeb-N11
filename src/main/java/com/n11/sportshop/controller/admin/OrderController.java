@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.n11.sportshop.controller.reload.OrderSseController;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
@@ -18,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequestMapping("/admin/order")
 public class OrderController {
-
+    private final OrderSseController orderSseController;
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderSseController orderSseController, OrderService orderService) {
+        this.orderSseController = orderSseController;
         this.orderService = orderService;
     }
 
@@ -94,20 +96,19 @@ public class OrderController {
         if (order.getStatus() == OrderStatus.pending) {
             this.orderService.updateOrderStatus(id, OrderStatus.shipped);
         }
+        orderSseController.sendEvent("Đơn hàng " + id + " đã được vận chuyển");
         return "redirect:/admin/order";
     }
 
     @PostMapping("/cancel/{id}")
     public String cancelOrderStatus(@PathVariable("id") Integer id) {
-        Order order = this.orderService.getOrderById(id);
-        order.setStatus(OrderStatus.canceled);
+        this.orderService.updateOrderStatus(id, OrderStatus.canceled);
         return "redirect:/order/cancel";
     }
 
     @PostMapping("/accept/{id}")
     public String acceptOrderStatus(@PathVariable("id") Integer id) {
-        Order order = this.orderService.getOrderById(id);
-        order.setStatus(OrderStatus.accept);
+        this.orderService.updateOrderStatus(id, OrderStatus.accept);
         return "redirect:/order/accept";
     }
 

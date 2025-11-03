@@ -87,24 +87,23 @@ public class ClientCartController {
         for (CartDetail cd : cartDetails) {
             Long price = cd.getProduct().getPrice();
             Long quantity = Long.valueOf(cd.getQuantity());
-            long stock = cd.getProduct().getStockQuantity();
+            // long stock = cd.getProduct().getStockQuantity();
 
-            if (stock == 0) {
-                // sản phẩm hết hàng -> có thể gỡ khỏi giỏ hoặc đặt quantity=0
-                cd.setQuantity(0);
-                hasChange = true;
-            } else if (quantity > stock) {
-                // số lượng trong giỏ vượt quá stock -> giảm xuống tối đa
-                cd.setQuantity((int) stock);
-                hasChange = true;
-            }
+            // if (stock == 0) {
+            //     // sản phẩm hết hàng -> có thể gỡ khỏi giỏ hoặc đặt quantity=0
+            //     cd.setQuantity(0);
+            //     hasChange = true;
+            // } else if (quantity > stock) {
+            //     // số lượng trong giỏ vượt quá stock -> giảm xuống tối đa
+            //     cd.setQuantity((int) stock);
+            //     hasChange = true;
+            // }
 
-            if (hasChange) {
-                cartService.updateCart(user, (Integer) cd.getProduct().getId(), (Integer) cd.getQuantity());
-                model.addAttribute("Một số sản phẩm không còn đủ hàng",
-                        "Chúng tôi đã cập nhật lại giỏ hàng của bạn");
-            }
-
+            // if (hasChange) {
+            //     cartService.updateCart(user, (Integer) cd.getProduct().getId(), (Integer) cd.getQuantity());
+            //     model.addAttribute("Một số sản phẩm không còn đủ hàng",
+            //             "Chúng tôi đã cập nhật lại giỏ hàng của bạn");
+            // }
             totalPrice = totalPrice + (price * quantity);
         }
         model.addAttribute("bill", new InformationDTO());

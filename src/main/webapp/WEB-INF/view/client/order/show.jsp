@@ -15,6 +15,26 @@
                     border: 3px solid #ddd;
                 }
             </style>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const eventSource = new EventSource("/order/stream");
+
+                    eventSource.addEventListener("order-update", (event) => {
+                        console.log("Cập nhật mới:", event.data);
+
+                        // Gọi AJAX để lấy lại phần HTML mới
+                        fetch("/order/list-fragment")
+                            .then(response => response.text())
+                            .then(html => {
+                                document.querySelector("#orderTable").innerHTML =
+                                    new DOMParser()
+                                        .parseFromString(html, "text/html")
+                                        .querySelector("#orderTable").innerHTML;
+                            })
+                            .catch(err => console.error("Lỗi cập nhật:", err));
+                    });
+                });
+            </script>
             <!-- Start Header Area -->
             <jsp:include page="../layout/header.jsp" />
             <!-- End Header Area -->
