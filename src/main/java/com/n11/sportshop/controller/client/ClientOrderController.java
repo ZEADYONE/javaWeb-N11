@@ -40,7 +40,7 @@ public class ClientOrderController {
         HttpSession session = request.getSession(false);
         Integer id = (Integer)session.getAttribute("id");
         User user = this.userService.getUserByID(id);
-        List<Order> orders = this.orderService.getOrderHistory(user);
+        List<Order> orders = this.orderService.getOrderHistoryByStatus(user);
         model.addAttribute("orders", orders);
         return "client/order/show";
     }

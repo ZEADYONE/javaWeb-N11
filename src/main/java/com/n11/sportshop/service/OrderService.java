@@ -50,8 +50,12 @@ public class OrderService {
         this.voucherRepository = voucherRepository;
     }
 
-    public List<Order> getOrderHistory(User user) {
+    public List<Order> getOrderHistoryByStatus(User user) {
         return orderRepo.findByUser(user);
+    }
+
+    public List<Order> getOrderByStatus(OrderStatus status) {
+        return this.orderRepo.findByStatus(status);
     }
 
     public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
