@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
@@ -26,6 +25,7 @@ import com.n11.sportshop.repository.VoucherRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class OrderService {
 
     private final CartRepository cartRepo;
@@ -50,40 +50,12 @@ public class OrderService {
         this.voucherRepository = voucherRepository;
     }
 
-    @Transactional
-    public Order checkout(User user) {
-        Cart cart = cartRepo.findByUserAndStatus(user, "active")
-                .orElseThrow(() -> new RuntimeException("Không có giỏ hàng!"));
-
-        Order order = new Order();
-        order.setUser(user);
-        order.setStatus(OrderStatus.paid);
-        orderRepo.save(order);
-
-        Long total = 0L;
-
-        List<CartDetail> items = cartDetailRepo.findByCart(cart);
-        for (CartDetail item : items) {
-            OrderDetail detail = new OrderDetail();
-            detail.setOrder(order);
-            detail.setProduct(item.getProduct());
-            detail.setQuantity(item.getQuantity());
-            detail.setPrice(item.getProduct().getPrice());
-            total = total + (item.getProduct().getPrice() * item.getQuantity());
-            orderDetailRepo.save(detail);
-        }
-
-        order.setTotalAmount(total);
-        orderRepo.save(order);
-
-        cart.setStatus("checked_out");
-        cartRepo.save(cart);
-
-        return order;
+    public List<Order> getOrderHistoryByStatus(User user) {
+        return orderRepo.findByUser(user);
     }
 
-    public List<Order> getOrderHistory(User user) {
-        return orderRepo.findByUser(user);
+    public List<Order> getOrderByStatus(OrderStatus status) {
+        return this.orderRepo.findByStatus(status);
     }
 
     public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
@@ -102,7 +74,9 @@ public class OrderService {
         Voucher voucher = this.voucherRepository.findByCode(voucherCode);
         order.setVoucher(voucher);
         order = this.orderRepo.save(order);
-        Long price = 0L + 30000;
+        Long price = 0L;
+        Long shipPrice = 30000L;
+        Long discountAmount = 0L;
         for (var item : items) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setPrice(item.getProduct().getPrice());
@@ -115,7 +89,14 @@ public class OrderService {
             this.orderDetailRepo.save(orderDetail);
             price += item.getQuantity() * orderDetail.getPrice();
         }
+        if (voucher.getCode().equals("FREESHIP")) {
+            shipPrice = 0L;
+        } else {
+            discountAmount = price * voucher.getDiscountValue() / 100;
+        }
         order.setTotalAmount(price);
+        order.setShipPrice(shipPrice);
+        order.setDiscountAmount(discountAmount);
         return order;
     }
 
@@ -131,10 +112,13 @@ public class OrderService {
     //Cap nhat trang thai trong admin/order
     @Transactional
     public void updateOrderStatus(Integer orderId, OrderStatus status) {
-        Order order = orderRepo.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng có ID = " + orderId));
+        Order order = orderRepo.findById(orderId).get();
         order.setStatus(status);
         orderRepo.save(order);
+    }
+
+    public Order getOrderByUser(User user) {
+        return this.orderRepo.findTopByUserOrderByIdDesc(user);
     }
 
 

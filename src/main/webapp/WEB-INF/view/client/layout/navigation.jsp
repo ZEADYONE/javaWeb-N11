@@ -52,7 +52,7 @@
                                                 <i class="fa fa-user-circle-o mr-2"></i> Thông tin tài khoản
                                             </a>
 
-                                            <a class="dropdown-item" href="/orders">
+                                            <a class="dropdown-item" href="/order">
                                                 <i class="fa fa-list-alt mr-2"></i> Quản lý đơn hàng
                                             </a>
 

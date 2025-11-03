@@ -124,7 +124,7 @@
 											<h5></h5>
 										</td>
 										<td>
-											<fmt:formatNumber value="${totalPrice}" type="currency" />
+											<fmt:formatNumber value="${subTotal}" type="currency" />
 											<p></p>
 										</td>
 									</tr>
@@ -137,7 +137,20 @@
 										</td>
 										<td>
 											<p>
-												<fmt:formatNumber value="30000" type="currency" />
+												<fmt:formatNumber value="${shipping}" type="currency" />
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<h4>Discount</h4>
+										</td>
+										<td>
+											<h5></h5>
+										</td>
+										<td>
+											<p>
+												<fmt:formatNumber value="${discountAmount}" type="currency" />
 											</p>
 										</td>
 									</tr>
@@ -150,7 +163,7 @@
 										</td>
 										<td>
 											<p>
-												<fmt:formatNumber value="${totalPrice + 30000}" type="currency" />
+												<fmt:formatNumber value="${totalPrice}" type="currency" />
 											</p>
 										</td>
 									</tr>

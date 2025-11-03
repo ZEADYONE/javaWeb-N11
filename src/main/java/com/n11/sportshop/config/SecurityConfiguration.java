@@ -69,7 +69,7 @@ public class SecurityConfiguration {
                         DispatcherType.INCLUDE)
                 .permitAll()
                 .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**", "/product/**",
-                        "/register", "/images/**", "/home", "/products")
+                        "/register", "/images/**", "/home", "/products/**")
                 .permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated())
