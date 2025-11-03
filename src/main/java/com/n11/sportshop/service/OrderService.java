@@ -98,8 +98,7 @@ public class OrderService {
     //Cap nhat trang thai trong admin/order
     @Transactional
     public void updateOrderStatus(Integer orderId, OrderStatus status) {
-        Order order = orderRepo.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng có ID = " + orderId));
+        Order order = orderRepo.findById(orderId).get();
         order.setStatus(status);
         orderRepo.save(order);
     }
