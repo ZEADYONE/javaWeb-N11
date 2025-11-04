@@ -128,6 +128,7 @@ public class UserController {
         List<Voucher> vouchers = this.productService.getVouchers();
         model.addAttribute("newUser", user);
         model.addAttribute("vouchers", vouchers);
+        model.addAttribute("userVouchers", user.getVoucherList());
         return "admin/user/update";
     }
 
