@@ -18,11 +18,9 @@ import com.n11.sportshop.service.OrderService;
 @Controller
 @RequestMapping("/admin/order")
 public class OrderController {
-    private final OrderSseController orderSseController;
     private final OrderService orderService;
 
-    public OrderController(OrderSseController orderSseController, OrderService orderService) {
-        this.orderSseController = orderSseController;
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
@@ -95,7 +93,6 @@ public class OrderController {
         if (order.getStatus() == OrderStatus.pending) {
             this.orderService.updateOrderStatus(id, OrderStatus.shipped);
         }
-        orderSseController.sendEvent("Đơn hàng " + id + " đã được vận chuyển");
         return "redirect:/admin/order";
     }
 
