@@ -96,7 +96,7 @@
                                                 <div class="input-group mb-3">
                                                     <form:select class="form-select border" style="padding-left: 20px;"
                                                         path="${voucher.code}">
-                                                        <form:option value="">-----</form:option>
+                                                        <form:option value="NONE">-----</form:option>
                                                         <form:options items="${vouchers}" itemValue="code"
                                                             itemLabel="code" />
                                                     </form:select>
