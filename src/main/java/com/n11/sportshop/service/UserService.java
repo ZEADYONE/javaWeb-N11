@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.UserVoucher;
 import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.repository.RoleRepository;
 import com.n11.sportshop.repository.UserRepository;
@@ -138,5 +139,9 @@ public class UserService {
         }
     
         userRepository.save(user);
+    }
+
+    public List<UserVoucher> getVoucherListMoreThan(int quantity) {
+        return this.userRepository.findByQuantityGreaterThan(quantity);
     }
 }

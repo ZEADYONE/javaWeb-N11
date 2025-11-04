@@ -1,5 +1,6 @@
 package com.n11.sportshop.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.CartDetail;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.UserVoucher;
+import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
 import com.n11.sportshop.service.OrderService;
@@ -108,6 +111,12 @@ public class ClientCartController {
             }
             totalPrice = totalPrice + (price * quantity);
         }
+        ArrayList<Voucher> vouchers = new ArrayList<>();
+        List<UserVoucher> userVouchers = this.userService.getVoucherListMoreThan(0);
+        for (var item : userVouchers) {
+            vouchers.add(item.getVoucher());
+        }
+        model.addAttribute("vouchers", vouchers);
         model.addAttribute("error", "");
         model.addAttribute("bill", new InformationDTO());
         model.addAttribute("items", cartDetails);
