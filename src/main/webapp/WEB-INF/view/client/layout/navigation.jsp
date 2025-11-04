@@ -24,10 +24,10 @@
                     </button>
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/products">Sản phẩm</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/contact">Liên hệ</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/cart">Giỏ hàng</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/products">Product</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
 
                             <li class="nav-item dropdown">
                                 <c:choose>
@@ -49,11 +49,11 @@
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 
                                             <a class="dropdown-item" href="/profile">
-                                                <i class="fa fa-user-circle-o mr-2"></i> Thông tin tài khoản
+                                                <i class="fa fa-user-circle-o mr-2"></i> Profiles
                                             </a>
 
                                             <a class="dropdown-item" href="/order">
-                                                <i class="fa fa-list-alt mr-2"></i> Quản lý đơn hàng
+                                                <i class="fa fa-list-alt mr-2"></i> Purchase order
                                             </a>
 
                                             <div class="dropdown-divider"></div>
@@ -63,7 +63,7 @@
                                                     value="${_csrf.token}" />
                                                 <button type="submit"
                                                     class="dropdown-item text-danger border-0 bg-transparent w-100 text-start">
-                                                    <i class="fa fa-sign-out mr-2"></i> Đăng xuất
+                                                    <i class="fa fa-sign-out mr-2"></i> Log out
                                                 </button>
                                             </form>
                                         </div>

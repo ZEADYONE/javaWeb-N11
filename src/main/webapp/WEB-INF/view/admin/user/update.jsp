@@ -94,10 +94,18 @@
                                             </div>
 
                                             <div class="text-center mt-4">
-                                                <button type="submit" class="btn text-white px-4 py-2"
-                                                    style="background-color: #ffba00;">
-                                                    Update
-                                                </button>
+                                                <div class="text-center mt-4">
+                                                    <button type="submit" class="btn text-white px-4 py-2"
+                                                        style="background-color: #ffba00;">
+                                                        Update
+                                                    </button>
+
+                                                    <!-- Button Add Voucher -->
+                                                    <button type="button" class="btn btn-success px-4 py-2 ms-2"
+                                                        data-bs-toggle="modal" data-bs-target="#addVoucherForUserModal">
+                                                        Add Voucher
+                                                    </button>
+                                                </div>
                                             </div>
                                         </form:form>
                                     </div>
@@ -108,6 +116,56 @@
                     </div>
                 </div>
             </main>
+            <!-- Modal Add Voucher to User -->
+            <div class="modal fade" id="addVoucherForUserModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg">
+                        <div class="modal-header bg-gradient-primary text-white">
+                            <h5 class="modal-title">Assign Voucher to User</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+
+                        <form action="/admin/user/assign-vouchers" method="post" class="p-3">
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
+                            <div class="row">
+                                <c:forEach var="voucher" items="${vouchers}">
+                                    <div class="col-md-4 mb-2">
+                                        <div class="form-check">
+
+                                            <input class="form-check-input" type="checkbox" name="voucherIds"
+                                                value="${voucher.id}" id="voucher_${voucher.id}" <c:if
+                                                test="${voucher.assigned}">checked
+                                            </c:if>
+                                            />
+
+                                            <label class="form-check-label" for="voucher_${voucher.id}">
+                                                <b>${voucher.code}</b> -
+                                                <c:choose>
+                                                    <c:when test="${v.type == 'PERCENT'}">${v.value}%</c:when>
+                                                    <c:otherwise>${v.value}₫</c:otherwise>
+                                                </c:choose>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn text-white px-4 py-2"
+                                    style="background-color: #ffba00;" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn text-white px-4 py-2"
+                                    style="background-color: #ffba00;"">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <script>
                 function previewImage(event) {

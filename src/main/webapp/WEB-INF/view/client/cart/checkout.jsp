@@ -29,8 +29,7 @@
                 <!--================Checkout Area =================-->
                 <section class="checkout_area section_gap">
                     <div class="container">
-                        <form:form class="row contact_form" action="/order/create" method="post" modelAttribute="bill"
-                            novalidate="novalidate">
+                        <form:form class="row contact_form" action="/order/create" method="post" modelAttribute="bill">
                             <div class="billing_details">
                                 <div class="row">
                                     <div class="col-lg-7">
@@ -39,24 +38,25 @@
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input type="text" path="name" class="form-control"
-                                                placeholder="Name" />
+                                            <form:input path="name" class="form-control" placeholder="Name"
+                                                required="required" />
+
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input type="text" path="phone" class="form-control"
-                                                placeholder="Phone number" />
+                                            <form:input path="phone" class="form-control" placeholder="Phone number"
+                                                required="required" />
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input type="text" path="email" class="form-control"
-                                                placeholder="Email Address" />
+                                            <form:input path="email" class="form-control" placeholder="Email Address"
+                                                required="required" />
                                         </div>
 
 
                                         <div class="col-md-12 form-group p_star">
                                             <form:textarea class="form-control" rows="1" path="address"
-                                                placeholder="Address"></form:textarea>
+                                                placeholder="Address" required="required"></form:textarea>
                                         </div>
 
                                         <div class="col-md-12 form-group">
@@ -64,7 +64,7 @@
                                                 <h3>Shipping Details</h3>
                                             </div>
                                             <form:textarea class="form-control" rows="1" path="note"
-                                                placeholder="Order Notes"></form:textarea>
+                                                placeholder="Order Notes" required="required"></form:textarea>
                                         </div>
 
 
@@ -146,10 +146,19 @@
                                             <a class="primary-btn" id="btn-paypal" style="display:none;"
                                                 href="#">Proceed to
                                                 Paypal</a>
-                                            <button type="submit" class="primary-btn" id="btn-cash"
-                                                style="display:none;">
-                                                Proceed to Cash Payment
-                                            </button>
+                                            <form action="/cart/checkout" method="post" style="display:none;"
+                                                id="form-cash">
+
+                                                <input type="hidden" name="checkoutToken" value="${checkoutToken}">
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+
+                                                <button type="submit" class="primary-btn" id="btn-cash"
+                                                    style="display:none;">
+                                                    Proceed to Cash Payment
+                                                </button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>

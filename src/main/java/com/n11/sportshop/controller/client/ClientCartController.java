@@ -1,6 +1,8 @@
 package com.n11.sportshop.controller.client;
 
 import java.util.List;
+import java.util.TreeMap;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.CartDetail;
-import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
@@ -37,24 +37,36 @@ public class ClientCartController {
         this.orderService = orderService;
         this.userService = userService;
     }
-    
 
-    @GetMapping("")
+    @GetMapping
     public String getCartPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
-
-        Long totalPrice = 0L;
-
-        for (CartDetail cd : cartDetails) {
-            Long price = cd.getProduct().getPrice();
-            Long quantity = Long.valueOf(cd.getQuantity());
-
+        Long totalPrice = 0L;  
+        String hasToDeleteProduct = "false";
+        TreeMap<Integer, String> errors = new TreeMap<>();
+        for (CartDetail item : cartDetails) {
+            Long price = item.getProduct().getPrice();
+            Integer quantity = item.getQuantity();
+            Integer stock = item.getProduct().getStockQuantity();
+            if (stock == 0) {
+                // sản phẩm hết hàng -> có thể gỡ khỏi giỏ hoặc đặt quantity=0
+                item.setQuantity(0);
+                errors.put(item.getProduct().getId(), "Sản phẩm này đã hết hàng");
+                hasToDeleteProduct = "true";
+            } else if (quantity > stock) {
+                // số lượng trong giỏ vượt quá stock -> giảm xuống tối đa
+                item.setQuantity(stock);
+                errors.put(item.getProduct().getId(), "Chỉ còn " + stock + " sản phẩm");
+            }
             totalPrice = totalPrice + (price * quantity);
         }
-
+        if (!errors.isEmpty()) {
+            model.addAttribute("errors", errors);
+        }
+        model.addAttribute("hasToDeleteProduct", hasToDeleteProduct);
         model.addAttribute("items", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
         return "client/cart/show";
@@ -79,23 +91,29 @@ public class ClientCartController {
     public String getCheckOut(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");
+        String token = UUID.randomUUID().toString();
+        session.setAttribute("checkoutToken", token);
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
-
+        if(cartDetails.isEmpty()) {
+            return "redirect:/cart?error=empty";
+        }
         Long totalPrice = 0L;
-
-        for (CartDetail cd : cartDetails) {
-            Long price = cd.getProduct().getPrice();
-            Long quantity = Long.valueOf(cd.getQuantity());
-
+        
+        for (CartDetail item : cartDetails) {
+            Long price = item.getProduct().getPrice();
+            Integer quantity = item.getQuantity();
+            if (item.getProduct().getStockQuantity() < item.getQuantity()) {
+                return "redirect:/cart";
+            }
             totalPrice = totalPrice + (price * quantity);
         }
+        model.addAttribute("error", "");
         model.addAttribute("bill", new InformationDTO());
         model.addAttribute("items", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
+        
         return "client/cart/checkout";
     }
-
-    
 
 }

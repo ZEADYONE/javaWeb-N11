@@ -48,7 +48,7 @@ public class ImageService {
             stream.close();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
 
@@ -93,7 +93,7 @@ public class ImageService {
             stream.close();
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
 

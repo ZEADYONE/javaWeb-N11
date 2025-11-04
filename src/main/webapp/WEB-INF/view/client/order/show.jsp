@@ -15,6 +15,26 @@
                     border: 3px solid #ddd;
                 }
             </style>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const eventSource = new EventSource("/order/stream");
+
+                    eventSource.addEventListener("order-update", (event) => {
+                        console.log("Cập nhật mới:", event.data);
+
+                        // Gọi AJAX để lấy lại phần HTML mới
+                        fetch("/order/list-fragment")
+                            .then(response => response.text())
+                            .then(html => {
+                                document.querySelector("#orderTable").innerHTML =
+                                    new DOMParser()
+                                        .parseFromString(html, "text/html")
+                                        .querySelector("#orderTable").innerHTML;
+                            })
+                            .catch(err => console.error("Lỗi cập nhật:", err));
+                    });
+                });
+            </script>
             <!-- Start Header Area -->
             <jsp:include page="../layout/header.jsp" />
             <!-- End Header Area -->
@@ -57,7 +77,7 @@
 
                                         <div class="media-body">
                                             <a href="/order">
-                                                <h3>Pendding</h3>
+                                                <h3>Pending</h3>
                                             </a>
 
                                         </div>
@@ -72,8 +92,8 @@
                                     </div>
                                     <div class="media post_item">
                                         <div class="media-body">
-                                            <a href="/order/accpect">
-                                                <h3>Accpect</h3>
+                                            <a href="/order/accept">
+                                                <h3>Accept</h3>
                                             </a>
                                         </div>
                                     </div>
@@ -99,8 +119,25 @@
 
                         <div class="col-lg-9 posts-list">
                             <c:forEach var="order" items="${orders}">
+
+
                                 <div class="order_details_table">
-                                    <h2>Order Details</h2>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h2>Order Details</h2>
+                                        <c:set var="badgeClass" value="" />
+
+                                        <c:choose>
+                                            <c:when test="${order.status == 'pending'}">
+                                                <c:set var="badgeClass" value="text-bg-info" />
+                                            </c:when>
+
+                                        </c:choose>
+
+                                        <span class="badge ${badgeClass}" style="padding:8px; font-size:14px;">
+                                            ${order.status}
+                                        </span>
+
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -188,6 +225,44 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="mt-3 d-flex justify-content-end gap-2">
+                                        <c:choose>
+
+
+                                            <c:when test="${status == 'pending'}">
+                                                <form action="/admin/order/cancel/${order.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+
+                                            </c:when>
+
+
+                                            <c:when test="${status == 'shipping'}">
+                                                <form action="/admin/order/accept/${order.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+                                                    <button class="btn btn-success btn-sm" type="submit"
+                                                        style="margin-right: 20px;">
+                                                        Accept
+                                                    </button>
+                                                </form>
+                                                <form action="/admin/order/cancel/${order.id}" method="post">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}">
+                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                        Cancel
+                                                    </button>
+                                                </form>
+                                            </c:when>
+
+                                            <c:otherwise></c:otherwise>
+
+                                        </c:choose>
                                     </div>
                                 </div>
                             </c:forEach>

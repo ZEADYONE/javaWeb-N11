@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.n11.sportshop.domain.CartDetail;
+import com.n11.sportshop.domain.DiscountType;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
@@ -50,8 +51,8 @@ public class OrderService {
         this.voucherRepository = voucherRepository;
     }
 
-    public List<Order> getOrderHistoryByStatus(User user) {
-        return orderRepo.findByUser(user);
+    public List<Order> getOrderHistoryByStatus(User user, OrderStatus status) {
+        return orderRepo.findByUserAndStatus(user, status);
     }
 
     public List<Order> getOrderByStatus(OrderStatus status) {
@@ -71,8 +72,6 @@ public class OrderService {
         Payment payment = this.paymentRepository.findByPaymentMethod(informationDTO.getPayment());
         order.setPayment(payment);
         order.setStatus(OrderStatus.pending);
-        Voucher voucher = this.voucherRepository.findByCode(voucherCode);
-        order.setVoucher(voucher);
         order = this.orderRepo.save(order);
         Long price = 0L;
         Long shipPrice = 30000L;
@@ -89,10 +88,18 @@ public class OrderService {
             this.orderDetailRepo.save(orderDetail);
             price += item.getQuantity() * orderDetail.getPrice();
         }
-        if (voucher.getCode().equals("FREESHIP")) {
-            shipPrice = 0L;
-        } else {
-            discountAmount = price * voucher.getDiscountValue() / 100;
+        if (!voucherCode.equals("NONE")) {
+            Voucher voucher = this.voucherRepository.findByCode(voucherCode);
+            order.setVoucher(voucher);
+            if (voucher.getDiscountType() == DiscountType.freeship) {
+                shipPrice = 0L;
+            } else {
+                if (voucher.getDiscountType() == DiscountType.fixed_amount) {
+                    discountAmount = 1L * voucher.getDiscountValue();
+                } else {
+                    discountAmount = price * voucher.getDiscountValue() / 100;
+                }
+            }
         }
         order.setTotalAmount(price);
         order.setShipPrice(shipPrice);
@@ -122,4 +129,11 @@ public class OrderService {
     }
 
 
+    public Order getOrderById(int id) {
+        return this.orderRepo.findById(id).get();
+    }
+
+    public Integer countByStatus(OrderStatus status) {
+        return this.orderRepo.countByStatus(status);
+    }
 }

@@ -174,11 +174,11 @@
                                                                     <form action="/admin/catalog/category/create"
                                                                         method="post">
 
-                                                                        <input type="hidden" 
-                                                                            name="${_csrf.parameterName}" 
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
                                                                             value="${_csrf.token}" />
 
-                                                                       
+
 
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
@@ -288,12 +288,6 @@
                                                                                                 <input type="hidden"
                                                                                                     name="${_csrf.parameterName}"
                                                                                                     value="${_csrf.token}">
-                                                                                                <input type="hidden"
-                                                                                                    name="id"
-                                                                                                    value="${brand.id}">
-                                                                                                <input type="hidden"
-                                                                                                    name="${_csrf.parameterName}"
-                                                                                                    value="${_csrf.token}" />
 
                                                                                                 <button type="button"
                                                                                                     class="btn btn-secondary me-2"
@@ -339,11 +333,9 @@
                                                                     <form action="/admin/catalog/brand/create"
                                                                         method="post">
 
-                                                                        <input type="hidden" 
-                                                                            name="${_csrf.parameterName}" 
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
                                                                             value="${_csrf.token}" />
-
-                                                                        
 
                                                                         <div class="modal-body">
                                                                             <div class="mb-3">
@@ -363,6 +355,214 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- VOUCHER -->
+                                            <div class="accordion-item border shadow-sm">
+                                                <h2 class="accordion-header" id="headingVoucher">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseVoucher"
+                                                        aria-expanded="false" aria-controls="collapseVoucher">
+                                                        <i class="ni ni-credit-card text-warning me-2"></i> Voucher List
+                                                    </button>
+                                                </h2>
+
+                                                <div id="collapseVoucher" class="accordion-collapse collapse"
+                                                    aria-labelledby="headingVoucher" data-bs-parent="#catalogAccordion">
+                                                    <div class="accordion-body">
+
+                                                        <table class="table align-items-center mb-0">
+                                                            <thead class="bg-light">
+                                                                <tr>
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                                                        ID</th>
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                        Code</th>
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                        Type</th>
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                        Value</th>
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                        Description
+                                                                    </th>
+
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                                                        Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach var="voucher" items="${vouchers}">
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                            <h6 class="mb-0 text-sm">${voucher.id}</h6>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="text-sm font-weight-bold mb-0">
+                                                                                ${voucher.code}</p>
+                                                                        </td>
+
+                                                                        <!-- Voucher Type -->
+                                                                        <td>
+                                                                            <span class="text-sm">
+                                                                                <c:choose>
+                                                                                    <c:when
+                                                                                        test="${voucher.discountType == 'percentage'}">
+                                                                                        %
+                                                                                    </c:when>
+                                                                                    <c:otherwise>Amount</c:otherwise>
+                                                                                </c:choose>
+                                                                            </span>
+                                                                        </td>
+
+                                                                        <!-- Voucher Value -->
+                                                                        <td>
+                                                                            <span class="text-xs font-weight-bold">
+                                                                                <c:choose>
+                                                                                    <c:when
+                                                                                        test="${voucher.discountType == 'percentage'}">
+                                                                                        ${voucher.discountValue}%
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        ${voucher.discountValue} ₫
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
+                                                                            </span>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <span
+                                                                                class="text-sm">${voucher.description}</span>
+                                                                        </td>
+
+                                                                        <!-- toggle -->
+                                                                        <td class="text-center">
+                                                                            <form method="post"
+                                                                                action="/admin/catalog/voucher/update/${voucher.id}"
+                                                                                style="display:inline;">
+                                                                                <input type="hidden"
+                                                                                    name="${_csrf.parameterName}"
+                                                                                    value="${_csrf.token}">
+
+                                                                                <c:choose>
+                                                                                    <c:when test="${voucher.status}">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-sm btn-success">
+                                                                                            <i
+                                                                                                class="bi bi-toggle-on fs-5"></i>
+                                                                                        </button>
+                                                                                    </c:when>
+
+                                                                                    <c:otherwise>
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-sm btn-secondary">
+                                                                                            <i
+                                                                                                class="bi bi-toggle-off fs-5"></i>
+                                                                                        </button>
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
+                                                                            </form>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </table>
+
+
+                                                        <button class="btn btn-sm btn-primary mt-3"
+                                                            data-bs-toggle="modal" data-bs-target="#addVoucherModal">
+                                                            Add Voucher
+                                                        </button>
+
+
+                                                        <div class="modal fade" id="addVoucherModal" tabindex="-1">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content border-0 shadow-lg">
+                                                                    <div
+                                                                        class="modal-header bg-gradient-primary text-white">
+                                                                        <h5 class="modal-title">Add New Voucher</h5>
+                                                                        <button type="button"
+                                                                            class="btn-close btn-close-white"
+                                                                            data-bs-dismiss="modal"></button>
+                                                                    </div>
+
+                                                                    <form action="/admin/catalog/voucher/create"
+                                                                        method="post">
+                                                                        <input type="hidden"
+                                                                            name="${_csrf.parameterName}"
+                                                                            value="${_csrf.token}" />
+
+                                                                        <div class="modal-body">
+
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Voucher
+                                                                                    Code</label>
+                                                                                <input type="text"
+                                                                                    class="form-control border"
+                                                                                    style="padding-left: 20px;"
+                                                                                    name="code" required>
+                                                                            </div>
+
+
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Type</label>
+                                                                                <select class="form-select"
+                                                                                    name="discountType"
+                                                                                    style="padding-left: 20px;"
+                                                                                    id="voucherType" required>
+                                                                                    <option value="percentage">Percent
+                                                                                        (%)
+                                                                                    </option>
+                                                                                    <option value="fixedAmount">Fixed
+                                                                                        Amount
+                                                                                        (₫)</option>
+                                                                                    <option value="freeship">Fixed
+                                                                                        Amount
+                                                                                        (₫)</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label"
+                                                                                    id="valueLabel">Discount Value
+                                                                                    (%)</label>
+                                                                                <input type="number"
+                                                                                    class="form-control border"
+                                                                                    style="padding-left: 20px;"
+                                                                                    id="voucherValue"
+                                                                                    name="discountValue" required
+                                                                                    min="1" max="100"
+                                                                                    placeholder="Enter percent (1 - 100)">
+
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label
+                                                                                    class="form-label">Description</label>
+                                                                                <textarea class="form-control border"
+                                                                                    style="padding-left: 20px;"
+                                                                                    name="description"
+                                                                                    rows="2"></textarea>
+                                                                            </div>
+
+                                                                            <div class="text-end">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Create</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </form>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -388,6 +588,25 @@
                     if (win && document.querySelector('#sidenav-scrollbar')) {
                         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), { damping: '0.5' });
                     }
+                </script>
+                <script>
+                    document.getElementById("voucherType").addEventListener("change", function () {
+                        const type = this.value;
+                        const valueInput = document.getElementById("voucherValue");
+                        const label = document.getElementById("valueLabel");
+                        const help = document.getElementById("valueHelp");
+
+                        if (type === "PERCENT") {
+                            valueInput.min = 1;
+                            valueInput.max = 100;
+                            valueInput.placeholder = "Enter percent (1 - 100)";
+
+                        } else {
+                            valueInput.removeAttribute("max");
+                            valueInput.placeholder = "Enter amount";
+
+                        }
+                    });
                 </script>
             </body>
 
