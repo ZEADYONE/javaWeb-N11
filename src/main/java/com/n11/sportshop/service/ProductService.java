@@ -96,6 +96,20 @@ public class ProductService {
     public void deleteBrand(Integer id) {
         brandRepository.deleteById(id);
     }
+
+    public void createVoucher(Voucher voucher) {
+        this.voucherRepository.save(voucher);
+    }
+
+    public void updateVoucher(Integer id) {
+        Voucher voucher = this.voucherRepository.findById(id).get();
+        if (voucher.getStatus() == 1) {
+            voucher.setStatus(0);
+        } else {
+            voucher.setStatus(1);
+        }
+        this.voucherRepository.save(voucher);
+    }
     public List<Product> getLatestProducts() {
         return this.productRepository.findTop8ByOrderByIdDesc();
     }
