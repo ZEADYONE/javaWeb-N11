@@ -129,7 +129,14 @@ public class UserService {
     public void softDeleteUser(Integer id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setStatus(0);
+        
+        if(user.getStatus()==1){
+            user.setStatus(0);
+        }
+        else{
+            user.setStatus(1);
+        }
+    
         userRepository.save(user);
     }
 }
