@@ -72,8 +72,6 @@ public class OrderService {
         Payment payment = this.paymentRepository.findByPaymentMethod(informationDTO.getPayment());
         order.setPayment(payment);
         order.setStatus(OrderStatus.pending);
-        Voucher voucher = this.voucherRepository.findByCode(voucherCode);
-        order.setVoucher(voucher);
         order = this.orderRepo.save(order);
         Long price = 0L;
         Long shipPrice = 30000L;
@@ -90,13 +88,17 @@ public class OrderService {
             this.orderDetailRepo.save(orderDetail);
             price += item.getQuantity() * orderDetail.getPrice();
         }
-        if (voucher.getDiscountType() == DiscountType.freeship) {
-            shipPrice = 0L;
-        } else {
-            if (voucher.getDiscountType() == DiscountType.fixed_amount) {
-                discountAmount = 1L * voucher.getDiscountValue();
+        if (!voucherCode.equals("NONE")) {
+            Voucher voucher = this.voucherRepository.findByCode(voucherCode);
+            order.setVoucher(voucher);
+            if (voucher.getDiscountType() == DiscountType.freeship) {
+                shipPrice = 0L;
             } else {
-                discountAmount = price * voucher.getDiscountValue() / 100;
+                if (voucher.getDiscountType() == DiscountType.fixed_amount) {
+                    discountAmount = 1L * voucher.getDiscountValue();
+                } else {
+                    discountAmount = price * voucher.getDiscountValue() / 100;
+                }
             }
         }
         order.setTotalAmount(price);
