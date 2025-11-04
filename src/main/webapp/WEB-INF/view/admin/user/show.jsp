@@ -50,7 +50,7 @@
                   <a href="/admin/user/create" type="button" class="btn btn-primary"
                     style="background-color: #ffba00; margin: 20px 0 0 30px; width: 130px;">Create User</a>
 
-            
+
 
                   <div class="card-body px-0 pb-2">
 
@@ -69,6 +69,9 @@
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                               Phone Number
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                              Status
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                               Action
@@ -99,6 +102,9 @@
                                 <p class="text-sm font-weight-bold mb-0">${user.phoneNumber}</p>
                               </td>
 
+                              <td style="min-width: 180px;">
+                                <p class="text-sm font-weight-bold mb-0">${user.status}</p>
+                              </td>
                               <!-- Action -->
                               <td class="text-center">
                                 <!-- View Detail-->
@@ -147,11 +153,8 @@
 
                                       <!-- Footer -->
                                       <div class="modal-footer justify-content-center border-0 pb-4">
-                                        <form method="post" action="/admin/user/delete">
+                                        <form method="post" action="/admin/user/delete/{user.id}">
                                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                                          <input type="hidden" name="id" value="${user.id}">
-                                          <input type="hidden" name="image" value="${user.image}">
-                                          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                           <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
                                             Cancel
                                           </button>

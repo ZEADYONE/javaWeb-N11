@@ -392,7 +392,10 @@
                                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                                         Description
                                                                     </th>
-
+                                                                    <th
+                                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                        Status
+                                                                    </th>
                                                                     <th
                                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                                                         Actions</th>
@@ -437,11 +440,16 @@
                                                                             </span>
                                                                         </td>
 
+
+
                                                                         <td>
                                                                             <span
                                                                                 class="text-sm">${voucher.description}</span>
                                                                         </td>
-
+                                                                        <td>
+                                                                            <span
+                                                                                class="text-sm">${voucher.status}</span>
+                                                                        </td>
                                                                         <!-- toggle -->
                                                                         <td class="text-center">
                                                                             <form method="post"
@@ -452,7 +460,8 @@
                                                                                     value="${_csrf.token}">
 
                                                                                 <c:choose>
-                                                                                    <c:when test="${voucher.status}">
+                                                                                    <c:when
+                                                                                        test="${voucher.status == 0}">
                                                                                         <button type="submit"
                                                                                             class="btn btn-sm btn-success">
                                                                                             <i
@@ -520,12 +529,12 @@
                                                                                     <option value="percentage">Percent
                                                                                         (%)
                                                                                     </option>
-                                                                                    <option value="fixedAmount">Fixed
+                                                                                    <option value="fixed_amount">Fixed
                                                                                         Amount
                                                                                         (₫)</option>
-                                                                                    <option value="freeship">Fixed
+                                                                                    <!-- <option value="freeship">Fixed
                                                                                         Amount
-                                                                                        (₫)</option>
+                                                                                        (₫)</option> -->
                                                                                 </select>
                                                                             </div>
 

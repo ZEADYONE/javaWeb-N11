@@ -137,15 +137,16 @@
 
                                             <input class="form-check-input" type="checkbox" name="voucherIds"
                                                 value="${voucher.id}" id="voucher_${voucher.id}" <c:if
-                                                test="${voucher.assigned}">checked
+                                                test="${voucher == 1}">checked
                                             </c:if>
                                             />
 
                                             <label class="form-check-label" for="voucher_${voucher.id}">
                                                 <b>${voucher.code}</b> -
                                                 <c:choose>
-                                                    <c:when test="${v.type == 'PERCENT'}">${v.value}%</c:when>
-                                                    <c:otherwise>${v.value}₫</c:otherwise>
+                                                    <c:when test="${v.type == 'percentage'}">${voucher.discountValue}%
+                                                    </c:when>
+                                                    <c:otherwise>${voucher.discountValue}₫</c:otherwise>
                                                 </c:choose>
                                             </label>
 
