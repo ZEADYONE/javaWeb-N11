@@ -122,4 +122,14 @@ public class UserService {
     public Page<User> fetchUsers(Pageable pageable) {
         return this.userRepository.findAll(pageable);
     }
+    public List<User> getActiveUsers() {
+        return userRepository.findByStatus(1);
+    }
+
+    public void softDeleteUser(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setStatus(0);
+        userRepository.save(user);
+    }
 }

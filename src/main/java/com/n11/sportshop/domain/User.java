@@ -49,7 +49,7 @@ public class User {
 
     // @Column(length = 255)
     private String address;
-
+    private int status=1;//=1 là hoạt động, 0 là ko hoạt động
     @Column
     String image;
 
@@ -124,4 +124,13 @@ public class User {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
 }

@@ -133,4 +133,16 @@ public class UserController {
         return "redirect:/admin/user";
 
     }
+    @GetMapping
+    public String getUserList(Model model) {
+        model.addAttribute("users", userService.getActiveUsers());
+        return "admin/user/show";
+    }
+
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("id") Integer id) {
+        userService.softDeleteUser(id);
+        return "redirect:/admin/user";
+    }
+
 }

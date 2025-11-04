@@ -1,5 +1,7 @@
 package com.n11.sportshop.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +22,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     boolean existsByUsername(String username);
 
     Page<User> findAll(Pageable pageable);
+    List<User> findByStatus(int status);
 }
