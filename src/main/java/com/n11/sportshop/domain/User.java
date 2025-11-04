@@ -126,7 +126,6 @@ public class User {
         this.image = image;
     }
 
-<<<<<<< HEAD
     public int getStatus() {
         return status;
     }
@@ -135,7 +134,7 @@ public class User {
         this.status = status;
     }
     
-=======
+
     public List<UserVoucher> getVoucherList() {
         return voucherList;
     }
@@ -143,5 +142,5 @@ public class User {
     public void setVoucherList(List<UserVoucher> voucherList) {
         this.voucherList = voucherList;
     }
->>>>>>> 53936619fc4a279c26c40534da5b0f9f37254f47
+
 }
