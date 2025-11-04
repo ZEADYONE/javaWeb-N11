@@ -1,7 +1,9 @@
 package com.n11.sportshop.controller.admin;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.UserVoucher;
 import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.UserService;
@@ -126,9 +129,17 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         List<Voucher> vouchers = this.productService.getVouchers();
+        Map<Voucher, Integer> userHasVoucher = new TreeMap<>();
+        for (var voucher : vouchers) {
+            userHasVoucher.put(voucher, 0);
+        }
+        List<UserVoucher> userVouchers = user.getVoucherList();
+
+        for (UserVoucher userVoucher : userVouchers) {
+            userHasVoucher.put(userVoucher.getVoucher(), 1);
+        }
         model.addAttribute("newUser", user);
-        model.addAttribute("vouchers", vouchers);
-        model.addAttribute("userVouchers", user.getVoucherList());
+        model.addAttribute("vouchers", userHasVoucher);
         return "admin/user/update";
     }
 
