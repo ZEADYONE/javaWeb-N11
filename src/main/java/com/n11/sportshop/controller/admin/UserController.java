@@ -129,17 +129,18 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
         List<Voucher> vouchers = this.productService.getVouchers();
-        Map<Voucher, Integer> userHasVoucher = new TreeMap<>();
+        Map<Integer, Integer> userHasVoucher = new TreeMap<>();
         for (var voucher : vouchers) {
-            userHasVoucher.put(voucher, 0);
+            userHasVoucher.put(voucher.getId(), 0);
         }
         List<UserVoucher> userVouchers = user.getVoucherList();
 
         for (UserVoucher userVoucher : userVouchers) {
-            userHasVoucher.put(userVoucher.getVoucher(), 1);
+            userHasVoucher.put(userVoucher.getVoucher().getId(), 1);
         }
         model.addAttribute("newUser", user);
-        model.addAttribute("vouchers", userHasVoucher);
+        model.addAttribute("mapVouchers", userHasVoucher);
+        model.addAttribute("vouchers", vouchers);
         return "admin/user/update";
     }
 
