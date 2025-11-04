@@ -1,5 +1,6 @@
 package com.n11.sportshop.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,6 +26,9 @@ public class Voucher {
 
     private Integer discountValue;
 
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    private Integer status = 1;
+    
     public int getId() {
         return id;
     }
@@ -64,4 +68,14 @@ public class Voucher {
     public void setDiscountValue(Integer discountValue) {
         this.discountValue = discountValue;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+
 }

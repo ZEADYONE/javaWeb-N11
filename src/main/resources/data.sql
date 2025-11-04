@@ -15,11 +15,6 @@ INSERT INTO roles (id, name) VALUES
 (1, 'ADMIN'),
 (2, 'USER');
 
-
-INSERT INTO voucher (id, code, discount_value) VALUES
-(1, 'NONE', 0),
-(2, 'DC20', 20);
-
 -- =========================================
 -- INSERT DATA FOR CATEGORY
 -- =========================================
@@ -144,10 +139,10 @@ INSERT INTO product (id, name, description, price, stock_quantity, category_id, 
 -- INSERT DATA FOR VOUCHER
 -- =========================================
 
-INSERT INTO Voucher (code, description, discountType, discountValue) VALUES
+INSERT INTO Voucher (code, description, discount_type, discount_value) VALUES
 ('SALE10', '10% off all products', 'percentage', 10),
 ('SALE20', '20% off all products', 'percentage', 20),
 ('FIX50', 'Instant 50,000 VND off any order', 'fixed_amount', 50000),
 ('FIX100', '100,000 VND off any order', 'fixed_amount', 1000000),
 ('FREESHIP', 'Free shipping nationwide', 'freeship', NULL),
-('WELCOME10', '10% discount for new users', 'percentage', 10),
+('WELCOME10', '10% discount for new users', 'percentage', 10);
