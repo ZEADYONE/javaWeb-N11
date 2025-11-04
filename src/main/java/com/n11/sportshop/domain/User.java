@@ -50,7 +50,7 @@ public class User {
     private String phoneNumber;
 
     private String address;
-
+    private int status=1;//=1 là hoạt động, 0 là ko hoạt động
     @Column
     String image;
 
@@ -126,6 +126,15 @@ public class User {
         this.image = image;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+
     public List<UserVoucher> getVoucherList() {
         return voucherList;
     }
@@ -133,4 +142,5 @@ public class User {
     public void setVoucherList(List<UserVoucher> voucherList) {
         this.voucherList = voucherList;
     }
+
 }
