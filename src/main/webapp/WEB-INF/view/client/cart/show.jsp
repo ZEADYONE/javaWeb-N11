@@ -123,7 +123,7 @@
                                                     </h5>
                                                 </td>
                                             </tr>
-                                            <c:if test="${hasToDeleteProduct}">
+                                            <c:if test="${not hasToDeleteProduct}">
                                                 <tr class="out_button_area">
                                                     <td> </td>
                                                     <td> </td>
