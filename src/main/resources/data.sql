@@ -142,7 +142,7 @@ INSERT INTO product (id, name, description, price, stock_quantity, category_id, 
 INSERT INTO Voucher (code, description, discount_type, discount_value) VALUES
 ('SALE10', '10% off all products', 'percentage', 10),
 ('SALE20', '20% off all products', 'percentage', 20),
-('FIX50', 'Instant 50,000 VND off any order', 'fixed_amount', 50000),
+('FIX500', 'Instant 50,000 VND off any order', 'fixed_amount', 500000),
 ('FIX100', '100,000 VND off any order', 'fixed_amount', 100000),
 ('FREESHIP', 'Free shipping nationwide', 'freeship', NULL),
 ('WELCOME10', '10% discount for new users', 'percentage', 10);
