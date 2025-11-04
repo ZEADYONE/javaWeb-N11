@@ -523,6 +523,9 @@
                                                                                     <option value="fixedAmount">Fixed
                                                                                         Amount
                                                                                         (₫)</option>
+                                                                                    <option value="freeship">Fixed
+                                                                                        Amount
+                                                                                        (₫)</option>
                                                                                 </select>
                                                                             </div>
 

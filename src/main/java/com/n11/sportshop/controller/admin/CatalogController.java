@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,7 +69,7 @@ public class CatalogController {
     }
     
     @PostMapping("/voucher/update/{id}")
-    public String postCreateVoucher(@RequestParam("id") Integer id) {
+    public String postCreateVoucher(@PathVariable("id") Integer id) {
         this.productService.updateVoucher(id);
         return "redirect:/admin/catalog";
     }
