@@ -138,3 +138,16 @@ INSERT INTO product (id, name, description, price, stock_quantity, category_id, 
 (78, 'Yonex Backpack', 'Compact backpack for rackets and gear.', 450000, 90, 4, 3, 'ACC78.jpg'),
 (79, 'Li-Ning Wrist Support', 'Elastic support for wrists.', 120000, 150, 4, 4, 'ACC79.jpg'),
 (80, 'Decathlon Running Armband', 'Holds your phone securely while running.', 160000, 130, 4, 5, 'ACC80.jpg');
+
+
+-- =========================================
+-- INSERT DATA FOR VOUCHER
+-- =========================================
+
+INSERT INTO Voucher (code, description, discountType, discountValue) VALUES
+('SALE10', '10% off all products', 'percentage', 10),
+('SALE20', '20% off all products', 'percentage', 20),
+('FIX50', 'Instant 50,000 VND off any order', 'fixed_amount', 50000),
+('FIX100', '100,000 VND off any order', 'fixed_amount', 1000000),
+('FREESHIP', 'Free shipping nationwide', 'freeship', NULL),
+('WELCOME10', '10% discount for new users', 'percentage', 10),

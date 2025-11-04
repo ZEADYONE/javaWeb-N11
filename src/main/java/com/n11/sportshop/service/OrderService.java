@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.n11.sportshop.domain.CartDetail;
+import com.n11.sportshop.domain.DiscountType;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
@@ -89,10 +90,14 @@ public class OrderService {
             this.orderDetailRepo.save(orderDetail);
             price += item.getQuantity() * orderDetail.getPrice();
         }
-        if (voucher.getCode().equals("FREESHIP")) {
+        if (voucher.getDiscountType() == DiscountType.freeship) {
             shipPrice = 0L;
         } else {
-            discountAmount = price * voucher.getDiscountValue() / 100;
+            if (voucher.getDiscountType() == DiscountType.fixed_amount) {
+                discountAmount = 1L * voucher.getDiscountValue();
+            } else {
+                discountAmount = price * voucher.getDiscountValue() / 100;
+            }
         }
         order.setTotalAmount(price);
         order.setShipPrice(shipPrice);

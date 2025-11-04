@@ -17,14 +17,13 @@ public class OrderDetail {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")//, nullable = false)
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")//, nullable = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    // @Column( nullable = false)
     private int quantity;
 
     private Long price;

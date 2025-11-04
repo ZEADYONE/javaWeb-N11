@@ -14,7 +14,6 @@ import com.n11.sportshop.controller.reload.OrderSseController;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/admin/order")

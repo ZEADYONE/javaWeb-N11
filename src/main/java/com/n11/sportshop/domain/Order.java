@@ -32,15 +32,6 @@ public class Order {
     private Long totalAmount;
     private Long shipPrice;
     private Long discountAmount;
-    
-    public Long getShipPrice() {
-        return shipPrice;
-    }
-
-    public void setShipPrice(Long shipPrice) {
-        this.shipPrice = shipPrice;
-    }
-
     private String name;
     private String phone;
     private String email;
@@ -56,6 +47,14 @@ public class Order {
 
     @OneToOne(mappedBy = "order")
     private Payment payment;
+
+    public Long getShipPrice() {
+        return shipPrice;
+    }
+
+    public void setShipPrice(Long shipPrice) {
+        this.shipPrice = shipPrice;
+    }
 
     public int getId() {
         return id;

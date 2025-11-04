@@ -16,13 +16,11 @@ public class Voucher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //@Column( unique = true, nullable = false, length = 50)
     private String code;
 
     private String description;
 
     @Enumerated(EnumType.STRING)
-    //@Column( nullable = false)
     private DiscountType discountType;
 
     private Integer discountValue;

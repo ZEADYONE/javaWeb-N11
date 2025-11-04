@@ -1,5 +1,7 @@
 package com.n11.sportshop.domain;
 
+import java.util.List;
+
 import com.n11.sportshop.service.Validator.StrongPassword;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -26,28 +29,26 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    // @Column(nullable = false, unique = true, length = 100)
+    @OneToMany(mappedBy = "user")
+    private List<UserVoucher> voucherList;
+
+
     @NotNull
     @Size(min = 2, message = "Tên đăng nhập không hợp lệ")
     private String username;
 
-    // @Column(nullable = false)
     @NotNull
     @StrongPassword
     private String password;
 
-    // @Column(length = 150)//,nullable = false)
     private String fullName;
 
-    // @Column(unique = true, length = 150)
     @NotBlank(message = "Cần nhập email")
     @Email(message = "email không hợp lệ")
     private String email;
 
-    // @Column( length = 20)
     private String phoneNumber;
 
-    // @Column(length = 255)
     private String address;
 
     @Column
@@ -123,5 +124,13 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<UserVoucher> getVoucherList() {
+        return voucherList;
+    }
+
+    public void setVoucherList(List<UserVoucher> voucherList) {
+        this.voucherList = voucherList;
     }
 }

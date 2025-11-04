@@ -1,6 +1,5 @@
 package com.n11.sportshop.controller.client;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -109,6 +108,7 @@ public class ClientOrderController {
         List<OrderDetail> orderDetails = this.orderService.getOrderDetails(user);
         Order order = this.orderService.getOrderByUser(user);
         Long totalPrice = order.getShipPrice() + order.getTotalAmount() - order.getDiscountAmount();
+        if (totalPrice < 0) totalPrice = 0L;
         model.addAttribute("items", orderDetails);
         model.addAttribute("shipping", order.getShipPrice());
         model.addAttribute("subTotal", order.getTotalAmount());
