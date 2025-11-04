@@ -27,6 +27,7 @@ public class CatalogController {
     // Phần cate và brand
     @GetMapping()
     public String getCateBrandList(Model model) {
+        model.addAttribute("vouchers", this.productService.getVouchers());
         model.addAttribute("categories", this.productService.getAllCategories());
         model.addAttribute("brands", this.productService.getAllBrands());
         model.addAttribute("category", new Category()); // cần cho form binding
