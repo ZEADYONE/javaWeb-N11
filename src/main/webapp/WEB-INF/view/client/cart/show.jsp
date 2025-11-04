@@ -90,6 +90,18 @@
                                                     </td>
 
                                                 </tr>
+                                                <c:if test="${errors[item.product.id] != null}">
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td colspan="5" style="padding:6px 12px;">
+                                                            <span style="color:red; font-size:13px; font-weight:600;">
+                                                                ${errors[item.product.id]}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </c:if>
+
                                             </c:forEach>
                                             <tr class="bottom_button">
                                                 <td></td>
@@ -111,17 +123,20 @@
                                                     </h5>
                                                 </td>
                                             </tr>
-                                            <tr class="out_button_area">
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="checkout_btn_inner d-flex align-items-center"> <a
-                                                            class="primary-btn" href="/cart/checkout">Proceed to
-                                                            checkout</a> </div>
-                                                </td>
-                                            </tr>
+                                            <c:if test="${hasToDeleteProduct}">
+                                                <tr class="out_button_area">
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td></td>
+                                                    <td>
+                                                        <div class="checkout_btn_inner d-flex align-items-center"> <a
+                                                                class="primary-btn" href="/cart/checkout">Proceed to
+                                                                checkout</a> </div>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+
                                         </tbody>
                                     </table>
                                 </c:when>
