@@ -14,6 +14,7 @@ import com.n11.sportshop.domain.UserVoucher;
 import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.repository.RoleRepository;
 import com.n11.sportshop.repository.UserRepository;
+import com.n11.sportshop.repository.UserVoucherRepo;
 
 @Service
 public class UserService {
@@ -22,16 +23,18 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final ImageService imageService;
     private final PasswordEncoder passwordEncoder;
-
+    private final UserVoucherRepo userVoucherRepo;
     public UserService(
             UserRepository userRepository,
             RoleRepository roleRepository,
             ImageService imageService,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            UserVoucherRepo userVoucherRepo) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.imageService = imageService;
         this.passwordEncoder = passwordEncoder;
+        this.userVoucherRepo = userVoucherRepo;
     }
 
     public void createUserByClient(RegisterDTO userDTO) {
@@ -141,7 +144,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<UserVoucher> getVoucherListMoreThan(int quantity) {
-        return this.userRepository.findByQuantityGreaterThan(quantity);
+    public List<UserVoucher> getVoucherListMoreThan(User user, int quantity) {
+        return this.userVoucherRepo.findByUserAndQuantityGreaterThan(user, quantity);
     }
 }

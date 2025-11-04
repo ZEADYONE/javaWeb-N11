@@ -25,6 +25,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Page<User> findAll(Pageable pageable);
     List<User> findByStatus(int status);
 
-    List<UserVoucher> findByQuantityGreaterThan(Integer quantity);
-
 }
