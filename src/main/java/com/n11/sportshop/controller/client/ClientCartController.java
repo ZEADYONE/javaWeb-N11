@@ -44,7 +44,7 @@ public class ClientCartController {
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
         Long totalPrice = 0L;  
-        boolean hasToDeleteProduct = false;
+        String hasToDeleteProduct = "false";
         TreeMap<Integer, String> errors = new TreeMap<>();
         for (CartDetail item : cartDetails) {
             Long price = item.getProduct().getPrice();
@@ -54,7 +54,7 @@ public class ClientCartController {
                 // sản phẩm hết hàng -> có thể gỡ khỏi giỏ hoặc đặt quantity=0
                 item.setQuantity(0);
                 errors.put(item.getProduct().getId(), "Sản phẩm này đã hết hàng");
-                hasToDeleteProduct = true;
+                hasToDeleteProduct = "true";
             } else if (quantity > stock) {
                 // số lượng trong giỏ vượt quá stock -> giảm xuống tối đa
                 item.setQuantity(stock);
