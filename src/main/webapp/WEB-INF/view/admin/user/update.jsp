@@ -137,7 +137,7 @@
 
                                             <input class="form-check-input" type="checkbox" name="voucherIds"
                                                 value="${voucher.id}" id="voucher_${voucher.id}" <c:if
-                                                test="${voucher == 1}">checked
+                                                test="${mapVouchers[voucher.id] == 1}">checked
                                             </c:if>
                                             />
 

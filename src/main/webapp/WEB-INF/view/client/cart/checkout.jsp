@@ -94,13 +94,12 @@
                                             </ul>
                                             <div class="voucher_box">
                                                 <div class="input-group mb-3">
-                                                    <form:input path="voucherCode" class="form-control"
-                                                        placeholder="Enter voucher code" />
-                                                    <button class="btn btn-outline-secondary" type="submit"
-                                                        name="applyVoucher" value="true"
-                                                        style="background:#ffba00;border:none;color:#fff;font-weight:600;">
-                                                        Apply
-                                                    </button>
+                                                    <form:select class="form-select border" style="padding-left: 20px;"
+                                                        path="${voucher.code}">
+                                                        <form:option value="">-----</form:option>
+                                                        <form:options items="${vouchers}" itemValue="code"
+                                                            itemLabel="code" />
+                                                    </form:select>
                                                 </div>
                                             </div>
 
