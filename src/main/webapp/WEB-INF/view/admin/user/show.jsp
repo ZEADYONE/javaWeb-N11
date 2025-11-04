@@ -153,7 +153,7 @@
 
                                       <!-- Footer -->
                                       <div class="modal-footer justify-content-center border-0 pb-4">
-                                        <form method="post" action="/admin/user/delete/{user.id}">
+                                        <form method="post" action="/admin/user/delete/${user.id}">
                                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                           <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">
                                             Cancel
