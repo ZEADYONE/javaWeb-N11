@@ -414,7 +414,8 @@
                                                                             <span class="text-sm">
                                                                                 <c:choose>
                                                                                     <c:when
-                                                                                        test="${v.type == 'PERCENT'}">%
+                                                                                        test="${voucher.discountType == 'percentage'}">
+                                                                                        %
                                                                                     </c:when>
                                                                                     <c:otherwise>Amount</c:otherwise>
                                                                                 </c:choose>
@@ -426,9 +427,11 @@
                                                                             <span class="text-xs font-weight-bold">
                                                                                 <c:choose>
                                                                                     <c:when
-                                                                                        test="${v.type == 'PERCENT'}">
-                                                                                        ${v.value}%</c:when>
-                                                                                    <c:otherwise>${v.value} ₫
+                                                                                        test="${voucher.discountType == 'percentage'}">
+                                                                                        ${voucher.discountValue}%
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                        ${voucher.discountValue} ₫
                                                                                     </c:otherwise>
                                                                                 </c:choose>
                                                                             </span>
@@ -513,7 +516,8 @@
 
                                                                             <div class="mb-3">
                                                                                 <label class="form-label">Type</label>
-                                                                                <select class="form-select" name="type"
+                                                                                <select class="form-select"
+                                                                                    name="discountType"
                                                                                     style="padding-left: 20px;"
                                                                                     id="voucherType" required>
                                                                                     <option value="PERCENT">Percent (%)
@@ -530,8 +534,9 @@
                                                                                 <input type="number"
                                                                                     class="form-control border"
                                                                                     style="padding-left: 20px;"
-                                                                                    id="voucherValue" name="value"
-                                                                                    required min="1" max="100"
+                                                                                    id="voucherValue"
+                                                                                    name="discountValue" required
+                                                                                    min="1" max="100"
                                                                                     placeholder="Enter percent (1 - 100)">
 
                                                                             </div>
