@@ -2,6 +2,7 @@ package com.n11.sportshop.controller.client;
 
 import java.util.List;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,9 +91,13 @@ public class ClientCartController {
     public String getCheckOut(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");
+        String token = UUID.randomUUID().toString();
+        session.setAttribute("checkoutToken", token);
         User user = this.userService.getUserByID(userId);
         List<CartDetail> cartDetails = this.cartService.getCartDetails(user);
-
+        if(cartDetails.isEmpty()) {
+            return "redirect:/cart?error=empty";
+        }
         Long totalPrice = 0L;
         
         for (CartDetail item : cartDetails) {
@@ -107,6 +112,7 @@ public class ClientCartController {
         model.addAttribute("bill", new InformationDTO());
         model.addAttribute("items", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
+        
         return "client/cart/checkout";
     }
 

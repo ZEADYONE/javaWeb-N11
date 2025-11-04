@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.Order;
@@ -88,8 +89,15 @@ public class ClientOrderController {
     @PostMapping("/create")
     public String createOrder(
             @ModelAttribute InformationDTO informationDTO,
-            HttpServletRequest http) {
+            HttpServletRequest http,
+            @RequestParam("checkoutToken") String token) {
         HttpSession session = http.getSession(false);
+        String sessionToken = (String) session.getAttribute("checkoutToken");
+        if (sessionToken == null || !sessionToken.equals(token)) {
+            return "redirect:/cart?error=invalid_or_used_token";
+        }
+        session.removeAttribute("checkoutToken");
+        
         Integer userId = (Integer) session.getAttribute("id");
         if (informationDTO.getVoucherCode().isEmpty()) {
             informationDTO.setVoucherCode("NONE");
