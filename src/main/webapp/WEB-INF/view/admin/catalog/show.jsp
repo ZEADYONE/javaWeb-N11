@@ -445,17 +445,14 @@
                                                                         <!-- toggle -->
                                                                         <td class="text-center">
                                                                             <form method="post"
-                                                                                action="/admin/catalog/voucher/toggle"
+                                                                                action="/admin/catalog/voucher/update/${voucher.id}"
                                                                                 style="display:inline;">
                                                                                 <input type="hidden"
                                                                                     name="${_csrf.parameterName}"
                                                                                     value="${_csrf.token}">
-                                                                                <input type="hidden" name="id"
-                                                                                    value="${v.id}">
 
                                                                                 <c:choose>
-
-                                                                                    <c:when test="${v.status}">
+                                                                                    <c:when test="${voucher.status}">
                                                                                         <button type="submit"
                                                                                             class="btn btn-sm btn-success">
                                                                                             <i
@@ -520,9 +517,11 @@
                                                                                     name="discountType"
                                                                                     style="padding-left: 20px;"
                                                                                     id="voucherType" required>
-                                                                                    <option value="PERCENT">Percent (%)
+                                                                                    <option value="percentage">Percent
+                                                                                        (%)
                                                                                     </option>
-                                                                                    <option value="AMOUNT">Fixed Amount
+                                                                                    <option value="fixedAmount">Fixed
+                                                                                        Amount
                                                                                         (₫)</option>
                                                                                 </select>
                                                                             </div>
