@@ -18,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.UserService;
+import com.n11.sportshop.service.ProductService;
 
 import jakarta.validation.Valid;
 
@@ -29,10 +31,12 @@ public class UserController {
 
     private final UserService userService;
     private final PaginationService paginationServie;
+    private final ProductService productService;
 
-    public UserController(UserService userService, PaginationService paginationServie) {
-        this.userService = userService;
+    public UserController(PaginationService paginationServie, ProductService productService, UserService userService) {
         this.paginationServie = paginationServie;
+        this.productService = productService;
+        this.userService = userService;
     }
 
     @GetMapping("/create")
@@ -121,7 +125,9 @@ public class UserController {
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
+        List<Voucher> vouchers = this.productService.getVouchers();
         model.addAttribute("newUser", user);
+        model.addAttribute("vouchers", vouchers);
         return "admin/user/update";
     }
 
