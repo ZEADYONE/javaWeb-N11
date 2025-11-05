@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,5 +124,17 @@ public class ClientOrderController {
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("discountAmount", order.getDiscountAmount());
         return "client/order/confirmation";
+    }
+
+    @PostMapping("/cancel/{id}")
+    public String cancelOrderStatus(@PathVariable("id") Integer id) {
+        this.orderService.updateOrderStatus(id, OrderStatus.canceled);
+        return "redirect:/order/cancel";
+    }
+
+    @PostMapping("/accept/{id}")
+    public String acceptOrderStatus(@PathVariable("id") Integer id) {
+        this.orderService.updateOrderStatus(id, OrderStatus.accept);
+        return "redirect:/order/accept";
     }
 }

@@ -95,16 +95,4 @@ public class OrderController {
         return "redirect:/admin/order";
     }
 
-    @PostMapping("/cancel/{id}")
-    public String cancelOrderStatus(@PathVariable("id") Integer id) {
-        this.orderService.updateOrderStatus(id, OrderStatus.canceled);
-        return "redirect:/order/cancel";
-    }
-
-    @PostMapping("/accept/{id}")
-    public String acceptOrderStatus(@PathVariable("id") Integer id) {
-        this.orderService.updateOrderStatus(id, OrderStatus.accept);
-        return "redirect:/order/accept";
-    }
-
 }
