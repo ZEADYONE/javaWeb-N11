@@ -13,4 +13,7 @@ import com.n11.sportshop.domain.Voucher;
 public interface UserVoucherRepo extends JpaRepository<UserVoucher, Integer>{
     List<UserVoucher> findByUserAndQuantityGreaterThan(User user, Integer quantity);
     UserVoucher findByUserAndVoucher(User user, Voucher voucher);
+    List<UserVoucher> findByUser(User user);
+    boolean existsByUserAndVoucher(User user, Voucher voucher);
+
 }

@@ -101,8 +101,9 @@
                                                     </button>
 
                                                     <!-- Button Add Voucher -->
-                                                    <button type="button" class="btn btn-success px-4 py-2 ms-2"
+                                                    < type="button" class="btn btn-success px-4 py-2 ms-2"
                                                         data-bs-toggle="modal" data-bs-target="#addVoucherForUserModal">
+                                                         
                                                         Add Voucher
                                                     </button>
                                                 </div>
@@ -129,7 +130,7 @@
                         <form action="/admin/user/assign-vouchers" method="post" class="p-3">
 
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-
+                            
                             <div class="row">
                                 <c:forEach var="voucher" items="${vouchers}">
                                     <div class="col-md-4 mb-2">
@@ -167,6 +168,8 @@
                     </div>
                 </div>
             </div>
+            
+
 
             <script>
                 function previewImage(event) {

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.PaginationQuery;
@@ -158,6 +160,16 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.softDeleteUser(id);
         return "redirect:/admin/user";
+    }
+    // gán voucher cho user
+    @PostMapping("/assign-vouchers")
+    @ResponseBody
+    public ResponseEntity<?> assignVouchersToUser(
+            @RequestParam("userId") Integer userId,
+            @RequestParam("voucherIds") List<Integer> voucherIds) {
+
+        userService.assignVouchersToUser(userId, voucherIds);
+        return ResponseEntity.ok("Vouchers assigned successfully");
     }
 
 }

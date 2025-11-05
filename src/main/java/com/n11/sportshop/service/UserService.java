@@ -11,10 +11,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.UserVoucher;
+import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.repository.RoleRepository;
 import com.n11.sportshop.repository.UserRepository;
 import com.n11.sportshop.repository.UserVoucherRepo;
+import com.n11.sportshop.repository.VoucherRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -24,17 +28,17 @@ public class UserService {
     private final ImageService imageService;
     private final PasswordEncoder passwordEncoder;
     private final UserVoucherRepo userVoucherRepo;
-    public UserService(
-            UserRepository userRepository,
-            RoleRepository roleRepository,
-            ImageService imageService,
-            PasswordEncoder passwordEncoder,
-            UserVoucherRepo userVoucherRepo) {
+    private final VoucherRepository voucherRepository;
+    
+
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, ImageService imageService,
+            PasswordEncoder passwordEncoder, UserVoucherRepo userVoucherRepo, VoucherRepository voucherRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.imageService = imageService;
         this.passwordEncoder = passwordEncoder;
         this.userVoucherRepo = userVoucherRepo;
+        this.voucherRepository = voucherRepository;
     }
 
     public void createUserByClient(RegisterDTO userDTO) {
@@ -46,8 +50,8 @@ public class UserService {
         user.setRole(this.roleRepository.findByName("USER"));
         String imageName = "defaultavatar.jpg";
         user.setImage(imageName);
-
         this.userRepository.save(user);
+        
     }
 
     public void createUserByAdmin(User user, MultipartFile file) {
@@ -61,7 +65,46 @@ public class UserService {
             imageName = this.imageService.handelImage(file, "avatar");
         }
         user.setImage(imageName);
-        this.userRepository.save(user);
+        User savedUser = this.userRepository.save(user);
+
+        // Thêm voucher “welcome” cho user mới
+        var welcomeVoucher = this.voucherRepository.findByCode("WELCOME10");
+        if (welcomeVoucher != null) {
+            var userVoucher = new com.n11.sportshop.domain.UserVoucher();
+            userVoucher.setUser(savedUser);
+            userVoucher.setVoucher(welcomeVoucher);
+            userVoucher.setQuantity(1);
+            this.userVoucherRepo.save(userVoucher);
+        }
+    }
+    @Transactional
+    public void assignVouchersToUser(Integer userId, List<Integer> voucherIds) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<UserVoucher> existingUserVouchers = userVoucherRepo.findByUser(user);
+
+        // Xóa voucher không còn được chọn
+        for (UserVoucher uv : existingUserVouchers) {
+            if (!voucherIds.contains(uv.getVoucher().getId())) {
+                userVoucherRepo.delete(uv);
+            }
+        }
+
+        // Thêm voucher mới được chọn
+        for (Integer voucherId : voucherIds) {
+            Voucher voucher = voucherRepository.findById(voucherId)
+                    .orElseThrow(() -> new RuntimeException("Voucher not found"));
+
+            boolean exists = userVoucherRepo.existsByUserAndVoucher(user, voucher);
+            if (!exists) {
+                UserVoucher newUserVoucher = new UserVoucher();
+                newUserVoucher.setUser(user);
+                newUserVoucher.setVoucher(voucher);
+                newUserVoucher.setQuantity(1);
+                userVoucherRepo.save(newUserVoucher);
+            }
+        }
     }
 
     public User updateUser(User user, MultipartFile file) {
