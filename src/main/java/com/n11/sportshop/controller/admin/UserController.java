@@ -128,7 +128,7 @@ public class UserController {
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
-        List<Voucher> vouchers = this.productService.getVouchers();
+        List<Voucher> vouchers = this.productService.getActiveVoucher(1);
         Map<Integer, Integer> userHasVoucher = new TreeMap<>();
         for (var voucher : vouchers) {
             userHasVoucher.put(voucher.getId(), 0);

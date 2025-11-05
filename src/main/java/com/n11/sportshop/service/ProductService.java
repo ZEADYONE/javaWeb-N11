@@ -117,4 +117,8 @@ public class ProductService {
         return this.voucherRepository.findAll();
     }
 
+    public List<Voucher> getActiveVoucher(int status) {
+        return this.voucherRepository.findByStatus(status);
+    }
+
 }
