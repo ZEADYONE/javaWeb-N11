@@ -94,12 +94,14 @@
                                             </ul>
                                             <div class="voucher_box">
                                                 <div class="input-group mb-3">
-                                                    <form:select class="form-select border" style="padding-left: 20px;"
-                                                        path="${voucher.code}">
-                                                        <form:option value="FREESHIP">-----</form:option>
-                                                        <form:options items="${vouchers}" itemValue="code"
-                                                            itemLabel="code" />
-                                                    </form:select>
+                                                    <select name="voucherCode" class="form-select border"
+                                                        style="padding-left: 20px;">
+                                                        <option value="">No voucher</option>
+                                                        <c:forEach var="v" items="${vouchers}">
+                                                            <option value="${v.code}">${v.code}</option>
+                                                        </c:forEach>
+                                                    </select>
+
                                                 </div>
                                             </div>
 
