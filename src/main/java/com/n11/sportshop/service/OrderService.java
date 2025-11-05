@@ -12,6 +12,7 @@ import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.domain.Payment;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
+import com.n11.sportshop.domain.UserVoucher;
 import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.repository.CartDetailRepository;
@@ -21,6 +22,7 @@ import com.n11.sportshop.repository.OrderRepository;
 import com.n11.sportshop.repository.PaymentRepository;
 import com.n11.sportshop.repository.ProductRepository;
 import com.n11.sportshop.repository.UserRepository;
+import com.n11.sportshop.repository.UserVoucherRepo;
 import com.n11.sportshop.repository.VoucherRepository;
 
 import jakarta.transaction.Transactional;
@@ -38,8 +40,8 @@ public class OrderService {
     private final PaymentRepository paymentRepository;
     private final ProductRepository productRepository;
     private final VoucherRepository voucherRepository;
-
-    public OrderService(CartDetailRepository cartDetailRepo, CartRepository cartRepo, CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo, PaymentRepository paymentRepository, ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
+    private final UserVoucherRepo userVoucherRepo;
+    public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo, CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo, PaymentRepository paymentRepository, ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
         this.cartDetailRepo = cartDetailRepo;
         this.cartRepo = cartRepo;
         this.cartService = cartService;
@@ -49,6 +51,7 @@ public class OrderService {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.voucherRepository = voucherRepository;
+        this.userVoucherRepo = userVoucherRepo;
     }
 
     public List<Order> getOrderHistoryByStatus(User user, OrderStatus status) {
@@ -90,7 +93,10 @@ public class OrderService {
         }
         if (!voucherCode.equals("NONE")) {
             Voucher voucher = this.voucherRepository.findByCode(voucherCode);
+            UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
             order.setVoucher(voucher);
+            userVoucher.setQuantity(userVoucher.getQuantity() - 1);
+            this.userVoucherRepo.save(userVoucher);
             if (voucher.getDiscountType() == DiscountType.freeship) {
                 shipPrice = 0L;
             } else {

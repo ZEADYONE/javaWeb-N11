@@ -99,7 +99,7 @@ public class ClientOrderController {
         session.removeAttribute("checkoutToken");
         
         Integer userId = (Integer) session.getAttribute("id");
-        if (informationDTO.getVoucherCode().isEmpty()) {
+        if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
             informationDTO.setVoucherCode("NONE");
         }
         Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);

@@ -124,5 +124,4 @@ public class ClientCartController {
         
         return "client/cart/checkout";
     }
-
 }
