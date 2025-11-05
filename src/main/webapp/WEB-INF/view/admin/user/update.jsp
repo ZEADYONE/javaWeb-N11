@@ -127,20 +127,16 @@
 
 
                         <form action="/admin/user/assign-vouchers" method="post" class="p-3">
-
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                            
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">                      
                             <div class="row">
                                 <c:forEach var="voucher" items="${vouchers}">
                                     <div class="col-md-4 mb-2">
                                         <div class="form-check">
-
                                             <input class="form-check-input" type="checkbox" name="voucherIds"
                                                 value="${voucher.id}" id="voucher_${voucher.id}" <c:if
                                                 test="${mapVouchers[voucher.id] == 1}">checked
                                             </c:if>
                                             />
-
                                             <label class="form-check-label" for="voucher_${voucher.id}">
                                                 <b>${voucher.code}</b> -
                                                 <c:choose>
@@ -149,7 +145,6 @@
                                                     <c:otherwise>${voucher.discountValue}₫</c:otherwise>
                                                 </c:choose>
                                             </label>
-
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -159,7 +154,7 @@
                                 <button type="button" class="btn text-white px-4 py-2"
                                     style="background-color: #ffba00;" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn text-white px-4 py-2"
-                                    style="background-color: #ffba00;"">
+                                    style="background-color: #ffba00;">
                                     Save
                                 </button>
                             </div>
