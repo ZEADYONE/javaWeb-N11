@@ -154,7 +154,7 @@
                                 <button type="button" class="btn text-white px-4 py-2"
                                     style="background-color: #ffba00;" data-bs-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn text-white px-4 py-2"
-                                    style="background-color: #ffba00;"">
+                                    style="background-color: #ffba00;">
                                     Save
                                 </button>
                             </div>
