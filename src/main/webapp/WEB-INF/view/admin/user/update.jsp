@@ -101,9 +101,8 @@
                                                     </button>
 
                                                     <!-- Button Add Voucher -->
-                                                    < type="button" class="btn btn-success px-4 py-2 ms-2"
+                                                    <button type="button" class="btn btn-success px-4 py-2 ms-2"
                                                         data-bs-toggle="modal" data-bs-target="#addVoucherForUserModal">
-                                                         
                                                         Add Voucher
                                                     </button>
                                                 </div>
