@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.PaginationQuery;
@@ -25,8 +24,8 @@ import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.UserVoucher;
 import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.service.PaginationService;
-import com.n11.sportshop.service.UserService;
 import com.n11.sportshop.service.ProductService;
+import com.n11.sportshop.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -163,7 +162,6 @@ public class UserController {
     }
     // gán voucher cho user
     @PostMapping("/assign-vouchers")
-    @ResponseBody
     public ResponseEntity<?> assignVouchersToUser(
             @RequestParam("userId") Integer userId,
             @RequestParam("voucherIds") List<Integer> voucherIds) {
