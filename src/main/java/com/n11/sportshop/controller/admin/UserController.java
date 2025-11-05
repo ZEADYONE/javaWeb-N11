@@ -163,13 +163,11 @@ public class UserController {
     }
     // gán voucher cho user
     @PostMapping("/assign-vouchers")
-    @ResponseBody
-    public ResponseEntity<?> assignVouchersToUser(
-            @RequestParam("userId") Integer userId,
-            @RequestParam("voucherIds") List<Integer> voucherIds) {
-
+    public String assignVouchersToUser(@RequestParam("userId") Integer userId,
+                                    @RequestParam("voucherIds") List<Integer> voucherIds) {
         userService.assignVouchersToUser(userId, voucherIds);
-        return ResponseEntity.ok("Vouchers assigned successfully");
+        return "redirect:/admin/user/update/" + userId; 
     }
+
 
 }
