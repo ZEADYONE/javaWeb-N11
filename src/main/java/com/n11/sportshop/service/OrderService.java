@@ -108,8 +108,7 @@ public class OrderService {
             UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
 
             order.setVoucher(voucher);
-            userVoucher.setQuantity(userVoucher.getQuantity() - 1);
-            this.userVoucherRepo.save(userVoucher);
+            this.userVoucherRepo.delete(userVoucher);
 
             if (voucher.getDiscountType() == DiscountType.freeship) {
                 shipPrice = 0L;

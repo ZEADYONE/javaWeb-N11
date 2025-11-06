@@ -21,7 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.n11.sportshop.domain.User user = this.userService.getUserByUsername(username);
         /*
-         * Tại sao ở đây getUserByEmail mà mình lại truyền username ?
          * -> Mặc định của Spring Security lấy email làm username.
          * -> Nếu tự custom thì ta sẽ truyền username thay vì email.
          */
