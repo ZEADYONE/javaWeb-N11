@@ -64,7 +64,7 @@
                                                 <h3>Shipping Details</h3>
                                             </div>
                                             <form:textarea class="form-control" rows="1" path="note"
-                                                placeholder="Order Notes" required="required"></form:textarea>
+                                                placeholder="Order Notes"></form:textarea>
                                         </div>
 
 
