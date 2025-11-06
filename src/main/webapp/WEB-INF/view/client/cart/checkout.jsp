@@ -104,7 +104,7 @@
                                                                 <option value="${voucher.code}"
                                                                     data-type="${voucher.discountType}"
                                                                     data-value="${voucher.discountValue}">
-                                                                    ${voucher.code}
+                                                                    ${voucher.code}: ${voucher.description}
                                                                 </option>
                                                             </c:forEach>
                                                         </select>

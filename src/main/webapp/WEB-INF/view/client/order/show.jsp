@@ -231,7 +231,7 @@
 
 
                                             <c:when test="${status == 'pending'}">
-                                                <form action="/admin/order/cancel/${order.id}" method="post">
+                                                <form action="/order/cancel/${order.id}" method="post">
                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                         value="${_csrf.token}">
                                                     <button class="btn btn-danger btn-sm" type="submit">
@@ -243,7 +243,7 @@
 
 
                                             <c:when test="${status == 'shipping'}">
-                                                <form action="/admin/order/accept/${order.id}" method="post">
+                                                <form action="/order/accept/${order.id}" method="post">
                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                         value="${_csrf.token}">
                                                     <button class="btn btn-success btn-sm" type="submit"
@@ -251,7 +251,7 @@
                                                         Accept
                                                     </button>
                                                 </form>
-                                                <form action="/admin/order/cancel/${order.id}" method="post">
+                                                <form action="/order/cancel/${order.id}" method="post">
                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                         value="${_csrf.token}">
                                                     <button class="btn btn-danger btn-sm" type="submit">

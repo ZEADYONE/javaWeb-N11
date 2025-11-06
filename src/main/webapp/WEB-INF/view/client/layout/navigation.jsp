@@ -26,7 +26,6 @@
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="/products">Product</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
                             <li class="nav-item"><a class="nav-link" href="/cart">Cart</a></li>
 
                             <li class="nav-item dropdown">
