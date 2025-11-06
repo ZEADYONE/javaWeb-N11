@@ -50,7 +50,17 @@ public class UserService {
         user.setRole(this.roleRepository.findByName("USER"));
         String imageName = "defaultavatar.jpg";
         user.setImage(imageName);
-        this.userRepository.save(user);
+        User savedUser = this.userRepository.save(user);
+
+        // Gán voucher “WELCOME10” mặc định cho user mới
+        Voucher welcomeVoucher = voucherRepository.findByCode("WELCOME10");
+        if (welcomeVoucher != null) {
+            UserVoucher userVoucher = new UserVoucher();
+            userVoucher.setUser(savedUser);
+            userVoucher.setVoucher(welcomeVoucher);
+            userVoucher.setQuantity(1);
+            userVoucherRepo.save(userVoucher);
+        }
         
     }
 
