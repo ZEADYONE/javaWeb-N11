@@ -2,6 +2,7 @@ package com.n11.sportshop.controller.client;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +91,7 @@ public class ClientOrderController {
     @PostMapping("/create")
     public String createOrder(
             @ModelAttribute InformationDTO informationDTO,
+            @RequestParam("payment") Optional<String> payment,
             HttpServletRequest http,
             @RequestParam("checkoutToken") String token) {
         HttpSession session = http.getSession(false);
@@ -103,12 +105,28 @@ public class ClientOrderController {
         if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
             informationDTO.setVoucherCode("NONE");
         }
-        Boolean status = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
-        if (status == true) {
+        Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+        if (order != null) {
             return "redirect:/order/confirmation";
         } else {
             return "redirect:/cart?error=not_enough_quantity";
         }
+
+        // String bankCode = "MBB"; // mã ngân hàng
+        // String accountNumber = "";
+        // String accountName = "NGUYEN TRUONG GIANG";
+        // String addInfo = "ORDER" + order.getId();
+        // Long amount = order.getTotalPrice(); // tổng tiền đơn hàng
+
+        // String qrUrl = String.format(
+        //     "https://img.vietqr.io/image/%s-%s.png?amount=%d&addInfo=%s&accountName=%s",
+        //     bankCode, accountNumber, amount, addInfo, accountName.replace(" ", "+")
+        // );
+
+        // model.addAttribute("qrUrl", qrUrl);
+        // model.addAttribute("order", order);
+
+        // return "order/payment"; // JSP hiển thị mã QR
     }
 
     @GetMapping("/confirmation")

@@ -63,7 +63,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Boolean createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
+    public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
         User user = this.userRepository.findById(userId).get();
         List<CartDetail> items = this.cartService.getCartDetails(user);
 
@@ -87,7 +87,7 @@ public class OrderService {
             Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId()).get();
 
             if (product.getStockQuantity() < item.getQuantity()) {
-                return false;
+                return null;
             }
 
             product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
@@ -122,7 +122,7 @@ public class OrderService {
         order.setTotalAmount(price);
         order.setShipPrice(shipPrice);
         order.setDiscountAmount(discountAmount);
-        return true;
+        return order;
     }
 
     public List<OrderDetail> getOrderDetails(User user) {
