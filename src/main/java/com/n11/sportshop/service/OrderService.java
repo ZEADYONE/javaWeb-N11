@@ -9,7 +9,6 @@ import com.n11.sportshop.domain.DiscountType;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
-import com.n11.sportshop.domain.Payment;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.UserVoucher;
@@ -41,6 +40,7 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final VoucherRepository voucherRepository;
     private final UserVoucherRepo userVoucherRepo;
+
     public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo, CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo, PaymentRepository paymentRepository, ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
         this.cartDetailRepo = cartDetailRepo;
         this.cartRepo = cartRepo;
@@ -62,9 +62,11 @@ public class OrderService {
         return this.orderRepo.findByStatus(status);
     }
 
+    @Transactional
     public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
         User user = this.userRepository.findById(userId).get();
         List<CartDetail> items = this.cartService.getCartDetails(user);
+
         Order order = new Order();
         order.setUser(user);
         order.setName(informationDTO.getName());
@@ -72,51 +74,64 @@ public class OrderService {
         order.setAddress(informationDTO.getAddress());
         order.setNote(informationDTO.getNote());
         order.setPhone(informationDTO.getPhone());
-        Payment payment = this.paymentRepository.findByPaymentMethod(informationDTO.getPayment());
-        order.setPayment(payment);
+        order.setPayment(this.paymentRepository.findByPaymentMethod(informationDTO.getPayment()));
         order.setStatus(OrderStatus.pending);
         order = this.orderRepo.save(order);
+
         Long price = 0L;
         Long shipPrice = 30000L;
         Long discountAmount = 0L;
+
         for (var item : items) {
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setPrice(item.getProduct().getPrice());
-            orderDetail.setQuantity(item.getQuantity());
-            Product product = this.productRepository.findById(item.getProduct().getId()).get();
+            // Khóa hàng lại để tránh 2 người mua cùng lúc
+            Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId())
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
+
+            if (product.getStockQuantity() < item.getQuantity()) {
+                throw new RuntimeException("Sản phẩm " + product.getName() + " đã hết hàng!");
+            }
+
             product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
             this.productRepository.save(product);
-            orderDetail.setProduct(item.getProduct());
+
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setProduct(product);
             orderDetail.setOrder(order);
+            orderDetail.setPrice(product.getPrice());
+            orderDetail.setQuantity(item.getQuantity());
             this.orderDetailRepo.save(orderDetail);
-            price += item.getQuantity() * orderDetail.getPrice();
+
+            price += item.getQuantity() * product.getPrice();
         }
+
         if (!voucherCode.equals("NONE")) {
             Voucher voucher = this.voucherRepository.findByCode(voucherCode);
             UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
+
             order.setVoucher(voucher);
             userVoucher.setQuantity(userVoucher.getQuantity() - 1);
             this.userVoucherRepo.save(userVoucher);
+
             if (voucher.getDiscountType() == DiscountType.freeship) {
                 shipPrice = 0L;
+            } else if (voucher.getDiscountType() == DiscountType.fixed_amount) {
+                discountAmount = voucher.getDiscountValue() * 1L;
             } else {
-                if (voucher.getDiscountType() == DiscountType.fixed_amount) {
-                    discountAmount = 1L * voucher.getDiscountValue();
-                } else {
-                    discountAmount = price * voucher.getDiscountValue() / 100;
-                }
+                discountAmount = price * voucher.getDiscountValue() / 100;
             }
         }
+
         order.setTotalAmount(price);
         order.setShipPrice(shipPrice);
         order.setDiscountAmount(discountAmount);
         return order;
     }
 
-    public List<OrderDetail> getOrderDetails (User user) {
+    public List<OrderDetail> getOrderDetails(User user) {
         Order order = this.orderRepo.findTopByUserOrderByIdDesc(user);
         return this.orderDetailRepo.findByOrder(order);
     }
+
     //lay toan bo don hang
     public List<Order> getAllOrders() {
         return orderRepo.findAll();
@@ -133,7 +148,6 @@ public class OrderService {
     public Order getOrderByUser(User user) {
         return this.orderRepo.findTopByUserOrderByIdDesc(user);
     }
-
 
     public Order getOrderById(int id) {
         return this.orderRepo.findById(id).get();
