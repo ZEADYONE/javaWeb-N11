@@ -63,7 +63,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
+    public Boolean createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
         User user = this.userRepository.findById(userId).get();
         List<CartDetail> items = this.cartService.getCartDetails(user);
 
@@ -84,11 +84,10 @@ public class OrderService {
 
         for (var item : items) {
             // Khóa hàng lại để tránh 2 người mua cùng lúc
-            Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId())
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
+            Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId()).get();
 
             if (product.getStockQuantity() < item.getQuantity()) {
-                throw new RuntimeException("Sản phẩm " + product.getName() + " đã hết hàng!");
+                return false;
             }
 
             product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
@@ -124,7 +123,7 @@ public class OrderService {
         order.setTotalAmount(price);
         order.setShipPrice(shipPrice);
         order.setDiscountAmount(discountAmount);
-        return order;
+        return true;
     }
 
     public List<OrderDetail> getOrderDetails(User user) {

@@ -103,8 +103,12 @@ public class ClientOrderController {
         if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
             informationDTO.setVoucherCode("NONE");
         }
-        Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
-        return "redirect:/order/confirmation";
+        Boolean status = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+        if (status == true) {
+            return "redirect:/order/confirmation";
+        } else {
+            return "redirect:/cart";
+        }
     }
 
     @GetMapping("/confirmation")
