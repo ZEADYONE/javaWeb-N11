@@ -73,5 +73,26 @@ public class CatalogController {
         this.productService.updateVoucher(id);
         return "redirect:/admin/catalog";
     }
-    
+    @PostMapping("/brand/action/{id}")
+    public String postCreateBrand(@PathVariable("id") Integer id) {
+        this.productService.actionBrand(id);
+        return "redirect:/admin/catalog";
+    }
+    @PostMapping("/category/action/{id}")
+    public String postCreateCategory(@PathVariable("id") Integer id) {
+        this.productService.actionCategory(id);
+        return "redirect:/admin/catalog";
+    }
+    @PostMapping("/category/update/{id}")
+    public String updateCategory(@PathVariable Integer id, @ModelAttribute Category category) {
+        productService.updateCategory(id, category);
+        return "redirect:/admin/catalog";
+    }
+    @PostMapping("/brand/update/{id}")
+    public String updateBrand(@PathVariable Integer id, @ModelAttribute Brand brand) {
+        productService.updateBrand(id, brand);
+        return "redirect:/admin/catalog";
+    }
+
+
 }

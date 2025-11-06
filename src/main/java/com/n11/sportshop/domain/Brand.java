@@ -1,5 +1,6 @@
 package com.n11.sportshop.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,8 @@ public class Brand {
     private int id;
 
     private String name;
-   
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    private Integer status = 1;
     public int getId() {
         return id;
     }
@@ -30,6 +32,14 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
     
 }
