@@ -104,16 +104,17 @@ public class UserController {
     // Delete-User
     // @GetMapping("/delete/{id}")
     // public String getDeleteUserPage(Model model, @PathVariable int id) {
-    //     User user = this.userService.getUserByID(id);
-    //     model.addAttribute("user", user);
-    //     return "admin/user/delete";
+    // User user = this.userService.getUserByID(id);
+    // model.addAttribute("user", user);
+    // return "admin/user/delete";
     // }
 
     // @PostMapping("/delete")
-    // public String postMethodName(Model model, @ModelAttribute("user") User user) {
-    //     // Chỉ xóa ảnh nếu KHÔNG phải ảnh mặc định
-    //     this.userService.deleteUser(user);
-    //     return "redirect:/admin/user";
+    // public String postMethodName(Model model, @ModelAttribute("user") User user)
+    // {
+    // // Chỉ xóa ảnh nếu KHÔNG phải ảnh mặc định
+    // this.userService.deleteUser(user);
+    // return "redirect:/admin/user";
     // }
 
     // Detail-User
@@ -152,20 +153,21 @@ public class UserController {
         return "redirect:/admin/user";
 
     }
-    
 
     @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.softDeleteUser(id);
         return "redirect:/admin/user";
     }
+
     // gán voucher cho user
     @PostMapping("/assign-vouchers")
-    public String assignVouchersToUser(@RequestParam("userId") Integer userId,
-                                    @RequestParam("voucherIds") List<Integer> voucherIds) {
-        userService.assignVouchersToUser(userId, voucherIds);
-        return "redirect:/admin/user/update/" + userId; 
-    }
+    public String assignVouchersToUser(
+            @RequestParam("userId") Integer userId,
+            @RequestParam(value = "voucherIds", required = false) List<Integer> voucherIds) {
 
+        userService.assignVouchersToUser(userId, voucherIds);
+        return "redirect:/admin/user/update/" + userId;
+    }
 
 }

@@ -86,65 +86,72 @@
                                                                                 class="text-xs font-weight-bold">${cate.code}</span>
                                                                         </td>
                                                                         <td class="text-center">
-                                                                            <button class="btn btn-sm btn-danger"
+                                                                            <button class="btn btn-sm btn-warning"
                                                                                 data-bs-toggle="modal"
-                                                                                data-bs-target="#deleteCategoryModal${cate.id}">
-                                                                                <i class="bi bi-trash fs-5"></i>
+                                                                                data-bs-target="#updateCategoryModal${cate.id}">
+                                                                                <i class="bi bi-pencil-square fs-5"></i>
                                                                             </button>
 
-                                                                            <!-- Modal xác nhận xóa Category -->
+                                                                            <!-- Modal Update Category -->
                                                                             <div class="modal fade"
-                                                                                id="deleteCategoryModal${cate.id}"
+                                                                                id="updateCategoryModal${cate.id}"
                                                                                 tabindex="-1" aria-hidden="true">
                                                                                 <div
                                                                                     class="modal-dialog modal-dialog-centered">
                                                                                     <div
                                                                                         class="modal-content border-0 shadow-lg">
                                                                                         <div
-                                                                                            class="modal-header bg-gradient-primary text-white ">
+                                                                                            class="modal-header bg-gradient-primary text-white">
                                                                                             <h5 class="modal-title">
-                                                                                                Confirm Delete</h5>
+                                                                                                Update Category</h5>
                                                                                             <button type="button"
                                                                                                 class="btn-close btn-close-white"
                                                                                                 data-bs-dismiss="modal"></button>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="modal-body text-center py-4">
-                                                                                            <p class="mb-2">Are you sure
-                                                                                                you want to delete:</p>
-                                                                                            <h6 class="text-danger
-                                                                                                fw-bold mb-0">
-                                                                                                ${cate.name}</h6>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="modal-footer justify-content-center border-0 pb-4">
-                                                                                            <form method="post"
-                                                                                                action="/admin/catalog/category/delete">
-                                                                                                <input type="hidden"
-                                                                                                    name="${_csrf.parameterName}"
-                                                                                                    value="${_csrf.token}">
-                                                                                                <input type="hidden"
-                                                                                                    name="id"
-                                                                                                    value="${cate.id}">
-                                                                                                <input type="hidden"
-                                                                                                    name="${_csrf.parameterName}"
-                                                                                                    value="${_csrf.token}" />
 
-                                                                                                <button type="button"
-                                                                                                    class="btn btn-secondary me-2"
-                                                                                                    data-bs-dismiss="modal">
-                                                                                                    Cancel
-                                                                                                </button>
-                                                                                                <button type="submit"
-                                                                                                    class="btn text-white"
-                                                                                                    style="background-color: #ffba00;">
-                                                                                                    Delete
-                                                                                                </button>
-                                                                                            </form>
-                                                                                        </div>
+                                                                                        <form
+                                                                                            action="/admin/catalog/category/update/${cate.id}"
+                                                                                            method="post">
+                                                                                            <input type="hidden"
+                                                                                                name="${_csrf.parameterName}"
+                                                                                                value="${_csrf.token}" />
+
+                                                                                            <div class="modal-body">
+                                                                                                <div class="mb-3">
+                                                                                                    <label
+                                                                                                        class="form-label">Category
+                                                                                                        Name</label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control border"
+                                                                                                        style="padding-left: 20px;"
+                                                                                                        name="name"
+                                                                                                        value="${cate.name}"
+                                                                                                        required>
+                                                                                                </div>
+
+                                                                                                <div class="mb-3">
+                                                                                                    <label
+                                                                                                        class="form-label">Code</label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control border"
+                                                                                                        style="padding-left: 20px;"
+                                                                                                        name="code"
+                                                                                                        value="${cate.code}"
+                                                                                                        required>
+                                                                                                </div>
+
+                                                                                                <div class="text-end">
+                                                                                                    <button
+                                                                                                        type="submit"
+                                                                                                        class="btn btn-primary">Update</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
@@ -251,59 +258,65 @@
                                                                                 ${brand.name}</p>
                                                                         </td>
                                                                         <td class="text-center">
-                                                                            <button class="btn btn-sm btn-danger"
+                                                                            <button class="btn btn-sm btn-warning"
                                                                                 data-bs-toggle="modal"
-                                                                                data-bs-target="#deleteBrandModal${brand.id}">
-                                                                                <i class="bi bi-trash fs-5"></i>
+                                                                                data-bs-target="#updateBrandModal${brand.id}">
+                                                                                <i class="bi bi-pencil-square fs-5"></i>
                                                                             </button>
 
-                                                                            <!-- Modal xác nhận xóa Brand -->
+
+
+                                                                            <!-- Modal Update Brand -->
                                                                             <div class="modal fade"
-                                                                                id="deleteBrandModal${brand.id}"
+                                                                                id="updateBrandModal${brand.id}"
                                                                                 tabindex="-1" aria-hidden="true">
                                                                                 <div
                                                                                     class="modal-dialog modal-dialog-centered">
                                                                                     <div
                                                                                         class="modal-content border-0 shadow-lg">
+
                                                                                         <div
-                                                                                            class="modal-header bg-gradient-primary text-white ">
-                                                                                            <h5 class="modal-title">
-                                                                                                Confirm Delete</h5>
+                                                                                            class="modal-header bg-gradient-primary text-white">
+                                                                                            <h5
+                                                                                                class="modal-title w-100 text-start">
+                                                                                                Update Brand</h5>
                                                                                             <button type="button"
                                                                                                 class="btn-close btn-close-white"
                                                                                                 data-bs-dismiss="modal"></button>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="modal-body text-center py-4">
-                                                                                            <p class="mb-2">Are you sure
-                                                                                                you want to delete:</p>
-                                                                                            <h6 class="text-danger
-                                                                                                fw-bold mb-0">
-                                                                                                ${brand.name}</h6>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="modal-footer justify-content-center border-0 pb-4">
-                                                                                            <form method="post"
-                                                                                                action="/admin/catalog/brand/delete">
-                                                                                                <input type="hidden"
-                                                                                                    name="${_csrf.parameterName}"
-                                                                                                    value="${_csrf.token}">
 
-                                                                                                <button type="button"
-                                                                                                    class="btn btn-secondary me-2"
-                                                                                                    data-bs-dismiss="modal">
-                                                                                                    Cancel
-                                                                                                </button>
-                                                                                                <button type="submit"
-                                                                                                    class="btn text-white"
-                                                                                                    style="background-color: #ffba00;">
-                                                                                                    Delete
-                                                                                                </button>
-                                                                                            </form>
-                                                                                        </div>
+                                                                                        <form
+                                                                                            action="/admin/catalog/brand/update/${brand.id}"
+                                                                                            method="post">
+                                                                                            <input type="hidden"
+                                                                                                name="${_csrf.parameterName}"
+                                                                                                value="${_csrf.token}" />
+
+                                                                                            <div class="modal-body">
+                                                                                                <div class="mb-3">
+                                                                                                    <label
+                                                                                                        class="form-label">Brand
+                                                                                                        Name</label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control border"
+                                                                                                        style="padding-left: 20px;"
+                                                                                                        name="name"
+                                                                                                        value="${brand.name}"
+                                                                                                        required>
+                                                                                                </div>
+
+                                                                                                <div class="text-end">
+                                                                                                    <button
+                                                                                                        type="submit"
+                                                                                                        class="btn btn-primary">Update</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
                                                                         </td>
 
                                                                     </tr>
@@ -461,7 +474,7 @@
 
                                                                                 <c:choose>
                                                                                     <c:when
-                                                                                        test="${voucher.status == 0}">
+                                                                                        test="${voucher.status == 1}">
                                                                                         <button type="submit"
                                                                                             class="btn btn-sm btn-success">
                                                                                             <i
@@ -471,7 +484,7 @@
 
                                                                                     <c:otherwise>
                                                                                         <button type="submit"
-                                                                                            class="btn btn-sm btn-secondary">
+                                                                                            class="btn btn-sm btn-danger">
                                                                                             <i
                                                                                                 class="bi bi-toggle-off fs-5"></i>
                                                                                         </button>

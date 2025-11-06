@@ -127,7 +127,8 @@
 
 
                         <form action="/admin/user/assign-vouchers" method="post" class="p-3">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">                      
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <input type="hidden" name="userId" value="${newUser.id}">
                             <div class="row">
                                 <c:forEach var="voucher" items="${vouchers}">
                                     <div class="col-md-4 mb-2">
@@ -162,7 +163,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
 
             <script>
