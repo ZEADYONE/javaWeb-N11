@@ -107,7 +107,7 @@ public class ClientOrderController {
         if (status == true) {
             return "redirect:/order/confirmation";
         } else {
-            return "redirect:/cart";
+            return "redirect:/cart?error=not_enough_quantity";
         }
     }
 
