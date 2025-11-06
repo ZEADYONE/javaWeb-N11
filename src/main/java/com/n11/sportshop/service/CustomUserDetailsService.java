@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
          * -> Mặc định của Spring Security lấy email làm username.
          * -> Nếu tự custom thì ta sẽ truyền username thay vì email.
          */
-        if (user == null) {
+        if (user == null || user.getStatus() == 0) {
             throw new UsernameNotFoundException("Tài khoản không tồn tại");
         }
         /*

@@ -156,7 +156,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/ban/{id}")
     public String deleteUser(@PathVariable("id") Integer id) {
         userService.softDeleteUser(id);
         return "redirect:/admin/user";
