@@ -112,7 +112,7 @@ public class ClientCartController {
             totalPrice = totalPrice + (price * quantity);
         }
         ArrayList<Voucher> vouchers = new ArrayList<>();
-        List<UserVoucher> userVouchers = this.userService.getVoucherListMoreThan(user, 0);
+        List<UserVoucher> userVouchers = this.userService.getActiveVoucherListMoreThan(user, 1);
         for (var item : userVouchers) {
             vouchers.add(item.getVoucher());
         }

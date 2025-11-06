@@ -187,7 +187,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<UserVoucher> getVoucherListMoreThan(User user, int quantity) {
-        return this.userVoucherRepo.findByUserAndQuantityGreaterThan(user, quantity);
+    public List<UserVoucher> getActiveVoucherListMoreThan(User user, int quantity) {
+        return this.userVoucherRepo.findByUserAndStatusAndQuantityGreaterThan(user.getId(), 1, quantity);
     }
 }
