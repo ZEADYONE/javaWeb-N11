@@ -91,7 +91,10 @@ public class UserService {
     public void assignVouchersToUser(Integer userId, List<Integer> voucherIds) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
+         // Nếu voucherIds == null, gán list rỗng 
+        if (voucherIds == null) {
+            voucherIds = List.of(); 
+        }
         List<UserVoucher> existingUserVouchers = userVoucherRepo.findByUser(user);
 
         // Xóa voucher không còn được chọn
