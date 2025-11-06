@@ -94,13 +94,22 @@
                                             </ul>
                                             <div class="voucher_box">
                                                 <div class="input-group mb-3">
-                                                    <select name="voucherCode" class="form-select border"
-                                                        style="padding-left: 20px;">
-                                                        <option value="">No voucher</option>
-                                                        <c:forEach var="v" items="${vouchers}">
-                                                            <option value="${v.code}">${v.code}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <div class="voucher_box mb-4">
+                                                        <label class="fw-bold mb-2">Select Voucher:</label>
+                                                        <select id="voucherSelect" name="voucherCode"
+                                                            class="form-select border" style="padding-left: 20px;">
+                                                            <option value="" data-type="none" data-value="0">No voucher
+                                                            </option>
+                                                            <c:forEach var="voucher" items="${vouchers}">
+                                                                <option value="${voucher.code}"
+                                                                    data-type="${voucher.discountType}"
+                                                                    data-value="${voucher.discountValue}">
+                                                                    ${voucher.code}
+                                                                </option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+
 
                                                 </div>
                                             </div>
@@ -183,7 +192,12 @@
                         btnCash.style.display = "inline-block";
                         btnPaypal.style.display = "none";
                     });
+
+
                 </script>
+
+
+
                 <!-- start footer Area -->
                 <jsp:include page="../layout/footer.jsp" />
                 <!-- End footer Area -->
