@@ -41,7 +41,7 @@
                     <div class="row">
                         <!-- Pending -->
                         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <a href="/admin/order">
+                            <a href="/admin/order/pending" data-page="pending" class="order-card-link">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
@@ -63,7 +63,7 @@
 
                         <!-- Shipping -->
                         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <a href="/admin/order/shipping">
+                            <a href="/admin/order/shipping" data-page="shipping" class="order-card-link">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
@@ -85,7 +85,7 @@
 
                         <!-- Accepted -->
                         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                            <a href="/admin/order/accepted">
+                            <a href="/admin/order/accepted" data-page="accepted" class="order-card-link">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
@@ -107,7 +107,7 @@
 
                         <!-- Canceled -->
                         <div class="col-xl-3 col-sm-6">
-                            <a href="/admin/order/canceled">
+                            <a href="/admin/order/canceled" data-page="canceled" class="order-card-link">
                                 <div class="card">
                                     <div class="card-header p-3 pt-2">
                                         <div
@@ -234,4 +234,24 @@
 
         </body>
 
-        </html>
+        <style>
+            .order-card-link.active .card {
+                border: 3px solid #4CAF50;
+                box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+                transform: scale(1.02);
+                transition: all 0.2s ease-in-out;
+            }
+        </style>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const currentPath = window.location.pathname;
+                document.querySelectorAll('.order-card-link').forEach(link => {
+                    if (currentPath === link.getAttribute('href')) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            });
+        </script>

@@ -72,11 +72,11 @@
                                     <div class="br"></div>
                                 </aside>
                                 <aside class="single_sidebar_widget popular_post_widget">
-                                    <h3 class="widget_title">Order</h3>
+                                    <h3 class="widget_title" style="border-radius: 6px;">Order</h3>
                                     <div class="media post_item">
 
                                         <div class="media-body">
-                                            <a href="/order">
+                                            <a href="/order" class="order-link" data-path="/order">
                                                 <h3>Pending</h3>
                                             </a>
 
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="media post_item">
                                         <div class="media-body">
-                                            <a href="/order/shipping">
+                                            <a href="/order/shipping" class="order-link" data-path="/order/shipping">
                                                 <h3>Shipping</h3>
                                             </a>
 
@@ -92,14 +92,14 @@
                                     </div>
                                     <div class="media post_item">
                                         <div class="media-body">
-                                            <a href="/order/accept">
+                                            <a href="/order/accept" class="order-link" data-path="/order/accept">
                                                 <h3>Accept</h3>
                                             </a>
                                         </div>
                                     </div>
                                     <div class=" media post_item">
                                         <div class="media-body">
-                                            <a href="/order/cancel">
+                                            <a href="/order/cancel" class="order-link" data-path="/order/cancel">
                                                 <h3>Cancel</h3>
                                             </a>
 
@@ -271,7 +271,35 @@
                     </div>
                 </div>
             </section>
-            <!--================Blog Area =================-->
+
+            <style>
+                .order-link.active h3 {
+                    color: #fff !important;
+                    background-color: #ffba00;
+                    padding: 6px 12px;
+                    border-radius: 6px;
+                    transition: all 0.2s ease-in-out;
+                    margin-right: 30px;
+                }
+
+                .order-link h3 {
+                    transition: all 0.2s ease-in-out;
+                }
+            </style>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const currentPath = window.location.pathname;
+                    document.querySelectorAll(".order-link").forEach(link => {
+                        const path = link.getAttribute("data-path");
+                        if (currentPath === path) {
+                            link.classList.add("active");
+                        } else {
+                            link.classList.remove("active");
+                        }
+                    });
+                });
+            </script>
 
             <!-- start footer Area -->
             <jsp:include page="../layout/footer.jsp" />

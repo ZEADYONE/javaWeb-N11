@@ -54,6 +54,9 @@
                                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                                             Code</th>
                                                                         <th
+                                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                            Status</th>
+                                                                        <th
                                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                                                             Actions</th>
                                                                     </tr>
@@ -71,6 +74,11 @@
                                                                             </td>
                                                                             <td> <span
                                                                                     class="text-xs font-weight-bold">${cate.code}</span>
+                                                                            </td>
+                                                                            <td> <span
+                                                                                    class="text-xs font-weight-bold">làm
+                                                                                    cái status, update, với toggle
+                                                                                    đi</span>
                                                                             </td>
                                                                             <td class="text-center">
                                                                                 <button class="btn btn-sm btn-warning"
@@ -143,6 +151,32 @@
                                                                                     </div>
                                                                                 </div>
 
+                                                                                <form method="post"
+                                                                                    action="/admin/catalog/category/toggle/${cate.id}"
+                                                                                    style="display:inline;">
+                                                                                    <input type="hidden"
+                                                                                        name="${_csrf.parameterName}"
+                                                                                        value="${_csrf.token}">
+
+                                                                                    <c:choose>
+                                                                                        <c:when
+                                                                                            test="${voucher.status == 1}">
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-sm btn-success">
+                                                                                                <i
+                                                                                                    class="bi bi-toggle-on fs-5"></i>
+                                                                                            </button>
+                                                                                        </c:when>
+
+                                                                                        <c:otherwise>
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-sm btn-danger">
+                                                                                                <i
+                                                                                                    class="bi bi-toggle-off fs-5"></i>
+                                                                                            </button>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </form>
                                                                             </td>
                                                                         </tr>
                                                                     </c:forEach>
@@ -235,6 +269,9 @@
                                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                                             Name</th>
                                                                         <th
+                                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                                            Status</th>
+                                                                        <th
                                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                                                             Actions</th>
                                                                     </tr>
@@ -252,6 +289,11 @@
                                                                                 <p
                                                                                     class="text-sm font-weight-bold mb-0">
                                                                                     ${brand.name}</p>
+                                                                            </td>
+                                                                            <td> <span
+                                                                                    class="text-xs font-weight-bold">làm
+                                                                                    cái status, update, với toggle
+                                                                                    đi</span>
                                                                             </td>
                                                                             <td class="text-center">
                                                                                 <button class="btn btn-sm btn-warning"
@@ -316,6 +358,32 @@
                                                                                     </div>
                                                                                 </div>
 
+                                                                                <form method="post"
+                                                                                    action="/admin/catalog/brand/toggle/${brand.id}"
+                                                                                    style="display:inline;">
+                                                                                    <input type="hidden"
+                                                                                        name="${_csrf.parameterName}"
+                                                                                        value="${_csrf.token}">
+
+                                                                                    <c:choose>
+                                                                                        <c:when
+                                                                                            test="${bran.status == 1}">
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-sm btn-success">
+                                                                                                <i
+                                                                                                    class="bi bi-toggle-on fs-5"></i>
+                                                                                            </button>
+                                                                                        </c:when>
+
+                                                                                        <c:otherwise>
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-sm btn-danger">
+                                                                                                <i
+                                                                                                    class="bi bi-toggle-off fs-5"></i>
+                                                                                            </button>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+                                                                                </form>
                                                                             </td>
 
                                                                         </tr>

@@ -34,32 +34,21 @@
 							<div class="details_item">
 								<h4>Order Info</h4>
 								<ul class="list">
-									<li><a href="#"><span>Order number</span> : 60235</a></li>
-									<li><a href="#"><span>Date</span> : Los Angeles</a></li>
-									<li><a href="#"><span>Total</span> : USD 2210</a></li>
+									<li><a href="#"><span>Order number</span> : ${id}</a></li>
+									<li><a href="#"><span>Total</span> : ${totalPrice}</a></li>
 									<li><a href="#"><span>Payment method</span> : Check payments</a></li>
 								</ul>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="details_item">
-								<h4>Billing Address</h4>
-								<ul class="list">
-									<li><a href="#"><span>Street</span> : 56/8</a></li>
-									<li><a href="#"><span>City</span> : Los Angeles</a></li>
-									<li><a href="#"><span>Country</span> : United States</a></li>
-									<li><a href="#"><span>Postcode </span> : 36952</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-4">
+
+						<div class="col-lg-6">
 							<div class="details_item">
 								<h4>Shipping Address</h4>
 								<ul class="list">
-									<li><a href="#"><span>Street</span> : 56/8</a></li>
-									<li><a href="#"><span>City</span> : Los Angeles</a></li>
-									<li><a href="#"><span>Country</span> : United States</a></li>
-									<li><a href="#"><span>Postcode </span> : 36952</a></li>
+									<li><a href="#"><span>Name</span> : ${name}</a></li>
+									<li><a href="#"><span>Email</span> : ${email}</a></li>
+									<li><a href="#"><span>Phone</span> : ${phone}</a></li>
+									<li><a href="#"><span>Address </span> : ${address}</a></li>
 								</ul>
 							</div>
 						</div>
