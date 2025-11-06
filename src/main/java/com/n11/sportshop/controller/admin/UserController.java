@@ -137,7 +137,9 @@ public class UserController {
         List<UserVoucher> userVouchers = user.getVoucherList();
 
         for (UserVoucher userVoucher : userVouchers) {
-            userHasVoucher.put(userVoucher.getVoucher().getId(), 1);
+            if (userVoucher.getQuantity() > 0) {
+                userHasVoucher.put(userVoucher.getVoucher().getId(), 1);
+            }
         }
         model.addAttribute("newUser", user);
         model.addAttribute("mapVouchers", userHasVoucher);
