@@ -154,9 +154,18 @@
                                             </div>
 
                                             <!-- Buttons -->
-                                            <a class="primary-btn" id="btn-paypal" style="display:none;"
-                                                href="#">Proceed to
-                                                Paypal</a>
+                                            <form action="/cart/checkout" method="post" style="display:none;"
+                                                id="form-paypal">
+
+                                                <input type="hidden" name="checkoutToken" value="${checkoutToken}">
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+
+                                                <button type="submit" class="primary-btn" id="btn-cash"
+                                                    style="display:none;">
+                                                    Proceed to Cash Payment
+                                                </button>
+                                            </form>
                                             <form action="/cart/checkout" method="post" style="display:none;"
                                                 id="form-cash">
 

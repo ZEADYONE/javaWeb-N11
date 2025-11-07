@@ -3,6 +3,7 @@ package com.n11.sportshop.controller.client;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
 import com.n11.sportshop.service.OrderService;
 import com.n11.sportshop.service.UserService;
+import com.n11.sportshop.service.VNPayService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -33,11 +35,12 @@ public class ClientOrderController {
     private final CartService cartService;
     private final UserService userService;
     private final OrderService orderService;
-
-    public ClientOrderController(CartService cartService, OrderService orderService, UserService userService) {
+    private final VNPayService vNPayService;
+    public ClientOrderController(CartService cartService, OrderService orderService, UserService userService, VNPayService vNPayService) {
         this.cartService = cartService;
         this.orderService = orderService;
         this.userService = userService;
+        this.vNPayService = vNPayService;
     }
 
     @GetMapping
@@ -100,7 +103,14 @@ public class ClientOrderController {
             return "redirect:/cart?error=invalid_or_used_token";
         }
         session.removeAttribute("checkoutToken");
-        
+
+        final String uuid = UUID.randomUUID().toString().replace("-", "");
+        informationDTO.setPaymentRef(uuid);
+        if (!informationDTO.getPayment().equals("cash")) {
+            String ip = this.vNPayService.getIpAddress(http);
+            String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(), informationDTO.getPaymentRef(), http);
+            return "redirect:" + vnpUrl;
+        }
         Integer userId = (Integer) session.getAttribute("id");
         if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
             informationDTO.setVoucherCode("NONE");
@@ -111,22 +121,6 @@ public class ClientOrderController {
         } else {
             return "redirect:/cart?error=not_enough_quantity";
         }
-
-        // String bankCode = "MBB"; // mã ngân hàng
-        // String accountNumber = "";
-        // String accountName = "NGUYEN TRUONG GIANG";
-        // String addInfo = "ORDER" + order.getId();
-        // Long amount = order.getTotalPrice(); // tổng tiền đơn hàng
-
-        // String qrUrl = String.format(
-        //     "https://img.vietqr.io/image/%s-%s.png?amount=%d&addInfo=%s&accountName=%s",
-        //     bankCode, accountNumber, amount, addInfo, accountName.replace(" ", "+")
-        // );
-
-        // model.addAttribute("qrUrl", qrUrl);
-        // model.addAttribute("order", order);
-
-        // return "order/payment"; // JSP hiển thị mã QR
     }
 
     @GetMapping("/confirmation")

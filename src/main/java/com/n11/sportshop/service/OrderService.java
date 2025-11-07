@@ -76,7 +76,7 @@ public class OrderService {
         order.setPhone(informationDTO.getPhone());
         order.setStatus(OrderStatus.pending);
         order.setPaymentStatus(PaymentStatus.unpaid);
-        final String uuid = UUID.randomUUID().toString().replace("-", "");
+        
         if (informationDTO.getPayment().equals("CASH")) {
             order.setPaymentMethod(PaymentMethod.cash);
         } else {
