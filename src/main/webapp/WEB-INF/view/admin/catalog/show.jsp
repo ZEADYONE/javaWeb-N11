@@ -76,9 +76,8 @@
                                                                                     class="text-xs font-weight-bold">${cate.code}</span>
                                                                             </td>
                                                                             <td> <span
-                                                                                    class="text-xs font-weight-bold">làm
-                                                                                    cái status, update, với toggle
-                                                                                    đi</span>
+                                                                                    class="text-xs font-weight-bold">${cate.status}
+                                                                                </span>
                                                                             </td>
                                                                             <td class="text-center">
                                                                                 <button class="btn btn-sm btn-warning"
@@ -160,7 +159,7 @@
 
                                                                                     <c:choose>
                                                                                         <c:when
-                                                                                            test="${voucher.status == 1}">
+                                                                                            test="${cate.status == 1}">
                                                                                             <button type="submit"
                                                                                                 class="btn btn-sm btn-success">
                                                                                                 <i
@@ -291,9 +290,7 @@
                                                                                     ${brand.name}</p>
                                                                             </td>
                                                                             <td> <span
-                                                                                    class="text-xs font-weight-bold">làm
-                                                                                    cái status, update, với toggle
-                                                                                    đi</span>
+                                                                                    class="text-xs font-weight-bold">${brand.status}</span>
                                                                             </td>
                                                                             <td class="text-center">
                                                                                 <button class="btn btn-sm btn-warning"
@@ -367,7 +364,7 @@
 
                                                                                     <c:choose>
                                                                                         <c:when
-                                                                                            test="${bran.status == 1}">
+                                                                                            test="${brand.status == 1}">
                                                                                             <button type="submit"
                                                                                                 class="btn btn-sm btn-success">
                                                                                                 <i
