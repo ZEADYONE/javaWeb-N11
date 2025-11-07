@@ -143,7 +143,7 @@
                                                 <div class="radion_btn">
                                                     <form:radiobutton path="payment" id="pay_paypal"
                                                         value="VNPAY" />
-                                                        <input style="display: none;" value="${totalPrice}" name="totalPrice">
+                                                    <input style="display: none;" value="${totalPrice}" name="totalPrice">
                                                     <label for="pay_paypal">Paypal</label>
                                                     <img src="img/product/card.jpg" alt="">
                                                     <div class="check"></div>

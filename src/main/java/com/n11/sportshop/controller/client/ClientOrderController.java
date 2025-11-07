@@ -96,7 +96,7 @@ public class ClientOrderController {
             @ModelAttribute InformationDTO informationDTO,
             @RequestParam("payment") Optional<String> payment,
             HttpServletRequest http,
-            @RequestParam("checkoutToken") String token) {
+            @RequestParam("checkoutToken") String token) throws Exception{
         HttpSession session = http.getSession(false);
         String sessionToken = (String) session.getAttribute("checkoutToken");
         if (sessionToken == null || !sessionToken.equals(token)) {
@@ -108,7 +108,7 @@ public class ClientOrderController {
         informationDTO.setPaymentRef(uuid);
         if (!informationDTO.getPayment().equals("cash")) {
             String ip = this.vNPayService.getIpAddress(http);
-            String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(), informationDTO.getPaymentRef(), http);
+            String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(), informationDTO.getPaymentRef(), ip);
             return "redirect:" + vnpUrl;
         }
         Integer userId = (Integer) session.getAttribute("id");
