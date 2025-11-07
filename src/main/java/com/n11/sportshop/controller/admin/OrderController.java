@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.n11.sportshop.domain.Order;
+import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.service.OrderService;
 
@@ -94,5 +95,18 @@ public class OrderController {
         }
         return "redirect:/admin/order";
     }
+    @GetMapping("/detail/{id}")
+    public String viewOrderDetail(@PathVariable("id") Integer id, Model model) {
+        Order order = orderService.getOrderById(id);
+        if (order == null) {
+            return "redirect:/admin/order";
+        }
 
+        // Lấy danh sách chi tiết sản phẩm trong đơn hàng
+        List<OrderDetail> orderDetails = order.getOrderDetails();
+
+        model.addAttribute("order", order);
+        model.addAttribute("orderDetails", orderDetails);
+        return "admin/order_detail"; 
+    }
 }
