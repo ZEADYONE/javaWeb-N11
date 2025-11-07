@@ -138,46 +138,49 @@
                                                     /
                                                     County, Store Postcode.</p>
                                             </div>
-
                                             <div class="payment_item">
                                                 <div class="radion_btn">
-                                                    <form:radiobutton path="payment" id="pay_paypal"
-                                                        value="VNPAY" />
-                                                    <input style="display: none;" value="${totalPrice}" name="totalPrice">
+                                                    <form:radiobutton path="payment" id="pay_paypal" value="VNPAY" />
+
                                                     <label for="pay_paypal">Paypal</label>
                                                     <img src="img/product/card.jpg" alt="">
                                                     <div class="check"></div>
                                                 </div>
-                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a
+                                                <p>Pay via PayPal; you can pay with your credit card if you don’t
+                                                    have a
                                                     PayPal
                                                     account.</p>
                                             </div>
 
                                             <!-- Buttons -->
-                                            <form action="/cart/checkout" method="post" style="display:none;"
-                                                id="form-paypal">
-
+                                            <div>
+                                                <hr>
+                                            </div>
+                                            <form action="/cart/checkout" method="post" id="form-paypal">
                                                 <input type="hidden" name="checkoutToken" value="${checkoutToken}">
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
+                                                <input type="hidden" value="${totalPrice}" name="totalPrice">
+
+                                                <button type="submit" class="primary-btn" id="btn-paypal"
+                                                    style="display:none;">
+                                                    Proceed to PayPal
+                                                </button>
+                                            </form>
+
+                                            <form action="/cart/checkout" method="post" id="form-cash">
+                                                <input type="hidden" name="checkoutToken" value="${checkoutToken}">
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+                                                <input type="hidden" value="${totalPrice}" name="totalPrice">
 
                                                 <button type="submit" class="primary-btn" id="btn-cash"
                                                     style="display:none;">
                                                     Proceed to Cash Payment
                                                 </button>
                                             </form>
-                                            <form action="/cart/checkout" method="post" style="display:none;"
-                                                id="form-cash">
 
-                                                <input type="hidden" name="checkoutToken" value="${checkoutToken}">
-                                                <input type="hidden" name="${_csrf.parameterName}"
-                                                    value="${_csrf.token}" />
 
-                                                <button type="submit" class="primary-btn" id="btn-cash"
-                                                    style="display:none;">
-                                                    Proceed to Cash Payment
-                                                </button>
-                                            </form>
 
                                         </div>
                                     </div>
