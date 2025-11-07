@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -45,8 +44,21 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
-    @OneToOne(mappedBy = "order")
-    private Payment payment;
+    private String paymentRef = "unknown";
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus = PaymentStatus.unpaid;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod = PaymentMethod.cash;
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 
     public Long getShipPrice() {
         return shipPrice;
@@ -94,14 +106,6 @@ public class Order {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public User getUser() {
@@ -160,4 +164,19 @@ public class Order {
         this.discountAmount = discountAmount;
     }
 
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaymentRef() {
+        return paymentRef;
+    }
+
+    public void setPaymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+    }
 }

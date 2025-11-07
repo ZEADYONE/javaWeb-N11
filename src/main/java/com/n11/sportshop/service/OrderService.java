@@ -1,6 +1,7 @@
 package com.n11.sportshop.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,8 @@ import com.n11.sportshop.domain.DiscountType;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
+import com.n11.sportshop.domain.PaymentMethod;
+import com.n11.sportshop.domain.PaymentStatus;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.UserVoucher;
@@ -18,7 +21,6 @@ import com.n11.sportshop.repository.CartDetailRepository;
 import com.n11.sportshop.repository.CartRepository;
 import com.n11.sportshop.repository.OrderDetailRepository;
 import com.n11.sportshop.repository.OrderRepository;
-import com.n11.sportshop.repository.PaymentRepository;
 import com.n11.sportshop.repository.ProductRepository;
 import com.n11.sportshop.repository.UserRepository;
 import com.n11.sportshop.repository.UserVoucherRepo;
@@ -36,18 +38,16 @@ public class OrderService {
     private final OrderDetailRepository orderDetailRepo;
     private final UserRepository userRepository;
     private final CartService cartService;
-    private final PaymentRepository paymentRepository;
     private final ProductRepository productRepository;
     private final VoucherRepository voucherRepository;
     private final UserVoucherRepo userVoucherRepo;
 
-    public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo, CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo, PaymentRepository paymentRepository, ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
+    public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo, CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo, ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
         this.cartDetailRepo = cartDetailRepo;
         this.cartRepo = cartRepo;
         this.cartService = cartService;
         this.orderDetailRepo = orderDetailRepo;
         this.orderRepo = orderRepo;
-        this.paymentRepository = paymentRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.voucherRepository = voucherRepository;
@@ -74,8 +74,14 @@ public class OrderService {
         order.setAddress(informationDTO.getAddress());
         order.setNote(informationDTO.getNote());
         order.setPhone(informationDTO.getPhone());
-        order.setPayment(this.paymentRepository.findByPaymentMethod(informationDTO.getPayment()));
         order.setStatus(OrderStatus.pending);
+        order.setPaymentStatus(PaymentStatus.unpaid);
+        final String uuid = UUID.randomUUID().toString().replace("-", "");
+        if (informationDTO.getPayment().equals("CASH")) {
+            order.setPaymentMethod(PaymentMethod.cash);
+        } else {
+            order.setPaymentMethod(PaymentMethod.vnpay);
+        }
         order = this.orderRepo.save(order);
 
         Long price = 0L;

@@ -8,6 +8,7 @@ public class InformationDTO {
     private String note;
     private String payment;
     private String voucherCode;
+    private Long totalPrice;
     
     public String getName() {
         return name;
@@ -63,6 +64,14 @@ public class InformationDTO {
 
     public void setVoucherCode(String voucherCode) {
         this.voucherCode = voucherCode;
+    }
+
+    public Long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Long totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     

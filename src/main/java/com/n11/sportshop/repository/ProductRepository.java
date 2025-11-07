@@ -16,6 +16,23 @@ import com.n11.sportshop.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
+
+    @Query(value = """
+            SELECT p.*, c.code
+            FROM product p
+            JOIN brand b ON p.brand_id = b.id
+            JOIN category c ON p.category_id = c.id
+            WHERE c.status = 1 AND b.status = 1
+            ORDER BY c.code ASC
+            """,
+            countQuery = """
+            SELECT count(*)
+            FROM product p
+            JOIN brand b ON p.brand_id = b.id
+            JOIN category c ON p.category_id = c.id
+            WHERE c.status = 1 AND b.status = 1
+            """,
+            nativeQuery = true)
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);

@@ -45,7 +45,7 @@ public class PaginationService {
         // Pageable: đại diện cho thông tin phân trang mà Spring Data JPA sử dụng
         // page - 1 vì trong Spring Data JPA, số trang bắt đầu từ 0 (0 = trang 1, 1 =
         // trang 2, ...)
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("category.code").ascending().and(Sort.by("name").ascending()));
+        Pageable pageable = PageRequest.of(page - 1, size);
         // 1 trang luu size sanr pham;
         // fetchProducts(pageable) trả về một Page<Product> gồm danh sách sản phẩm +
         // tổng số trang + tổng số phần tử
