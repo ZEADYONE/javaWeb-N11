@@ -73,12 +73,12 @@ public class CatalogController {
         this.productService.updateVoucher(id);
         return "redirect:/admin/catalog";
     }
-    @PostMapping("/brand/action/{id}")
+    @PostMapping("/brand/toggle/{id}")
     public String postCreateBrand(@PathVariable("id") Integer id) {
         this.productService.actionBrand(id);
         return "redirect:/admin/catalog";
     }
-    @PostMapping("/category/action/{id}")
+    @PostMapping("/category/toggle/{id}")
     public String postCreateCategory(@PathVariable("id") Integer id) {
         this.productService.actionCategory(id);
         return "redirect:/admin/catalog";
