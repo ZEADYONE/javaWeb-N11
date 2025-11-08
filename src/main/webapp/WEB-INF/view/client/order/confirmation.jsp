@@ -86,28 +86,7 @@
 										</tr>
 									</c:forEach>
 
-									<!-- <tr>
-										<td>
-											<p>Pixelstore fresh Blackberry</p>
-										</td>
-										<td>
-											<h5>x 02</h5>
-										</td>
-										<td>
-											<p>$720.00</p>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p>Pixelstore fresh Blackberry</p>
-										</td>
-										<td>
-											<h5>x 02</h5>
-										</td>
-										<td>
-											<p>$720.00</p>
-										</td>
-									</tr> -->
+								
 									<tr>
 										<td>
 											<h4>Subtotal</h4>
