@@ -6,9 +6,9 @@ public class InformationDTO {
     private String email;
     private String address;
     private String note;
-    private String payment;
+    private String payment; // CASH hay VNPAY
     private String voucherCode;
-    private Long totalPrice;
+    private Long totalPrice; // Tao ma qr
     private String paymentRef;
     
     public String getName() {

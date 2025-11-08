@@ -1,7 +1,6 @@
 package com.n11.sportshop.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -75,12 +74,12 @@ public class OrderService {
         order.setNote(informationDTO.getNote());
         order.setPhone(informationDTO.getPhone());
         order.setStatus(OrderStatus.pending);
-        order.setPaymentStatus(PaymentStatus.unpaid);
+        order.setPaymentStatus(PaymentStatus.UNPAID);
         
         if (informationDTO.getPayment().equals("CASH")) {
-            order.setPaymentMethod(PaymentMethod.cash);
+            order.setPaymentMethod(PaymentMethod.CASH);
         } else {
-            order.setPaymentMethod(PaymentMethod.vnpay);
+            order.setPaymentMethod(PaymentMethod.VNPAY);
         }
         order = this.orderRepo.save(order);
 

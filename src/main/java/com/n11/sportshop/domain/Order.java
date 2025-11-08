@@ -47,10 +47,10 @@ public class Order {
     private String paymentRef = "unknown";
 
     @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus = PaymentStatus.unpaid;
+    private PaymentStatus paymentStatus = PaymentStatus.UNPAID;
 
     @Enumerated(EnumType.STRING)
-    private PaymentMethod paymentMethod = PaymentMethod.cash;
+    private PaymentMethod paymentMethod = PaymentMethod.CASH;
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
