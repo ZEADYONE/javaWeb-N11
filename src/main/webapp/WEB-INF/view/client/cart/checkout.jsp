@@ -118,13 +118,16 @@
                                                 <li><a>Subtotal <span>
                                                             <fmt:formatNumber value="${totalPrice}" type="currency" />
                                                         </span></a></li>
-                                                <li><a>Shipping <span>
+                                                <li><a>Shipping <span id="shippingAmountSpan">
                                                             <fmt:formatNumber value="${shipPrice}" type="currency" />
                                                         </span></a></li>
-                                                <li><a>Discount <span>
+
+                                                <li><a>Discount <span id="discountAmountSpan">
                                                             <fmt:formatNumber value="${Discount}" type="currency" />
                                                         </span></a></li>
-                                                <li><a>Total <span>
+
+
+                                                <li><a>Total <span id="totalAmountSpan">
                                                             <fmt:formatNumber
                                                                 value="${totalPrice - Discount + shipPrice}"
                                                                 type="currency" />
@@ -188,26 +191,86 @@
                     </div>
                 </section>
                 <!--================End Checkout Area =================-->
+
                 <script>
                     const paypalRadio = document.getElementById("pay_paypal");
                     const cashRadio = document.getElementById("pay_cash");
                     const btnPaypal = document.getElementById("btn-paypal");
                     const btnCash = document.getElementById("btn-cash");
 
-                    paypalRadio.addEventListener("change", function () {
-                        btnPaypal.style.display = "inline-block";
-                        btnCash.style.display = "none";
-                    });
+                    if (paypalRadio && cashRadio) {
+                        paypalRadio.addEventListener("change", function () {
+                            btnPaypal.style.display = "inline-block";
+                            btnCash.style.display = "none";
+                        });
 
-                    cashRadio.addEventListener("change", function () {
-                        btnCash.style.display = "inline-block";
-                        btnPaypal.style.display = "none";
-                    });
+                        cashRadio.addEventListener("change", function () {
+                            btnCash.style.display = "inline-block";
+                            btnPaypal.style.display = "none";
+                        });
+                    }
 
+                    // --- Logic cho Voucher ---
 
+                    // 1. Lấy giá trị gốc (phải là SỐ, không phải chuỗi)
+                    const subtotal = ${ totalPrice };
+                    const originalShippingCost = ${ shipPrice };
+
+                    // 2. Lấy các element
+                    const voucherSelect = document.getElementById("voucherSelect");
+                    const discountSpan = document.getElementById("discountAmountSpan");
+                    const totalSpan = document.getElementById("totalAmountSpan");
+                    const shippingSpan = document.getElementById("shippingAmountSpan");
+                    const totalPriceInput = document.querySelector('input[name="totalPrice"]');
+
+                    // 3. Hàm định dạng tiền tệ
+                    function formatCurrency(value) {
+                        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+                    }
+
+                    // 4. Thêm sự kiện
+                    if (voucherSelect) {
+                        voucherSelect.addEventListener("change", function () {
+                            const selectedOption = voucherSelect.options[voucherSelect.selectedIndex];
+                            const discountType = selectedOption.dataset.type;
+                            const discountValue = parseFloat(selectedOption.dataset.value);
+
+                            let discountAmount = 0;
+                            let currentShippingCost = originalShippingCost;
+
+                            // 5. Tính toán
+                            const typeUpperCase = String(discountType).toUpperCase();
+
+                            if (typeUpperCase === "PERCENTAGE") {
+                                discountAmount = (subtotal * discountValue) / 100;
+                            } else if (typeUpperCase === "FIXED_AMOUNT" || typeUpperCase === "FIXEDAMOUNT") {
+                                discountAmount = discountValue;
+                            } else if (typeUpperCase === "FREESHIP") {
+                                discountAmount = 0;
+                                currentShippingCost = 0;
+                            }
+
+                            // 6. [FIX LỖI GIÁ ÂM]
+                            // Đảm bảo tiền giảm giá không bao giờ lớn hơn tiền hàng
+                            if (discountAmount > subtotal) {
+                                discountAmount = subtotal;
+                            }
+
+                            // 7. Tính tổng mới
+                            const newTotal = subtotal - discountAmount + currentShippingCost;
+
+                            // 8. Cập nhật HTML
+                            if (discountSpan) discountSpan.textContent = formatCurrency(discountAmount);
+                            if (totalSpan) totalSpan.textContent = formatCurrency(newTotal);
+                            if (shippingSpan) shippingSpan.textContent = formatCurrency(currentShippingCost);
+
+                            // 9. Cập nhật input ẩn
+                            if (totalPriceInput) {
+                                totalPriceInput.value = newTotal;
+                            }
+                        });
+                    }
                 </script>
-
-
 
                 <!-- start footer Area -->
                 <jsp:include page="../layout/footer.jsp" />
