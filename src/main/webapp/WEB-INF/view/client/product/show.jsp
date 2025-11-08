@@ -21,6 +21,34 @@
                         color: #fff;
                         border-color: #ffba00;
                     }
+
+                    .product-badge {
+                        position: absolute;
+
+                        top: 15px;
+
+                        left: 15px;
+
+                        color: white;
+                        padding: 3px 6px;
+                        font-size: 8px;
+                        font-weight: 500;
+                        border-radius: 4px;
+                        z-index: 10;
+                        text-transform: uppercase;
+                    }
+
+
+                    .product-badge.badge-stock {
+                        background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+
+
+                    }
+
+                    .product-badge.badge-out-of-stock {
+                        background-color: #dc3545;
+
+                    }
                 </style>
 
                 <!-- Start Banner Area -->
@@ -136,6 +164,17 @@
                                     <c:forEach var="product" items="${products}">
                                         <div class="col-lg-4 col-md-6">
                                             <div class="single-product">
+                                                <c:choose>
+
+                                                    <c:when test="${product.stockQuantity > 0}">
+                                                        <span class="product-badge badge-stock">Còn hàng</span>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <span class="product-badge badge-out-of-stock">Còn cái
+                                                            nịt</span>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 <img class="img-fluid" src="/images/product/${product.image}" alt=""
                                                     style="height: 255px;">
                                                 <div class="product-details">
@@ -148,22 +187,30 @@
 
                                                     </div>
                                                     <div class="prd-bottom">
-                                                        <form action="/products/add-product-to-cart/${product.id}"
-                                                            method="post" class="d-inline">
-                                                            <input type="hidden" name="${_csrf.parameterName}"
-                                                                value="${_csrf.token}" />
-                                                            <a href="#" class="social-info"
-                                                                onclick="this.closest('form').submit(); return false;">
-                                                                <span class="ti-bag"></span>
-                                                                <p class="hover-text">add to bag</p>
-                                                            </a>
-                                                        </form>
+                                                        <c:choose>
 
+                                                            <c:when test="${product.stockQuantity > 0}">
+                                                                <form
+                                                                    action="/products/add-product-to-cart/${product.id}"
+                                                                    method="post" class="d-inline">
+                                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                                        value="${_csrf.token}" />
+                                                                    <a href="#" class="social-info"
+                                                                        onclick="this.closest('form').submit(); return false;">
+                                                                        <span class="ti-bag"></span>
+                                                                        <p class="hover-text">add to bag</p>
+                                                                    </a>
+                                                                </form>
+                                                            </c:when>
 
-                                                        <a href="" class="social-info">
-                                                            <span class="lnr lnr-move"></span>
-                                                            <p class="hover-text">view more</p>
-                                                        </a>
+                                                            <c:otherwise>
+                                                                <a class="social-info">
+                                                                    <span class="ti-close"></span>
+
+                                                                    <p class="hover-text">Còn cái nịt</p>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </div>
                                                 </div>
                                             </div>

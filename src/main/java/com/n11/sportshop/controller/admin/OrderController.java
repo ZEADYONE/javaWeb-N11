@@ -95,6 +95,7 @@ public class OrderController {
         }
         return "redirect:/admin/order";
     }
+
     @GetMapping("/detail/{id}")
     public String viewOrderDetail(@PathVariable("id") Integer id, Model model) {
         Order order = orderService.getOrderById(id);
@@ -107,6 +108,6 @@ public class OrderController {
 
         model.addAttribute("order", order);
         model.addAttribute("orderDetails", orderDetails);
-        return "admin/order_detail"; 
+        return "admin/order/detail";
     }
 }

@@ -1,32 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
-        <html lang="en">
 
-        <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="apple-touch-icon" sizes="76x76" href="/admin/img/apple-icon.png">
-            <link rel="icon" type="image/png" href="/admin/img/favicon.png">
-            <title>
-                Material Dashboard 2 by Creative Tim
-            </title>
-
-            <!--     Fonts and icons     -->
-            <link rel="stylesheet" type="text/css"
-                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-            <!-- Nucleo Icons -->
-            <link href="/admin/css/nucleo-icons.css" rel="stylesheet" />
-            <link href="/admin/css/nucleo-svg.css" rel="stylesheet" />
-            <!-- Font Awesome Icons -->
-            <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-            <!-- Material Icons -->
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-            <!-- CSS Files -->
-            <link id="pagestyle" href="/admin/css/material-dashboard.css" rel="stylesheet" />
-
-
-        </head>
 
         <body class="g-sidenav-show  bg-gray-200">
             <aside
@@ -161,11 +135,12 @@
                                                             me-2">local_shipping</i>Shipping</button>
                                                 </form>
                                             </c:if>
-                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                            <!-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                 href="javascript:;"><i
-                                                    class="material-icons text-sm me-2">delete</i>Delete</a>
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
-                                                    class="material-icons text-sm me-2">edit</i>Edit</a>
+                                                    class="material-icons text-sm me-2">delete</i>Delete</a> -->
+                                            <a class="btn btn-link text-dark px-3 mb-0"
+                                                href="/admin/order/detail/${order.id}"><i
+                                                    class="material-icons text-sm me-2">visibility</i>View</a>
                                         </div>
                                     </li>
 

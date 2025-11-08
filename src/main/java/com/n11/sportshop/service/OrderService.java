@@ -80,6 +80,7 @@ public class OrderService {
             order.setPaymentMethod(PaymentMethod.CASH);
         } else {
             order.setPaymentMethod(PaymentMethod.VNPAY);
+            order.setPaymentRef(informationDTO.getPaymentRef());
         }
         order = this.orderRepo.save(order);
 
@@ -158,5 +159,9 @@ public class OrderService {
 
     public Integer countByStatus(OrderStatus status) {
         return this.orderRepo.countByStatus(status);
+    }
+
+    public Order getOrderByPaymentRef(String paymentRef) {
+        return this.orderRepo.findByPaymentRef(paymentRef);
     }
 }
