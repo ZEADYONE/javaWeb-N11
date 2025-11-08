@@ -129,7 +129,8 @@
 
                                             <div class="payment_item">
                                                 <div class="radion_btn">
-                                                    <form:radiobutton path="payment" id="pay_cash" value="CASH" />
+                                                    <form:radiobutton path="payment" name="payment" id="pay_cash"
+                                                        value="CASH" />
                                                     <label for="pay_cash">Cash Payment</label>
                                                     <div class="check"></div>
                                                 </div>
@@ -140,7 +141,8 @@
                                             </div>
                                             <div class="payment_item">
                                                 <div class="radion_btn">
-                                                    <form:radiobutton path="payment" id="pay_paypal" value="VNPAY" />
+                                                    <form:radiobutton path="payment" name="payment"
+                                                        id="pay_paypal" value="VNPAY" />
 
                                                     <label for="pay_paypal">Paypal</label>
                                                     <img src="img/product/card.jpg" alt="">
@@ -156,29 +158,20 @@
                                             <div>
                                                 <hr>
                                             </div>
-                                            <form action="/cart/checkout" method="post" id="form-paypal">
-                                                <input type="hidden" name="checkoutToken" value="${checkoutToken}">
-                                                <input type="hidden" name="${_csrf.parameterName}"
-                                                    value="${_csrf.token}" />
-                                                <input type="hidden" value="${totalPrice}" name="totalPrice">
 
-                                                <button type="submit" class="primary-btn" id="btn-paypal"
-                                                    style="display:none;">
-                                                    Proceed to PayPal
-                                                </button>
-                                            </form>
+                                            <input type="hidden" name="checkoutToken" value="${checkoutToken}">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                            <input type="hidden" value="${totalPrice}" name="totalPrice">
 
-                                            <form action="/cart/checkout" method="post" id="form-cash">
-                                                <input type="hidden" name="checkoutToken" value="${checkoutToken}">
-                                                <input type="hidden" name="${_csrf.parameterName}"
-                                                    value="${_csrf.token}" />
-                                                <input type="hidden" value="${totalPrice}" name="totalPrice">
+                                            <button type="submit" class="primary-btn" id="btn-cash"
+                                                style="display:none;">
+                                                Proceed to Cash Payment
+                                            </button>
 
-                                                <button type="submit" class="primary-btn" id="btn-cash"
-                                                    style="display:none;">
-                                                    Proceed to Cash Payment
-                                                </button>
-                                            </form>
+                                            <button type="submit" class="primary-btn" id="btn-paypal"'?'
+                                                style="display:none;">
+                                                Proceed to PayPal
+                                            </button>
 
 
 

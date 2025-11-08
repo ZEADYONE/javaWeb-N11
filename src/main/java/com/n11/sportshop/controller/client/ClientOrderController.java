@@ -106,7 +106,7 @@ public class ClientOrderController {
 
         final String uuid = UUID.randomUUID().toString().replace("-", "");
         informationDTO.setPaymentRef(uuid);
-        if (!informationDTO.getPayment().equals("cash")) {
+        if (!informationDTO.getPayment().equals("CASH")) {
             String ip = this.vNPayService.getIpAddress(http);
             String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(), informationDTO.getPaymentRef(), ip);
             return "redirect:" + vnpUrl;
