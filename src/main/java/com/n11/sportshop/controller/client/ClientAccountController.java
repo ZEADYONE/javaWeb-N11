@@ -3,6 +3,7 @@ package com.n11.sportshop.controller.client;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,11 +43,32 @@ public class ClientAccountController {
 
     @PostMapping("/profile/update")
     public String updateUserPage(
-            @ModelAttribute("user") User user,
+            @ModelAttribute("newUser") User user,
+            // BindingResult userBindingResult,
             @RequestParam("images") MultipartFile file,
             Authentication authentication,
             HttpSession session,
             RedirectAttributes redirectAttributes) {
+
+        // Không cho update trùng username và email
+        // User existingUser = userService.getUserByID(user.getId());
+        // boolean emailChanged =
+        // !user.getEmail().equalsIgnoreCase(existingUser.getEmail());
+        // boolean usernameChanged =
+        // !user.getUsername().equalsIgnoreCase(existingUser.getUsername());
+
+        // if (emailChanged && userService.checkEmailExist(user.getEmail())) {
+        // userBindingResult.rejectValue("email", "error.user", "Email đã tồn tại");
+        // }
+
+        // if (usernameChanged && userService.checkUsernameExist(user.getUsername())) {
+        // userBindingResult.rejectValue("username", "error.user", "Tên đăng nhập đã tồn
+        // tại");
+        // }
+
+        // if (userBindingResult.hasErrors()) {
+        // return "client/user/update";
+        // }
 
         User updateUser = this.userService.updateUser(user, file);
         session.setAttribute("fullName", updateUser.getFullName());
