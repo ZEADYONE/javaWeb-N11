@@ -119,10 +119,14 @@
                                                             <fmt:formatNumber value="${totalPrice}" type="currency" />
                                                         </span></a></li>
                                                 <li><a>Shipping <span>
-                                                            <fmt:formatNumber value="30000" type="currency" />
+                                                            <fmt:formatNumber value="${shipPrice}" type="currency" />
+                                                        </span></a></li>
+                                                <li><a>Discount <span>
+                                                            <fmt:formatNumber value="${Discount}" type="currency" />
                                                         </span></a></li>
                                                 <li><a>Total <span>
-                                                            <fmt:formatNumber value="${totalPrice + 30000}"
+                                                            <fmt:formatNumber
+                                                                value="${totalPrice - Discount + shipPrice}"
                                                                 type="currency" />
                                                         </span></a></li>
                                             </ul>
@@ -141,8 +145,8 @@
                                             </div>
                                             <div class="payment_item">
                                                 <div class="radion_btn">
-                                                    <form:radiobutton path="payment" name="payment"
-                                                        id="pay_paypal" value="VNPAY" />
+                                                    <form:radiobutton path="payment" name="payment" id="pay_paypal"
+                                                        value="VNPAY" />
 
                                                     <label for="pay_paypal">Paypal</label>
                                                     <img src="img/product/card.jpg" alt="">
@@ -161,7 +165,8 @@
 
                                             <input type="hidden" name="checkoutToken" value="${checkoutToken}">
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                            <input type="hidden" value="${totalPrice}" name="totalPrice">
+                                            <input type="hidden" value="${totalPrice - Discount + shipPrice}"
+                                                name="totalPrice">
 
                                             <button type="submit" class="primary-btn" id="btn-cash"
                                                 style="display:none;">
