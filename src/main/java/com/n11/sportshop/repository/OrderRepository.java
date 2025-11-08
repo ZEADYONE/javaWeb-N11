@@ -16,4 +16,5 @@ public interface OrderRepository extends JpaRepository<Order,Integer>{
     List<Order> findByStatus(OrderStatus status);
     List<Order> findByUserAndStatus(User user, OrderStatus status);
     Integer countByStatus(OrderStatus status);
+    Order findByPaymentRef(String paymentRef);
 }

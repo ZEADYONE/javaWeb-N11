@@ -18,6 +18,7 @@ import com.n11.sportshop.domain.Cart;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
+import com.n11.sportshop.domain.PaymentStatus;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
@@ -36,6 +37,7 @@ public class ClientOrderController {
     private final UserService userService;
     private final OrderService orderService;
     private final VNPayService vNPayService;
+
     public ClientOrderController(CartService cartService, OrderService orderService, UserService userService, VNPayService vNPayService) {
         this.cartService = cartService;
         this.orderService = orderService;
@@ -46,7 +48,7 @@ public class ClientOrderController {
     @GetMapping
     public String getUserOrderPendingPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        Integer id = (Integer)session.getAttribute("id");
+        Integer id = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.pending);
         Collections.reverse(orders);
@@ -58,7 +60,7 @@ public class ClientOrderController {
     @GetMapping("/shipping")
     public String getUserOrderShippingPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        Integer id = (Integer)session.getAttribute("id");
+        Integer id = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.shipped);
         Collections.reverse(orders);
@@ -70,7 +72,7 @@ public class ClientOrderController {
     @GetMapping("/accept")
     public String getUserOrderAcceptPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        Integer id = (Integer)session.getAttribute("id");
+        Integer id = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.accept);
         Collections.reverse(orders);
@@ -82,7 +84,7 @@ public class ClientOrderController {
     @GetMapping("/cancel")
     public String getUserOrderCancelPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        Integer id = (Integer)session.getAttribute("id");
+        Integer id = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(id);
         List<Order> orders = this.orderService.getOrderHistoryByStatus(user, OrderStatus.canceled);
         Collections.reverse(orders);
@@ -96,7 +98,7 @@ public class ClientOrderController {
             @ModelAttribute InformationDTO informationDTO,
             @RequestParam("payment") Optional<String> payment,
             HttpServletRequest http,
-            @RequestParam("checkoutToken") String token) throws Exception{
+            @RequestParam("checkoutToken") String token) throws Exception {
         HttpSession session = http.getSession(false);
         String sessionToken = (String) session.getAttribute("checkoutToken");
         if (sessionToken == null || !sessionToken.equals(token)) {
@@ -109,22 +111,58 @@ public class ClientOrderController {
         if (!informationDTO.getPayment().equals("CASH")) {
             String ip = this.vNPayService.getIpAddress(http);
             String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(), informationDTO.getPaymentRef(), ip);
-            return "redirect:" + vnpUrl;
-        }
-        Integer userId = (Integer) session.getAttribute("id");
-        if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
-            informationDTO.setVoucherCode("NONE");
-        }
-        Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
-        if (order != null) {
-            return "redirect:/order/confirmation";
+            Integer userId = (Integer) session.getAttribute("id");
+            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
+                informationDTO.setVoucherCode("NONE");
+            }
+            Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+            if (order != null) {
+                return "redirect:" + vnpUrl;
+            } else {
+                return "redirect:/cart?error=not_enough_quantity";
+            }
         } else {
-            return "redirect:/cart?error=not_enough_quantity";
+            Integer userId = (Integer) session.getAttribute("id");
+            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
+                informationDTO.setVoucherCode("NONE");
+            }
+            Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+            if (order != null) {
+                return "redirect:/order/confirmation";
+            } else {
+                return "redirect:/cart?error=not_enough_quantity";
+            }
         }
     }
 
+    @GetMapping("/payment-return")
+    public String paymentReturn(
+            @RequestParam("vnp_ResponseCode") Optional<String> vnpayResponseCode,
+            @RequestParam("vnp_TxnRef") Optional<String> paymentRef,
+            Model model) {
+        String responseCode = vnpayResponseCode.get();
+
+        // Lấy thời gian tạo đơn (từ DB)
+        Order order = orderService.getOrderByPaymentRef(paymentRef.get());
+
+        // Kiểm tra trạng thái giao dịch
+        if ("00".equals(responseCode)) {
+            order.setPaymentStatus(PaymentStatus.PAID);
+            model.addAttribute("message", "Thanh toán thành công!");
+        } else {
+            order.setPaymentStatus(PaymentStatus.UNPAID);
+            model.addAttribute("message", "Thanh toán thất bại!");
+        }
+
+        return "redirect:/order/confirmation";
+    }
+
     @GetMapping("/confirmation")
-    public String getConfirmation(Model model, HttpServletRequest request) {
+    public String getConfirmation(
+            Model model,
+            HttpServletRequest request
+    ) {
+
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");
         User user = this.userService.getUserByID(userId);
@@ -133,7 +171,9 @@ public class ClientOrderController {
         List<OrderDetail> orderDetails = this.orderService.getOrderDetails(user);
         Order order = this.orderService.getOrderByUser(user);
         Long totalPrice = order.getShipPrice() + order.getTotalAmount() - order.getDiscountAmount();
-        if (totalPrice < 0) totalPrice = 0L;
+        if (totalPrice < 0) {
+            totalPrice = 0L;
+        }
         model.addAttribute("items", orderDetails);
         model.addAttribute("shipping", order.getShipPrice());
         model.addAttribute("subTotal", order.getTotalAmount());
