@@ -16,23 +16,6 @@ import com.n11.sportshop.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
-
-    @Query(value = """
-            SELECT p.*, c.code
-            FROM product p
-            JOIN brand b ON p.brand_id = b.id
-            JOIN category c ON p.category_id = c.id
-            WHERE c.status = 1 AND b.status = 1
-            ORDER BY c.code ASC
-            """,
-            countQuery = """
-            SELECT count(*)
-            FROM product p
-            JOIN brand b ON p.brand_id = b.id
-            JOIN category c ON p.category_id = c.id
-            WHERE c.status = 1 AND b.status = 1
-            """,
-            nativeQuery = true)
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
@@ -43,4 +26,14 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     @Query(value = "SELECT * FROM product WHERE id = :id FOR UPDATE", nativeQuery = true)
     Optional<Product> findByIdForUpdate(@Param("id") Integer id);
+
+    @Query(value = """
+    SELECT p.* 
+    FROM product p
+    JOIN brand b ON p.brand_id = b.id
+    JOIN category c ON c.id = p.category_id
+    WHERE b.status = 1
+      AND c.status = 1
+    """, nativeQuery = true)
+    List<Product> findActiveProduct();
 }

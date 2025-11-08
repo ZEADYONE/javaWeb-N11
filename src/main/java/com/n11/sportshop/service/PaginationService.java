@@ -73,7 +73,7 @@ public class PaginationService {
 
     
     public Page<Product> ClientProductsPagination(ProductCriteriaDTO productCriteriaDTO) {
-        Specification<Product> combineSpecs = Specification.where(null);
+        Specification<Product> combineSpecs = Specification.where(ProductSpecs.onlyActiveBrandAndCategory());
         int page = 1;
 
         try {
@@ -102,6 +102,7 @@ public class PaginationService {
             if (productCriteriaDTO.getMinPrice() != null || productCriteriaDTO.getMaxPrice() != null) {
                 combineSpecs = combineSpecs.and(ProductSpecs.filterPrice(productCriteriaDTO.getMinPrice().get(), productCriteriaDTO.getMaxPrice().get()));
             }
+
             return this.productRepository.findAll(combineSpecs, pageable);
         }
     }

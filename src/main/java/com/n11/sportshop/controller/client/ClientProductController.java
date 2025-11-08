@@ -62,10 +62,9 @@ public class ClientProductController {
 
         // ---------------Lấy tổng số trang ------------------
         model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
-
         model.addAttribute("products", paginationQuery.getPrs().getContent());
-        model.addAttribute("categories", this.productService.getAllCategories());
-        model.addAttribute("brands", this.productService.getAllBrands());
+        model.addAttribute("categories", this.productService.getActiveCategory(1));
+        model.addAttribute("brands", this.productService.getActiveBrand(1));
         model.addAttribute("queryString", qs);
         model.addAttribute("criteria", productCriteriaDTO);
         return "client/product/show";

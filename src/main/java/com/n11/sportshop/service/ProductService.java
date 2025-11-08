@@ -54,6 +54,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    
+    public List<Product> getActiveProduct() {
+        return this.productRepository.findActiveProduct();
+    }
+
     // xem chi tiet 1 san pham theo id
     public Optional<Product> getProductById(int id) {
         return productRepository.findById(id);
@@ -88,15 +93,7 @@ public class ProductService {
     public void saveBrand(Brand brand) {
         brandRepository.save(brand);
     }
-    //Xóa category
-    public void deleteCategory(Integer id) {
-        categoryRepository.deleteById(id);
-    }
-    //Xóa brand
-    public void deleteBrand(Integer id) {
-        brandRepository.deleteById(id);
-    }
-
+    
     public void createVoucher(Voucher voucher) {
         this.voucherRepository.save(voucher);
     }
@@ -116,7 +113,6 @@ public class ProductService {
     public List<Voucher> getVouchers() {
         return this.voucherRepository.findAll();
     }
-    
     
     public List<Voucher> getActiveVoucher(int status) {
         return this.voucherRepository.findByStatus(status);
