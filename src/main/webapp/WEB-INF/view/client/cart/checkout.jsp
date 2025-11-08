@@ -210,25 +210,21 @@
                         });
                     }
 
-                    // --- Logic cho Voucher ---
 
-                    // 1. Lấy giá trị gốc (phải là SỐ, không phải chuỗi)
                     const subtotal = ${ totalPrice };
                     const originalShippingCost = ${ shipPrice };
 
-                    // 2. Lấy các element
                     const voucherSelect = document.getElementById("voucherSelect");
                     const discountSpan = document.getElementById("discountAmountSpan");
                     const totalSpan = document.getElementById("totalAmountSpan");
                     const shippingSpan = document.getElementById("shippingAmountSpan");
                     const totalPriceInput = document.querySelector('input[name="totalPrice"]');
 
-                    // 3. Hàm định dạng tiền tệ
                     function formatCurrency(value) {
                         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
                     }
 
-                    // 4. Thêm sự kiện
+
                     if (voucherSelect) {
                         voucherSelect.addEventListener("change", function () {
                             const selectedOption = voucherSelect.options[voucherSelect.selectedIndex];
@@ -238,7 +234,7 @@
                             let discountAmount = 0;
                             let currentShippingCost = originalShippingCost;
 
-                            // 5. Tính toán
+
                             const typeUpperCase = String(discountType).toUpperCase();
 
                             if (typeUpperCase === "PERCENTAGE") {
@@ -250,21 +246,20 @@
                                 currentShippingCost = 0;
                             }
 
-                            // 6. [FIX LỖI GIÁ ÂM]
-                            // Đảm bảo tiền giảm giá không bao giờ lớn hơn tiền hàng
+
                             if (discountAmount > subtotal) {
                                 discountAmount = subtotal;
                             }
 
-                            // 7. Tính tổng mới
+
                             const newTotal = subtotal - discountAmount + currentShippingCost;
 
-                            // 8. Cập nhật HTML
+
                             if (discountSpan) discountSpan.textContent = formatCurrency(discountAmount);
                             if (totalSpan) totalSpan.textContent = formatCurrency(newTotal);
                             if (shippingSpan) shippingSpan.textContent = formatCurrency(currentShippingCost);
 
-                            // 9. Cập nhật input ẩn
+
                             if (totalPriceInput) {
                                 totalPriceInput.value = newTotal;
                             }
