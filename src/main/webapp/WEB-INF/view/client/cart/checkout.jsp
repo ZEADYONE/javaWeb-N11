@@ -211,8 +211,8 @@
                     }
 
 
-                    const subtotal = ${ totalPrice };
-                    const originalShippingCost = ${ shipPrice };
+                    const subtotal = ${totalPrice};
+                    const originalShippingCost = ${shipPrice};;
 
                     const voucherSelect = document.getElementById("voucherSelect");
                     const discountSpan = document.getElementById("discountAmountSpan");
