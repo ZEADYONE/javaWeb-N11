@@ -139,6 +139,7 @@ public class ClientOrderController {
         model.addAttribute("subTotal", order.getTotalAmount());
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("discountAmount", order.getDiscountAmount());
+        model.addAttribute("information", order);
         return "client/order/confirmation";
     }
 

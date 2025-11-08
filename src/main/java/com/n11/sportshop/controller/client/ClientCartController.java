@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.n11.sportshop.domain.CartDetail;
+import com.n11.sportshop.domain.DiscountType;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.UserVoucher;
 import com.n11.sportshop.domain.Voucher;
@@ -26,6 +27,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
+
 @Controller
 @RequestMapping("/cart")
 @Transactional
@@ -34,7 +36,6 @@ public class ClientCartController {
     private final CartService cartService;
     private final UserService userService;
     private final OrderService orderService;
-
     public ClientCartController(CartService cartService, OrderService orderService, UserService userService) {
         this.cartService = cartService;
         this.orderService = orderService;
@@ -121,7 +122,32 @@ public class ClientCartController {
         model.addAttribute("bill", new InformationDTO());
         model.addAttribute("items", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
-        
+        model.addAttribute("shipPrice", 30000);
+        model.addAttribute("discountValue", 0);
         return "client/cart/checkout";
     }
+
+    @PostMapping("/checkout/apply-voucher")
+    public String postApplyVoucher(@RequestParam("voucherCode") String code, Model model, HttpServletRequest request) {
+        Long discountPrice = 0L;
+        if (code == null) {
+            model.addAttribute("discountValue", 0);
+        } else {
+            HttpSession session = request.getSession(false);
+            User user = this.userService.getUserByID((Integer)session.getAttribute("id"));
+            Voucher voucher = this.userService.getVoucherByCodeAndUser(code, user);
+            if (voucher.getDiscountType() == DiscountType.freeship) {
+                model.addAttribute("shipPrice", 0);
+            } else if (voucher.getDiscountType() == DiscountType.fixed_amount) {
+                Long totalPrice = (Long)model.getAttribute("totalPrice");
+                discountPrice = totalPrice - voucher.getDiscountValue();
+            } else {
+                Long totalPrice = (Long)model.getAttribute("totalPrice");
+                discountPrice = totalPrice * (100 - voucher.getDiscountValue()) / 100;
+            }
+            model.addAttribute("discountValue", discountPrice);
+        }
+        return "client/cart/checkout";
+    }
+    
 }

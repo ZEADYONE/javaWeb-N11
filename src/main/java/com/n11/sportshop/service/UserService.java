@@ -203,4 +203,10 @@ public class UserService {
     public List<UserVoucher> getActiveVoucherListMoreThan(User user, int quantity) {
         return this.userVoucherRepo.findByUserAndStatusAndQuantityGreaterThan(user.getId(), 1, quantity);
     }
+
+    public Voucher getVoucherByCodeAndUser (String code, User user) {
+        Voucher voucher = this.voucherRepository.findByCode(code);
+        UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
+        return userVoucher.getVoucher();
+    }
 }
