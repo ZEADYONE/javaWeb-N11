@@ -34,9 +34,12 @@
 							<div class="details_item">
 								<h4>Order Info</h4>
 								<ul class="list">
-									<li><a href="#"><span>Order number</span> : ${id}</a></li>
-									<li><a href="#"><span>Total</span> : ${totalPrice}</a></li>
-									<li><a href="#"><span>Payment method</span> : Check payments</a></li>
+									<li><a href="#"><span>Order number</span> : ${information.id}</a></li>
+									<li><a href="#"><span>Total</span> :
+											<fmt:formatNumber value="${information.totalAmount}" type="currency" />
+										</a></li>
+									<li><a href="#"><span>Payment method</span> : ${information.paymentMethod}</a></li>
+									<li><a href="#"><span>Note</span> : ${information.note}</a></li>
 								</ul>
 							</div>
 						</div>
@@ -45,10 +48,10 @@
 							<div class="details_item">
 								<h4>Shipping Address</h4>
 								<ul class="list">
-									<li><a href="#"><span>Name</span> : ${name}</a></li>
-									<li><a href="#"><span>Email</span> : ${email}</a></li>
-									<li><a href="#"><span>Phone</span> : ${phone}</a></li>
-									<li><a href="#"><span>Address </span> : ${address}</a></li>
+									<li><a href="#"><span>Name</span> : ${information.name}</a></li>
+									<li><a href="#"><span>Email</span> : ${information.email}</a></li>
+									<li><a href="#"><span>Phone</span> : ${information.phone}</a></li>
+									<li><a href="#"><span>Address </span> : ${information.address}</a></li>
 								</ul>
 							</div>
 						</div>
