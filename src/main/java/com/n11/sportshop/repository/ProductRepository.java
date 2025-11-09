@@ -8,15 +8,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 
 import com.n11.sportshop.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
+
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
@@ -37,5 +38,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
       AND c.status = 1
     """, nativeQuery = true)
     List<Product> findActiveProduct();
+
     List<Product> findByStatus(Integer status);
+
+    @Modifying
+    @Query(value = "UPDATE product SET stock_quantity = stock_quantity - :quantity WHERE id = :id AND stock_quantity >= :quantity", nativeQuery = true)
+    int reduceStock(@Param("id") Long id, @Param("quantity") int quantity);
+
 }
