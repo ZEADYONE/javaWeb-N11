@@ -115,15 +115,23 @@
 
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
+                                            <c:set var="errorEmail">
+                                                <form:errors path="email" cssClass="invalid-feedback"/>
+                                            </c:set>
                                             <label class="form-label fw-bold">Email:</label>
-                                            <form:input type="email" class="form-control border bg-light"
+                                            <form:input type="email" class="form-control border bg-light ${not empty errorEmail ? 'is-invalid' : ''}"
                                                 style="padding-left: 20px;" path="email" readonly="true"/>
+                                            ${errorEmail}
                                         </div>
 
                                         <div class="col-md-6 mb-3">
+                                            <c:set var="errorUsername">
+                                                <form:errors path="username" cssClass="invalid-feedback"/>
+                                            </c:set>
                                             <label class="form-label fw-bold">User name:</label>
-                                            <form:input type="text" class="form-control border bg-light"
+                                            <form:input type="text" class="form-control border bg-light ${not empty errorUsername ? 'is-invalid' : ''}"
                                                 style="padding-left: 20px;" path="username" readonly="true"/>
+                                            ${errorUsername}
                                         </div>
 
                                         <div class="col-md-6 mb-3">

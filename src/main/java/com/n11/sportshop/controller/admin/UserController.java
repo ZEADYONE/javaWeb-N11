@@ -149,8 +149,30 @@ public class UserController {
 
     @PostMapping("/update")
     public String updateUserPage(Model model, @ModelAttribute("newUser") User user,
+            // BindingResult userBindingResult,
             @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
+
+        // Không cho update trùng username và email
+        // User existingUser = userService.getUserByID(user.getId());
+        // boolean emailChanged =
+        // !user.getEmail().equalsIgnoreCase(existingUser.getEmail());
+        // boolean usernameChanged =
+        // !user.getUsername().equalsIgnoreCase(existingUser.getUsername());
+
+        // if (emailChanged && userService.checkEmailExist(user.getEmail())) {
+        // userBindingResult.rejectValue("email", "error.user", "Email đã tồn tại");
+        // }
+
+        // if (usernameChanged && userService.checkUsernameExist(user.getUsername())) {
+        // userBindingResult.rejectValue("username", "error.user", "Tên đăng nhập đã tồn
+        // tại");
+        // }
+
+        // if (userBindingResult.hasErrors()) {
+        // return "admin/user/update";
+        // }
+
         this.userService.updateUser(user, file);
         return "redirect:/admin/user";
 
