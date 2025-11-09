@@ -66,9 +66,6 @@ public class OrderService {
     public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
         User user = this.userRepository.findById(userId).get();
         List<CartDetail> items = this.cartService.getCartDetails(user);
-        if (items == null || items.isEmpty()) {
-            return null;
-        }
         Order order = new Order();
         order.setUser(user);
         order.setName(informationDTO.getName());
@@ -98,7 +95,7 @@ public class OrderService {
             Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId()).get();
 
             if (product.getStockQuantity() == 0 ||product.getStockQuantity() < item.getQuantity()) {
-                return null;
+                throw new RuntimeException("Kho không còn đủ số lượng");
             }
 
             product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
