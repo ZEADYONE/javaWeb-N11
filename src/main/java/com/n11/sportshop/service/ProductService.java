@@ -141,6 +141,18 @@ public class ProductService {
         }
         this.categoryRepository.save(category);
     }
+    public List<Product> getActiveProduct(int status) {
+        return this.productRepository.findByStatus(status);
+    }
+    public void actionProduct(Integer id) {
+        Product product = this.productRepository.findById(id).get();
+        if (product.getStatus() == 1) {
+            product.setStatus(0);
+        } else {
+            product.setStatus(1);
+        }
+        this.productRepository.save(product);
+    }
     public void updateCategory(Integer id, Category updatedCategory) {
         Category category = categoryRepository.findById(id).orElse(null);
         if (category != null) {

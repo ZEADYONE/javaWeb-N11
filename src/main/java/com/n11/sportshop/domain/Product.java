@@ -46,7 +46,8 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;
-
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    private Integer status = 1;
     public int getId() {
         return id;
     }
@@ -117,6 +118,14 @@ public class Product {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 }
