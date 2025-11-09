@@ -148,6 +148,7 @@ public class OrderService {
     @Transactional
     public void updateOrderStatus(Integer orderId, OrderStatus status) {
         Order order = orderRepo.findById(orderId).get();
+        order.setPaymentStatus(PaymentStatus.PAID);
         order.setStatus(status);
         orderRepo.save(order);
     }
