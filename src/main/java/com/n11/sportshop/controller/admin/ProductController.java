@@ -139,5 +139,9 @@ public class ProductController {
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
-
+    @PostMapping("/toggle/{id}")
+    public String postCreateProduct(@PathVariable("id") Integer id) {
+        this.productService.actionProduct(id);
+        return "redirect:/admin/product";
+    }
 }

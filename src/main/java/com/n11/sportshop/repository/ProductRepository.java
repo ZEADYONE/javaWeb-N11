@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+
 import com.n11.sportshop.domain.Product;
 
 @Repository
@@ -36,4 +37,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
       AND c.status = 1
     """, nativeQuery = true)
     List<Product> findActiveProduct();
+    List<Product> findByStatus(Integer status);
 }
