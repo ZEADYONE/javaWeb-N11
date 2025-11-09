@@ -77,7 +77,7 @@ public class OrderService {
         order.setStatus(OrderStatus.pending);
         order.setPaymentStatus(PaymentStatus.UNPAID);
         order.setCreateAt(LocalDateTime.now());
-        order.setExpiredTime(order.getCreateAt().plusMinutes(1));
+        order.setExpiredTime(order.getCreateAt().plusMinutes(5));
         
         if (informationDTO.getPayment().equals("CASH")) {
             order.setPaymentMethod(PaymentMethod.CASH);
