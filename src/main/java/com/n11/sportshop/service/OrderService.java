@@ -66,7 +66,7 @@ public class OrderService {
     public Order createOrder(Integer userId, String voucherCode, InformationDTO informationDTO) {
         User user = this.userRepository.findById(userId).get();
         List<CartDetail> items = this.cartService.getCartDetails(user);
-        if (items.isEmpty()) {
+        if (items == null || items.isEmpty()) {
             return null;
         }
         Order order = new Order();
