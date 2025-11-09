@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,7 @@ import com.n11.sportshop.service.VNPayService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/order")
@@ -44,8 +47,6 @@ public class ClientOrderController {
     private final OrderService orderService;
     private final VNPayService vNPayService;
     private final ProductService productService;
-
-    
 
     @GetMapping
     public String getUserOrderPendingPage(Model model, HttpServletRequest request) {
@@ -106,10 +107,23 @@ public class ClientOrderController {
 
     @PostMapping("/create")
     public String createOrder(
-            @ModelAttribute InformationDTO informationDTO,
+            @ModelAttribute("bill") @Valid InformationDTO informationDTO,
+            // BindingResult orderBindingResult,
             @RequestParam("payment") Optional<String> payment,
             HttpServletRequest http,
             @RequestParam("checkoutToken") String token) throws Exception {
+
+        // Validate
+        // List<FieldError> errors = orderBindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        // System.out.println(">>>>" + error.getObjectName() + " - " +
+        // error.getDefaultMessage());
+        // }
+
+        // if (orderBindingResult.hasErrors()) {
+        // return "client/cart/checkout";
+        // }
+
         HttpSession session = http.getSession(false);
         String sessionToken = (String) session.getAttribute("checkoutToken");
         if (sessionToken == null || !sessionToken.equals(token)) {
@@ -121,13 +135,15 @@ public class ClientOrderController {
         informationDTO.setPaymentRef(uuid);
         if (!informationDTO.getPayment().equals("CASH")) {
             String ip = this.vNPayService.getIpAddress(http);
-            String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(), informationDTO.getPaymentRef(), ip);
+            String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(),
+                    informationDTO.getPaymentRef(), ip);
             Integer userId = (Integer) session.getAttribute("id");
-            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
+            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty()
+                    || informationDTO.getVoucherCode().isBlank()) {
                 informationDTO.setVoucherCode("NONE");
             }
             Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
-            
+
             if (order != null) {
                 return "redirect:" + vnpUrl;
             } else {
@@ -135,7 +151,8 @@ public class ClientOrderController {
             }
         } else {
             Integer userId = (Integer) session.getAttribute("id");
-            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty() || informationDTO.getVoucherCode().isBlank()) {
+            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty()
+                    || informationDTO.getVoucherCode().isBlank()) {
                 informationDTO.setVoucherCode("NONE");
             }
             Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
@@ -174,8 +191,7 @@ public class ClientOrderController {
     @GetMapping("/confirmation")
     public String getConfirmation(
             Model model,
-            HttpServletRequest request
-    ) {
+            HttpServletRequest request) {
 
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("id");

@@ -38,25 +38,43 @@
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input path="name" class="form-control" placeholder="Name"
-                                                required="required" />
-
+                                            <c:set var="errorName">
+                                                <form:errors path="name" cssClass="invalid-feedback"/>
+                                            </c:set>
+                                            <form:input path="name" 
+                                                class="form-control ${not empty errorName ? 'is-invalid' : ''}" 
+                                                placeholder="Name" />
+                                            ${errorName}
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input path="phone" class="form-control" placeholder="Phone number"
-                                                required="required" />
+                                            <c:set var="errorPhone">
+                                                <form:errors path="phone" cssClass="invalid-feedback"/>
+                                            </c:set>
+                                            <form:input path="phone" 
+                                                class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" 
+                                                placeholder="Phone number" />
+                                            ${errorPhone}
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
-                                            <form:input path="email" class="form-control" placeholder="Email Address"
-                                                required="required" />
+                                            <c:set var="errorEmail">
+                                                <form:errors path="email" cssClass="invalid-feedback"/>
+                                            </c:set>
+                                            <form:input path="email" 
+                                                class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" 
+                                                placeholder="Email Address" />
+                                            ${errorEmail}
                                         </div>
 
-
                                         <div class="col-md-12 form-group p_star">
-                                            <form:textarea class="form-control" rows="1" path="address"
-                                                placeholder="Address" required="required"></form:textarea>
+                                            <c:set var="errorAddress">
+                                                <form:errors path="address" cssClass="invalid-feedback"/>
+                                            </c:set>
+                                            <form:textarea class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" 
+                                                rows="1" path="address"
+                                                placeholder="Address" ></form:textarea>
+                                            ${errorAddress}
                                         </div>
 
                                         <div class="col-md-12 form-group">
