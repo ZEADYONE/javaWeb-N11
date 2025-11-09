@@ -11,4 +11,5 @@ import com.n11.sportshop.domain.OrderDetail;
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail,Integer> {
     List<OrderDetail> findByOrder(Order order);
+    void deleteByOrder(Order order);
 }

@@ -1,5 +1,7 @@
 package com.n11.sportshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class OrderDetail {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
     @ManyToOne

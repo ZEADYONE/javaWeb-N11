@@ -1,7 +1,11 @@
 package com.n11.sportshop.domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -42,6 +46,7 @@ public class Order {
     private Voucher voucher;
 
     @OneToMany(mappedBy = "order")
+    @JsonManagedReference
     private List<OrderDetail> orderDetails;
 
     private String paymentRef = "unknown";
@@ -51,6 +56,12 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod = PaymentMethod.CASH;
+
+    @Column(name = "create_at")
+    private LocalDateTime createAt;
+
+    @Column(name = "expiredTime")
+    private LocalDateTime expiredTime;
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
@@ -178,5 +189,21 @@ public class Order {
 
     public void setPaymentRef(String paymentRef) {
         this.paymentRef = paymentRef;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public LocalDateTime getExpiredTime() {
+        return expiredTime;
+    }
+
+    public void setExpiredTime(LocalDateTime expiredTime) {
+        this.expiredTime = expiredTime;
     }
 }

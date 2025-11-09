@@ -1,5 +1,6 @@
 package com.n11.sportshop.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -75,6 +76,8 @@ public class OrderService {
         order.setPhone(informationDTO.getPhone());
         order.setStatus(OrderStatus.pending);
         order.setPaymentStatus(PaymentStatus.UNPAID);
+        order.setCreateAt(LocalDateTime.now());
+        order.setExpiredTime(order.getCreateAt().plusMinutes(1));
         
         if (informationDTO.getPayment().equals("CASH")) {
             order.setPaymentMethod(PaymentMethod.CASH);
@@ -147,6 +150,12 @@ public class OrderService {
         Order order = orderRepo.findById(orderId).get();
         order.setStatus(status);
         orderRepo.save(order);
+    }
+
+    @Transactional
+    public void deleteOrder(Order order) {
+        this.orderDetailRepo.deleteByOrder(order);
+        this.orderRepo.deleteById(order.getId());
     }
 
     public Order getOrderByUser(User user) {

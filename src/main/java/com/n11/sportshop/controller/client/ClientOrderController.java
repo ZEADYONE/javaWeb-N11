@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +20,13 @@ import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
 import com.n11.sportshop.domain.PaymentStatus;
+import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
+import com.n11.sportshop.service.OrderProducer;
 import com.n11.sportshop.service.OrderService;
+import com.n11.sportshop.service.ProductService;
 import com.n11.sportshop.service.UserService;
 import com.n11.sportshop.service.VNPayService;
 
@@ -33,17 +37,15 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/order")
 public class ClientOrderController {
 
+    @Autowired
+    private OrderProducer producer;
     private final CartService cartService;
     private final UserService userService;
     private final OrderService orderService;
     private final VNPayService vNPayService;
+    private final ProductService productService;
 
-    public ClientOrderController(CartService cartService, OrderService orderService, UserService userService, VNPayService vNPayService) {
-        this.cartService = cartService;
-        this.orderService = orderService;
-        this.userService = userService;
-        this.vNPayService = vNPayService;
-    }
+    
 
     @GetMapping
     public String getUserOrderPendingPage(Model model, HttpServletRequest request) {
@@ -55,6 +57,15 @@ public class ClientOrderController {
         model.addAttribute("status", "pending");
         model.addAttribute("orders", orders);
         return "client/order/show";
+    }
+
+    public ClientOrderController(CartService cartService, UserService userService, OrderService orderService,
+            VNPayService vNPayService, ProductService productService) {
+        this.cartService = cartService;
+        this.userService = userService;
+        this.orderService = orderService;
+        this.vNPayService = vNPayService;
+        this.productService = productService;
     }
 
     @GetMapping("/shipping")
@@ -116,6 +127,7 @@ public class ClientOrderController {
                 informationDTO.setVoucherCode("NONE");
             }
             Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+            
             if (order != null) {
                 return "redirect:" + vnpUrl;
             } else {
@@ -128,6 +140,7 @@ public class ClientOrderController {
             }
             Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
             if (order != null) {
+                producer.sendOrderMessage(order);
                 return "redirect:/order/confirmation";
             } else {
                 return "redirect:/cart?error=not_enough_quantity";
@@ -142,16 +155,17 @@ public class ClientOrderController {
             Model model) {
         String responseCode = vnpayResponseCode.get();
 
-        // Lấy thời gian tạo đơn (từ DB)
         Order order = orderService.getOrderByPaymentRef(paymentRef.get());
 
-        // Kiểm tra trạng thái giao dịch
         if ("00".equals(responseCode)) {
             order.setPaymentStatus(PaymentStatus.PAID);
-            model.addAttribute("message", "Thanh toán thành công!");
         } else {
-            order.setPaymentStatus(PaymentStatus.UNPAID);
-            model.addAttribute("message", "Thanh toán thất bại!");
+            for (var item : order.getOrderDetails()) {
+                Product product = this.productService.getProductById(item.getProduct().getId()).get();
+                product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
+                this.productService.saveProduct(product, null);
+            }
+            return "redirect:/cart?error=not_paid";
         }
 
         return "redirect:/order/confirmation";

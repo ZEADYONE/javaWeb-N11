@@ -61,7 +61,6 @@ public class UserService {
             userVoucher.setQuantity(1);
             userVoucherRepo.save(userVoucher);
         }
-        
     }
 
     public void createUserByAdmin(User user, MultipartFile file) {
