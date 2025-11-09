@@ -10,8 +10,6 @@ import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.repository.OrderDetailRepository;
 import com.n11.sportshop.repository.OrderRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class OrderCleanupService {
 
@@ -26,7 +24,7 @@ public class OrderCleanupService {
     
 
     @Scheduled(fixedRate = 60000)
-    @Transactional
+    
     public void cleanupUnpaidOrders() {
         LocalDateTime now = LocalDateTime.now();
         List<Order> expiredOrders = this.orderRepository.findExpiredUnpaidOrders(now);
