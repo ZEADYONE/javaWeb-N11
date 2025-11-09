@@ -140,11 +140,10 @@ public class ClientOrderController {
                     || informationDTO.getVoucherCode().isBlank()) {
                 informationDTO.setVoucherCode("NONE");
             }
-            Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
-
-            if (order != null) {
+            try {
+                Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
                 return "redirect:" + vnpUrl;
-            } else {
+            } catch (Exception e) {
                 return "redirect:/cart?error=not_enough_quantity";
             }
         } else {
