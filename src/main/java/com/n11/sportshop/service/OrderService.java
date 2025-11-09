@@ -95,7 +95,7 @@ public class OrderService {
             // Khóa hàng lại để tránh 2 người mua cùng lúc
             Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId()).get();
 
-            if (product.getStockQuantity() < item.getQuantity()) {
+            if (product.getStockQuantity() == 0 ||product.getStockQuantity() < item.getQuantity()) {
                 return null;
             }
 
