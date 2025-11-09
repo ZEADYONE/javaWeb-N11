@@ -140,7 +140,7 @@ public class ClientOrderController {
             }
             Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
             if (order != null) {
-                producer.sendOrderMessage(order);
+                // producer.sendOrderMessage(order);
                 return "redirect:/order/confirmation";
             } else {
                 return "redirect:/cart?error=not_enough_quantity";
