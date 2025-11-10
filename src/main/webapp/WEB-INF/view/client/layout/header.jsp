@@ -34,6 +34,7 @@
             <link rel="stylesheet" href="/client/css/main.css">
             <link rel="stylesheet"
                 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
             <!--
         Javascript
@@ -47,14 +48,10 @@
             <script src="/client/js/jquery.nice-select.min.js"></script>
             <script src="/client/js/jquery.sticky.js"></script>
             <script src="/client/js/nouislider.min.js"></script>
-            <script src="/client/js/countdown.js"></script>
             <script src="/client/js/jquery.magnific-popup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
-            <!--gmaps Js-->
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-            <script src="/client/js/gmaps.min.js"></script>
+
             <script src="/client/js/main.js"></script>
-            <script src="/client/js/lazy.js"></script>
             <meta name="_csrf" content="${_csrf.token}" />
             <meta name="_csrf_header" content="${_csrf.headerName}" />
 

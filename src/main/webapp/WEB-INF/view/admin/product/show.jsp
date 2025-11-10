@@ -77,6 +77,9 @@
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Price
                               </th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Status
+                              </th>
                               <th
                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                 Action
@@ -109,6 +112,13 @@
                                   </p>
                                 </td>
 
+                                <!-- Status -->
+                                <td style="min-width: 180px;">
+                                  <p class="text-sm font-weight-bold mb-0">
+                                    ${product.status}
+                                  </p>
+                                </td>
+
                                 <!-- Action -->
                                 <td class="text-center">
                                   <!-- View Detail-->
@@ -128,54 +138,26 @@
                                   </a>
 
                                   <!-- Delete (modal trigger) -->
-                                  <button type="button" class="btn btn-sm btn-danger border-0" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal${product.id}" title="Delete">
-                                    <i class="bi bi-trash fs-5"></i>
-                                  </button>
+                                  <form method="post" action="/admin/user/ban/${user.id}" style="display:inline;">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-                                  <!-- Modal Delete -->
-                                  <div class="modal fade" id="deleteModal${product.id}" tabindex="-1"
-                                    aria-labelledby="deleteModalLabel${product.id}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content border-0 shadow-lg">
+                                    <c:choose>
+                                      <c:when test="${product.status == 1}">
+                                        <!-- Khi chưa bị ban -->
+                                        <button type="submit" class="btn btn-sm btn-success" title="Đang hoạt động">
+                                          <i class="bi bi-unlock fs-5"></i>
+                                        </button>
+                                      </c:when>
 
-                                        <!-- Header -->
-                                        <div class="modal-header bg-gradient-primary text-white">
-                                          <h5 class="modal-title" id="deleteModalLabel${product.id}">
-                                            Confirm Delete
-                                          </h5>
-                                          <button type="button" class="btn-close btn-close-white"
-                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
+                                      <c:otherwise>
+                                        <!-- Khi bị ban -->
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Đã bị cấm">
+                                          <i class="bi bi-ban fs-5"></i>
+                                        </button>
+                                      </c:otherwise>
+                                    </c:choose>
 
-                                        <!-- Body -->
-                                        <div class="modal-body text-center py-4">
-                                          <p class="mb-2">Are you sure you want to delete:</p>
-                                          <h6 class="text-danger fw-bold mb-0">${product.name}</h6>
-                                        </div>
-
-                                        <!-- Footer -->
-                                        <div class="modal-footer justify-content-center border-0 pb-4">
-                                          <form method="post" action="/admin/product/delete/${product.id}">
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                                            <input type="hidden" name="id" value="${product.id}">
-                                            <input type="hidden" name="image" value="${user.image}">
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
-                                            <button type="button" class="btn btn-secondary me-2"
-                                              data-bs-dismiss="modal">
-                                              Cancel
-                                            </button>
-                                            <button type="submit" class="btn text-white"
-                                              style="background-color: #ffba00;">
-                                              Delete
-                                            </button>
-                                          </form>
-                                        </div>
-
-                                      </div>
-                                    </div>
-                                  </div>
+                                  </form>
 
                                 </td>
                               </tr>

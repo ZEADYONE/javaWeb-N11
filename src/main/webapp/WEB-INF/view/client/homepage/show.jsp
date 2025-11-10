@@ -5,92 +5,43 @@
 
         <fmt:setLocale value="vi_VN" />
         <fmt:setBundle basename="messages" />
-        <!DOCTYPE html>
-        <html lang="zxx" class="no-js">
 
-        <head>
-          <!-- Mobile Specific Meta -->
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-          <!-- Favicon-->
-          <link rel="shortcut icon" href="/client/img/fav.png">
-          <!-- Author Meta -->
-          <meta name="author" content="CodePixar">
-          <!-- Meta Description -->
-          <meta name="description" content="">
-          <!-- Meta Keyword -->
-          <meta name="keywords" content="">
-          <!-- meta character set -->
-          <meta charset="UTF-8">
-          <!-- Site Title -->
-          <title>Sport Shop</title>
-          <!--
-		CSS
-		============================================= -->
-          <link rel="stylesheet" href="/client/css/linearicons.css">
-          <link rel="stylesheet" href="/client/css/font-awesome.min.css">
-          <link rel="stylesheet" href="/client/css/themify-icons.css">
-          <link rel="stylesheet" href="/client/css/bootstrap.css">
-          <link rel="stylesheet" href="/client/css/owl.carousel.css">
-          <link rel="stylesheet" href="/client/css/nice-select.css">
-          <link rel="stylesheet" href="/client/css/nouislider.min.css">
-          <link rel="stylesheet" href="/client/css/ion.rangeSlider.css" />
-          <link rel="stylesheet" href="/client/css/ion.rangeSlider.skinFlat.css" />
-          <link rel="stylesheet" href="/client/css/magnific-popup.css">
-          <link rel="stylesheet" href="/client/css/main.css">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <!-- Start Header Area -->
+        <jsp:include page="../layout/header.jsp" />
+        <!-- End Header Area -->
 
-          <!-- 
-    Javascript
-		============================================= -->
-          <script src="/client/js/vendor/jquery-2.2.4.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-            crossorigin="anonymous"></script>
-          <script src="/client/js/vendor/bootstrap.min.js"></script>
-          <script src="/client/js/jquery.ajaxchimp.min.js"></script>
-          <script src="/client/js/jquery.nice-select.min.js"></script>
-          <script src="/client/js/jquery.sticky.js"></script>
-          <script src="/client/js/nouislider.min.js"></script>
-          <script src="/client/js/countdown.js"></script>
-          <script src="/client/js/jquery.magnific-popup.min.js"></script>
-          <script src="/client/js/owl.carousel.min.js"></script>
 
-          <style>
-            /* ép chiều cao cho 2 slide bằng nhau */
-            .single-slide {
-              max-height: 400px;
-              display: flex;
-              align-items: center;
+    
 
-            }
-          </style>
+        <style>
+          /* ép chiều cao cho 2 slide bằng nhau */
+          .single-slide {
+            max-height: 400px;
+            display: flex;
+            align-items: center;
 
-          <!--gmaps Js-->
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-          <script src="/client/js/gmaps.min.js"></script>
-          <script src="/client/js/main.js"></script>
-          <script>
-            $(document).ready(function () {
-              $(".active-banner-slider-custom").owlCarousel({
-                items: 1,                // 1 slide mỗi lần hiển thị
-                loop: true,              // lặp vô tận
-                autoplay: true,          // tự động chạy
-                autoplayTimeout: 3000,   // đổi slide mỗi 3 giây
-                autoplayHoverPause: false, // không dừng khi rê chuột vào
-                smartSpeed: 800,         // tốc độ chuyển (ms)
-                animateOut: 'animate__slideOutLeft',  // Slide cũ đi sang trái
-                animateIn: 'animate__slideInRight',   // Slide mới đi từ phải sang
-                dots: true,              // chấm chỉ slide
-              });
+          }
+        </style>
+
+
+        <script>
+          $(document).ready(function () {
+            $(".active-banner-slider-custom").owlCarousel({
+              items: 1,                // 1 slide mỗi lần hiển thị
+              loop: true,              // lặp vô tận
+              autoplay: true,          // tự động chạy
+              autoplayTimeout: 3000,   // đổi slide mỗi 3 giây
+              autoplayHoverPause: false, // không dừng khi rê chuột vào
+              smartSpeed: 800,         // tốc độ chuyển (ms)
+              animateOut: 'animate__slideOutLeft',  // Slide cũ đi sang trái
+              animateIn: 'animate__slideInRight',   // Slide mới đi từ phải sang
+              dots: true,              // chấm chỉ slide
             });
-          </script>
-        </head>
+          });
+        </script>
 
         <body>
 
-          <!-- Start Header Area -->
-          <jsp:include page="../layout/header.jsp" />
-          <!-- End Header Area -->
 
 
           <!-- start banner Area -->
@@ -571,5 +522,3 @@
 
 
         </body>
-
-        </html>

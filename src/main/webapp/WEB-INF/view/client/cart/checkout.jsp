@@ -16,10 +16,7 @@
                         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                             <div class="col-first">
                                 <h1>Checkout</h1>
-                                <nav class="d-flex align-items-center">
-                                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                                    <a href="single-product.html">Checkout</a>
-                                </nav>
+
                             </div>
                         </div>
                     </div>
@@ -39,41 +36,41 @@
 
                                         <div class="col-md-12 form-group p_star">
                                             <c:set var="errorName">
-                                                <form:errors path="name" cssClass="invalid-feedback"/>
+                                                <form:errors path="name" cssClass="invalid-feedback" />
                                             </c:set>
-                                            <form:input path="name" 
-                                                class="form-control ${not empty errorName ? 'is-invalid' : ''}" 
+                                            <form:input path="name"
+                                                class="form-control ${not empty errorName ? 'is-invalid' : ''}"
                                                 placeholder="Name" />
                                             ${errorName}
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
                                             <c:set var="errorPhone">
-                                                <form:errors path="phone" cssClass="invalid-feedback"/>
+                                                <form:errors path="phone" cssClass="invalid-feedback" />
                                             </c:set>
-                                            <form:input path="phone" 
-                                                class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" 
+                                            <form:input path="phone"
+                                                class="form-control ${not empty errorPhone ? 'is-invalid' : ''}"
                                                 placeholder="Phone number" />
                                             ${errorPhone}
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
                                             <c:set var="errorEmail">
-                                                <form:errors path="email" cssClass="invalid-feedback"/>
+                                                <form:errors path="email" cssClass="invalid-feedback" />
                                             </c:set>
-                                            <form:input path="email" 
-                                                class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" 
+                                            <form:input path="email"
+                                                class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
                                                 placeholder="Email Address" />
                                             ${errorEmail}
                                         </div>
 
                                         <div class="col-md-12 form-group p_star">
                                             <c:set var="errorAddress">
-                                                <form:errors path="address" cssClass="invalid-feedback"/>
+                                                <form:errors path="address" cssClass="invalid-feedback" />
                                             </c:set>
-                                            <form:textarea class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" 
-                                                rows="1" path="address"
-                                                placeholder="Address" ></form:textarea>
+                                            <form:textarea
+                                                class="form-control ${not empty errorAddress ? 'is-invalid' : ''}"
+                                                rows="1" path="address" placeholder="Address"></form:textarea>
                                             ${errorAddress}
                                         </div>
 
