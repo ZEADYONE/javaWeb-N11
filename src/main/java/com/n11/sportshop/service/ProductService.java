@@ -168,6 +168,9 @@ public class ProductService {
             brandRepository.save(brand);
         }
     }
+    public long countActiveProductsWithActiveCategoryAndBrand() {
+        return productRepository.countActiveProductsWithActiveCategoryAndBrand();
+    }
 
 
 
