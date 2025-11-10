@@ -44,5 +44,14 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
     @Modifying
     @Query(value = "UPDATE product SET stock_quantity = stock_quantity - :quantity WHERE id = :id AND stock_quantity >= :quantity", nativeQuery = true)
     int reduceStock(@Param("id") Long id, @Param("quantity") int quantity);
-
+    @Query(value = """
+        SELECT COUNT(*) 
+        FROM product p
+        JOIN brand b ON p.brand_id = b.id
+        JOIN category c ON c.id = p.category_id
+        WHERE p.status = 1
+          AND b.status = 1
+          AND c.status = 1
+        """, nativeQuery = true)
+    long countActiveProductsWithActiveCategoryAndBrand();
 }

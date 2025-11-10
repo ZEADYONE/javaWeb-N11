@@ -176,4 +176,12 @@ public class OrderService {
     public Order getOrderByPaymentRef(String paymentRef) {
         return this.orderRepo.findByPaymentRef(paymentRef);
     }
+    public long countAllOrders() {
+        return orderRepo.count();
+    }
+    public Long getTotalSales() {
+        Long total = orderRepo.getTotalSales();
+        return total != null ? total : 0L;
+    }
+
 }
