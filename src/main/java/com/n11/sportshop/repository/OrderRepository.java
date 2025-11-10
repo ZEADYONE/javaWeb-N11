@@ -22,4 +22,5 @@ public interface OrderRepository extends JpaRepository<Order,Integer>{
     Order findByPaymentRef(String paymentRef);
     @Query(value = "SELECT * FROM orders o WHERE o.payment_status = 'UNPAID' AND o.payment_method = 'VNPAY' AND o.expired_time < :now", nativeQuery = true)
     List<Order> findExpiredUnpaidOrders(@Param("now") LocalDateTime now);
+    long count();
 }

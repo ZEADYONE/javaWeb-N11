@@ -208,4 +208,7 @@ public class UserService {
         UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
         return userVoucher.getVoucher();
     }
+    public long countActiveUsers() {
+        return userRepository.countByStatus(1);
+    }
 }
