@@ -40,7 +40,7 @@
                                             </c:set>
                                             <form:input path="name"
                                                 class="form-control ${not empty errorName ? 'is-invalid' : ''}"
-                                                placeholder="Name" />
+                                                placeholder="Name" required="required"/>
                                             ${errorName}
                                         </div>
 
@@ -48,9 +48,9 @@
                                             <c:set var="errorPhone">
                                                 <form:errors path="phone" cssClass="invalid-feedback" />
                                             </c:set>
-                                            <form:input path="phone"
+                                            <form:input path="phone" type="number"
                                                 class="form-control ${not empty errorPhone ? 'is-invalid' : ''}"
-                                                placeholder="Phone number" />
+                                                placeholder="Phone number" required="required"/>
                                             ${errorPhone}
                                         </div>
 
@@ -60,7 +60,7 @@
                                             </c:set>
                                             <form:input path="email"
                                                 class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
-                                                placeholder="Email Address" />
+                                                placeholder="Email Address" required="required"/>
                                             ${errorEmail}
                                         </div>
 
@@ -70,7 +70,8 @@
                                             </c:set>
                                             <form:textarea
                                                 class="form-control ${not empty errorAddress ? 'is-invalid' : ''}"
-                                                rows="1" path="address" placeholder="Address"></form:textarea>
+                                                rows="1" path="address" placeholder="Address"
+                                                required="required"></form:textarea>
                                             ${errorAddress}
                                         </div>
 

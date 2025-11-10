@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
 
 // @ProductNameChecked
 @Entity
@@ -30,9 +31,11 @@ public class Product {
     private String description;
 
     @NotNull(message = "Giá sản phẩm không được để trống")
+    @Min(value = 0, message = "Giá sản phẩm phải lớn hơn hoặc bằng 0")
     private Long price;
 
     @NotNull(message = "số lượng tồn kho không được để trống")
+    @Min(value = 0, message = "Số lượng phải lớn hơn hoặc bằng 0")
     private int stockQuantity = 0;
 
     @ManyToOne
