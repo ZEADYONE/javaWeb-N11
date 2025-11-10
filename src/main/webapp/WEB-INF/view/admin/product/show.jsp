@@ -138,7 +138,8 @@
                                   </a>
 
                                   <!-- Delete (modal trigger) -->
-                                  <form method="post" action="/admin/user/ban/${user.id}" style="display:inline;">
+                                  <form method="post" action="/admin/product/toggle/${product.id}"
+                                    style="display:inline;">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                                     <c:choose>

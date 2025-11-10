@@ -41,6 +41,18 @@ public class ProductSpecs {
                 -> builder.between(root.get(Product_.PRICE), finalMinPrice, finalMaxPrice);
     }
 
+    public static Specification<Product> onlyActiveBrandAndCategoryAndStatus() {
+        return (root, query, cb) -> {
+            Join<Product, Brand> brandJoin = root.join("brand");
+            Join<Product, Category> categoryJoin = root.join("category");
+            return cb.and(
+                    cb.equal(brandJoin.get("status"), 1),
+                    cb.equal(categoryJoin.get("status"), 1),
+                    cb.equal(root.get(Product_.STATUS), 1)
+            );
+        };
+    }
+
     public static Specification<Product> onlyActiveBrandAndCategory() {
         return (root, query, cb) -> {
             Join<Product, Brand> brandJoin = root.join("brand");

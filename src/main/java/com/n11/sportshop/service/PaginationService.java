@@ -30,6 +30,7 @@ public class PaginationService {
     }
 
     public PaginationQuery<Product> AdminProductPagination(Optional<String> pageOptinal, int size) {
+        Specification<Product> combineSpecs = Specification.where(ProductSpecs.onlyActiveBrandAndCategory());
         // pageOptinal chứa số thứ tự trang do client truyền lên (có thể null hoặc rỗng)
         // size :Số lượng sản phẩm hiển thị trên mỗi trang
         int page = 1; // Mặc định nếu client không truyền số trang thì sẽ hiển thị trang đầu tiên
@@ -49,7 +50,7 @@ public class PaginationService {
         // 1 trang luu size sanr pham;
         // fetchProducts(pageable) trả về một Page<Product> gồm danh sách sản phẩm +
         // tổng số trang + tổng số phần tử
-        Page<Product> prs = this.productService.getAllProducts(pageable);
+        Page<Product> prs = this.productRepository.findAll(combineSpecs, pageable);
 
         return new PaginationQuery<>(page, prs);
     }
@@ -73,7 +74,7 @@ public class PaginationService {
 
     
     public Page<Product> ClientProductsPagination(ProductCriteriaDTO productCriteriaDTO) {
-        Specification<Product> combineSpecs = Specification.where(ProductSpecs.onlyActiveBrandAndCategory());
+        Specification<Product> combineSpecs = Specification.where(ProductSpecs.onlyActiveBrandAndCategoryAndStatus());
         int page = 1;
 
         try {
