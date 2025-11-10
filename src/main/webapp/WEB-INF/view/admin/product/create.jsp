@@ -63,16 +63,21 @@
                                                         <form:errors path="price" cssClass="invalid-feedback" />
                                                     </c:set>
                                                     <label class="form-label fw-bold">Price:</label>
-                                                    <form:input type="text"
+                                                    <form:input type="number"
                                                         class="form-control border ${not empty errorPrice ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="price" />
                                                     ${errorPrice}
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorStock">
+                                                        <form:errors path="stockQuantity" cssClass="invalid-feedback" />
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Stock:</label>
-                                                    <form:input type="text" class="form-control border "
+                                                    <form:input type="number" required="required"
+                                                        class="form-control border ${not empty errorStock ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="stockQuantity" />
+                                                    ${errorStock}
                                                 </div>
 
                                                 <div class="col-md-12 mb-3">

@@ -32,6 +32,7 @@ public class Product {
     @NotNull(message = "Giá sản phẩm không được để trống")
     private Long price;
 
+    @NotNull(message = "số lượng tồn kho không được để trống")
     private int stockQuantity = 0;
 
     @ManyToOne
@@ -48,6 +49,7 @@ public class Product {
     private List<OrderDetail> orderDetails;
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
     private Integer status = 1;
+
     public int getId() {
         return id;
     }
