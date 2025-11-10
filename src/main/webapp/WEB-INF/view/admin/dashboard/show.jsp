@@ -50,7 +50,7 @@
                                     <div class="text-end pt-1">
                                         <h5 class="text-sm mb-0 text-capitalize" style="color: rgb(19, 19, 19);">User
                                         </h5>
-                                        <h4 class="mb-0">$53k</h4>
+                                        <h4 class="mb-0">${activeUserCount}</h4>
                                     </div>
                                 </div>
                                 <hr class="dark horizontal my-0">

@@ -42,7 +42,9 @@ public class OrderService {
     private final VoucherRepository voucherRepository;
     private final UserVoucherRepo userVoucherRepo;
 
-    public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo, CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo, ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
+    public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo,
+            CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo,
+            ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
         this.cartDetailRepo = cartDetailRepo;
         this.cartRepo = cartRepo;
         this.cartService = cartService;
@@ -77,7 +79,7 @@ public class OrderService {
         order.setPaymentStatus(PaymentStatus.UNPAID);
         order.setCreateAt(LocalDateTime.now());
         order.setExpiredTime(order.getCreateAt().plusMinutes(5));
-        
+
         if (informationDTO.getPayment().equals("CASH")) {
             order.setPaymentMethod(PaymentMethod.CASH);
         } else {
@@ -94,7 +96,7 @@ public class OrderService {
             // Khóa hàng lại để tránh 2 người mua cùng lúc
             Product product = this.productRepository.findByIdForUpdate(item.getProduct().getId()).get();
 
-            if (product.getStockQuantity() == 0 ||product.getStockQuantity() < item.getQuantity()) {
+            if (product.getStockQuantity() == 0 || product.getStockQuantity() < item.getQuantity()) {
                 throw new RuntimeException("Kho không còn đủ số lượng");
             }
 
@@ -138,17 +140,18 @@ public class OrderService {
         return this.orderDetailRepo.findByOrder(order);
     }
 
-    //lay toan bo don hang
+    // lay toan bo don hang
     public List<Order> getAllOrders() {
         return orderRepo.findAll();
     }
 
-    //Cap nhat trang thai trong admin/order
+    // Cap nhat trang thai trong admin/order
     @Transactional
     public void updateOrderStatus(Integer orderId, OrderStatus status) {
         Order order = orderRepo.findById(orderId).get();
-        order.setPaymentStatus(PaymentStatus.PAID);
         order.setStatus(status);
+        if (order.getStatus() == OrderStatus.accept)
+            order.setPaymentStatus(PaymentStatus.PAID);
         orderRepo.save(order);
     }
 

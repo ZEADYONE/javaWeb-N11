@@ -23,7 +23,8 @@ public class PaginationService {
     private final ProductService productService;
     private final ProductRepository productRepository;
 
-    public PaginationService(ProductRepository productRepository, ProductService productService, UserService userService) {
+    public PaginationService(ProductRepository productRepository, ProductService productService,
+            UserService userService) {
         this.productRepository = productRepository;
         this.productService = productService;
         this.userService = userService;
@@ -72,7 +73,6 @@ public class PaginationService {
         return new PaginationQuery<>(page, prs);
     }
 
-    
     public Page<Product> ClientProductsPagination(ProductCriteriaDTO productCriteriaDTO) {
         Specification<Product> combineSpecs = Specification.where(ProductSpecs.onlyActiveBrandAndCategoryAndStatus());
         int page = 1;
@@ -97,11 +97,13 @@ public class PaginationService {
                 combineSpecs = combineSpecs.and(ProductSpecs.filterBrand(productCriteriaDTO.getBrand().get()));
             }
             if (productCriteriaDTO.getCategories() != null && productCriteriaDTO.getCategories().isPresent()) {
-                combineSpecs = combineSpecs.and(ProductSpecs.filterCategories(productCriteriaDTO.getCategories().get()));
+                combineSpecs = combineSpecs
+                        .and(ProductSpecs.filterCategories(productCriteriaDTO.getCategories().get()));
             }
-            
+
             if (productCriteriaDTO.getMinPrice() != null || productCriteriaDTO.getMaxPrice() != null) {
-                combineSpecs = combineSpecs.and(ProductSpecs.filterPrice(productCriteriaDTO.getMinPrice().get(), productCriteriaDTO.getMaxPrice().get()));
+                combineSpecs = combineSpecs.and(ProductSpecs.filterPrice(productCriteriaDTO.getMinPrice().get(),
+                        productCriteriaDTO.getMaxPrice().get()));
             }
 
             return this.productRepository.findAll(combineSpecs, pageable);

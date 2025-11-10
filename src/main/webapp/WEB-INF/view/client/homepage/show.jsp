@@ -11,7 +11,7 @@
         <!-- End Header Area -->
 
 
-    
+
 
         <style>
           /* ép chiều cao cho 2 slide bằng nhau */
@@ -19,6 +19,46 @@
             max-height: 400px;
             display: flex;
             align-items: center;
+
+          }
+
+          .pagination .page-link {
+            color: #ffba00;
+            border-color: #ffba00;
+          }
+
+          .pagination .page-item.active .page-link {
+            background-color: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+
+            color: #fff;
+            border-color: #ffba00;
+          }
+
+          .product-badge {
+            position: absolute;
+
+            top: 15px;
+
+            left: 15px;
+
+            color: white;
+            padding: 3px 6px;
+            font-size: 8px;
+            font-weight: 500;
+            border-radius: 4px;
+            z-index: 10;
+            text-transform: uppercase;
+          }
+
+
+          .product-badge.badge-stock {
+            background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+
+
+          }
+
+          .product-badge.badge-out-of-stock {
+            background-color: #dc3545;
 
           }
         </style>
@@ -99,8 +139,8 @@
                     <div class="f-icon">
                       <img src="/client/img/features/f-icon1.png" alt="">
                     </div>
-                    <h6>Free Delivery</h6>
-                    <p>Free Shipping on all order</p>
+                    <h6>Fast Delivery</h6>
+
                   </div>
                 </div>
                 <!-- single features -->
@@ -110,7 +150,7 @@
                       <img src="/client/img/features/f-icon2.png" alt="">
                     </div>
                     <h6>Return Policy</h6>
-                    <p>Free Shipping on all order</p>
+
                   </div>
                 </div>
                 <!-- single features -->
@@ -120,7 +160,7 @@
                       <img src="/client/img/features/f-icon3.png" alt="">
                     </div>
                     <h6>24/7 Support</h6>
-                    <p>Free Shipping on all order</p>
+
                   </div>
                 </div>
                 <!-- single features -->
@@ -130,7 +170,7 @@
                       <img src="/client/img/features/f-icon4.png" alt="">
                     </div>
                     <h6>Secure Payment</h6>
-                    <p>Free Shipping on all order</p>
+
                   </div>
                 </div>
               </div>
@@ -225,6 +265,16 @@
                     <!-- single product -->
                     <div class="col-lg-3 col-md-6">
                       <div class="single-product">
+                        <c:choose>
+                          <c:when test="${product.stockQuantity > 0}">
+                            <span class="product-badge badge-stock">Còn hàng</span>
+                          </c:when>
+
+                          <c:otherwise>
+                            <span class="product-badge badge-out-of-stock">Còn cái
+                              nịt</span>
+                          </c:otherwise>
+                        </c:choose>
                         <img class="img-fluid" src="/images/product/${product.image}" alt="" style="height: 255px;">
                         <div class="product-details">
                           <a href="/products/${product.id}">
@@ -236,19 +286,28 @@
 
                           </div>
                           <div class="prd-bottom">
-                            <form action="/products/add-product-to-cart/${product.id}" method="post" class="d-inline">
-                              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                              <a href="#" class="social-info" onclick="this.closest('form').submit(); return false;">
-                                <span class="ti-bag"></span>
-                                <p class="hover-text">add to bag</p>
-                              </a>
-                            </form>
+                            <c:choose>
 
+                              <c:when test="${product.stockQuantity > 0}">
+                                <form action="/products/add-product-to-cart/${product.id}" method="post"
+                                  class="d-inline">
+                                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                  <a href="#" class="social-info"
+                                    onclick="this.closest('form').submit(); return false;">
+                                    <span class="ti-bag"></span>
+                                    <p class="hover-text">add to bag</p>
+                                  </a>
+                                </form>
+                              </c:when>
 
-                            <a href="" class="social-info">
-                              <span class="lnr lnr-move"></span>
-                              <p class="hover-text">view more</p>
-                            </a>
+                              <c:otherwise>
+                                <a class="social-info">
+                                  <span class="ti-close"></span>
+
+                                  <p class="hover-text">Còn cái nịt</p>
+                                </a>
+                              </c:otherwise>
+                            </c:choose>
                           </div>
                         </div>
                       </div>

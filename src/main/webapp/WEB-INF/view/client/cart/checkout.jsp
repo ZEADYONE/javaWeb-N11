@@ -156,24 +156,19 @@
                                                     <label for="pay_cash">Cash Payment</label>
                                                     <div class="check"></div>
                                                 </div>
-                                                <p>Please send a check to Store Name, Store Street, Store Town, Store
-                                                    State
-                                                    /
-                                                    County, Store Postcode.</p>
+                                                <p>Please send a check to Name, Email, Address, Phone
+                                                    .</p>
                                             </div>
                                             <div class="payment_item">
                                                 <div class="radion_btn">
                                                     <form:radiobutton path="payment" name="payment" id="pay_paypal"
                                                         value="VNPAY" />
 
-                                                    <label for="pay_paypal">Paypal</label>
+                                                    <label for="pay_paypal">Banking payment</label>
                                                     <img src="img/product/card.jpg" alt="">
                                                     <div class="check"></div>
                                                 </div>
-                                                <p>Pay via PayPal; you can pay with your credit card if you don’t
-                                                    have a
-                                                    PayPal
-                                                    account.</p>
+                                                <p>You can pay with your credit. </p>
                                             </div>
 
                                             <!-- Buttons -->
