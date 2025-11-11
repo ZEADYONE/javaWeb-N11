@@ -60,9 +60,14 @@
                                                     </div>
 
                                                     <div class="col-md-6 mb-3">
+                                                        <c:set var="errorPhoneNumber">
+                                                            <form:errors path="phoneNumber" cssClass="invalid-feedback"/>
+                                                        </c:set>
                                                         <label class="form-label fw-bold">Phone number:</label>
-                                                        <form:input type="text" class="form-control border"
+                                                        <form:input type="number" 
+                                                            class="form-control border ${not empty errorPhoneNumber ? 'is-invalid' : ''}"
                                                             style="padding-left: 20px;" path="phoneNumber" />
+                                                        ${errorPhoneNumber}
                                                     </div>
 
                                                     <div class="col-md-6 mb-3">

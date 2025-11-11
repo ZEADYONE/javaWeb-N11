@@ -149,7 +149,7 @@ public class UserController {
 
     @PostMapping("/update")
     public String updateUserPage(Model model, @ModelAttribute("newUser") User user,
-            // BindingResult userBindingResult,
+            BindingResult userBindingResult,
             @RequestParam("images") MultipartFile file) {
         // @RequestParam("images") MultipartFile file dùng để lấy file từ client đây về
 
@@ -169,9 +169,16 @@ public class UserController {
         // tại");
         // }
 
-        // if (userBindingResult.hasErrors()) {
-        // return "admin/user/update";
-        // }
+        String phone = user.getPhoneNumber();
+        if (phone != null && !phone.isEmpty()) {
+            if (!phone.matches("^[0-9]{10}$")) {
+                userBindingResult.rejectValue("phoneNumber", "error.user", "Số điện thoại phải gồm đúng 10 chữ số");
+            }
+        }
+
+        if (userBindingResult.hasErrors()) {
+            return "admin/user/update";
+        }
 
         this.userService.updateUser(user, file);
         return "redirect:/admin/user";

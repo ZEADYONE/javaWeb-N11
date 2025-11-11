@@ -44,7 +44,7 @@ public class ClientAccountController {
     @PostMapping("/profile/update")
     public String updateUserPage(
             @ModelAttribute("newUser") User user,
-            // BindingResult userBindingResult,
+            BindingResult userBindingResult,
             @RequestParam("images") MultipartFile file,
             Authentication authentication,
             HttpSession session,
@@ -57,6 +57,8 @@ public class ClientAccountController {
         // boolean usernameChanged =
         // !user.getUsername().equalsIgnoreCase(existingUser.getUsername());
 
+        String phone = user.getPhoneNumber();
+
         // if (emailChanged && userService.checkEmailExist(user.getEmail())) {
         // userBindingResult.rejectValue("email", "error.user", "Email đã tồn tại");
         // }
@@ -66,9 +68,15 @@ public class ClientAccountController {
         // tại");
         // }
 
-        // if (userBindingResult.hasErrors()) {
-        // return "client/user/update";
-        // }
+        if (phone != null && !phone.isEmpty()) {
+            if (!phone.matches("^[0-9]{10}$")) {
+                userBindingResult.rejectValue("phoneNumber", "error.user", "Số điện thoại phải gồm đúng 10 chữ số");
+            }
+        }
+
+        if (userBindingResult.hasErrors()) {
+            return "client/user/update";
+        }
 
         User updateUser = this.userService.updateUser(user, file);
         session.setAttribute("fullName", updateUser.getFullName());
