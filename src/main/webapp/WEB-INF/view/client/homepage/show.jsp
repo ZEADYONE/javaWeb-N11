@@ -304,7 +304,7 @@
                                 <a class="social-info">
                                   <span class="ti-close"></span>
 
-                                  <p class="hover-text">Còn cái nịt</p>
+                                  <p class="hover-text">Hết hàng</p>
                                 </a>
                               </c:otherwise>
                             </c:choose>

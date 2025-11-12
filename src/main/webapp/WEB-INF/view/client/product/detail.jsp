@@ -50,7 +50,7 @@
                                             <c:choose>
                                                 <c:when test="${product.stockQuantity > 0}">${product.stockQuantity}
                                                 </c:when>
-                                                <c:otherwise>Còn cái nịt
+                                                <c:otherwise>Hết hàng
                                                 </c:otherwise>
                                             </c:choose>
                                         </li>
@@ -108,11 +108,11 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header bg-warning text-dark">
-                                <h5 class="modal-title" id="outOfStockModalLabel">Lười</h5>
+                                <h5 class="modal-title" id="outOfStockModalLabel">Shop</h5>
 
                             </div>
                             <div class="modal-body">
-                                Còn cái nịt thôi không bán đâu, quay lại sau đi !
+                                Hết hàng, quay lại sau!
                             </div>
 
                         </div>
