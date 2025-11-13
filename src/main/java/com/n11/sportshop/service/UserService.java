@@ -79,7 +79,7 @@ public class UserService {
         // Thêm voucher “welcome” cho user mới
         var welcomeVoucher = this.voucherRepository.findByCode("WELCOME10");
         if (welcomeVoucher != null) {
-            var userVoucher = new com.n11.sportshop.domain.UserVoucher();
+            UserVoucher userVoucher = new UserVoucher();
             userVoucher.setUser(savedUser);
             userVoucher.setVoucher(welcomeVoucher);
             userVoucher.setQuantity(1);
