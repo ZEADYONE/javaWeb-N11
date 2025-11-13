@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,6 @@ import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.service.CartService;
-import com.n11.sportshop.service.OrderProducer;
 import com.n11.sportshop.service.OrderService;
 import com.n11.sportshop.service.ProductService;
 import com.n11.sportshop.service.UserService;
@@ -38,8 +36,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/order")
 public class ClientOrderController {
 
-    @Autowired
-    private OrderProducer producer;
     private final CartService cartService;
     private final UserService userService;
     private final OrderService orderService;
