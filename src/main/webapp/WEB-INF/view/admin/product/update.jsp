@@ -45,7 +45,7 @@
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
-                                                    <label class="form-label">Category</label>
+                                                    <label class="form-label">Brand</label>
                                                     <form:select class="form-select border" style="padding-left: 20px;"
                                                         path="brand.name">
                                                         <form:option value="">-----</form:option>

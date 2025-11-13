@@ -24,29 +24,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
     @OneToMany(mappedBy = "user")
     private List<UserVoucher> voucherList;
-
-
     @NotNull
     @Size(min = 2, message = "Tên đăng nhập không hợp lệ")
     private String username;
-
     @NotNull
     @StrongPassword
     private String password;
 
     private String fullName;
-
     @NotBlank(message = "Cần nhập email")
     @Email(message = "email không hợp lệ")
     private String email;
-
     private String phoneNumber;
 
     private String address;
