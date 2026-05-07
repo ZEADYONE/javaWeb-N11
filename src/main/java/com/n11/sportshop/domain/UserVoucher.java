@@ -1,5 +1,6 @@
 package com.n11.sportshop.domain;
 
+/*
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -58,3 +59,4 @@ public class UserVoucher {
 
 
 }
+*/

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.n11.sportshop.domain.CartDetail;
-import com.n11.sportshop.domain.DiscountType;
+// import com.n11.sportshop.domain.DiscountType;
 import com.n11.sportshop.domain.Order;
 import com.n11.sportshop.domain.OrderDetail;
 import com.n11.sportshop.domain.OrderStatus;
@@ -14,8 +14,8 @@ import com.n11.sportshop.domain.PaymentMethod;
 import com.n11.sportshop.domain.PaymentStatus;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.domain.UserVoucher;
-import com.n11.sportshop.domain.Voucher;
+// import com.n11.sportshop.domain.UserVoucher;
+// import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.domain.dto.InformationDTO;
 import com.n11.sportshop.repository.CartDetailRepository;
 import com.n11.sportshop.repository.CartRepository;
@@ -23,8 +23,8 @@ import com.n11.sportshop.repository.OrderDetailRepository;
 import com.n11.sportshop.repository.OrderRepository;
 import com.n11.sportshop.repository.ProductRepository;
 import com.n11.sportshop.repository.UserRepository;
-import com.n11.sportshop.repository.UserVoucherRepo;
-import com.n11.sportshop.repository.VoucherRepository;
+// import com.n11.sportshop.repository.UserVoucherRepo;
+// import com.n11.sportshop.repository.VoucherRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -39,12 +39,12 @@ public class OrderService {
     private final UserRepository userRepository;
     private final CartService cartService;
     private final ProductRepository productRepository;
-    private final VoucherRepository voucherRepository;
-    private final UserVoucherRepo userVoucherRepo;
+    // private final VoucherRepository voucherRepository;
+    // private final UserVoucherRepo userVoucherRepo;
 
-    public OrderService(UserVoucherRepo userVoucherRepo, CartDetailRepository cartDetailRepo, CartRepository cartRepo,
+    public OrderService(CartDetailRepository cartDetailRepo, CartRepository cartRepo,
             CartService cartService, OrderDetailRepository orderDetailRepo, OrderRepository orderRepo,
-            ProductRepository productRepository, UserRepository userRepository, VoucherRepository voucherRepository) {
+            ProductRepository productRepository, UserRepository userRepository) {
         this.cartDetailRepo = cartDetailRepo;
         this.cartRepo = cartRepo;
         this.cartService = cartService;
@@ -52,8 +52,8 @@ public class OrderService {
         this.orderRepo = orderRepo;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
-        this.voucherRepository = voucherRepository;
-        this.userVoucherRepo = userVoucherRepo;
+        // this.voucherRepository = voucherRepository;
+        // this.userVoucherRepo = userVoucherRepo;
     }
 
     public List<Order> getOrderHistoryByStatus(User user, OrderStatus status) {
@@ -113,21 +113,21 @@ public class OrderService {
             price += item.getQuantity() * product.getPrice();
         }
 
-        if (!voucherCode.equals("NONE")) {
-            Voucher voucher = this.voucherRepository.findByCode(voucherCode);
-            UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
+        // if (!voucherCode.equals("NONE")) {
+        //     Voucher voucher = this.voucherRepository.findByCode(voucherCode);
+        //     UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
 
-            order.setVoucher(voucher);
-            this.userVoucherRepo.delete(userVoucher);
+        //     order.setVoucher(voucher);
+        //     this.userVoucherRepo.delete(userVoucher);
 
-            if (voucher.getDiscountType() == DiscountType.freeship) {
-                shipPrice = 0L;
-            } else if (voucher.getDiscountType() == DiscountType.fixed_amount) {
-                discountAmount = voucher.getDiscountValue() * 1L;
-            } else {
-                discountAmount = price * voucher.getDiscountValue() / 100;
-            }
-        }
+        //     if (voucher.getDiscountType() == DiscountType.freeship) {
+        //         shipPrice = 0L;
+        //     } else if (voucher.getDiscountType() == DiscountType.fixed_amount) {
+        //         discountAmount = voucher.getDiscountValue() * 1L;
+        //     } else {
+        //         discountAmount = price * voucher.getDiscountValue() / 100;
+        //     }
+        // }
 
         order.setTotalAmount(price);
         order.setShipPrice(shipPrice);

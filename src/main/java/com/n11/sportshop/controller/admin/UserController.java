@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.domain.UserVoucher;
-import com.n11.sportshop.domain.Voucher;
+// import com.n11.sportshop.domain.UserVoucher;
+// import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
 import com.n11.sportshop.service.UserService;
@@ -129,21 +129,21 @@ public class UserController {
     @GetMapping("/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable("id") int id) {
         User user = this.userService.getUserByID(id);
-        List<Voucher> vouchers = this.productService.getActiveVoucher(1);
-        Map<Integer, Integer> userHasVoucher = new TreeMap<>();
-        for (var voucher : vouchers) {
-            userHasVoucher.put(voucher.getId(), 0);
-        }
-        List<UserVoucher> userVouchers = user.getVoucherList();
+        // List<Voucher> vouchers = this.productService.getActiveVoucher(1);
+        // Map<Integer, Integer> userHasVoucher = new TreeMap<>();
+        // for (var voucher : vouchers) {
+        //     userHasVoucher.put(voucher.getId(), 0);
+        // }
+        // List<UserVoucher> userVouchers = user.getVoucherList();
 
-        for (UserVoucher userVoucher : userVouchers) {
-            if (userVoucher.getQuantity() > 0) {
-                userHasVoucher.put(userVoucher.getVoucher().getId(), 1);
-            }
-        }
+        // for (UserVoucher userVoucher : userVouchers) {
+        //     if (userVoucher.getQuantity() > 0) {
+        //         userHasVoucher.put(userVoucher.getVoucher().getId(), 1);
+        //     }
+        // }
         model.addAttribute("newUser", user);
-        model.addAttribute("mapVouchers", userHasVoucher);
-        model.addAttribute("vouchers", vouchers);
+        // model.addAttribute("mapVouchers", userHasVoucher);
+        // model.addAttribute("vouchers", vouchers);
         return "admin/user/update";
     }
 
@@ -192,13 +192,13 @@ public class UserController {
     }
 
     // gán voucher cho user
-    @PostMapping("/assign-vouchers")
-    public String assignVouchersToUser(
-            @RequestParam("userId") Integer userId,
-            @RequestParam(value = "voucherIds", required = false) List<Integer> voucherIds) {
+    // @PostMapping("/assign-vouchers")
+    // public String assignVouchersToUser(
+    //         @RequestParam("userId") Integer userId,
+    //         @RequestParam(value = "voucherIds", required = false) List<Integer> voucherIds) {
 
-        userService.assignVouchersToUser(userId, voucherIds);
-        return "redirect:/admin/user/update/" + userId;
-    }
+    //     userService.assignVouchersToUser(userId, voucherIds);
+    //     return "redirect:/admin/user/update/" + userId;
+    // }
 
 }

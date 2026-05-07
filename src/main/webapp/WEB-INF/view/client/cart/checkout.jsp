@@ -108,7 +108,7 @@
                                         <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span
                                                     class="last">$720.00</span></a></li> -->
                                             </ul>
-                                            <div class="voucher_box">
+                                            <%-- <div class="voucher_box">
                                                 <div class="input-group mb-3">
                                                     <div class="voucher_box mb-4">
                                                         <label class="fw-bold mb-2">Select Voucher:</label>
@@ -128,7 +128,7 @@
 
 
                                                 </div>
-                                            </div>
+                                            </div> --%>
 
                                             <ul class="list list_2">
                                                 <li><a>Subtotal <span>
@@ -225,57 +225,57 @@
                     const subtotal = ${ totalPrice };
                     const originalShippingCost = ${ shipPrice };
 
-                    const voucherSelect = document.getElementById("voucherSelect");
-                    const discountSpan = document.getElementById("discountAmountSpan");
-                    const totalSpan = document.getElementById("totalAmountSpan");
-                    const shippingSpan = document.getElementById("shippingAmountSpan");
-                    const totalPriceInput = document.querySelector('input[name="totalPrice"]');
+                    // const voucherSelect = document.getElementById("voucherSelect");
+                    // const discountSpan = document.getElementById("discountAmountSpan");
+                    // const totalSpan = document.getElementById("totalAmountSpan");
+                    // const shippingSpan = document.getElementById("shippingAmountSpan");
+                    // const totalPriceInput = document.querySelector('input[name="totalPrice"]');
 
-                    function formatCurrency(value) {
-                        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
-                    }
-
-
-                    if (voucherSelect) {
-                        voucherSelect.addEventListener("change", function () {
-                            const selectedOption = voucherSelect.options[voucherSelect.selectedIndex];
-                            const discountType = selectedOption.dataset.type;
-                            const discountValue = parseFloat(selectedOption.dataset.value);
-
-                            let discountAmount = 0;
-                            let currentShippingCost = originalShippingCost;
+                    // function formatCurrency(value) {
+                    //     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+                    // }
 
 
-                            const typeUpperCase = String(discountType).toUpperCase();
+                    // if (voucherSelect) {
+                    //     voucherSelect.addEventListener("change", function () {
+                    //         const selectedOption = voucherSelect.options[voucherSelect.selectedIndex];
+                    //         const discountType = selectedOption.dataset.type;
+                    //         const discountValue = parseFloat(selectedOption.dataset.value);
 
-                            if (typeUpperCase === "PERCENTAGE") {
-                                discountAmount = (subtotal * discountValue) / 100;
-                            } else if (typeUpperCase === "FIXED_AMOUNT" || typeUpperCase === "FIXEDAMOUNT") {
-                                discountAmount = discountValue;
-                            } else if (typeUpperCase === "FREESHIP") {
-                                discountAmount = 0;
-                                currentShippingCost = 0;
-                            }
+                    //         let discountAmount = 0;
+                    //         let currentShippingCost = originalShippingCost;
 
 
-                            if (discountAmount > subtotal) {
-                                discountAmount = subtotal;
-                            }
+                    //         const typeUpperCase = String(discountType).toUpperCase();
+
+                    //         if (typeUpperCase === "PERCENTAGE") {
+                    //             discountAmount = (subtotal * discountValue) / 100;
+                    //         } else if (typeUpperCase === "FIXED_AMOUNT" || typeUpperCase === "FIXEDAMOUNT") {
+                    //             discountAmount = discountValue;
+                    //         } else if (typeUpperCase === "FREESHIP") {
+                    //             discountAmount = 0;
+                    //             currentShippingCost = 0;
+                    //         }
 
 
-                            const newTotal = subtotal - discountAmount + currentShippingCost;
+                    //         if (discountAmount > subtotal) {
+                    //             discountAmount = subtotal;
+                    //         }
 
 
-                            if (discountSpan) discountSpan.textContent = formatCurrency(discountAmount);
-                            if (totalSpan) totalSpan.textContent = formatCurrency(newTotal);
-                            if (shippingSpan) shippingSpan.textContent = formatCurrency(currentShippingCost);
+                    //         const newTotal = subtotal - discountAmount + currentShippingCost;
 
 
-                            if (totalPriceInput) {
-                                totalPriceInput.value = newTotal;
-                            }
-                        });
-                    }
+                    //         if (discountSpan) discountSpan.textContent = formatCurrency(discountAmount);
+                    //         if (totalSpan) totalSpan.textContent = formatCurrency(newTotal);
+                    //         if (shippingSpan) shippingSpan.textContent = formatCurrency(currentShippingCost);
+
+
+                    //         if (totalPriceInput) {
+                    //             totalPriceInput.value = newTotal;
+                    //         }
+                    //     });
+                    // }
                 </script>
 
                 <!-- start footer Area -->

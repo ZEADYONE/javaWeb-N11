@@ -132,24 +132,24 @@ public class ClientOrderController {
             String vnpUrl = this.vNPayService.generateVNPayURL(informationDTO.getTotalPrice(),
                     informationDTO.getPaymentRef(), ip);
             Integer userId = (Integer) session.getAttribute("id");
-            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty()
-                    || informationDTO.getVoucherCode().isBlank()) {
-                informationDTO.setVoucherCode("NONE");
-            }
+            // if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty()
+            //         || informationDTO.getVoucherCode().isBlank()) {
+            //     informationDTO.setVoucherCode("NONE");
+            // }
             try {
-                Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+                Order order = this.orderService.createOrder(userId, "NONE", informationDTO);
                 return "redirect:" + vnpUrl;
             } catch (Exception e) {
                 return "redirect:/cart?error=not_enough_quantity";
             }
         } else {
             Integer userId = (Integer) session.getAttribute("id");
-            if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty()
-                    || informationDTO.getVoucherCode().isBlank()) {
-                informationDTO.setVoucherCode("NONE");
-            }
+            // if (informationDTO.getVoucherCode() == null || informationDTO.getVoucherCode().isEmpty()
+            //         || informationDTO.getVoucherCode().isBlank()) {
+            //     informationDTO.setVoucherCode("NONE");
+            // }
             try {
-                Order order = this.orderService.createOrder(userId, informationDTO.getVoucherCode(), informationDTO);
+                Order order = this.orderService.createOrder(userId, "NONE", informationDTO);
                 return "redirect:/order/confirmation";
             } catch (Exception e) {
                 return "redirect:/cart?error=not_enough_quantity";

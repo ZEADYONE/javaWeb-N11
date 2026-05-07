@@ -1,5 +1,6 @@
 package com.n11.sportshop.repository;
 
+/*
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,3 +15,4 @@ public interface VoucherRepository extends JpaRepository<Voucher, Integer>{
     Voucher findByCode(String code);
     List<Voucher> findByStatus(Integer status);
 }
+*/

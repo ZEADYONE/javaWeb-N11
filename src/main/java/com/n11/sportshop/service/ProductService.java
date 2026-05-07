@@ -11,11 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
 import com.n11.sportshop.domain.Product;
-import com.n11.sportshop.domain.Voucher;
+// import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.repository.BrandRepository;
 import com.n11.sportshop.repository.CategoryRepository;
 import com.n11.sportshop.repository.ProductRepository;
-import com.n11.sportshop.repository.VoucherRepository;
+// import com.n11.sportshop.repository.VoucherRepository;
 
 @Service
 public class ProductService {
@@ -24,15 +24,15 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final ImageService imageService;
     private final BrandRepository brandRepository;
-    private final VoucherRepository voucherRepository;
+    // private final VoucherRepository voucherRepository;
 
     public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository,
-            ImageService imageService, ProductRepository productRepository, VoucherRepository voucherRepository) {
+            ImageService imageService, ProductRepository productRepository) {
         this.brandRepository = brandRepository;
         this.categoryRepository = categoryRepository;
         this.imageService = imageService;
         this.productRepository = productRepository;
-        this.voucherRepository = voucherRepository;
+        // this.voucherRepository = voucherRepository;
     }
 
     // them moi san pham
@@ -78,31 +78,31 @@ public class ProductService {
         return this.productRepository.existsByName(name);
     }
 
-    public void createVoucher(Voucher voucher) {
-        this.voucherRepository.save(voucher);
-    }
+    // public void createVoucher(Voucher voucher) {
+    //     this.voucherRepository.save(voucher);
+    // }
 
-    public void updateVoucher(Integer id) {
-        Voucher voucher = this.voucherRepository.findById(id).get();
-        if (voucher.getStatus() == 1) {
-            voucher.setStatus(0);
-        } else {
-            voucher.setStatus(1);
-        }
-        this.voucherRepository.save(voucher);
-    }
+    // public void updateVoucher(Integer id) {
+    //     Voucher voucher = this.voucherRepository.findById(id).get();
+    //     if (voucher.getStatus() == 1) {
+    //         voucher.setStatus(0);
+    //     } else {
+    //         voucher.setStatus(1);
+    //     }
+    //     this.voucherRepository.save(voucher);
+    // }
 
     public List<Product> getLatestProducts() {
         return this.productRepository.findTop8ByOrderByIdDesc();
     }
 
-    public List<Voucher> getVouchers() {
-        return this.voucherRepository.findAll();
-    }
+    // public List<Voucher> getVouchers() {
+    //     return this.voucherRepository.findAll();
+    // }
 
-    public List<Voucher> getActiveVoucher(int status) {
-        return this.voucherRepository.findByStatus(status);
-    }
+    // public List<Voucher> getActiveVoucher(int status) {
+    //     return this.voucherRepository.findByStatus(status);
+    // }
 
     public List<Product> getActiveProduct(int status) {
         return this.productRepository.findByStatus(status);

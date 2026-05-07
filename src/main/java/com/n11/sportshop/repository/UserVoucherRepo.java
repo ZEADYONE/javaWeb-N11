@@ -1,5 +1,6 @@
 package com.n11.sportshop.repository;
 
+/*
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,3 +37,4 @@ public interface UserVoucherRepo extends JpaRepository<UserVoucher, Integer> {
     boolean existsByUserAndVoucher(User user, Voucher voucher);
 
 }
+*/

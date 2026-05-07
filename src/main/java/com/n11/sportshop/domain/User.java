@@ -27,8 +27,8 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-    @OneToMany(mappedBy = "user")
-    private List<UserVoucher> voucherList;
+    // @OneToMany(mappedBy = "user")
+    // private List<UserVoucher> voucherList;
     @NotNull
     @Size(min = 2, message = "Tên đăng nhập không hợp lệ")
     private String username;
@@ -128,12 +128,12 @@ public class User {
     }
     
 
-    public List<UserVoucher> getVoucherList() {
-        return voucherList;
-    }
+    // public List<UserVoucher> getVoucherList() {
+    //     return voucherList;
+    // }
 
-    public void setVoucherList(List<UserVoucher> voucherList) {
-        this.voucherList = voucherList;
-    }
+    // public void setVoucherList(List<UserVoucher> voucherList) {
+    //     this.voucherList = voucherList;
+    // }
 
 }

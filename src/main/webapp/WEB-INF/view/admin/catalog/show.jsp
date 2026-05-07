@@ -436,7 +436,7 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- VOUCHER -->
+                                                <%-- <!-- VOUCHER -->
                                                 <div class="accordion-item border shadow-sm">
                                                     <h2 class="accordion-header" id="headingVoucher">
                                                         <button class="accordion-button collapsed" type="button"
@@ -663,7 +663,7 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --%>
 
                                             </div> <!-- end accordion -->
                                         </div>
@@ -687,23 +687,23 @@
                             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), { damping: '0.5' });
                         }
                     </script>
-                    <script>
-                        document.getElementById("voucherType").addEventListener("change", function () {
-                            const type = this.value;
-                            const valueInput = document.getElementById("voucherValue");
-                            const label = document.getElementById("valueLabel");
-                            const help = document.getElementById("valueHelp");
+                    // <script>
+                    //     document.getElementById("voucherType").addEventListener("change", function () {
+                    //         const type = this.value;
+                    //         const valueInput = document.getElementById("voucherValue");
+                    //         const label = document.getElementById("valueLabel");
+                    //         const help = document.getElementById("valueHelp");
 
-                            if (type === "PERCENT") {
-                                valueInput.min = 1;
-                                valueInput.max = 100;
-                                valueInput.placeholder = "Enter percent (1 - 100)";
+                    //         if (type === "PERCENT") {
+                    //             valueInput.min = 1;
+                    //             valueInput.max = 100;
+                    //             valueInput.placeholder = "Enter percent (1 - 100)";
 
-                            } else {
-                                valueInput.removeAttribute("max");
-                                valueInput.placeholder = "Enter amount";
+                    //         } else {
+                    //             valueInput.removeAttribute("max");
+                    //             valueInput.placeholder = "Enter amount";
 
-                            }
-                        });
-                    </script>
+                    //         }
+                    //     });
+                    // </script>
                 </body>

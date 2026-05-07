@@ -134,7 +134,7 @@
                         </div>
                     </div>
                 </main>
-                <!-- Modal Add Voucher to User -->
+                <%-- <!-- Modal Add Voucher to User -->
                 <div class="modal fade" id="addVoucherForUserModal" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content border-0 shadow-lg">
@@ -191,7 +191,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --%>
 
 
 

@@ -10,13 +10,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.n11.sportshop.domain.Role;
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.domain.UserVoucher;
-import com.n11.sportshop.domain.Voucher;
+// import com.n11.sportshop.domain.UserVoucher;
+// import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.domain.dto.RegisterDTO;
 import com.n11.sportshop.repository.RoleRepository;
 import com.n11.sportshop.repository.UserRepository;
-import com.n11.sportshop.repository.UserVoucherRepo;
-import com.n11.sportshop.repository.VoucherRepository;
+// import com.n11.sportshop.repository.UserVoucherRepo;
+// import com.n11.sportshop.repository.VoucherRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -27,18 +27,18 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final ImageService imageService;
     private final PasswordEncoder passwordEncoder;
-    private final UserVoucherRepo userVoucherRepo;
-    private final VoucherRepository voucherRepository;
+    // private final UserVoucherRepo userVoucherRepo;
+    // private final VoucherRepository voucherRepository;
     
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository, ImageService imageService,
-            PasswordEncoder passwordEncoder, UserVoucherRepo userVoucherRepo, VoucherRepository voucherRepository) {
+            PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.imageService = imageService;
         this.passwordEncoder = passwordEncoder;
-        this.userVoucherRepo = userVoucherRepo;
-        this.voucherRepository = voucherRepository;
+        // this.userVoucherRepo = userVoucherRepo;
+        // this.voucherRepository = voucherRepository;
     }
 
     public void createUserByClient(RegisterDTO userDTO) {
@@ -53,14 +53,14 @@ public class UserService {
         User savedUser = this.userRepository.save(user);
 
         // Gán voucher “WELCOME10” mặc định cho user mới
-        Voucher welcomeVoucher = voucherRepository.findByCode("WELCOME10");
-        if (welcomeVoucher != null) {
-            UserVoucher userVoucher = new UserVoucher();
-            userVoucher.setUser(savedUser);
-            userVoucher.setVoucher(welcomeVoucher);
-            userVoucher.setQuantity(1);
-            userVoucherRepo.save(userVoucher);
-        }
+        // Voucher welcomeVoucher = voucherRepository.findByCode("WELCOME10");
+        // if (welcomeVoucher != null) {
+        //     UserVoucher userVoucher = new UserVoucher();
+        //     userVoucher.setUser(savedUser);
+        //     userVoucher.setVoucher(welcomeVoucher);
+        //     userVoucher.setQuantity(1);
+        //     userVoucherRepo.save(userVoucher);
+        // }
     }
 
     public void createUserByAdmin(User user, MultipartFile file) {
@@ -77,47 +77,47 @@ public class UserService {
         User savedUser = this.userRepository.save(user);
 
         // Thêm voucher “welcome” cho user mới
-        var welcomeVoucher = this.voucherRepository.findByCode("WELCOME10");
-        if (welcomeVoucher != null) {
-            UserVoucher userVoucher = new UserVoucher();
-            userVoucher.setUser(savedUser);
-            userVoucher.setVoucher(welcomeVoucher);
-            userVoucher.setQuantity(1);
-            this.userVoucherRepo.save(userVoucher);
-        }
+        // var welcomeVoucher = this.voucherRepository.findByCode("WELCOME10");
+        // if (welcomeVoucher != null) {
+        //     UserVoucher userVoucher = new UserVoucher();
+        //     userVoucher.setUser(savedUser);
+        //     userVoucher.setVoucher(welcomeVoucher);
+        //     userVoucher.setQuantity(1);
+        //     this.userVoucherRepo.save(userVoucher);
+        // }
     }
-    @Transactional
-    public void assignVouchersToUser(Integer userId, List<Integer> voucherIds) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-         // Nếu voucherIds == null, gán list rỗng 
-        if (voucherIds == null) {
-            voucherIds = List.of(); 
-        }
-        List<UserVoucher> existingUserVouchers = userVoucherRepo.findByUser(user);
+    // @Transactional
+    // public void assignVouchersToUser(Integer userId, List<Integer> voucherIds) {
+    //     User user = userRepository.findById(userId)
+    //             .orElseThrow(() -> new RuntimeException("User not found"));
+    //      // Nếu voucherIds == null, gán list rỗng 
+    //     if (voucherIds == null) {
+    //         voucherIds = List.of(); 
+    //     }
+    //     List<UserVoucher> existingUserVouchers = userVoucherRepo.findByUser(user);
 
-        // Xóa voucher không còn được chọn
-        for (UserVoucher uv : existingUserVouchers) {
-            if (!voucherIds.contains(uv.getVoucher().getId())) {
-                userVoucherRepo.delete(uv);
-            }
-        }
+    //     // Xóa voucher không còn được chọn
+    //     for (UserVoucher uv : existingUserVouchers) {
+    //         if (!voucherIds.contains(uv.getVoucher().getId())) {
+    //             userVoucherRepo.delete(uv);
+    //         }
+    //     }
 
-        // Thêm voucher mới được chọn
-        for (Integer voucherId : voucherIds) {
-            Voucher voucher = voucherRepository.findById(voucherId)
-                    .orElseThrow(() -> new RuntimeException("Voucher not found"));
+    //     // Thêm voucher mới được chọn
+    //     for (Integer voucherId : voucherIds) {
+    //         Voucher voucher = voucherRepository.findById(voucherId)
+    //                 .orElseThrow(() -> new RuntimeException("Voucher not found"));
 
-            boolean exists = userVoucherRepo.existsByUserAndVoucher(user, voucher);
-            if (!exists) {
-                UserVoucher newUserVoucher = new UserVoucher();
-                newUserVoucher.setUser(user);
-                newUserVoucher.setVoucher(voucher);
-                newUserVoucher.setQuantity(1);
-                userVoucherRepo.save(newUserVoucher);
-            }
-        }
-    }
+    //         boolean exists = userVoucherRepo.existsByUserAndVoucher(user, voucher);
+    //         if (!exists) {
+    //             UserVoucher newUserVoucher = new UserVoucher();
+    //             newUserVoucher.setUser(user);
+    //             newUserVoucher.setVoucher(voucher);
+    //             newUserVoucher.setQuantity(1);
+    //             userVoucherRepo.save(newUserVoucher);
+    //         }
+    //     }
+    // }
 
     public User updateUser(User user, MultipartFile file) {
         User currentUser = this.userRepository.findById(user.getId()).get();
@@ -199,15 +199,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<UserVoucher> getActiveVoucherListMoreThan(User user, int quantity) {
-        return this.userVoucherRepo.findByUserAndStatusAndQuantityGreaterThan(user.getId(), 1, quantity);
-    }
+    // public List<UserVoucher> getActiveVoucherListMoreThan(User user, int quantity) {
+    //     return this.userVoucherRepo.findByUserAndStatusAndQuantityGreaterThan(user.getId(), 1, quantity);
+    // }
 
-    public Voucher getVoucherByCodeAndUser (String code, User user) {
-        Voucher voucher = this.voucherRepository.findByCode(code);
-        UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
-        return userVoucher.getVoucher();
-    }
+    // public Voucher getVoucherByCodeAndUser (String code, User user) {
+    //     Voucher voucher = this.voucherRepository.findByCode(code);
+    //     UserVoucher userVoucher = this.userVoucherRepo.findByUserAndVoucher(user, voucher);
+    //     return userVoucher.getVoucher();
+    // }
     public long countActiveUsers() {
         return userRepository.countByStatus(1);
     }

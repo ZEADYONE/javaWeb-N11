@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.Category;
-import com.n11.sportshop.domain.Voucher;
+// import com.n11.sportshop.domain.Voucher;
 import com.n11.sportshop.service.BrandService;
 import com.n11.sportshop.service.CategoryService;
 import com.n11.sportshop.service.ProductService;

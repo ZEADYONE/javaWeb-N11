@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.n11.sportshop.domain.User;
-import com.n11.sportshop.domain.UserVoucher;
+// import com.n11.sportshop.domain.UserVoucher;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {

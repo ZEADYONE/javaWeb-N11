@@ -41,9 +41,9 @@ public class Order {
     private String address;
     private String note;
 
-    @ManyToOne
-    @JoinColumn(name = "voucher_id")
-    private Voucher voucher;
+    // @ManyToOne
+    // @JoinColumn(name = "voucher_id")
+    // private Voucher voucher;
 
     @OneToMany(mappedBy = "order")
     @JsonManagedReference
@@ -95,13 +95,13 @@ public class Order {
         this.status = status;
     }
 
-    public Voucher getVoucher() {
-        return voucher;
-    }
+    // public Voucher getVoucher() {
+    //     return voucher;
+    // }
 
-    public void setVoucher(Voucher voucher) {
-        this.voucher = voucher;
-    }
+    // public void setVoucher(Voucher voucher) {
+    //     this.voucher = voucher;
+    // }
 
     public Long getTotalAmount() {
         return totalAmount;

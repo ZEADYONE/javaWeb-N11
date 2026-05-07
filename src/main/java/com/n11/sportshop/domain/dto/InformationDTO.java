@@ -22,7 +22,7 @@ public class InformationDTO {
 
     private String note;
     private String payment; // CASH hay VNPAY
-    private String voucherCode;
+    // private String voucherCode;
     private Long totalPrice; // Tao ma qr
     private String paymentRef;
 
@@ -74,13 +74,13 @@ public class InformationDTO {
         this.payment = payment;
     }
 
-    public String getVoucherCode() {
-        return voucherCode;
-    }
+    // public String getVoucherCode() {
+    //     return voucherCode;
+    // }
 
-    public void setVoucherCode(String voucherCode) {
-        this.voucherCode = voucherCode;
-    }
+    // public void setVoucherCode(String voucherCode) {
+    //     this.voucherCode = voucherCode;
+    // }
 
     public Long getTotalPrice() {
         return totalPrice;
