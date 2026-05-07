@@ -49,25 +49,20 @@ public class ProductItemController {
     public String createItem(
             @PathVariable("productId") int productId,
             @ModelAttribute("newItem") ProductItem productItem,
-            Model model) {
+            org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
         
         Product product = productService.getProductById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + productId));
         
         if (productItemService.existsBySerialCode(productItem.getSerialCode())) {
-            // Add error message to model and return back to the page
-            model.addAttribute("error", "Mã Serial đã tồn tại!");
-            model.addAttribute("product", product);
-            model.addAttribute("items", productItemService.findByProductId(productId));
-            return "admin/product/items";
+            redirectAttributes.addFlashAttribute("error", "Mã Serial đã tồn tại!");
+            return "redirect:/admin/product/" + productId + "/items";
         }
 
         if (productItem.getWarrantyStartDate() != null && productItem.getWarrantyEndDate() != null 
                 && productItem.getWarrantyStartDate().isAfter(productItem.getWarrantyEndDate())) {
-            model.addAttribute("error", "Ngày bắt đầu bảo hành phải nhỏ hơn hoặc bằng ngày kết thúc bảo hành!");
-            model.addAttribute("product", product);
-            model.addAttribute("items", productItemService.findByProductId(productId));
-            return "admin/product/items";
+            redirectAttributes.addFlashAttribute("error", "Ngày bắt đầu bảo hành phải nhỏ hơn hoặc bằng ngày kết thúc bảo hành!");
+            return "redirect:/admin/product/" + productId + "/items";
         }
         
         productItem.setProduct(product);
@@ -84,29 +79,21 @@ public class ProductItemController {
             @RequestParam("status") String status,
             @RequestParam(value = "warrantyStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate warrantyStartDate,
             @RequestParam(value = "warrantyEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate warrantyEndDate,
-            Model model) {
+            org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
         
         ProductItem item = productItemService.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy Serial ID = " + itemId));
         
         // Check if serial code changed and if new code already exists
         if (!item.getSerialCode().equals(serialCode) && productItemService.existsBySerialCode(serialCode)) {
-            Product product = productService.getProductById(productId).orElse(null);
-            model.addAttribute("error", "Mã Serial đã tồn tại!");
-            model.addAttribute("product", product);
-            model.addAttribute("items", productItemService.findByProductId(productId));
-            model.addAttribute("newItem", new ProductItem());
-            return "admin/product/items";
+            redirectAttributes.addFlashAttribute("error", "Mã Serial đã tồn tại!");
+            return "redirect:/admin/product/" + productId + "/items";
         }
 
         if (warrantyStartDate != null && warrantyEndDate != null 
                 && warrantyStartDate.isAfter(warrantyEndDate)) {
-            Product product = productService.getProductById(productId).orElse(null);
-            model.addAttribute("error", "Ngày bắt đầu bảo hành phải nhỏ hơn hoặc bằng ngày kết thúc bảo hành!");
-            model.addAttribute("product", product);
-            model.addAttribute("items", productItemService.findByProductId(productId));
-            model.addAttribute("newItem", new ProductItem());
-            return "admin/product/items";
+            redirectAttributes.addFlashAttribute("error", "Ngày bắt đầu bảo hành phải nhỏ hơn hoặc bằng ngày kết thúc bảo hành!");
+            return "redirect:/admin/product/" + productId + "/items";
         }
         
         item.setSerialCode(serialCode);

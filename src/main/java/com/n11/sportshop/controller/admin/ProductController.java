@@ -152,12 +152,6 @@ public class ProductController {
             System.out.println(">>>> Update Error: " + error.getObjectName() + " - " + error.getDefaultMessage());
         }
 
-        // LƯU Ý: Tạm thời bỏ check existsByName ở hàm Update đi, hoặc phải check "Tồn
-        // tại tên nhưng ID khác với ID hiện tại"
-        // productService.existsByName(...) chỗ này thường gây lỗi logic nếu không
-        // truyền ID vào.
-
-        // Validate trả lỗi về màn hình trang product UPDATE (Không phải create)
         if (productBindingResult.hasErrors()) {
             model.addAttribute("categories", this.categoryService.getAllCategories());
             model.addAttribute("brands", this.brandService.getAllBrands());
