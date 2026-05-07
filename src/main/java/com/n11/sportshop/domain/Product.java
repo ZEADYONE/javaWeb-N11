@@ -50,6 +50,10 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;
+    
+    @OneToMany(mappedBy = "product")
+    private List<ProductItem> productItems;
+
     @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
     private Integer status = 1;
 
@@ -133,4 +137,11 @@ public class Product {
         this.status = status;
     }
 
+    public List<ProductItem> getProductItems() {
+        return productItems;
+    }
+
+    public void setProductItems(List<ProductItem> productItems) {
+        this.productItems = productItems;
+    }
 }

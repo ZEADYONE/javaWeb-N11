@@ -15,7 +15,9 @@ import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.domain.User;
 import com.n11.sportshop.domain.dto.ProductCriteriaDTO;
+import com.n11.sportshop.service.BrandService;
 import com.n11.sportshop.service.CartService;
+import com.n11.sportshop.service.CategoryService;
 import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
 import com.n11.sportshop.service.UserService;
@@ -31,15 +33,21 @@ public class ClientProductController {
     private final ProductService productService;
     private final PaginationService paginationService;
     private final UserService userService;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
 
     public ClientProductController(ProductService productService,
             PaginationService paginationService,
             CartService cartService,
-            UserService userService) {
+            UserService userService,
+            CategoryService categoryService,
+            BrandService brandService) {
         this.productService = productService;
         this.paginationService = paginationService;
         this.cartService = cartService;
         this.userService = userService;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
     }
 
     @GetMapping
@@ -63,8 +71,8 @@ public class ClientProductController {
         // ---------------Lấy tổng số trang ------------------
         model.addAttribute("totalPage", paginationQuery.getPrs().getTotalPages());
         model.addAttribute("products", paginationQuery.getPrs().getContent());
-        model.addAttribute("categories", this.productService.getActiveCategory(1));
-        model.addAttribute("brands", this.productService.getActiveBrand(1));
+        model.addAttribute("categories", this.categoryService.getActiveCategory(1));
+        model.addAttribute("brands", this.brandService.getActiveBrand(1));
         model.addAttribute("queryString", qs);
         model.addAttribute("criteria", productCriteriaDTO);
         return "client/product/show";

@@ -132,6 +132,11 @@
                                   <jsp:include page="../product/detail.jsp" />
 
 
+                                  <!-- Manage Serials -->
+                                  <a href="/admin/product/${product.id}/items" class="btn btn-sm btn-warning border-0" title="Quản lý Serial">
+                                    <i class="bi bi-upc-scan fs-5 text-white"></i>
+                                  </a>
+
                                   <!-- Edit -->
                                   <a href="/admin/product/update/${product.id}" class="btn btn-sm btn-primary border-0">
                                     <i class="bi bi-pencil-square fs-5"></i>

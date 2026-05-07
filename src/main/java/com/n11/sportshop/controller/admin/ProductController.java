@@ -19,6 +19,8 @@ import com.n11.sportshop.domain.Brand;
 import com.n11.sportshop.domain.PaginationQuery;
 import com.n11.sportshop.domain.Product;
 import com.n11.sportshop.repository.BrandRepository;
+import com.n11.sportshop.service.BrandService;
+import com.n11.sportshop.service.CategoryService;
 import com.n11.sportshop.service.ImageService;
 import com.n11.sportshop.service.PaginationService;
 import com.n11.sportshop.service.ProductService;
@@ -34,13 +36,18 @@ public class ProductController {
     private final ProductService productService;
     private final ImageService imageService;
     private final PaginationService paginationServie;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
 
     public ProductController(ProductService productService, ImageService imageService,
-            PaginationService paginationServie, BrandRepository brandRepository) {
+            PaginationService paginationServie, BrandRepository brandRepository,
+            CategoryService categoryService, BrandService brandService) {
         this.productService = productService;
         this.imageService = imageService;
         this.paginationServie = paginationServie;
         this.brandRepository = brandRepository;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
     }
 
     // hien thi danh sach san pham
@@ -67,8 +74,8 @@ public class ProductController {
     public String getProductCreatePage(Model model) {
         model.addAttribute("newProduct", new Product());
         model.addAttribute("brand", new Brand());
-        model.addAttribute("categories", this.productService.getAllCategories());
-        model.addAttribute("brands", this.productService.getAllBrands());
+        model.addAttribute("categories", this.categoryService.getAllCategories());
+        model.addAttribute("brands", this.brandService.getAllBrands());
         return "admin/product/create";
     }
 
@@ -92,8 +99,8 @@ public class ProductController {
 
         // Validate trả lỗi về màn hình trang product create
         if (productBindingResult.hasErrors() == true) {
-            model.addAttribute("categories", this.productService.getAllCategories());
-            model.addAttribute("brands", this.productService.getAllBrands());
+            model.addAttribute("categories", this.categoryService.getAllCategories());
+            model.addAttribute("brands", this.brandService.getAllBrands());
             return "admin/product/create";
         }
 
@@ -125,22 +132,44 @@ public class ProductController {
     public String editProductForm(@PathVariable("id") int id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy sản phẩm ID = " + id));
-        model.addAttribute("categories", this.productService.getAllCategories());
-        model.addAttribute("brands", this.productService.getAllBrands());
+        model.addAttribute("categories", this.categoryService.getAllCategories());
+        model.addAttribute("brands", this.brandService.getAllBrands());
         model.addAttribute("product", product);
         return "admin/product/update";
     }
 
     // Cập nhật sản phẩm
+    // Cập nhật sản phẩm
     @PostMapping("/update")
     public String updateProduct(
-            @ModelAttribute("product") Product product,
-            @RequestParam("images") MultipartFile file) {
+            @Valid @ModelAttribute("product") Product product, // THÊM @Valid Ở ĐÂY
+            BindingResult productBindingResult,
+            @RequestParam("images") MultipartFile file, Model model) {
+
+        // Dùng để debug validate trên console
+        List<FieldError> errors = productBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>> Update Error: " + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        // LƯU Ý: Tạm thời bỏ check existsByName ở hàm Update đi, hoặc phải check "Tồn
+        // tại tên nhưng ID khác với ID hiện tại"
+        // productService.existsByName(...) chỗ này thường gây lỗi logic nếu không
+        // truyền ID vào.
+
+        // Validate trả lỗi về màn hình trang product UPDATE (Không phải create)
+        if (productBindingResult.hasErrors()) {
+            model.addAttribute("categories", this.categoryService.getAllCategories());
+            model.addAttribute("brands", this.brandService.getAllBrands());
+            return "admin/product/update"; // SỬA ĐÚNG TÊN FILE JSP LÀ UPDATE
+        }
+
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
+
     @PostMapping("/toggle/{id}")
-    public String postCreateProduct(@PathVariable("id") Integer id) {
+    public String toggleProduct(@PathVariable("id") Integer id) {
         this.productService.actionProduct(id);
         return "redirect:/admin/product";
     }
