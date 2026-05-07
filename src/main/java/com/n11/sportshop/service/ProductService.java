@@ -26,7 +26,8 @@ public class ProductService {
     private final BrandRepository brandRepository;
     private final VoucherRepository voucherRepository;
 
-    public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository, ImageService imageService, ProductRepository productRepository, VoucherRepository voucherRepository) {
+    public ProductService(BrandRepository brandRepository, CategoryRepository categoryRepository,
+            ImageService imageService, ProductRepository productRepository, VoucherRepository voucherRepository) {
         this.brandRepository = brandRepository;
         this.categoryRepository = categoryRepository;
         this.imageService = imageService;
@@ -54,7 +55,6 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    
     public List<Product> getActiveProduct() {
         return this.productRepository.findActiveProduct();
     }
@@ -69,7 +69,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-
     public Page<Product> getAllProducts(Pageable pageable) {
         return this.productRepository.findAll(pageable);
     }
@@ -78,7 +77,7 @@ public class ProductService {
     public boolean existsByName(String name) {
         return this.productRepository.existsByName(name);
     }
-    
+
     public void createVoucher(Voucher voucher) {
         this.voucherRepository.save(voucher);
     }
@@ -92,13 +91,15 @@ public class ProductService {
         }
         this.voucherRepository.save(voucher);
     }
+
     public List<Product> getLatestProducts() {
         return this.productRepository.findTop8ByOrderByIdDesc();
     }
+
     public List<Voucher> getVouchers() {
         return this.voucherRepository.findAll();
     }
-    
+
     public List<Voucher> getActiveVoucher(int status) {
         return this.voucherRepository.findByStatus(status);
     }
@@ -106,6 +107,7 @@ public class ProductService {
     public List<Product> getActiveProduct(int status) {
         return this.productRepository.findByStatus(status);
     }
+
     public void actionProduct(Integer id) {
         Product product = this.productRepository.findById(id).get();
         if (product.getStatus() == 1) {
@@ -119,7 +121,5 @@ public class ProductService {
     public long countActiveProductsWithActiveCategoryAndBrand() {
         return productRepository.countActiveProductsWithActiveCategoryAndBrand();
     }
-
-
 
 }

@@ -24,14 +24,13 @@
                                     <div class="col-md-8">
                                         <form:form method="post" action="/admin/product/update" modelAttribute="product"
                                             enctype="multipart/form-data">
-                                            <!-- Hidden ID -->
                                             <form:input type="hidden" path="id" />
 
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label fw-bold">Name:</label>
                                                     <form:input type="text" class="form-control border bg-light"
-                                                        style="padding-left: 20px;" path="name" readonly ="true"/>
+                                                        style="padding-left: 20px;" path="name" readonly="true" />
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
@@ -55,15 +54,26 @@
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorPrice">
+                                                        <form:errors path="price" cssClass="invalid-feedback d-block" />
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Price:</label>
-                                                    <form:input type="text" class="form-control border "
+                                                    <form:input type="number"
+                                                        class="form-control border ${not empty errorPrice ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="price" />
+                                                    ${errorPrice}
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
+                                                    <c:set var="errorStock">
+                                                        <form:errors path="stockQuantity"
+                                                            cssClass="invalid-feedback d-block" />
+                                                    </c:set>
                                                     <label class="form-label fw-bold">Stock:</label>
-                                                    <form:input type="text" class="form-control border "
+                                                    <form:input type="number"
+                                                        class="form-control border ${not empty errorStock ? 'is-invalid' : ''}"
                                                         style="padding-left: 20px;" path="stockQuantity" />
+                                                    ${errorStock}
                                                 </div>
 
                                                 <div class="col-md-12 mb-3">

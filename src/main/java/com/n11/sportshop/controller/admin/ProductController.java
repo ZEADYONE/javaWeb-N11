@@ -139,15 +139,37 @@ public class ProductController {
     }
 
     // Cập nhật sản phẩm
+    // Cập nhật sản phẩm
     @PostMapping("/update")
     public String updateProduct(
-            @ModelAttribute("product") Product product,
-            @RequestParam("images") MultipartFile file) {
+            @Valid @ModelAttribute("product") Product product, // THÊM @Valid Ở ĐÂY
+            BindingResult productBindingResult,
+            @RequestParam("images") MultipartFile file, Model model) {
+
+        // Dùng để debug validate trên console
+        List<FieldError> errors = productBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>> Update Error: " + error.getObjectName() + " - " + error.getDefaultMessage());
+        }
+
+        // LƯU Ý: Tạm thời bỏ check existsByName ở hàm Update đi, hoặc phải check "Tồn
+        // tại tên nhưng ID khác với ID hiện tại"
+        // productService.existsByName(...) chỗ này thường gây lỗi logic nếu không
+        // truyền ID vào.
+
+        // Validate trả lỗi về màn hình trang product UPDATE (Không phải create)
+        if (productBindingResult.hasErrors()) {
+            model.addAttribute("categories", this.categoryService.getAllCategories());
+            model.addAttribute("brands", this.brandService.getAllBrands());
+            return "admin/product/update"; // SỬA ĐÚNG TÊN FILE JSP LÀ UPDATE
+        }
+
         this.productService.saveProduct(product, file);
         return "redirect:/admin/product";
     }
+
     @PostMapping("/toggle/{id}")
-    public String postCreateProduct(@PathVariable("id") Integer id) {
+    public String toggleProduct(@PathVariable("id") Integer id) {
         this.productService.actionProduct(id);
         return "redirect:/admin/product";
     }

@@ -38,11 +38,11 @@ public class CategoryService {
         this.categoryRepository.save(category);
     }
 
-    public void updateCategory(Integer id, Category updatedCategory) {
+    public void updateCategory(Integer id, Category Category) {
         Category category = categoryRepository.findById(id).orElse(null);
         if (category != null) {
-            category.setName(updatedCategory.getName());
-            category.setCode(updatedCategory.getCode());
+            category.setName(category.getName());
+            category.setCode(category.getCode());
             categoryRepository.save(category);
         }
     }
