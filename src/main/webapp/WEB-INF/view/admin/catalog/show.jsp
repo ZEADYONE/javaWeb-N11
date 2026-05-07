@@ -105,7 +105,7 @@
                                                                                             </div>
 
                                                                                             <form
-                                                                                                action="/admin/catalog/category/update/${cate.id}"
+                                                                                                action="${pageContext.request.contextPath}/admin/catalog/category/update/${cate.id}"
                                                                                                 method="post">
                                                                                                 <input type="hidden"
                                                                                                     name="${_csrf.parameterName}"
@@ -151,7 +151,7 @@
                                                                                 </div>
 
                                                                                 <form method="post"
-                                                                                    action="/admin/catalog/category/toggle/${cate.id}"
+                                                                                    action="${pageContext.request.contextPath}/admin/catalog/category/toggle/${cate.id}"
                                                                                     style="display:inline;">
                                                                                     <input type="hidden"
                                                                                         name="${_csrf.parameterName}"
@@ -203,7 +203,7 @@
                                                                                 data-bs-dismiss="modal"></button>
                                                                         </div>
 
-                                                                        <form action="/admin/catalog/category/create"
+                                                                        <form action="${pageContext.request.contextPath}/admin/catalog/category/create"
                                                                             method="post">
 
                                                                             <input type="hidden"
@@ -322,7 +322,7 @@
                                                                                             </div>
 
                                                                                             <form
-                                                                                                action="/admin/catalog/brand/update/${brand.id}"
+                                                                                                action="${pageContext.request.contextPath}/admin/catalog/brand/update/${brand.id}"
                                                                                                 method="post">
                                                                                                 <input type="hidden"
                                                                                                     name="${_csrf.parameterName}"
@@ -356,7 +356,7 @@
                                                                                 </div>
 
                                                                                 <form method="post"
-                                                                                    action="/admin/catalog/brand/toggle/${brand.id}"
+                                                                                    action="${pageContext.request.contextPath}/admin/catalog/brand/toggle/${brand.id}"
                                                                                     style="display:inline;">
                                                                                     <input type="hidden"
                                                                                         name="${_csrf.parameterName}"
@@ -407,7 +407,7 @@
                                                                                 data-bs-dismiss="modal"></button>
                                                                         </div>
 
-                                                                        <form action="/admin/catalog/brand/create"
+                                                                        <form action="${pageContext.request.contextPath}/admin/catalog/brand/create"
                                                                             method="post">
 
                                                                             <input type="hidden"
@@ -537,7 +537,7 @@
                                                                             <!-- toggle -->
                                                                             <td class="text-center">
                                                                                 <form method="post"
-                                                                                    action="/admin/catalog/voucher/update/${voucher.id}"
+                                                                                    action="${pageContext.request.contextPath}/admin/catalog/voucher/update/${voucher.id}"
                                                                                     style="display:inline;">
                                                                                     <input type="hidden"
                                                                                         name="${_csrf.parameterName}"
@@ -587,7 +587,7 @@
                                                                                 data-bs-dismiss="modal"></button>
                                                                         </div>
 
-                                                                        <form action="/admin/catalog/voucher/create"
+                                                                        <form action="${pageContext.request.contextPath}/admin/catalog/voucher/create"
                                                                             method="post">
                                                                             <input type="hidden"
                                                                                 name="${_csrf.parameterName}"

@@ -69,13 +69,6 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Category> getAllCategories() {
-        return this.categoryRepository.findAll();
-    }
-
-    public List<Brand> getAllBrands() {
-        return this.brandRepository.findAll();
-    }
 
     public Page<Product> getAllProducts(Pageable pageable) {
         return this.productRepository.findAll(pageable);
@@ -84,14 +77,6 @@ public class ProductService {
     // Kiểm tra Tên sản phẩm có tồn tại hay ko
     public boolean existsByName(String name) {
         return this.productRepository.existsByName(name);
-    }
-    // Lưu Category
-    public void saveCategory(Category category) {
-        categoryRepository.save(category);
-    }
-    //Lưu Brand
-    public void saveBrand(Brand brand) {
-        brandRepository.save(brand);
     }
     
     public void createVoucher(Voucher voucher) {
@@ -117,30 +102,7 @@ public class ProductService {
     public List<Voucher> getActiveVoucher(int status) {
         return this.voucherRepository.findByStatus(status);
     }
-    public List<Category> getActiveCategory(int status) {
-        return this.categoryRepository.findByStatus(status);
-    }
-    public List<Brand> getActiveBrand(int status) {
-        return this.brandRepository.findByStatus(status);
-    }
-    public void actionBrand(Integer id) {
-        Brand brand = this.brandRepository.findById(id).get();
-        if (brand.getStatus() == 1) {
-            brand.setStatus(0);
-        } else {
-            brand.setStatus(1);
-        }
-        this.brandRepository.save(brand);
-    }
-     public void actionCategory(Integer id) {
-        Category category = this.categoryRepository.findById(id).get();
-        if (category.getStatus() == 1) {
-            category.setStatus(0);
-        } else {
-            category.setStatus(1);
-        }
-        this.categoryRepository.save(category);
-    }
+
     public List<Product> getActiveProduct(int status) {
         return this.productRepository.findByStatus(status);
     }
@@ -153,21 +115,7 @@ public class ProductService {
         }
         this.productRepository.save(product);
     }
-    public void updateCategory(Integer id, Category updatedCategory) {
-        Category category = categoryRepository.findById(id).orElse(null);
-        if (category != null) {
-            category.setName(updatedCategory.getName());
-            category.setCode(updatedCategory.getCode());
-            categoryRepository.save(category);
-        }
-    }
-    public void updateBrand(Integer id, Brand updatedBrand) {
-        Brand brand = brandRepository.findById(id).orElse(null);
-        if (brand != null) {
-            brand.setName(updatedBrand.getName());
-            brandRepository.save(brand);
-        }
-    }
+
     public long countActiveProductsWithActiveCategoryAndBrand() {
         return productRepository.countActiveProductsWithActiveCategoryAndBrand();
     }
