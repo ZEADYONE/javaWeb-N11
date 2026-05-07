@@ -1,6 +1,9 @@
 package com.n11.sportshop.controller.admin;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,6 +61,14 @@ public class ProductItemController {
             model.addAttribute("items", productItemService.findByProductId(productId));
             return "admin/product/items";
         }
+
+        if (productItem.getWarrantyStartDate() != null && productItem.getWarrantyEndDate() != null 
+                && productItem.getWarrantyStartDate().isAfter(productItem.getWarrantyEndDate())) {
+            model.addAttribute("error", "Ngày bắt đầu bảo hành phải nhỏ hơn hoặc bằng ngày kết thúc bảo hành!");
+            model.addAttribute("product", product);
+            model.addAttribute("items", productItemService.findByProductId(productId));
+            return "admin/product/items";
+        }
         
         productItem.setProduct(product);
         productItemService.save(productItem);
@@ -71,6 +82,8 @@ public class ProductItemController {
             @RequestParam("itemId") int itemId,
             @RequestParam("serialCode") String serialCode,
             @RequestParam("status") String status,
+            @RequestParam(value = "warrantyStartDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate warrantyStartDate,
+            @RequestParam(value = "warrantyEndDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate warrantyEndDate,
             Model model) {
         
         ProductItem item = productItemService.findById(itemId)
@@ -85,9 +98,21 @@ public class ProductItemController {
             model.addAttribute("newItem", new ProductItem());
             return "admin/product/items";
         }
+
+        if (warrantyStartDate != null && warrantyEndDate != null 
+                && warrantyStartDate.isAfter(warrantyEndDate)) {
+            Product product = productService.getProductById(productId).orElse(null);
+            model.addAttribute("error", "Ngày bắt đầu bảo hành phải nhỏ hơn hoặc bằng ngày kết thúc bảo hành!");
+            model.addAttribute("product", product);
+            model.addAttribute("items", productItemService.findByProductId(productId));
+            model.addAttribute("newItem", new ProductItem());
+            return "admin/product/items";
+        }
         
         item.setSerialCode(serialCode);
         item.setStatus(status);
+        item.setWarrantyStartDate(warrantyStartDate);
+        item.setWarrantyEndDate(warrantyEndDate);
         productItemService.save(item);
         
         return "redirect:/admin/product/" + productId + "/items";

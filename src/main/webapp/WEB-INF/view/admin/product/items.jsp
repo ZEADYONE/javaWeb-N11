@@ -84,6 +84,12 @@
                                 Serial Code / IMEI
                               </th>
                               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Ngày bắt đầu bảo hành
+                              </th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Ngày kết thúc bảo hành
+                              </th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Status
                               </th>
                               <th
@@ -102,6 +108,26 @@
 
                                 <td style="min-width: 250px;">
                                   <p class="text-sm font-weight-bold mb-0">${item.serialCode}</p>
+                                </td>
+
+                                <td style="min-width: 120px;">
+                                  <c:if test="${not empty item.warrantyStartDate}">
+                                    <fmt:parseDate value="${item.warrantyStartDate}" pattern="yyyy-MM-dd" var="parsedSaleDate" type="date" />
+                                    <p class="text-sm font-weight-bold mb-0"><fmt:formatDate value="${parsedSaleDate}" pattern="dd/MM/yyyy" /></p>
+                                  </c:if>
+                                  <c:if test="${empty item.warrantyStartDate}">
+                                    <p class="text-sm text-secondary mb-0">N/A</p>
+                                  </c:if>
+                                </td>
+
+                                <td style="min-width: 120px;">
+                                  <c:if test="${not empty item.warrantyEndDate}">
+                                    <fmt:parseDate value="${item.warrantyEndDate}" pattern="yyyy-MM-dd" var="parsedWarrantyDate" type="date" />
+                                    <p class="text-sm font-weight-bold mb-0"><fmt:formatDate value="${parsedWarrantyDate}" pattern="dd/MM/yyyy" /></p>
+                                  </c:if>
+                                  <c:if test="${empty item.warrantyEndDate}">
+                                    <p class="text-sm text-secondary mb-0">N/A</p>
+                                  </c:if>
                                 </td>
 
                                 <td style="min-width: 180px;">
@@ -151,6 +177,16 @@
                                                     <option value="Đã bán" ${item.status == 'Đã bán' ? 'selected' : ''}>Đã bán</option>
                                                     <option value="Lỗi" ${item.status == 'Lỗi' ? 'selected' : ''}>Lỗi</option>
                                                 </select>
+                                              </div>
+
+                                              <div class="mb-3">
+                                                <label for="warrantyStartDate" class="form-label">Ngày bắt đầu bảo hành</label>
+                                                <input type="date" class="form-control border px-2" name="warrantyStartDate" value="${item.warrantyStartDate}">
+                                              </div>
+
+                                              <div class="mb-3">
+                                                <label for="warrantyEndDate" class="form-label">Ngày kết thúc bảo hành</label>
+                                                <input type="date" class="form-control border px-2" name="warrantyEndDate" value="${item.warrantyEndDate}">
                                               </div>
                                             </div>
                                             <div class="modal-footer">
@@ -204,6 +240,16 @@
                             <form:option value="Đã bán">Đã bán</form:option>
                             <form:option value="Lỗi">Lỗi</form:option>
                         </form:select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="warrantyStartDate" class="form-label fw-bold">Ngày bắt đầu bảo hành</label>
+                        <form:input path="warrantyStartDate" type="date" class="form-control border px-2" />
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="warrantyEndDate" class="form-label fw-bold">Ngày kết thúc bảo hành</label>
+                        <form:input path="warrantyEndDate" type="date" class="form-control border px-2" />
                       </div>
                     </div>
                     <div class="modal-footer">
